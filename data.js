@@ -49,10 +49,13 @@ window.PET_DATA = {
       tema: "Educação em saúde",
       resumo: "Curso de primeiros socorros e atendimento pré-hospitalar; a X edição está registrada para 2026.",
       objetivo: "Capacitar participantes para os primeiros cuidados em situações de urgência.",
-      publico: "Público estimado de 45 pessoas (previsão do registro oficial).",
-      quando: "",
-      comoParticipar: "Somente pelo link oficial de inscrição, quando o PET publicar.",
-      comoFunciona: [],
+      publico: "Principalmente estudantes e profissionais da saúde. A proposta oficial prevê 40 inscrições e 5 vagas sociais, com público estimado de 45 participantes.",
+      quando: "Edição registrada para 2026; datas efetivas a confirmar pelo PET.",
+      comoParticipar: "Somente pelo link oficial de inscrição, quando o PET publicar. Consulte o PET sobre inscrições e datas.",
+      comoFunciona: [
+        "Aulas teóricas e práticas de atendimento pré-hospitalar.",
+        "O projeto já teve nove edições anteriores, segundo o registro no SIEx/UFMT."
+      ],
       resultados: [
         { valor: "45", rotulo: "público estimado (previsão)", periodo: "2026" }
       ],
@@ -65,14 +68,18 @@ window.PET_DATA = {
       id: "comecando-cedo",
       titulo: "Começando Cedo",
       tema: "Humanização",
-      resumo: "Atividades de humanização, com capacitação de voluntários e ações autorizadas do projeto.",
-      objetivo: "",
-      publico: "",
+      resumo: "Palhaçoterapia e atividades de humanização com pacientes no Hospital Universitário Júlio Müller.",
+      objetivo: "Levar humor, arte e acolhimento ao contexto hospitalar e contribuir para a formação humana dos participantes.",
+      publico: "Pacientes do hospital; participam estudantes de Medicina da UFMT.",
       quando: "",
-      comoParticipar: "",
-      comoFunciona: [],
+      comoParticipar: "Informações de funcionamento e ingresso devem ser confirmadas diretamente com o projeto.",
+      comoFunciona: [
+        "Iniciativa de palhaçoterapia de estudantes de Medicina da UFMT, historicamente vinculada ao PET Medicina."
+      ],
       resultados: [],
-      fontes: [],
+      fontes: [
+        { texto: "Cartilha dos estudantes de Medicina da UFMT (2025)", url: "https://pt.scribd.com/document/993808596/MED-UFMT-SISU-2025" }
+      ],
       instagram: ""
     },
     {
@@ -92,6 +99,63 @@ window.PET_DATA = {
       fontes: [
         { texto: "UFMT — notícia sobre a 23ª edição (15/06/2020)", url: "https://www.ufmt.br/noticias/pet-medicina-divulga-a-23a-edicao-do-jornal-anamnese-1592251180" },
         { texto: "Acervo do PET Medicina (WordPress)", url: "https://petmedicinaufmt.wordpress.com/2012/04/24/anamnese-o-novo-jornal-produzido-pelo-pet-medicina/" }
+      ],
+      instagram: ""
+    },
+    {
+      id: "menstruacao",
+      titulo: "MenstruAção",
+      tema: "Educação em saúde",
+      resumo: "Iniciativa listada entre os projetos do PET Medicina nos materiais de apresentação da Faculdade.",
+      objetivo: "",
+      publico: "",
+      quando: "",
+      comoParticipar: "",
+      comoFunciona: [
+        "A cartilha da Medicina UFMT inclui o MenstruAção entre os projetos do PET Medicina.",
+        "Os detalhes de funcionamento não foram confirmados por fontes públicas; esta página aguarda uma descrição validada pelo grupo."
+      ],
+      resultados: [],
+      fontes: [
+        { texto: "Cartilha dos estudantes de Medicina da UFMT (2025)", url: "https://pt.scribd.com/document/993808596/MED-UFMT-SISU-2025" }
+      ],
+      instagram: ""
+    },
+    {
+      id: "arte-na-veia",
+      titulo: "Arte na Veia",
+      tema: "Cultura",
+      resumo: "Evento artístico relacionado ao Começando Cedo, com espaço para os talentos dos estudantes de Medicina.",
+      objetivo: "",
+      publico: "",
+      quando: "",
+      comoParticipar: "",
+      comoFunciona: [
+        "Segundo a cartilha de 2025, é um evento artístico produzido pelo Começando Cedo, com música, teatro, literatura e dança.",
+        "A descrição se refere a edições anteriores; não indica programação atual."
+      ],
+      resultados: [],
+      fontes: [
+        { texto: "Cartilha dos estudantes de Medicina da UFMT (2025)", url: "https://pt.scribd.com/document/993808596/MED-UFMT-SISU-2025" }
+      ],
+      instagram: ""
+    },
+    {
+      id: "papo-cabeca",
+      titulo: "Papo Cabeça",
+      tema: "Educação em saúde",
+      resumo: "Iniciativa identificada entre os projetos do PET Medicina em materiais institucionais estudantis.",
+      objetivo: "",
+      publico: "",
+      quando: "",
+      comoParticipar: "",
+      comoFunciona: [
+        "O Papo Cabeça aparece na lista de iniciativas do PET Medicina na cartilha de 2025.",
+        "O escopo, os métodos e o público atual não foram confirmados nas fontes disponíveis."
+      ],
+      resultados: [],
+      fontes: [
+        { texto: "Cartilha dos estudantes de Medicina da UFMT (2025)", url: "https://pt.scribd.com/document/993808596/MED-UFMT-SISU-2025" }
       ],
       instagram: ""
     },
