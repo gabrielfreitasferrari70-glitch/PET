@@ -1,97 +1,271 @@
 (function(){
-  // Catálogo só com iniciativas documentadas nas fontes citadas no site.
-  var PROJETOS=[
-    {id:'cadastro',cat:'Educação em saúde',titulo:'Cadastro do Bem',
-     desc:'Ação de conscientização sobre a importância de ser doador de medula óssea.',
-     info:{'Resultados documentados (2024)':'41 ações, 1.880 pessoas alcançadas e 27 novos cadastros, segundo a Mostra de Extensão.','Como participar':'Consulte os canais oficiais do PET Medicina.'}},
-    {id:'aph',cat:'Educação em saúde',titulo:'Curso de Atendimento Pré-Hospitalar (APH)',
-     desc:'Curso de primeiros socorros e atendimento pré-hospitalar, com a X edição registrada para 2026.',
-     info:{'Previsão (2026)':'Público estimado de 45 pessoas, conforme o registro do SIEx/UFMT.','Como participar':'Inscrições só pelo link oficial, quando o PET publicar.'}},
-    {id:'cedo',cat:'Humanização',titulo:'Começando Cedo',
-     desc:'Atividades de humanização, com capacitação de voluntários e ações autorizadas do projeto.',
-     info:{'Como participar':'Consulte os canais oficiais do PET Medicina.'}},
-    {id:'anamnese',cat:'Comunicação',titulo:'Jornal Anamnese',
-     desc:'Jornal produzido pelo PET Medicina, com acervo histórico disponível online.',
-     info:{'Acervo':'petmedicinaufmt.wordpress.com','Proposta':'Edição digital bimestral com arquivo permanente.'}}
-  ];
-  var CATS=['Todos','Educação em saúde','Humanização','Comunicação','Cultura'];
-  var atual='Todos';
-  var $=function(s){return document.querySelector(s)};
+  var D=window.PET_DATA||{projetos:[],eventos:[],acoes:[],edicoes:[],instagram:{}};
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var AC='A confirmar pelo PET';
 
-  var filtros=$('#filters'),lista=$('#projetos-lista'),vazio=$('#vazio');
-  CATS.forEach(function(c){
-    var b=document.createElement('button');
-    b.type='button';b.className='chip';b.textContent=c;
-    b.setAttribute('aria-pressed',c===atual);
-    b.addEventListener('click',function(){atual=c;render()});
-    filtros.appendChild(b);
+  function h(tag,props,kids){
+    var e=document.createElement(tag);
+    Object.keys(props||{}).forEach(function(k){
+      if(k==='text')e.textContent=props[k];
+      else if(k==='class')e.className=props[k];
+      else e.setAttribute(k,props[k]);
+    });
+    (kids||[]).forEach(function(c){if(c)e.appendChild(typeof c==='string'?document.createTextNode(c):c)});
+    return e;
+  }
+  function fmtData(iso){
+    if(!iso)return '';
+    var p=iso.split('-');
+    var d=new Date(+p[0],+p[1]-1,+p[2]);
+    return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+  }
+  function projetoPorId(id){return D.projetos.filter(function(p){return p.id===id})[0]}
+
+  /* ================= PROJETOS ================= */
+  var temas=['Todos'];
+  D.projetos.forEach(function(p){if(temas.indexOf(p.tema)<0)temas.push(p.tema)});
+  var temaAtual='Todos',busca='';
+  var fWrap=$('#filters'),lista=$('#projetos-lista'),vazio=$('#vazio'),campo=$('#busca');
+
+  temas.forEach(function(t){
+    var b=h('button',{type:'button',class:'chip','aria-pressed':t==='Todos',text:t});
+    b.addEventListener('click',function(){temaAtual=t;renderProjetos()});
+    fWrap.appendChild(b);
   });
+  campo.addEventListener('input',function(){busca=campo.value.trim().toLowerCase();renderProjetos()});
 
-  function render(){
-    Array.prototype.forEach.call(filtros.children,function(b){b.setAttribute('aria-pressed',b.textContent===atual)});
+  function renderProjetos(){
+    Array.prototype.forEach.call(fWrap.children,function(b){b.setAttribute('aria-pressed',b.textContent===temaAtual)});
     lista.innerHTML='';
-    var itens=PROJETOS.filter(function(p){return atual==='Todos'||p.cat===atual});
+    var itens=D.projetos.filter(function(p){
+      var okTema=temaAtual==='Todos'||p.tema===temaAtual;
+      var texto=(p.titulo+' '+p.resumo+' '+p.tema).toLowerCase();
+      return okTema&&(!busca||texto.indexOf(busca)>=0);
+    });
     vazio.hidden=itens.length>0;
     itens.forEach(function(p){
-      var b=document.createElement('button');
-      b.type='button';b.className='pcard';
-      b.innerHTML='<span class="cat"></span><h3></h3><p></p><span class="go">Conheça o projeto →</span>';
-      b.querySelector('.cat').textContent=p.cat;
-      b.querySelector('h3').textContent=p.titulo;
-      b.querySelector('p').textContent=p.desc;
-      b.addEventListener('click',function(){abrir(p)});
-      lista.appendChild(b);
+      var c=h('button',{type:'button',class:'pcard'},[
+        h('span',{class:'cat',text:p.tema}),
+        h('h3',{text:p.titulo}),
+        h('p',{text:p.resumo}),
+        h('span',{class:'go',text:'Ver como funciona e como participar →'})
+      ]);
+      c.addEventListener('click',function(){abrirProjeto(p,true)});
+      lista.appendChild(c);
     });
   }
 
-  var modal=$('#modal'),ultimo=null;
-  function abrir(p){
-    ultimo=document.activeElement;
-    $('#m-cat').textContent=p.cat.toUpperCase();
-    $('#m-titulo').textContent=p.titulo;
-    $('#m-desc').textContent=p.desc;
-    var dl=$('#m-info');dl.innerHTML='';
-    Object.keys(p.info).forEach(function(k){
-      var dt=document.createElement('dt'),dd=document.createElement('dd');
-      dt.textContent=k;dd.textContent=p.info[k];dl.appendChild(dt);dl.appendChild(dd);
-    });
-    modal.classList.add('open');$('#m-fechar').focus();
+  /* ================= MODAL DO PROJETO ================= */
+  var modal=$('#modal'),ultimoFoco=null;
+  function linha(dl,rotulo,valor){
+    dl.appendChild(h('dt',{text:rotulo}));
+    var dd=h('dd',{text:valor||AC});
+    if(!valor)dd.className='pendente';
+    dl.appendChild(dd);
   }
-  function fechar(){modal.classList.remove('open');if(ultimo)ultimo.focus()}
+  function abrirProjeto(p,atualizaHash){
+    ultimoFoco=document.activeElement;
+    $('#m-cat').textContent=p.tema.toUpperCase();
+    $('#m-titulo').textContent=p.titulo;
+    $('#m-desc').textContent=p.resumo;
+    var dl=$('#m-info');dl.innerHTML='';
+    linha(dl,'Objetivo',p.objetivo);
+    linha(dl,'Para quem é',p.publico);
+    linha(dl,'Quando acontece',p.quando);
+    linha(dl,'Como participar',p.comoParticipar);
+
+    var res=$('#m-resultados');res.innerHTML='';
+    if(p.resultados&&p.resultados.length){
+      res.appendChild(h('h4',{text:'Resultados documentados'}));
+      var g=h('div',{class:'mini-stats'});
+      p.resultados.forEach(function(r){
+        g.appendChild(h('div',{},[h('b',{text:r.valor}),h('span',{text:r.rotulo+' · '+r.periodo})]));
+      });
+      res.appendChild(g);
+    }
+    var fo=$('#m-fontes');fo.innerHTML='';
+    if(p.fontes&&p.fontes.length){
+      fo.appendChild(document.createTextNode('Fontes: '));
+      p.fontes.forEach(function(f,i){
+        if(i)fo.appendChild(document.createTextNode(' · '));
+        fo.appendChild(h('a',{href:f.url,target:'_blank',rel:'noopener',text:f.texto}));
+      });
+    }
+    $('#m-ig').href=p.instagram||(D.instagram&&D.instagram.url)||'#';
+    $('#m-share').onclick=function(){compartilhar(p)};
+    $('#m-share-msg').textContent='';
+    modal.classList.add('open');
+    document.body.style.overflow='hidden';
+    $('#m-fechar').focus();
+    if(atualizaHash)history.replaceState(null,'','#projeto='+p.id);
+  }
+  function fechar(){
+    modal.classList.remove('open');
+    document.body.style.overflow='';
+    if(location.hash.indexOf('#projeto=')===0)history.replaceState(null,'',location.pathname+location.search+'#projetos');
+    if(ultimoFoco&&ultimoFoco.focus)ultimoFoco.focus();
+  }
+  function compartilhar(p){
+    var url=location.origin+location.pathname+'#projeto='+p.id;
+    var msg=$('#m-share-msg');
+    if(navigator.share){
+      navigator.share({title:p.titulo+' · PET Conecta',text:p.resumo,url:url}).catch(function(){});
+    }else if(navigator.clipboard){
+      navigator.clipboard.writeText(url).then(function(){msg.textContent='Link copiado.'},function(){msg.textContent=url});
+    }else{msg.textContent=url}
+  }
   $('#m-fechar').addEventListener('click',fechar);
   $('#m-cta').addEventListener('click',fechar);
   modal.addEventListener('click',function(e){if(e.target===modal)fechar()});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))fechar()});
+  document.addEventListener('keydown',function(e){
+    if(!modal.classList.contains('open'))return;
+    if(e.key==='Escape'){fechar();return}
+    if(e.key==='Tab'){
+      var f=modal.querySelectorAll('a[href],button');
+      if(!f.length)return;
+      var a=f[0],z=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
+      else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
+    }
+  });
+  function abrirDoHash(){
+    var m=location.hash.match(/^#projeto=(.+)$/);
+    if(!m)return;
+    var p=projetoPorId(decodeURIComponent(m[1]));
+    if(p)abrirProjeto(p,false);
+  }
+  window.addEventListener('hashchange',abrirDoHash);
 
-  // menu mobile
+  /* ================= AGENDA ================= */
+  function ics(ev){
+    function dt(d,hr){return d.replace(/-/g,'')+'T'+(hr||'09:00').replace(':','')+'00'}
+    function esc(s){return String(s||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n')}
+    var linhas=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//PET Conecta//PT','BEGIN:VEVENT',
+      'UID:'+ev.data+'-'+esc(ev.titulo).replace(/\s/g,'')+'@pet-conecta',
+      'DTSTART:'+dt(ev.data,ev.hora),
+      'DTEND:'+dt(ev.data,ev.fim||ev.hora||'10:00'),
+      'SUMMARY:'+esc(ev.titulo),
+      'LOCATION:'+esc(ev.local),
+      'DESCRIPTION:'+esc((ev.descricao||'')+(ev.inscricao?' Inscrição: '+ev.inscricao:'')),
+      'END:VEVENT','END:VCALENDAR'];
+    var blob=new Blob([linhas.join('\r\n')],{type:'text/calendar;charset=utf-8'});
+    var a=h('a',{href:URL.createObjectURL(blob),download:ev.titulo.replace(/\W+/g,'-').toLowerCase()+'.ics'});
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+  }
+  var statusRotulo={'confirmado':'CONFIRMADO','inscricoes-abertas':'INSCRIÇÕES ABERTAS','encerrado':'ENCERRADO'};
+  var agendaLista=$('#agenda-lista'),agendaExemplos=$('#agenda-exemplos');
+  if(D.eventos&&D.eventos.length){
+    agendaExemplos.hidden=true;
+    var hoje=new Date();hoje.setHours(0,0,0,0);
+    var ordenados=D.eventos.slice().sort(function(a,b){return a.data<b.data?-1:1});
+    ordenados.forEach(function(ev){
+      var passou=new Date(ev.data+'T23:59:00')<hoje||ev.status==='encerrado';
+      var p=ev.projeto?projetoPorId(ev.projeto):null;
+      var card=h('article',{class:'card evento'+(passou?' passou':'')},[
+        h('span',{class:'badge',text:statusRotulo[ev.status]||'CONFIRMADO'}),
+        h('h3',{text:ev.titulo}),
+        h('p',{class:'quando',text:fmtData(ev.data)+(ev.hora?' · '+ev.hora:'')+(ev.local?' · '+ev.local:'')}),
+        ev.descricao?h('p',{text:ev.descricao}):null
+      ]);
+      var acoes=h('div',{class:'ev-acoes'});
+      if(ev.inscricao&&!passou)acoes.appendChild(h('a',{class:'btn accent',href:ev.inscricao,target:'_blank',rel:'noopener',text:'Inscrever-se ↗'}));
+      if(!passou){var b=h('button',{type:'button',class:'btn ghost',text:'Adicionar ao calendário'});b.addEventListener('click',function(){ics(ev)});acoes.appendChild(b)}
+      if(p){var v=h('button',{type:'button',class:'btn ghost',text:'Sobre o projeto'});v.addEventListener('click',function(){abrirProjeto(p,true)});acoes.appendChild(v)}
+      card.appendChild(acoes);
+      card.dataset.passou=passou?'1':'0';
+      agendaLista.appendChild(card);
+    });
+    $('#agenda-toggle').hidden=false;
+  }else{
+    $('#agenda-vazio').hidden=false;
+  }
+  var mostrarPassados=false;
+  $('#agenda-toggle').addEventListener('click',function(){
+    mostrarPassados=!mostrarPassados;
+    this.textContent=mostrarPassados?'Ocultar atividades passadas':'Ver atividades passadas';
+    agendaLista.classList.toggle('ver-passados',mostrarPassados);
+  });
+
+  /* ================= AÇÕES REALIZADAS ================= */
+  var acoesLista=$('#acoes-lista');
+  if(D.acoes&&D.acoes.length){
+    $('#acoes-vazio').hidden=true;
+    D.acoes.slice().sort(function(a,b){return a.data<b.data?1:-1}).forEach(function(a){
+      var p=a.projeto?projetoPorId(a.projeto):null;
+      var kids=[];
+      if(a.imagem)kids.push(h('img',{src:a.imagem,alt:a.titulo,loading:'lazy',class:'foto'}));
+      if(a.video)kids.push(h('video',{src:a.video,controls:'',preload:'none',class:'foto'}));
+      kids.push(h('span',{class:'badge',text:(p?p.titulo+' · ':'')+fmtData(a.data)}));
+      kids.push(h('h3',{text:a.titulo}));
+      if(a.resumo)kids.push(h('p',{text:a.resumo}));
+      if(a.resultado)kids.push(h('p',{class:'resultado',text:'Resultado: '+a.resultado}));
+      if(a.instagram)kids.push(h('a',{class:'more',href:a.instagram,target:'_blank',rel:'noopener',text:'Ver a publicação no Instagram ↗'}));
+      acoesLista.appendChild(h('article',{class:'card acao'},kids));
+    });
+  }
+
+  /* ================= JORNAL ================= */
+  var edLista=$('#edicoes-lista');
+  if(D.edicoes&&D.edicoes.length){
+    $('#edicoes-vazio').hidden=true;
+    D.edicoes.forEach(function(e){
+      edLista.appendChild(h('li',{},[
+        h('strong',{text:e.titulo}),
+        document.createTextNode(e.periodo?' — '+e.periodo:''),
+        e.pdf?h('a',{href:e.pdf,target:'_blank',rel:'noopener',text:' Ler ↗'}):null
+      ]));
+    });
+  }
+
+  /* ================= IMPACTO (vem dos projetos) ================= */
+  var stats=$('#stats');
+  D.projetos.forEach(function(p){
+    (p.resultados||[]).forEach(function(r){
+      stats.appendChild(h('div',{class:'stat'},[
+        h('b',{text:r.valor}),h('span',{text:r.rotulo}),
+        h('small',{text:p.titulo+' · '+r.periodo})
+      ]));
+    });
+  });
+
+  /* ================= MENU / NAVEGAÇÃO ================= */
   var menu=$('#menu'),nav=$('#nav');
   menu.addEventListener('click',function(){
-    var aberto=nav.classList.toggle('open');
-    menu.setAttribute('aria-expanded',aberto);
+    var ab=nav.classList.toggle('open');menu.setAttribute('aria-expanded',ab);
   });
   nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');menu.setAttribute('aria-expanded','false')}});
-
-  // item ativo no menu ao rolar
   var links=Array.prototype.slice.call(nav.querySelectorAll('a'));
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){
       es.forEach(function(e){
-        if(e.isIntersecting){
-          links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id)});
-        }
+        if(e.isIntersecting)links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id)});
       });
     },{rootMargin:'-40% 0px -55% 0px'});
     links.forEach(function(a){var s=document.querySelector(a.getAttribute('href'));if(s)io.observe(s)});
   }
 
-  // formulário de demonstração: não envia nada
+  /* ================= SUGESTÕES ================= */
+  var escolhidos=[];
   document.querySelectorAll('#temas .chip').forEach(function(c){
-    c.addEventListener('click',function(){c.setAttribute('aria-pressed',c.getAttribute('aria-pressed')!=='true')});
+    c.addEventListener('click',function(){
+      var on=c.getAttribute('aria-pressed')!=='true';
+      c.setAttribute('aria-pressed',on);
+      var t=c.textContent,i=escolhidos.indexOf(t);
+      if(on&&i<0)escolhidos.push(t);
+      if(!on&&i>=0)escolhidos.splice(i,1);
+    });
   });
   $('#form').addEventListener('submit',function(e){
     e.preventDefault();
-    $('#msg').textContent='Obrigado! Isto é só uma demonstração: nada foi enviado nem guardado.';
+    $('#msg').textContent='Isto é só uma demonstração: nada foi enviado. Para sugerir de verdade, use o botão "Enviar pelo Instagram" ao lado.';
+  });
+  var dm=$('#dm');
+  dm.addEventListener('click',function(e){
+    var txt=($('#sug').value||'').trim();
+    var corpo=(escolhidos.length?'Tenho interesse em: '+escolhidos.join(', ')+'. ':'')+txt;
+    if(corpo&&navigator.clipboard){navigator.clipboard.writeText(corpo).then(function(){$('#msg').textContent='Sua sugestão foi copiada. Cole na conversa que vai abrir no Instagram.'},function(){})}
   });
 
-  render();
+  renderProjetos();
+  abrirDoHash();
 })();

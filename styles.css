@@ -150,3 +150,37 @@ footer .legal{border-top:1px solid rgba(255,255,255,.2);margin-top:32px;padding-
   section{padding:52px 0}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* ===== melhorias v2 ===== */
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.insta-strip{padding:28px 0;background:var(--verde);color:#fff}
+.insta-inner{display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.insta-inner p{max-width:760px;margin:0}
+.insta-strip .btn.primary{background:#fff;color:var(--verde-escuro)}
+.insta-strip .btn.primary:hover{background:var(--suave)}
+.toolbar{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:24px}
+.toolbar .filters{margin:0;flex:1 1 360px}
+.busca input{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:11px 18px;min-height:44px;min-width:230px;color:var(--ink)}
+.busca input:focus{border-color:var(--verde)}
+.evento .quando{font-weight:700;color:var(--ink);margin-bottom:8px}
+.evento.passou{display:none;opacity:.75}
+.ver-passados .evento.passou{display:block}
+.ev-acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.ev-acoes .btn{padding:11px 18px;font-size:14px;min-height:44px}
+#agenda-toggle{margin-bottom:20px}
+.vazio-card{max-width:760px}
+.card .foto{width:100%;border-radius:14px;margin-bottom:14px;display:block;aspect-ratio:4/3;object-fit:cover}
+.acao .resultado{margin-top:8px;font-weight:700;color:var(--verde-escuro)}
+.jornal .sub{margin:26px 0 8px;font-size:20px}
+.edicoes{list-style:none;padding:0;margin:0 0 10px;display:grid;gap:8px}
+.edicoes li{padding:10px 14px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.edicoes a{color:var(--verde);font-weight:700}
+.modal dd.pendente{font-style:italic;opacity:.85}
+.modal h4{margin:18px 0 8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--verde)}
+.mini-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.mini-stats div{background:var(--suave);border-radius:14px;padding:12px 14px}
+.mini-stats b{display:block;font:700 28px/1.1 Georgia,serif;color:var(--verde-escuro)}
+.mini-stats span{font-size:12px;color:var(--muted)}
+.m-acoes,.form .botoes{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 0}
+.m-acoes .btn,.form .botoes .btn{padding:12px 20px;font-size:14px}
