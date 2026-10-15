@@ -74,6 +74,13 @@
     linha(dl,'Quando acontece',p.quando);
     linha(dl,'Como participar',p.comoParticipar);
 
+    var det=$('#m-detalhes');det.innerHTML='';
+    if(p.comoFunciona&&p.comoFunciona.length){
+      det.appendChild(h('h4',{text:'Como funciona'}));
+      var ul=h('ul',{});
+      p.comoFunciona.forEach(function(t){ul.appendChild(h('li',{text:t}))});
+      det.appendChild(ul);
+    }
     var res=$('#m-resultados');res.innerHTML='';
     if(p.resultados&&p.resultados.length){
       res.appendChild(h('h4',{text:'Resultados documentados'}));
@@ -195,11 +202,12 @@
       var kids=[];
       if(a.imagem)kids.push(h('img',{src:a.imagem,alt:a.titulo,loading:'lazy',class:'foto'}));
       if(a.video)kids.push(h('video',{src:a.video,controls:'',preload:'none',class:'foto'}));
-      kids.push(h('span',{class:'badge',text:(p?p.titulo+' · ':'')+fmtData(a.data)}));
+      kids.push(h('span',{class:'badge',text:(a.acervo?'ACERVO · ':'')+(p?p.titulo+' · ':'')+(a.periodo||fmtData(a.data))}));
       kids.push(h('h3',{text:a.titulo}));
       if(a.resumo)kids.push(h('p',{text:a.resumo}));
       if(a.resultado)kids.push(h('p',{class:'resultado',text:'Resultado: '+a.resultado}));
-      if(a.instagram)kids.push(h('a',{class:'more',href:a.instagram,target:'_blank',rel:'noopener',text:'Ver a publicação no Instagram ↗'}));
+      var lk=a.link||a.instagram;
+      if(lk)kids.push(h('a',{class:'more',href:lk,target:'_blank',rel:'noopener',text:a.linkTexto||'Ver a publicação no Instagram ↗'}));
       acoesLista.appendChild(h('article',{class:'card acao'},kids));
     });
   }
@@ -212,7 +220,8 @@
       edLista.appendChild(h('li',{},[
         h('strong',{text:e.titulo}),
         document.createTextNode(e.periodo?' — '+e.periodo:''),
-        e.pdf?h('a',{href:e.pdf,target:'_blank',rel:'noopener',text:' Ler ↗'}):null
+        e.pdf?h('a',{href:e.pdf,target:'_blank',rel:'noopener',text:' Ler ↗'}):null,
+        e.resumo?h('span',{class:'ed-resumo',text:e.resumo}):null
       ]));
     });
   }
