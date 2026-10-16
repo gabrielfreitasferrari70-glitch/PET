@@ -1,4 +1,8 @@
 (function(){
+  /* sempre abre no topo (a página é montada por JS e o navegador restaurava a rolagem para o meio) */
+  if('scrollRestoration' in history)history.scrollRestoration='manual';
+  if(!location.hash)window.scrollTo(0,0);
+  window.addEventListener('pageshow',function(){if(!location.hash)window.scrollTo(0,0)});
   var D=window.PET_DATA||{projetos:[],eventos:[],acoes:[],edicoes:[],instagram:{}};
   var $=function(s,r){return (r||document).querySelector(s)};
   var AC='A confirmar pelo PET';

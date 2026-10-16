@@ -294,3 +294,15 @@ p,li,dd,h1,h2,h3,.fine{overflow-wrap:anywhere}
 @media(max-width:360px){
   .stats{grid-template-columns:1fr}
 }
+
+/* ===== v3.1: trava de rolagem lateral e topo da página ===== */
+html{overflow-x:hidden;max-width:100%}
+body{overflow-x:hidden;max-width:100%;position:relative}
+@supports (overflow:clip){
+  html,body{overflow-x:clip}
+  .announcement,.top,main,section,footer{overflow-x:clip}
+}
+.skip-link{left:12px;top:-120px}
+.stat,.stat *,.badge,.pcard .cat,.btn,.chip{overflow-wrap:anywhere}
+.btn,.chip{max-width:100%}
+img,video,svg{max-width:100%}
