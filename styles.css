@@ -187,3 +187,110 @@ footer .legal{border-top:1px solid rgba(255,255,255,.2);margin-top:32px;padding-
 .ed-resumo{display:block;color:var(--muted);font-size:14px;margin-top:4px}
 .modal ul{margin:6px 0 0;padding-left:20px;color:var(--muted)}
 .modal li{margin-bottom:6px}
+
+/* ===== v3: otimização para celular e tablet =====
+   COLAR NO FINAL do styles.css (não apagar nada do que já existe) */
+
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:hidden}
+p,li,dd,h1,h2,h3,.fine{overflow-wrap:anywhere}
+.grid3>*,.grid2>*,.jornal>*,.hero .wrap>*,.toolbar>*{min-width:0}
+.chip{min-height:44px}
+
+/* sem "hover preso" em telas de toque */
+@media(hover:none){.pcard:hover{transform:none;border-color:var(--line)}}
+
+/* menu hambúrguer até 1040px (antes só até 900px e o menu estourava entre 901 e 1000px) */
+@media(max-width:1040px){
+  .menu{display:block}
+  .nav{display:none;position:absolute;left:0;right:0;top:78px;background:var(--bg);flex-direction:column;gap:2px;padding:12px 24px 20px;border-bottom:1px solid var(--line);margin:0;max-height:calc(100vh - 90px);max-height:calc(100dvh - 90px);overflow-y:auto;box-shadow:0 18px 30px rgba(7,68,58,.10)}
+  .nav.open{display:flex}
+  .nav a{padding:14px 16px;font-size:16px}
+  .top .btn.hide-m{display:none}
+}
+
+/* ===== TABLET (601px a 900px) ===== */
+@media(min-width:601px) and (max-width:900px){
+  .hero{padding:56px 0 44px}
+  .hero-card{max-width:560px}
+  .grid3{grid-template-columns:repeat(2,1fr)}
+  .grid3>.card:last-child:nth-child(odd),
+  .grid3>.pcard:last-child:nth-child(odd){grid-column:1/-1}
+  .jornal .capa{margin:0 auto}
+  footer .cols{grid-template-columns:1fr 1fr}
+  footer .cols>div:first-child{grid-column:1/-1}
+}
+
+/* ===== CELULAR (até 600px) ===== */
+@media(max-width:600px){
+  .wrap{padding:0 18px}
+  .announcement{font-size:10px;letter-spacing:.04em;line-height:1.45;padding:8px 12px}
+
+  .topinner{height:68px;gap:12px}
+  .brand img{width:40px;height:40px}
+  .brand strong{font-size:18px}
+  .brand small{font-size:9px}
+  .nav{top:68px;padding:8px 18px 16px}
+
+  section{padding:44px 0}
+  .hero{padding:32px 0 36px}
+  .hero .wrap{gap:28px}
+  h1{font-size:clamp(34px,10.5vw,44px)}
+  h2{font-size:clamp(27px,8vw,34px)}
+  h3{font-size:20px}
+  .hero p.lead{font-size:17px;margin:16px 0 24px}
+  .hero .cta{flex-direction:column}
+  .hero .cta .btn,.callout .btn,.insta-strip .btn,.form .botoes .btn,.m-acoes .btn,.ev-acoes .btn,#agenda-toggle{width:100%;justify-content:center}
+
+  .hero-card{padding:28px 22px;border-radius:24px}
+  .hero-card h2{font-size:clamp(30px,9vw,38px);margin:10px 0 18px}
+  .hero-card .tags span{font-size:11px;padding:5px 11px}
+  .hero-card:after{width:150px;height:150px;right:-50px;bottom:-50px}
+
+  .insta-strip{padding:24px 0}
+  .insta-inner{gap:16px}
+  .sec-head{margin-bottom:24px}
+  .sec-head p{font-size:16px}
+  .note{font-size:13.5px;padding:12px 14px}
+
+  .grid3,.grid2{gap:16px}
+  .card,.pcard{padding:22px;border-radius:18px}
+
+  /* filtros em uma linha com rolagem lateral; busca em largura total */
+  .toolbar{flex-direction:column;align-items:stretch;gap:12px}
+  .toolbar .filters{flex:none;flex-wrap:nowrap;overflow-x:auto;margin:0 -18px;padding:2px 18px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .toolbar .filters::-webkit-scrollbar{display:none}
+  .toolbar .chip{white-space:nowrap;flex:0 0 auto}
+  .busca{display:block}
+  .busca input{width:100%;min-width:0}
+
+  .callout{padding:24px;gap:16px}
+  .callout h3{font-size:22px}
+
+  .jornal{gap:32px}
+  .capa{max-width:300px;margin:0 auto;padding:24px;transform:rotate(-1.5deg)}
+  .capa h3{font-size:clamp(36px,12vw,46px)}
+
+  .stats{grid-template-columns:1fr 1fr;gap:12px}
+  .stat{padding:18px 16px}
+  .stat b{font-size:clamp(30px,9vw,38px)}
+  .stat span{font-size:14px}
+  .stat small{display:block;font-size:12px;line-height:1.4;margin-top:4px}
+
+  .form{max-width:none}
+  textarea{min-height:120px}
+
+  footer{padding:40px 0 28px}
+  footer ul{gap:2px}
+  footer li a{display:inline-block;padding:6px 0}
+
+  /* modal vira "gaveta" colada embaixo, com botão de fechar sempre visível */
+  .modal{padding:0;align-items:flex-end}
+  .modal .box{max-width:none;border-radius:22px 22px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom));max-height:92vh;max-height:92dvh;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .modal .close{position:sticky;top:8px;right:auto;display:block;width:44px;height:44px;margin:0 0 -44px auto;z-index:3}
+  .modal h3{font-size:24px;padding-right:48px}
+}
+
+@media(max-width:360px){
+  .stats{grid-template-columns:1fr}
+}
