@@ -247,6 +247,10 @@
     var ab=nav.classList.toggle('open');menu.setAttribute('aria-expanded',ab);
   });
   nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');menu.setAttribute('aria-expanded','false')}});
+  function fechaMenu(){nav.classList.remove('open');menu.setAttribute('aria-expanded','false')}
+  document.addEventListener('click',function(e){if(nav.classList.contains('open')&&!nav.contains(e.target)&&!menu.contains(e.target))fechaMenu()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){fechaMenu();menu.focus()}});
+  window.addEventListener('scroll',function(){if(nav.classList.contains('open')&&window.scrollY>200)fechaMenu()},{passive:true});
   var links=Array.prototype.slice.call(nav.querySelectorAll('a'));
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){

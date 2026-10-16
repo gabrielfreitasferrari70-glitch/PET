@@ -313,3 +313,11 @@ img,video,svg{max-width:100%}
   .toolbar .filters{width:calc(100% + 36px);max-width:none}
   .busca{width:100%;max-width:100%}
 }
+
+/* ===== v3.3: ancoras sem ficar atras do cabecalho fixo + alvos de toque maiores ===== */
+section[id]{scroll-margin-top:82px}
+.card a.more{display:inline-flex;align-items:center;min-height:44px;margin-top:8px}
+.edicoes a{display:inline-block;padding:10px 6px}
+.fine a,.note a{display:inline-block;padding:8px 2px}
+.chip:focus-visible,.btn:focus-visible{outline-offset:3px}
+@media(hover:none){.chip:hover{border-color:var(--line)}.chip[aria-pressed="true"]:hover{border-color:var(--verde)}}
