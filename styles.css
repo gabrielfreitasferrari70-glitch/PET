@@ -306,3 +306,10 @@ body{overflow-x:hidden;max-width:100%;position:relative}
 .stat,.stat *,.badge,.pcard .cat,.btn,.chip{overflow-wrap:anywhere}
 .btn,.chip{max-width:100%}
 img,video,svg{max-width:100%}
+
+/* ===== v3.2: filtros e busca no celular (a linha de chips alargava a busca para 748px) ===== */
+@media(max-width:600px){
+  .toolbar{flex-wrap:nowrap;width:100%;max-width:100%}
+  .toolbar .filters{width:calc(100% + 36px);max-width:none}
+  .busca{width:100%;max-width:100%}
+}
