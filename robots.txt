@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pet-conecta.vercel.app/sitemap.xml

@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//PET Conecta//Agenda//PT-BR
+BEGIN:VEVENT
+UID:x-curso-aph-2026@pet-conecta.vercel.app
+DTSTAMP:20261019T120000Z
+DTSTART;VALUE=DATE:20261109
+DTEND;VALUE=DATE:20261115
+SUMMARY:X Curso de Atendimento Pré-Hospitalar
+DESCRIPTION:Consulte horários e locais na divulgação oficial do curso.
+URL:https://www.instagram.com/xcursoaph/p/DdbypMUxp9Q/
+END:VEVENT
+END:VCALENDAR

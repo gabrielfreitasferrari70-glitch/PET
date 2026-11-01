@@ -1,0 +1,125 @@
+/* ==========================================================================
+   PET Conecta — melhorias (pet-plus.css)
+   Carregar DEPOIS de /styles.css. Usa as variáveis já existentes no :root
+   (--paper, --ink, --muted, --line, --mint, --forest, --deep, --turquoise,
+   --serif, --sans, --display). Nada aqui altera conteúdo.
+   ========================================================================== */
+
+/* ---------- 1. Painel de leitura ampliado (#reading-panel) ---------- */
+.reading-plus{display:grid;gap:14px;margin:4px 0 16px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.reading-plus fieldset{border:0;margin:0;padding:0;display:grid;gap:7px}
+.reading-plus legend{font:700 10px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.reading-plus .rp-options{display:flex;gap:6px;flex-wrap:wrap}
+.reading-plus button{font:600 13px/1 var(--sans);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:9px 13px;min-height:38px;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.reading-plus button:hover{border-color:var(--forest);color:var(--forest)}
+.reading-plus button[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:#fff}
+
+/* Tamanho do texto (complementa o "Aumentar textos" existente) */
+html[data-reading-size="sm"]{font-size:93.75%}
+html[data-reading-size="lg"]{font-size:112.5%}
+
+/* Família tipográfica */
+html[data-reading-font="sans"] body,
+html[data-reading-font="sans"] body :is(h1,h2,h3,h4,p,li,blockquote,figcaption){font-family:var(--sans)!important}
+
+/* Tema sépia */
+html[data-reading-theme="sepia"]{--paper:#fbf6ea;--mint:#efe6d2;--line:#ddd0b6;--ink:#2d281f;--muted:#6e6454}
+html[data-reading-theme="sepia"] body{background:#f4ecdb;color:var(--ink)}
+
+/* Tema escuro */
+html[data-reading-theme="dark"]{--paper:#13211e;--mint:#182b27;--line:#28443d;--ink:#e9f3f0;--muted:#a3bab3;--forest:#3cc5a6;--green:#3cc5a6;--deep:#2aa88c;--turquoise:#45dccb;color-scheme:dark}
+html[data-reading-theme="dark"] body{background:#0d1715;color:var(--ink)}
+html[data-reading-theme="dark"] :is(header,.editorial-nav,.header,footer,dialog,.reading-panel,.project-card,article,section){background-color:transparent;color:inherit}
+html[data-reading-theme="dark"] .reading-panel,
+html[data-reading-theme="dark"] dialog{background:var(--paper)!important}
+html[data-reading-theme="dark"] img{filter:brightness(.92)}
+html[data-reading-theme="dark"] .button{color:#0d1715}
+
+/* ---------- 2. Faixa de números (home) ---------- */
+.pet-numbers{border-top:3px solid var(--forest);border-bottom:1px solid var(--line);padding:30px 0 34px;margin:56px 0}
+.pet-numbers-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.pet-numbers-head h2{font:500 clamp(34px,4.5vw,52px)/.95 var(--display);text-transform:uppercase;letter-spacing:-.01em;color:var(--forest);margin:0}
+.pet-numbers-head p{font-size:.85rem;color:var(--muted);max-width:420px;margin:0}
+.pet-numbers-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+.pet-number{display:flex;flex-direction:column;gap:6px;padding:4px 22px;border-left:1px solid var(--line);text-decoration:none;color:inherit;transition:transform .2s}
+.pet-number:first-child{border-left:0;padding-left:0}
+.pet-number:hover{transform:translateY(-3px)}
+.pet-number strong{font:500 clamp(44px,5.5vw,68px)/1 var(--serif);letter-spacing:-.04em;color:var(--forest)}
+.pet-number span{font:700 .95rem/1.3 var(--sans);color:var(--ink)}
+.pet-number small{font-size:.75rem;line-height:1.45;color:var(--muted)}
+.pet-number em{font-style:normal;font-size:.72rem;font-weight:700;color:var(--turquoise);margin-top:auto;padding-top:8px}
+@media (max-width:860px){.pet-numbers-grid{grid-template-columns:1fr 1fr;row-gap:26px}.pet-number:nth-child(3){border-left:0;padding-left:0}}
+@media (max-width:480px){.pet-numbers-grid{grid-template-columns:1fr}.pet-number{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:18px}.pet-number:first-child{border-top:0;padding-top:0}}
+
+/* ---------- 3. Dock de temas no catálogo (/projetos/) ---------- */
+.theme-dock{position:sticky;top:12px;z-index:5;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:6px;margin:0 0 26px;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:999px;box-shadow:0 6px 18px #0e614f12}
+.theme-dock::-webkit-scrollbar{display:none}
+.theme-dock button{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;font:600 13px/1 var(--sans);color:var(--muted);background:transparent;border:0;border-radius:999px;padding:10px 15px;min-height:40px;cursor:pointer;transition:background .15s,color .15s}
+.theme-dock button:hover{background:var(--mint);color:var(--forest)}
+.theme-dock button[aria-pressed="true"]{background:var(--forest);color:#fff}
+.theme-dock .count{font-size:11px;padding:2px 7px;border-radius:999px;background:var(--mint);color:var(--muted)}
+.theme-dock button[aria-pressed="true"] .count{background:#ffffff33;color:#fff}
+.theme-dock .sep{flex:0 0 1px;background:var(--line);margin:8px 4px}
+.project-card.dock-hidden{display:none!important}
+.dock-empty{color:var(--muted);font-size:.9rem}
+
+/* ---------- 4. Selos de status e profundidade nos cards ---------- */
+.project-card{transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s,border-color .25s}
+.project-card:hover,.project-card:focus-within{transform:translateY(-4px);box-shadow:0 14px 30px #0e614f1f;position:relative;z-index:2}
+.project-card .meta{display:inline-flex;align-items:center;gap:6px;width:fit-content;padding:4px 9px;border-radius:4px;font-weight:700;letter-spacing:.06em}
+.project-card[data-period="2026"] .meta{background:#e6f4ea;color:#1f6b35}
+.project-card[data-period="2026"] .meta::before{content:"●";font-size:.7em}
+.project-card[data-period="historico"] .meta{background:var(--mint);color:var(--muted)}
+html[data-reading-theme="dark"] .project-card[data-period="2026"] .meta{background:#1f6b3540;color:#8fd8a3}
+
+@media (prefers-reduced-motion:reduce){.project-card,.pet-number{transition:none}.project-card:hover{transform:none}}
+
+/* Shared surfaces follow the selected reading theme, including the fixed nav. */
+html[data-reading-size]{font-size:100%}
+html[data-reading-size].large-text{font-size:112.5%}
+.reading-panel{max-height:calc(100dvh - 90px);overflow-y:auto;overscroll-behavior:contain;z-index:30}
+.reading-plus button,.theme-dock button{min-height:44px}
+.reading-plus button[aria-pressed="true"],.theme-dock button[aria-pressed="true"]{background:var(--forest);color:var(--paper)}
+.theme-dock{position:static;flex-wrap:wrap;overflow:visible;border-radius:18px;background:var(--paper);backdrop-filter:none;scrollbar-width:auto}
+.theme-dock button[aria-pressed="true"] .count{background:transparent;color:inherit}
+.pet-number em{color:var(--forest)}
+.project-card[hidden]{display:none!important}
+html[data-reading-theme="sepia"] :is(.header.editorial-nav,.editorial-nav .header-inner,.reading-panel,footer,.project-detail-hero,.aside-card,.button.secondary,input,select,textarea,.carousel-slide figcaption,.news-desk .news-agenda){background:var(--paper)}
+html[data-reading-theme="sepia"] :is(.news-desk .news-journal,.slide-visual,.catalog-photo img){background:var(--mint)}
+html[data-reading-theme="dark"] :is(.header.editorial-nav,.editorial-nav .header-inner,.reading-panel,footer,.project-detail-hero,.aside-card,.button.secondary,input,select,textarea,.carousel-slide figcaption,dialog){background:var(--paper);color:var(--ink)}
+html[data-reading-theme="dark"] :is(.carousel-stage,.carousel-slide .slide-visual,.catalog-photo img,.news-desk .news-journal,.news-desk .news-agenda,.filter-panel,.quiz,.media-placeholder,.collection-card,.download-card,.message-preview){background:var(--mint);color:var(--ink)}
+html[data-reading-theme="dark"] :is(h1,h2,h3,h4,.editorial-news h2 a,.section-head h2,.editorial-paths h2,.journal-spread h2,.editorial-closing h2){color:var(--ink)}
+html[data-reading-theme="dark"] :is(.editorial-lead>p,.editorial-news p,.editorial-reading-grid p,.editorial-closing p,.project-copy>p,.learning-copy p,.issue-card p,.action-row p,.prose p,.prose li,.footer-bottom,.news-desk-heading>span:last-child){color:var(--muted)}
+html[data-reading-theme="dark"] :is(.text-link,.eyebrow,.meta,.news-date,.carousel-mode,.carousel-controls,.carousel-buttons button,.field-grid .meta){color:var(--forest)}
+html[data-reading-theme="dark"] :is(.news-impact,.impact-spread){background:#0e614f;color:#fff}
+html[data-reading-theme="dark"] :is(.news-impact,.impact-spread) :is(h2,p,a,.eyebrow,.text-link,.meta){color:#fff}
+html[data-reading-theme="dark"] .news-tag{background:#0e614f;color:#fff}
+html[data-reading-theme="dark"] .news-event-top .news-tag{background:var(--mint);color:var(--forest)}
+html[data-reading-theme="dark"] .button{background:var(--forest);color:#0d1715}
+html[data-reading-theme="dark"] .button:hover{background:#71dfc6}
+html[data-reading-theme="dark"] .button.secondary{background:var(--paper);color:var(--forest)}
+html[data-reading-theme="dark"] .button[aria-pressed="true"]{background:var(--mint);color:var(--forest)}
+html[data-reading-theme="dark"] :is(input,textarea)::placeholder{color:var(--muted)}
+html[data-reading-theme="dark"] :focus-visible{outline-color:#f4c47f}
+html[data-reading-theme="dark"] .carousel-buttons button:hover{background:var(--mint)}
+html[data-reading-theme="dark"] .carousel-dots button span{border-color:var(--forest)}
+html[data-reading-theme="dark"] .carousel-dots button[aria-current="true"] span{background:var(--forest)}
+/* High contrast stays effective with either background theme. */
+html.high-contrast[data-reading-theme="dark"]{--ink:#fff;--muted:#fff;--forest:#8df8d9;--green:#8df8d9;--line:#a3bab3}
+html.high-contrast[data-reading-theme="dark"] :is(.meta,.eyebrow,.note,.editorial-brand,.masthead-title,.editorial-lead h1,.editorial-lead>p,.editorial-news p,.editorial-reading-grid p){color:var(--ink)}
+@media(max-width:480px){.theme-dock{gap:4px;padding:8px}.theme-dock button{font-size:12px;padding:10px}.reading-panel{position:fixed;top:72px;right:15px;max-height:calc(100dvh - 90px);max-width:calc(100vw - 30px)}.pet-numbers{margin:35px 0}}
+@media(prefers-reduced-motion:reduce){.reading-plus button,.theme-dock button{transition:none}.project-card:focus-within,.pet-number:hover{transform:none}}
+/* Documented results must also fit narrow screens and enlarged reading text. */
+.results-grid{grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr))}
+.results-grid>div{min-width:0}
+.results-grid strong{overflow-wrap:anywhere}
+html[data-reading-theme="dark"] :is(.editorial-affiliation small,.editorial-paths p,.field-grid p,.process-grid p,.media-credit){color:var(--muted)}
+html[data-reading-theme="dark"] :is(.desktop-nav a,.join,.icon-button,.menu-button,#mobile-menu a){color:var(--ink)}
+html[data-reading-theme="dark"] :is(.desktop-nav a.active,.mobile-caption,.process-grid article>span){color:var(--forest)}
+html[data-reading-theme="dark"] #mobile-menu{background:var(--paper)}
+html[data-reading-theme="dark"] .learning-cover>span{background:var(--paper);color:var(--forest)}
+html[data-reading-theme="dark"] :is(.event-date,.document-block,.about-manifesto,.issue-cover,.participation-path,#contact-form,.quiz-choice){background:var(--paper)}
+html[data-reading-theme="dark"] .quiz-choice{color:var(--ink)}
+html[data-reading-theme="dark"] .quiz-choice[data-state="correct"]{background:#1b4538;color:var(--ink)}
+html[data-reading-theme="dark"] .button.secondary:hover{background:var(--mint);color:var(--ink)}
+html[data-reading-theme="sepia"] :is(.event-date,.document-block,.about-manifesto,.issue-cover,.participation-path,#contact-form,.quiz-choice){background:var(--paper)}
