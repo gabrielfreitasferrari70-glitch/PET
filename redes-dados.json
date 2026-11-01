@@ -158,6 +158,27 @@
   },
   "tarjapet": {
     "instagram": [],
-    "youtube": []
+    "youtube": [
+      {
+        "titulo": "Aula 1 - Farmacocinética",
+        "id": "z0U_lvre9-k"
+      },
+      {
+        "titulo": "Aula 2 - Farmacodinâmica",
+        "id": "I7eKiO_WTG0"
+      },
+      {
+        "titulo": "Aula 3 - Prescrição racional de medicamentos e tipos de tarja",
+        "id": "rNPkZN5ISq0"
+      },
+      {
+        "titulo": "Aula 4 - Toxicologia farmacológica",
+        "id": "ZXZNdoipgUk"
+      },
+      {
+        "titulo": "Aula bônus - Anti-inflamatórios esteroidais (AIEs)",
+        "id": "hTm5eMxSnyo"
+      }
+    ]
   }
 }
