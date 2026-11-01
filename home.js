@@ -16,8 +16,8 @@ if(tl){P.get('pet_sugestoes','select=id,tema,categoria,votos&status=eq.aprovada&
  tl.innerHTML=rows.map(function(r,i){var ja=v.indexOf(r.id)>=0;return `<li class='tema-item'><div><p><span class='pos'>${i+1}</span>${P.esc(r.tema)}</p><span class='chip'>${P.esc(CAT[r.categoria]||'Outro tema')}</span></div><button type='button' class='voto' data-voto='${P.esc(r.id)}' aria-pressed='${ja}'${ja?' disabled':''} aria-label='${ja?'Você votou em':'Eu também quero saber sobre'}: ${P.esc(r.tema)}. ${plural(r.votos)}'>${ja?'Votado':'Eu também'} <b>${r.votos}</b></button></li>`;}).join('');})
  .catch(function(){tl.innerHTML=`<li class='empty-state'>Não foi possível carregar os temas agora.</li>`;});
  tl.addEventListener('click',function(e){var b=e.target.closest('[data-voto]');if(!b||b.disabled){return;}var id=b.getAttribute('data-voto');b.disabled=true;
-  fetch(P.BASE+'/rest/v1/rpc/pet_votar_tema',{method:'POST',headers:{apikey:P.KEY,'Content-Type':'application/json'},body:JSON.stringify({p_id:id})}).then(function(r){if(!r.ok){throw new Error();}return r.json();}).then(function(n){try{var v=votados();v.push(id);localStorage.setItem(VK,JSON.stringify(v));}catch(e){}b.setAttribute('aria-pressed','true');b.innerHTML='Votado <b>'+n+'</b>';})
-  .catch(function(){b.disabled=false;});});}
+  fetch(P.BASE+'/rest/v1/rpc/pet_votar_tema',{method:'POST',headers:{apikey:P.KEY,'Content-Type':'application/json'},body:JSON.stringify({p_id:id})}).then(function(r){if(!r.ok){return r.json().then(function(j){throw new Error((j&&j.message)||'');},function(){throw new Error();});}return r.json();}).then(function(n){try{var v=votados();v.push(id);localStorage.setItem(VK,JSON.stringify(v));}catch(e){}b.setAttribute('aria-pressed','true');b.innerHTML='Votado <b>'+n+'</b>';})
+  .catch(function(err){if(err&&err.message&&err.message.indexOf('Voce ja')===0){try{var v=votados();v.push(id);localStorage.setItem(VK,JSON.stringify(v));}catch(e){}b.setAttribute('aria-pressed','true');return;}b.disabled=false;});});}
 })();
 /* Carrossel da abertura */
 (function(){var c=document.querySelector('.hm-car');if(!c){return;}

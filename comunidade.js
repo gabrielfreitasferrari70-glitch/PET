@@ -46,5 +46,5 @@ function temas(){if(!lista){return;}P.get('pet_sugestoes','select=id,tema,catego
  .catch(function(){lista.innerHTML=`<li class='empty-state'>Não foi possível carregar os temas agora. Tente novamente em instantes.</li>`;});}
 if(lista){lista.addEventListener('click',function(e){var b=e.target.closest('[data-voto]');if(!b||b.disabled){return;}var id=b.getAttribute('data-voto');b.disabled=true;tmsg.className='com-msg';tmsg.textContent='';
  post('/rest/v1/rpc/pet_votar_tema',{p_id:id}).then(function(n){marca(id);soma++;mostraTotal();b.setAttribute('aria-pressed','true');b.setAttribute('aria-label','Você votou em: '+b.getAttribute('data-tema')+'. '+plural(n));b.innerHTML='Votado <b>'+n+'</b>';tmsg.className='com-msg ok';tmsg.textContent='Voto registrado. Obrigado!';})
- .catch(function(err){b.disabled=false;tmsg.className='com-msg erro';tmsg.textContent=err.message.indexOf('Muitos')===0?err.message:'Não foi possível registrar o voto agora.';});});}
+ .catch(function(err){if(err.message.indexOf('Voce ja')===0){marca(id);b.setAttribute('aria-pressed','true');tmsg.className='com-msg ok';tmsg.textContent='Você já votou neste tema. Obrigado!';return;}b.disabled=false;tmsg.className='com-msg erro';tmsg.textContent=err.message.indexOf('Muitos')===0?err.message:'Não foi possível registrar o voto agora.';});});}
 temas();})();
