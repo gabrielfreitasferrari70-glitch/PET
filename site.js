@@ -1,0 +1,120 @@
+/* Gerado por ferramentas/unir-arquivos.py. Nao edite aqui. */
+(()=>{'use strict';const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+function read(k){try{const x=JSON.parse(localStorage.getItem(k)||'[]');return new Set(Array.isArray(x)?x:[])}catch{return new Set()}}function persist(k,v){try{localStorage.setItem(k,JSON.stringify([...v]))}catch{}}let saved=read('pet-conecta-salvos'),done=read('pet-conecta-aprendizado');
+// Anos calculados: o HTML traz o valor de 2026 como reserva, e um relogio atrasado nunca o reduz.
+const anoAtual=Math.max(new Date().getFullYear(),2026),anosPet=anoAtual-2010;
+function porExtenso(n){const un=['','um','dois','três','quatro','cinco','seis','sete','oito','nove'],esp=['dez','onze','doze','treze','quatorze','quinze','dezesseis','dezessete','dezoito','dezenove'],dez=['','','vinte','trinta','quarenta','cinquenta','sessenta','setenta','oitenta','noventa'];const t=n<20?esp[n-10]:dez[Math.floor(n/10)]+(n%10?' e '+un[n%10]:'');return t[0].toUpperCase()+t.slice(1)}
+$$('[data-ano-atual]').forEach(n=>{n.textContent=anoAtual});$$('[data-ano-intervalo]').forEach(n=>{n.textContent='2010–'+anoAtual});if(anosPet<100)$$('[data-anos-pet]').forEach(n=>{n.textContent=porExtenso(anosPet)});
+// Preserve deep links shared from the previous single-page portal.
+function legacy(){if(location.pathname!=='/')return;let h;try{h=decodeURIComponent(location.hash.slice(1))}catch{return;}let target='';if(h.startsWith('projeto='))target='/projetos/'+encodeURIComponent(h.slice(8))+'/';else if(h.startsWith('aprender='))target='/aprender/'+encodeURIComponent(h.slice(9))+'/';else if(h.startsWith('colecao='))target='/colecoes/'+encodeURIComponent(h.slice(8))+'/';else if(h.startsWith('balanco='))target='/publicacoes/balanco-'+encodeURIComponent(h.slice(8))+'/';else target={projetos:'/projetos/',agenda:'/agenda/',acoes:'/agenda/#arquivo',aprender:'/aprender/','learning-library':'/aprender/',jornal:'/publicacoes/',balanco:'/publicacoes/',impacto:'/agenda/#arquivo',participe:'/participar/',ingresso:'/participar/#ingresso',form:'/participar/#contato'}[h]||'';if(target)location.replace(target)}legacy();window.addEventListener('hashchange',legacy);
+const menu=$('#menu-open');menu?.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));$('#mobile-menu').hidden=!open});document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(menu){menu.setAttribute('aria-expanded','false');$('#mobile-menu').hidden=true}$('#reading-panel').hidden=true;$('#reading-open').setAttribute('aria-expanded','false')}});
+const toast=t=>{const n=$('#toast');n.textContent=t;n.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>n.hidden=true,4000)};
+// Painel de leitura: tamanho e tema, guardados neste navegador.
+const painel=$('#reading-panel'),abrir=$('#reading-open'),corMeta=$('meta[name="theme-color"]'),corBase=corMeta?.content,COR_TEMA={dark:'#0d1715',sepia:'#f4ecdb'},PADRAO={theme:'auto',size:'md'},sistemaEscuro=matchMedia('(prefers-color-scheme: dark)');let leitura={},medidos=[];
+function salvaLeitura(){try{localStorage.setItem('pet-reading-plus',JSON.stringify(leitura))}catch{}}
+try{const g=JSON.parse(localStorage.getItem('pet-reading-plus')||'{}');if(['auto','paper','sepia','dark'].includes(g?.theme))leitura.theme=g.theme;if(['sm','md','lg'].includes(g?.size))leitura.size=g.size;const velho=JSON.parse(localStorage.getItem('pet-conecta-leitura')||localStorage.getItem('pet-reading')||'{}');if(velho?.large&&!leitura.size){leitura.size='lg';salvaLeitura()}localStorage.removeItem('pet-conecta-leitura');localStorage.removeItem('pet-reading')}catch{}
+// O CSS usa medidas em px, entao o tamanho e aplicado sobre o valor calculado de cada texto.
+function escala(){medidos.forEach(m=>m.node.style.fontSize=m.original);medidos=[];const r=leitura.size==='sm'?.9375:leitura.size==='lg'?1.125:1;if(r===1)return;const lista=[...document.querySelectorAll('main :is(h1,h2,h3,h4,p,li,dt,dd,figcaption,label),main .pet-number :is(strong,span,small,em)')].map(node=>({node,original:node.style.fontSize,size:parseFloat(getComputedStyle(node).fontSize)}));lista.forEach(m=>m.node.style.fontSize=m.size*r+'px');medidos=lista}
+// Sem escolha guardada, o tema acompanha o sistema; "paper" e o claro escolhido a mao.
+function temaAtual(){const t=leitura.theme||PADRAO.theme;return t==='auto'?(sistemaEscuro.matches?'dark':'paper'):t}
+function aplicaLeitura(){for(const k of Object.keys(PADRAO)){const v=leitura[k]||PADRAO[k],atual=k==='theme'?temaAtual():v;if(atual==='paper'||atual===PADRAO[k])document.documentElement.removeAttribute('data-reading-'+k);else document.documentElement.setAttribute('data-reading-'+k,atual);painel.querySelectorAll(`[data-rp="${k}"]`).forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.value===v)))}if(corMeta)corMeta.content=COR_TEMA[temaAtual()]||corBase;escala()}
+aplicaLeitura();
+sistemaEscuro.addEventListener('change',aplicaLeitura);
+// Impressao sempre em fundo claro, qualquer que seja o tema da tela.
+window.addEventListener('beforeprint',()=>document.documentElement.removeAttribute('data-reading-theme'));
+window.addEventListener('afterprint',aplicaLeitura);
+abrir.addEventListener('click',e=>{const fechado=!painel.hidden;painel.hidden=fechado;abrir.setAttribute('aria-expanded',String(!fechado));if(!fechado&&e.detail===0)painel.querySelector('[data-rp]').focus()});
+painel.addEventListener('click',e=>{const b=e.target.closest('[data-rp]');if(!b)return;leitura[b.dataset.rp]=b.dataset.value;salvaLeitura();aplicaLeitura()});
+$('#reading-reset').addEventListener('click',()=>{leitura={};salvaLeitura();aplicaLeitura()});
+document.addEventListener('click',e=>{if(!painel.hidden&&!painel.contains(e.target)&&!abrir.contains(e.target)){painel.hidden=true;abrir.setAttribute('aria-expanded','false')}});
+painel.addEventListener('keydown',e=>{if(e.key==='Escape')abrir.focus()});
+let quadroEscala;window.addEventListener('resize',()=>{cancelAnimationFrame(quadroEscala);quadroEscala=requestAnimationFrame(escala)});
+function paintSaved(){$$('[data-save]').forEach(b=>{const yes=saved.has(b.dataset.save);b.setAttribute('aria-pressed',String(yes));if(b.classList.contains('labeled'))b.textContent=yes?'♥ Projeto salvo':'♡ Salvar projeto';else{b.textContent=yes?'♥':'♡';b.setAttribute('aria-label',(yes?'Remover dos salvos: ':'Salvar: ')+(b.closest('article')?.querySelector('h3')?.textContent||'projeto'))}});if($('#saved-count'))$('#saved-count').textContent=saved.size}paintSaved();$$('[data-save]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.save;saved.has(id)?saved.delete(id):saved.add(id);persist('pet-conecta-salvos',saved);paintSaved();filterCatalog()}));
+function paintDone(){$$('[data-complete]').forEach(b=>{const yes=done.has(b.dataset.complete);b.setAttribute('aria-pressed',String(yes));b.textContent=yes?'Concluído ✓ · desmarcar':'Marcar como concluído ✓'});$$('[data-completed]').forEach(n=>n.textContent=done.has(n.dataset.completed)?'✓ Concluído neste navegador':'');if($('#progress-count'))$('#progress-count').textContent=done.size+' de 7 conteúdos concluídos'}paintDone();$$('[data-complete]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.complete;done.has(id)?done.delete(id):done.add(id);persist('pet-conecta-aprendizado',done);paintDone()}));
+async function copy(text,feedback){try{await navigator.clipboard.writeText(text);if(feedback)feedback.textContent='Mensagem copiada. Abra o Instagram, cole e envie.';else toast('Link copiado.')}catch{if(feedback){feedback.textContent='Não foi possível copiar automaticamente. Selecione a mensagem na prévia e copie.';$('#message-preview').closest('details').open=true}else toast('Copie o endereço na barra do navegador.')}}$$('.share').forEach(b=>b.addEventListener('click',()=>copy(location.href)));
+let savedOnly=false;const catalog=$('[data-catalog]'),cards=catalog?[...$('#catalog-grid').children]:[];
+function filterCatalog(){if(!catalog)return;const term=norm($('#catalog-search').value.trim()),filters={theme:$('#theme-filter')?.value||'',period:$('#period-filter')?.value||'',format:$('#format-filter')?.value||'',project:$('#project-filter')?.value||''};let count=0;cards.forEach(c=>{let yes=(!term||norm(c.dataset.search).includes(term))&&(!savedOnly||saved.has(c.dataset.id));for(const [key,v]of Object.entries(filters))if(v&&c.dataset[key]!==v)yes=false;c.hidden=!yes;if(yes)count++});$('#catalog-empty').hidden=count!==0;$('#catalog-count').textContent=count+' '+(catalog.dataset.catalog==='projects'?(count===1?'projeto encontrado':'projetos encontrados'):(count===1?'conteúdo encontrado':'conteúdos encontrados'));const q=new URLSearchParams();if(term)q.set('busca',$('#catalog-search').value);for(const [k,v]of Object.entries(filters))if(v)q.set(k,v);if(savedOnly)q.set('salvos','1');history.replaceState(null,'',location.pathname+(q.size?'?'+q.toString():'')+location.hash)}
+if(catalog){let query=new URLSearchParams(location.search);$('#catalog-search').value=query.get('busca')||'';for(const[k,id]of Object.entries({theme:'theme-filter',period:'period-filter',format:'format-filter',project:'project-filter'}))if($('#'+id))$('#'+id).value=query.get(k)||'';savedOnly=query.get('salvos')==='1';if($('#saved-only'))$('#saved-only').setAttribute('aria-pressed',String(savedOnly));catalog.querySelectorAll('input,select').forEach(x=>x.addEventListener('input',filterCatalog));$('#filter-toggle').addEventListener('click',()=>{let n=$('#catalog-filters');n.hidden=!n.hidden;$('#filter-toggle').setAttribute('aria-expanded',String(!n.hidden))});$('#saved-only')?.addEventListener('click',()=>{savedOnly=!savedOnly;$('#saved-only').setAttribute('aria-pressed',String(savedOnly));filterCatalog()});$('#reset-filters').addEventListener('click',()=>{catalog.querySelectorAll('input,select').forEach(x=>x.value='');savedOnly=false;$('#saved-only')?.setAttribute('aria-pressed','false');filterCatalog()});if([...query.keys()].some(k=>['theme','period','format','project'].includes(k))){$('#catalog-filters').hidden=false;$('#filter-toggle').setAttribute('aria-expanded','true')}filterCatalog()}
+const dialog=$('#search-dialog'),search=$('#global-search');let index=null;let searchPromise=null;
+async function loadSearch(){if(index)return index;if(!searchPromise)searchPromise=fetch('/search-index.json').then(r=>{if(!r.ok)throw Error();return r.json()}).then(d=>index=d).catch(()=>{searchPromise=null;throw Error()});return searchPromise}
+async function searchResults(){const n=$('#search-results');try{const data=await loadSearch(),termos=norm(search.value.trim()).split(/\s+/).filter(Boolean),items=termos.length?data.filter(x=>{const t=norm(x.title+' '+x.text);return termos.every(p=>t.includes(p))}):data.slice(0,6);n.replaceChildren();if(!items.length){const p=document.createElement('p');p.textContent='Nenhum resultado. Tente outro termo.';n.append(p)}for(const x of items){let url;try{url=new URL(x.url,location.origin)}catch{continue}if(url.origin!==location.origin||!['https:','http:'].includes(url.protocol))continue;const a=document.createElement('a');a.href=url.href;const kind=document.createElement('span');kind.className='meta';kind.textContent=x.kind;const title=document.createElement('h3');title.textContent=x.title+' →';a.append(kind,title);n.append(a)}}catch{n.textContent='A busca não carregou. Acesse Projetos ou Aprender pelo menu.'}}
+$('#search-open').addEventListener('click',()=>{dialog.showModal();search.focus();searchResults()});$('#search-close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}});search.addEventListener('input',searchResults);document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)&&!dialog.open){e.preventDefault();dialog.showModal();search.focus();searchResults()}});
+$$('.quiz').forEach(q=>q.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>{q.querySelectorAll('[data-answer]').forEach(x=>{delete x.dataset.state;x.setAttribute('aria-pressed','false')});const correct=b.dataset.answer===q.dataset.correct;b.dataset.state=correct?'correct':'retry';b.setAttribute('aria-pressed','true');q.querySelector('.quiz-feedback').textContent=(correct?'Isso mesmo. ':'Vamos rever. ')+q.dataset.explanation})));
+if($('#contact-form')){const form=$('#contact-form'),purpose=$('#contact-purpose'),project=$('#contact-project');const query=new URLSearchParams(location.search);if(query.has('projeto'))project.value=query.get('projeto');function preview(){const partner=purpose.value==='Propor uma parceria';$('#institution-fields').hidden=!partner;let parts=['Olá, PET Medicina UFMT!',purpose.value+'.'];if(project.value)parts.push('Projeto: '+project.options[project.selectedIndex].text+'.');const contribution=$('#contact-contribution').value;if(contribution)parts.push('Interesse em contribuir: '+contribution+'.');if(partner)for(const[id,label]of Object.entries({'institution-name':'Instituição','institution-place':'Local','institution-public':'Público','institution-theme':'Necessidade','institution-availability':'Disponibilidade'})){const v=$('#'+id).value.trim();if(v)parts.push(label+': '+v)}const msg=$('#contact-message').value.trim();if(msg)parts.push(msg);$('#message-preview').textContent=parts.join('\n\n');return parts.join('\n\n')}form.addEventListener('input',preview);form.addEventListener('change',preview);$$('[data-purpose-link]').forEach(a=>a.addEventListener('click',()=>{purpose.value=a.dataset.purposeLink;preview()}));form.addEventListener('submit',e=>{e.preventDefault();copy(preview(),$('#contact-feedback'))});preview()}
+// Atalhos para filtrar projetos por tema e periodo.
+{const lista=$('[data-catalog="projects"]'),projetos=lista?[...lista.querySelectorAll('.project-card')]:[],tema=$('#theme-filter'),periodo=$('#period-filter');if(projetos.length&&tema&&periodo){const dock=document.createElement('div');dock.className='theme-dock';dock.setAttribute('role','group');dock.setAttribute('aria-label','Atalhos para filtrar projetos');const opcoes=[['Todos','','',projetos.length]];for(const sel of[periodo,tema])for(const o of sel.options){if(!o.value)continue;const tipo=sel===periodo?'period':'theme',total=projetos.filter(c=>c.dataset[tipo]===o.value).length;if(total)opcoes.push([o.value==='2026'?'Em 2026':o.value==='historico'?'Histórico':o.textContent,tipo,o.value,total])}
+const marca=()=>dock.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.kind==='theme'?tema.value===b.dataset.value:b.dataset.kind==='period'?periodo.value===b.dataset.value:!tema.value&&!periodo.value)));
+for(const[nome,tipo,valor,total]of opcoes){const b=document.createElement('button');b.type='button';b.dataset.kind=tipo;b.dataset.value=valor;b.setAttribute('aria-controls','catalog-grid');b.append(nome+' ');const c=document.createElement('span');c.className='count';c.textContent=total;c.setAttribute('aria-hidden','true');b.append(c);b.addEventListener('click',()=>{if(!tipo)$('#reset-filters').click();else{const sel=tipo==='theme'?tema:periodo;sel.value=sel.value===valor?'':valor;sel.dispatchEvent(new Event('input',{bubbles:true}))}marca()});dock.append(b)}
+lista.insertBefore(dock,$('#catalog-grid'));lista.addEventListener('input',marca);$('#reset-filters').addEventListener('click',marca);marca()}}
+// O botao do menu movel abre o mesmo painel de leitura do cabecalho.
+$('[data-abrir-leitura]')?.addEventListener('click',e=>{e.stopPropagation();$('#reading-open').click()});
+// O botao flutuante some quando o rodape ou um bloco de contato aparece na tela.
+const fala=$('.fale-flutuante');if(fala&&'IntersectionObserver'in window){const vis=new Set(),io=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?vis.add(e.target):vis.delete(e.target));fala.classList.toggle('is-oculto',vis.size>0)});$$('footer, .hm-fale, #contato').forEach(n=>io.observe(n))}
+// Restore the catalog scroll position when returning from a detail page.
+if(catalog){const key='pet-scroll:'+location.pathname;try{if(performance.getEntriesByType('navigation')[0]?.type==='back_forward'){const y=Number(sessionStorage.getItem(key)||0);requestAnimationFrame(()=>scrollTo(0,y))}window.addEventListener('pagehide',()=>sessionStorage.setItem(key,String(scrollY)))}catch{}}
+})();;
+/* Conteúdo externo é carregado somente por escolha explícita, sem consentimento persistente. */
+(() => {
+  'use strict';
+  // Devolve o foco ao controle de busca quando o diálogo é fechado.
+  const searchDialog = document.getElementById('search-dialog');
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && searchDialog?.open) {
+      event.preventDefault();
+      searchDialog.close();
+    }
+  }, true);
+  searchDialog?.addEventListener('close', () => {
+    document.getElementById('search-open')?.focus();
+  });
+  document.querySelectorAll('iframe[data-privacy-src]').forEach(frame => {
+    const placeholder = frame.previousElementSibling;
+    const button = placeholder?.querySelector('[data-load-embed]');
+    if (!button) return;
+    const hide = document.createElement('button');
+    hide.type = 'button';
+    hide.className = 'text-link privacy-hide-embed';
+    hide.textContent = 'Ocultar publicação e interromper a conexão';
+    hide.hidden = true;
+    frame.after(hide);
+    button.addEventListener('click', () => {
+      let url;
+      try { url = new URL(frame.dataset.privacySrc); } catch { return; }
+      if (url.origin !== 'https://www.instagram.com' || !/^\/p\/[A-Za-z0-9_-]+\/embed\/$/.test(url.pathname)) return;
+      frame.src = url.href;
+      frame.hidden = false;
+      placeholder.hidden = true;
+      hide.hidden = false;
+      hide.focus();
+    });
+    hide.addEventListener('click', () => {
+      frame.removeAttribute('src');
+      frame.hidden = true;
+      placeholder.hidden = false;
+      hide.hidden = true;
+      button.focus();
+    });
+  });
+
+  const form = document.getElementById('contact-form');
+  form?.addEventListener('reset', () => {
+    setTimeout(() => {
+      form.dispatchEvent(new Event('input', {bubbles:true}));
+      document.getElementById('contact-feedback').textContent = 'Campos limpos nesta página. A área de transferência não foi alterada.';
+    }, 0);
+  });
+
+  const clear = document.querySelector('[data-clear-local]');
+  const feedback = document.getElementById('privacy-storage-status');
+  if (feedback && location.hash === '#preferencias-redefinidas') feedback.textContent = 'Favoritos, progresso e preferências foram redefinidos neste navegador. As preferências padrão podem ser gravadas novamente.';
+  clear?.addEventListener('click', () => {
+    try {
+      ['pet-conecta-salvos','pet-conecta-aprendizado','pet-conecta-leitura','pet-reading','pet-reading-plus'].forEach(key => localStorage.removeItem(key));
+      Object.keys(sessionStorage).filter(key => key.startsWith('pet-scroll:')).forEach(key => sessionStorage.removeItem(key));
+      location.hash = 'preferencias-redefinidas';
+      location.reload();
+    } catch {
+      feedback.textContent = 'O navegador não permitiu redefinir os dados. Use as configurações do navegador para limpar os dados deste site.';
+    }
+  });
+})();

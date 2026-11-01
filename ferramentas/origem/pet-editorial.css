@@ -1,6 +1,3 @@
-@import url(/pet-editorial-base.css);
-@import url(/pet-v2.css);
-@import url(/pet-v3.css);
 /* Regras comuns ficam na camada base. As que estao fora dela, no fim do arquivo, vencem qualquer regra da base. */
 @layer base{
 /* Rodada 1: data da agenda cabe na tela do celular. */
