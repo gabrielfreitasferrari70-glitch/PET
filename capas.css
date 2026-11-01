@@ -1,7 +1,0 @@
-/* PET Conecta: capas ilustradas dos projetos (carregado pelo pet-editorial.js). */
-.capa-midia { display: block !important; position: relative; aspect-ratio: 16 / 9; height: auto !important; min-height: 0 !important; max-height: none !important; padding: 0 !important; overflow: hidden; background: var(--mint, #edf7f4); }
-.capa-midia img { display: block; width: 100% !important; height: 100% !important; max-width: none !important; max-height: none !important; margin: 0 !important; object-fit: cover !important; object-position: center; }
-.capa-midia::before, .capa-midia::after, article.tem-capa::before { content: none !important; display: none !important; }
-.pj-capa { margin: 28px 0 8px; aspect-ratio: 16 / 9; max-height: 420px; overflow: hidden; border: 1px solid var(--line, #d1dfda); border-radius: 12px; background: var(--mint, #edf7f4); }
-.pj-capa img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.hp-corpo .capa-titulo { position: static !important; display: block !important; width: auto !important; height: auto !important; overflow: visible !important; clip: auto !important; clip-path: none !important; white-space: normal !important; margin: 0 0 6px !important; padding: 0 !important; border: 0 !important; font-family: var(--serif, Georgia, serif); font-size: 1.3rem; font-weight: 600; line-height: 1.2; color: var(--ink, #171a18); }

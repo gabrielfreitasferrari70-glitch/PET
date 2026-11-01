@@ -1,33 +1,6 @@
-/* PET Conecta: pagina YouTube. 1) traz cabecalho e rodape da pagina Projetos para manter tudo igual; 2) abre o resumo de cada video. */
+/* PET Conecta: pagina YouTube: abre o resumo de cada video. */
 (function () {
   'use strict';
-
-  /* 1) Cabecalho e rodape: lidos de /projetos/ antes dos scripts do site rodarem. */
-  var main = document.getElementById('conteudo');
-  try {
-    var x = new XMLHttpRequest();
-    x.open('GET', '/projetos/', false);
-    x.send();
-    if (x.status === 200 && main) {
-      var doc = new DOMParser().parseFromString(x.responseText, 'text/html');
-      var kids = Array.prototype.slice.call(doc.body.children);
-      var i = -1;
-      kids.forEach(function (k, n) { if (i < 0 && (k.tagName === 'MAIN' || k.id === 'conteudo')) { i = n; } });
-      if (i > 0) {
-        var antes = kids.slice(0, i), depois = kids.slice(i + 1);
-        var ok = function (k) { return k.tagName !== 'SCRIPT'; };
-        antes.filter(ok).forEach(function (k) { main.parentNode.insertBefore(document.importNode(k, true), main); });
-        var ref = main.nextSibling;
-        depois.filter(ok).forEach(function (k) { main.parentNode.insertBefore(document.importNode(k, true), ref); });
-        /* Nenhum link do menu fica marcado como ativo: quem marca e o pet-editorial.js. */
-        document.querySelectorAll('.editorial-nav .active, .editorial-nav [aria-current]').forEach(function (a) {
-          a.classList.remove('active'); a.removeAttribute('aria-current');
-        });
-        var mini = document.getElementById('yt-mini');
-        if (mini) { mini.remove(); }
-      }
-    }
-  } catch (e) { /* sem cabecalho completo, fica o menu simples da propria pagina */ }
 
   /* Resultado da busca que leva a uma secao desta pagina: fecha a busca para mostrar a secao. */
   window.addEventListener('hashchange', function () {
@@ -37,7 +10,7 @@
     if (alvo) { setTimeout(function () { alvo.scrollIntoView(); }, 0); }
   });
 
-  /* 2) Resumo do video. */
+  /* Resumo do video. */
   var dlg = document.getElementById('yt-dialog');
   if (!dlg || typeof dlg.showModal !== 'function') { return; }
   var img = document.getElementById('yt-d-img');
