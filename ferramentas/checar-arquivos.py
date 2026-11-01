@@ -2,7 +2,7 @@
 """Lista arquivos citados pelo site que nao existem no repositorio. Rode antes de publicar:
    python3 ferramentas/checar-arquivos.py
 """
-import os, re, sys
+import json, os, re, sys
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TIPOS = ('.html', '.js', '.css', '.json')
@@ -11,6 +11,10 @@ EXT = 'png|jpe?g|svg|webp|gif|pdf|ics|ttf|woff2?|css|js|json'
 CITACAO = re.compile(r"""["'(`]((?:https://pet-conecta\.vercel\.app)?/[A-Za-z0-9_./-]+\.(?:%s))(?=["'`)?#])""" % EXT)
 # Montagem de caminho em tempo de execucao: nao pode ser conferida, entao tambem e erro.
 MONTADO = re.compile(r"""["'`]/?(?:assets|materiais)/[A-Za-z0-9_/-]*/?["'`]\s*\+""")
+
+# Enderecos servidos por rewrite do vercel.json (ex.: /agenda/pet.ics) nao sao arquivos do repositorio.
+with open(os.path.join(RAIZ, 'vercel.json'), encoding='utf-8') as f:
+    REESCRITOS = {r['source'].lstrip('/') for r in json.load(f).get('rewrites', [])}
 
 faltando, montados = {}, []
 for pasta, subpastas, arquivos in os.walk(RAIZ):
@@ -23,7 +27,7 @@ for pasta, subpastas, arquivos in os.walk(RAIZ):
         texto = open(caminho, encoding='utf-8', errors='replace').read()
         for citado in CITACAO.findall(texto):
             alvo = citado.replace('https://pet-conecta.vercel.app', '').lstrip('/')
-            if not os.path.isfile(os.path.join(RAIZ, alvo)):
+            if alvo not in REESCRITOS and not os.path.isfile(os.path.join(RAIZ, alvo)):
                 faltando.setdefault(alvo, set()).add(rel)
         if MONTADO.search(texto):
             montados.append(rel)
