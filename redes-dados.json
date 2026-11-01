@@ -31,8 +31,34 @@
     ]
   },
   "arte-na-veia": {
-    "instagram": [],
-    "youtube": []
+    "instagram": [
+      {
+        "titulo": "Alimentos entregues à Associação Pestalozzi",
+        "url": "https://www.instagram.com/artenaveia.ufmt/reel/DdSDLBDh4qh/"
+      },
+      {
+        "titulo": "Retrospectiva das músicas de 2026",
+        "url": "https://www.instagram.com/artenaveia.ufmt/p/Ddw7m7XGXaV/"
+      },
+      {
+        "titulo": "Entrega de 234 kg de alimentos em 2024",
+        "url": "https://www.instagram.com/artenaveia.ufmt/p/DBrIZyDx_sO/"
+      },
+      {
+        "titulo": "ANV 2023: teatro cheio e 249 kg de alimentos",
+        "url": "https://www.instagram.com/artenaveia.ufmt/p/CxVrkpmu4Zp/"
+      }
+    ],
+    "youtube": [
+      {
+        "titulo": "Projeto Arte na Veia: um projeto sócio-educativo-cultural na faculdade de medicina",
+        "id": "iHaMglVvPH0"
+      },
+      {
+        "titulo": "Projeto Arte na Veia 2017",
+        "id": "tEcQpbCiHMc"
+      }
+    ]
   },
   "curso-aph": {
     "instagram": [],
