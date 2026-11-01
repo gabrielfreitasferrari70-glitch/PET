@@ -61,7 +61,20 @@
     ]
   },
   "curso-aph": {
-    "instagram": [],
+    "instagram": [
+      {
+        "titulo": "Como é participar do Curso APH",
+        "url": "https://www.instagram.com/xcursoaph/reel/Det_6caxvHo/"
+      },
+      {
+        "titulo": "Vale a pena fazer o APH? Depoimentos da edição passada",
+        "url": "https://www.instagram.com/xcursoaph/reel/DeKHpP-Rg-m/"
+      },
+      {
+        "titulo": "10ª edição: 9 a 14 de novembro",
+        "url": "https://www.instagram.com/xcursoaph/p/DdbypMUxp9Q/"
+      }
+    ],
     "youtube": []
   },
   "petnews": {
