@@ -117,9 +117,8 @@
   .hm-acoes .button { width: 100%; justify-content: space-between; box-sizing: border-box; }
 }
 
-/* De Jaleco e Fone: a foto com rostos da abertura vira a ilustração do projeto */
-.djf-photo { background: var(--djf-orange) url(/assets/capas/de-jaleco-e-fone.svg) center / cover no-repeat; }
-.djf-photo img { opacity: 0; }
+/* De Jaleco e Fone: fundo laranja enquanto a foto da equipe carrega */
+.djf-photo { background: var(--djf-orange); }
 .op .pj-cab, .yt-intro { padding: 27px 0 41px; border: 0; }
 .op .pj-cab .eyebrow, .yt-intro .eyebrow { display: block; margin: 26px 0 20px; }
 .op .pj-cab h1, .yt-intro h1 { text-wrap: wrap}

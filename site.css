@@ -788,8 +788,7 @@ html[data-reading-theme="dark"] .djf-page h1 span{color:var(--djf-soft)}html[dat
 }
 
 
-.djf-photo { background: var(--djf-orange) url(/assets/capas/de-jaleco-e-fone.svg) center / cover no-repeat; }
-.djf-photo img { opacity: 0; }
+.djf-photo { background: var(--djf-orange); }
 .op .pj-cab, .yt-intro { padding: 27px 0 41px; border: 0; }
 .op .pj-cab .eyebrow, .yt-intro .eyebrow { display: block; margin: 26px 0 20px; }
 .op .pj-cab h1, .yt-intro h1 { text-wrap: wrap}
