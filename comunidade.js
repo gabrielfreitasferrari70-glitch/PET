@@ -1,5 +1,5 @@
 (function(){'use strict';var P=window.PET;if(!P){return;}
-var EMAIL='gabrielfreitasferrari701@gmail.com',VK='pet-conecta-votos',soma=0,ntemas=0;
+var ALIAS='0c6a077896ce402455ad91693ad6b897',VK='pet-conecta-votos',soma=0,ntemas=0;
 var CAT={infancia:'Saúde da criança','saude-sexual':'Saúde sexual','saude-mental':'Saúde mental',inclusao:'Inclusão',outro:'Outro tema'};
 var TIPOS={
  duvida:{nome:'Dúvida de saúde',titulo:'Sua dúvida',rotulo:'Qual é a sua dúvida?',ph:'Ex.: quem pode doar sangue?',assunto:true,min:10,max:1000,subj:'nova dúvida de saúde',nomeRot:'Seu nome (opcional)',contRot:'Telefone ou e-mail para resposta (opcional)',contObr:false,ok:'Dúvida enviada! Se você deixou um contato, a resposta chega por lá.'},
@@ -9,7 +9,7 @@ var TIPOS={
 };
 function $(id){return document.getElementById(id);}
 function post(path,body){return fetch(P.BASE+path,{method:'POST',headers:{apikey:P.KEY,'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.text().then(function(t){var j=null;try{j=t?JSON.parse(t):null;}catch(e){}if(!r.ok){throw new Error((j&&j.message)||('Erro '+r.status));}return j;});});}
-function enviar(d){return fetch('https://formsubmit.co/ajax/'+EMAIL,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},referrerPolicy:'strict-origin-when-cross-origin',body:JSON.stringify(d)}).then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok||String(j.success)!=='true'){throw new Error(j.message||('Erro '+r.status));}return j;});});}
+function enviar(d){return fetch('https://formsubmit.co/ajax/'+ALIAS,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},referrerPolicy:'strict-origin-when-cross-origin',body:JSON.stringify(d)}).then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok||String(j.success)!=='true'){throw new Error(j.message||('Erro '+r.status));}return j;});});}
 var atual='duvida',t=$('fale-texto'),cnt=$('fale-cnt'),msg=$('fale-msg'),btn=$('fale-enviar');
 function msgEstado(c,txt){msg.className='com-msg'+(c?' '+c:'');msg.textContent=txt;}
 function tipo(k){if(!TIPOS[k]){k='duvida';}atual=k;var o=TIPOS[k];
