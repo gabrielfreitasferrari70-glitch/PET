@@ -1,9 +1,7 @@
 (function(){'use strict';
-var raiz=document.getElementById('pj-raiz');if(!raiz){return;}
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function url(u){return /^(https:\/\/|\/)/.test(u)?u:'#';}
-function ext(u){return /^https:/.test(u)?' target="_blank" rel="noopener noreferrer"':'';}
-function seta(u){return /^https:/.test(u)?'↗':'→';}
+var raiz=document.getElementById('pj-raiz'),P=window.PET;if(!raiz||!P){return;}
+var esc=P.esc,ext=P.la,seta=P.seta;
+function url(u){return P.safeUrl(u)||'#';}
 var slug=location.pathname.split('/').filter(Boolean).pop();
 function falhou(){raiz.innerHTML='<a href="/projetos/" class="breadcrumb">← Todos os projetos</a><header class="pj-cab"><h1>Projeto não encontrado</h1><p class="pj-lead">Veja a lista completa de projetos.</p></header><p><a class="button" href="/projetos/">Ver os projetos</a></p>';}
 fetch('/projetos-dados.json').then(function(r){if(!r.ok){throw new Error();}return r.json();}).then(function(D){

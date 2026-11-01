@@ -19,8 +19,6 @@ html[data-reading-size="sm"]{font-size:93.75%}
 html[data-reading-size="lg"]{font-size:112.5%}
 
 /* Família tipográfica */
-html[data-reading-font="sans"] body,
-html[data-reading-font="sans"] body :is(h1,h2,h3,h4,p,li,blockquote,figcaption){font-family:var(--sans)!important}
 
 /* Tema sépia */
 html[data-reading-theme="sepia"]{--paper:#fbf6ea;--mint:#efe6d2;--line:#ddd0b6;--ink:#2d281f;--muted:#6e6454}
@@ -76,7 +74,6 @@ html[data-reading-theme="dark"] .project-card[data-period="2026"] .meta{backgrou
 
 /* Shared surfaces follow the selected reading theme, including the fixed nav. */
 html[data-reading-size]{font-size:100%}
-html[data-reading-size].large-text{font-size:112.5%}
 .reading-panel{max-height:calc(100dvh - 90px);overflow-y:auto;overscroll-behavior:contain;z-index:30}
 .reading-plus button,.theme-dock button{min-height:44px}
 .reading-plus button[aria-pressed="true"],.theme-dock button[aria-pressed="true"]{background:var(--forest);color:var(--paper)}
@@ -105,8 +102,6 @@ html[data-reading-theme="dark"] .carousel-buttons button:hover{background:var(--
 html[data-reading-theme="dark"] .carousel-dots button span{border-color:var(--forest)}
 html[data-reading-theme="dark"] .carousel-dots button[aria-current="true"] span{background:var(--forest)}
 /* High contrast stays effective with either background theme. */
-html.high-contrast[data-reading-theme="dark"]{--ink:#fff;--muted:#fff;--forest:#8df8d9;--green:#8df8d9;--line:#a3bab3}
-html.high-contrast[data-reading-theme="dark"] :is(.meta,.eyebrow,.note,.editorial-brand,.masthead-title,.editorial-lead h1,.editorial-lead>p,.editorial-news p,.editorial-reading-grid p){color:var(--ink)}
 @media(max-width:480px){.theme-dock{gap:4px;padding:8px}.theme-dock button{font-size:12px;padding:10px}.reading-panel{position:fixed;top:72px;right:15px;max-height:calc(100dvh - 90px);max-width:calc(100vw - 30px)}.pet-numbers{margin:35px 0}}
 @media(prefers-reduced-motion:reduce){.reading-plus button,.theme-dock button{transition:none}.project-card:focus-within,.pet-number:hover{transform:none}}
 /* Documented results must also fit narrow screens and enlarged reading text. */
