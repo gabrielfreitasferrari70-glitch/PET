@@ -11,7 +11,7 @@
 
 /* ===== A3. Cards: 12px; caixas internas 8px ===== */
 .acervo-card, .com-form, .part-links a, .ap-guia a, .pj-mats a, .fale-tipo, .tl-rolagem { border-radius: var(--raio-card); }
-.part-etapas li,.tema-item{ border-radius: var(--raio-peq); }
+.part-etapas li{ border-radius: var(--raio-peq); }
 .tl-rolagem { overflow: hidden; }
 
 /* ===== A4. Fundos menta grandes viram branco com borda ===== */
@@ -176,7 +176,7 @@
 .page-intro h1, .pj-cab h1, .djf-page h1 {color: var(--ink)}
 
 /* ===== A2. Botões: um raio, uma altura ===== */
-.button, .djf-button, .header-tools .join, .fale-flutuante, .part-acoes .button, .assinar-acoes .button,
+.button, .djf-button, .header-tools .join, .part-acoes .button, .assinar-acoes .button,
 .event-actions .button, .com-form .button, .hm-acoes .button, .hm-fale .hm-fale-btn {border-radius: var(--raio-peq)}.djf-button {background: var(--forest);color: var(--claro)}
 .djf-button:hover {background: var(--deep)}.fale-votos,.part-parceria,.op-cx,.pj-nums li,.hm-car-palco,.agenda-assinar{background: var(--paper)}.hm-fale {background: var(--paper);color: var(--ink)}
 .hm-fale h2 {color: var(--ink)}

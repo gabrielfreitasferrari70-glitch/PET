@@ -16,12 +16,12 @@
 .fala-ic{display:inline-block;width:15px;height:12px;border:1.6px solid currentColor;border-radius:var(--raio-peq);position:relative;flex:0 0 auto}
 .fala-ic::after{content:'';position:absolute;left:2px;bottom:-5px;width:5px;height:5px;border-left:1.6px solid currentColor;border-bottom:1.6px solid currentColor;background:var(--forest);transform:skewX(-20deg)}
 .header-tools .join:hover .fala-ic::after,.header-tools .join[aria-current="page"] .fala-ic::after{background:var(--deep)}
-.fale-flutuante{display:none;position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:40;align-items:center;gap:9px;background:var(--forest);color:var(--paper);border-radius:var(--raio-pill);padding:14px 20px;font:600 15px/1 var(--sans);text-decoration:none;box-shadow:0 10px 26px var(--sombra)}
+.fale-flutuante{display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;border-radius:0;align-items:center;justify-content:center;gap:9px;background:var(--paper);color:var(--forest);border-top:1px solid var(--line);padding:16px 16px calc(16px + env(safe-area-inset-bottom));font:600 15px/1 var(--sans);text-decoration:none}
 #mobile-menu a.menu-destaque{color:var(--forest);font-weight:600}
 #mobile-menu .menu-sep{display:block;grid-column:1/-1;height:1px;background:var(--line);margin:8px 0}
 #mobile-menu button.menu-sec{background:none;border:0;padding:12px 0;text-align:left;font-family:var(--sans);cursor:pointer;min-height:44px}
 @media(max-width:1000px){.header-tools .join{padding:10px 15px}}
-@media(max-width:760px){.header-inner{gap:12px;min-height:62px}.header-inner>.editorial-brand{margin-right:0}.header-inner>.editorial-brand img{width:34px;height:34px}.fale-flutuante{display:inline-flex}footer{padding-bottom:84px}}
+@media(max-width:760px){.header-inner{gap:12px;min-height:62px}.header-inner>.editorial-brand{margin-right:0}.header-inner>.editorial-brand img{width:34px;height:34px}.fale-flutuante{display:flex}html{scroll-padding-bottom:64px}footer{padding-bottom:64px}}
 .footer-wordmark{letter-spacing:-.02em}
 /* ===== Etapa 2: Fale com o PET ===== */
 .fale{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
