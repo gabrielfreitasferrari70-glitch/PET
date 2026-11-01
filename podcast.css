@@ -3,7 +3,7 @@
 /* De Jaleco e Fone: a project within the PET Conecta portal. */
 .desktop-nav .djf-nav.active{color:var(--djf-deep);border-color:var(--djf-deep)}
 
-.djf-breadcrumb{display:flex;flex-wrap:wrap;gap:10px;padding-block:28px;font:500 12px/1.6 var(--sans);color:var(--muted)}
+.djf-breadcrumb{display:flex;flex-wrap:wrap;gap:10px;padding-block:28px;font:400 12px/1.6 var(--sans);color:var(--muted)}
 .djf-breadcrumb a{text-decoration:none}.djf-breadcrumb a:hover{text-decoration:underline}
 .djf-hero{display:grid;grid-template-columns:1fr 1.07fr;gap:clamp(32px,5vw,76px);align-items:center;padding-block:28px 70px}
 .djf-kicker{display:block;font:600 11px/1.6 var(--sans);letter-spacing:.09em;text-transform:uppercase}
@@ -20,7 +20,7 @@
 .djf-signature strong{font-weight:600;color:var(--ink)}.djf-signature svg{width:40px;height:40px;fill:none;stroke:var(--djf-deep);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .djf-hero-media{min-width:0;margin:0;align-self:center;background:var(--djf-dark);color:var(--claro)}
 .djf-photo{aspect-ratio:1.82;overflow:hidden}.djf-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 48.2%}
-.djf-hero-media figcaption{display:flex;gap:14px;justify-content:space-between;font:500 9px/1.6 var(--sans);letter-spacing:.055em;padding:13px 20px}
+.djf-hero-media figcaption{display:flex;gap:14px;justify-content:space-between;font:400 9px/1.6 var(--sans);letter-spacing:.055em;padding:13px 20px}
 .djf-studio-label{background:var(--djf-orange);color:var(--djf-dark);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:25px 20px}
 .djf-studio-label>span:first-child{font:600 46px/.9 'Barlow Condensed',sans-serif;letter-spacing:-.03em}.djf-studio-label>span:last-child{font:600 9px/1.8 var(--sans);max-width:96px}
 .djf-studio-label svg{width:42%;height:46px;stroke:currentColor;stroke-width:2;fill:none;max-width:180px}

@@ -8,8 +8,8 @@
 .privacy-prose p,.privacy-prose ul{margin-bottom:18px;line-height:1.8}
 .privacy-prose nav ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px 24px}
 .privacy-prose nav a{display:inline-flex;align-items:center;min-height:44px}
-.privacy-prose .privacy-updated{font:500 13px/1.5 var(--sans);color:var(--muted)}
-.privacy-embed{min-height:420px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:18px;padding:28px;background:var(--mint);color:var(--ink)}
+.privacy-prose .privacy-updated{font:400 13px/1.5 var(--sans);color:var(--muted)}
+.privacy-embed{min-height:420px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:18px;padding:28px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:var(--raio-card)}
 .privacy-embed h2{font-size:30px;margin:0}
 .privacy-embed p{font:400 15px/1.8 var(--sans);margin:0}
 .privacy-embed .button{max-width:100%;white-space:normal;text-align:left;line-height:1.6}

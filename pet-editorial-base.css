@@ -12,9 +12,9 @@
 .pet-refined .pathway-description{font-size:14px;line-height:1.85;color:var(--muted);margin:0 0 24px}
 .pet-refined .pathway-next{margin-top:auto;padding:18px 0;border-top:1px solid var(--line);display:grid;gap:8px}
 .pet-refined .pathway-next-label{font:600 9px/1.5 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.pet-refined .pathway-next-title{font:500 14px/1.6 var(--sans);color:var(--ink)}
+.pet-refined .pathway-next-title{font:400 14px/1.6 var(--sans);color:var(--ink)}
 .pet-refined .pathway-footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;align-items:center;padding-top:8px}
-.pet-refined .pathway-progress{font:500 11px/1.6 var(--sans);color:var(--muted);margin:0}
+.pet-refined .pathway-progress{font:400 11px/1.6 var(--sans);color:var(--muted);margin:0}
 .pet-refined .pathway-continue{font-size:12px;min-height:44px;gap:12px}
 .pet-refined .project-card{display:flex;flex-direction:column;min-width:0}
 .pet-refined .project-copy{display:flex;flex-direction:column;flex:1}
@@ -44,7 +44,7 @@
 /* Projetos: todas as capas com a mesma proporcao; projetos sem imagem ganham capa tipografica. */
 .project-card .catalog-photo,.project-card .djf-catalog-art{overflow:hidden}
 .project-card .catalog-photo img{object-fit:contain}
-.project-card:not(:has(.catalog-photo,.djf-catalog-art))::before{content:attr(data-theme);display:flex;align-items:flex-end;aspect-ratio:4/3;padding:20px;box-sizing:border-box;background:var(--mint);border-bottom:3px solid var(--forest);font:500 clamp(24px,2.4vw,32px)/1 var(--serif);text-transform:uppercase;color:var(--forest)}
+.project-card:not(:has(.catalog-photo,.djf-catalog-art))::before{content:attr(data-theme);display:flex;align-items:flex-end;aspect-ratio:4/3;padding:20px;box-sizing:border-box;background:var(--paper);border-bottom:3px solid var(--forest);font:400 clamp(24px,2.4vw,32px)/1 var(--serif);text-transform:uppercase;color:var(--forest)}
 .project-card .meta{white-space:nowrap}
 }
 /* Menu enxuto: o podcast fica em Projetos e em destaque no inicio. */
