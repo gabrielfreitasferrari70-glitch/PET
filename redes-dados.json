@@ -78,7 +78,16 @@
     "youtube": []
   },
   "petnews": {
-    "instagram": [],
+    "instagram": [
+      {
+        "titulo": "Hand Talk e VLibras: o primeiro passo para um atendimento humano",
+        "url": "https://www.instagram.com/petmedicina.ufmt/reel/DdyvjbcOFKU/"
+      },
+      {
+        "titulo": "O que é o ProfiMed e a demografia médica no Brasil",
+        "url": "https://www.instagram.com/petmedicina.ufmt/p/DWU8a4nlUFq/"
+      }
+    ],
     "youtube": []
   },
   "12-e-30": {
