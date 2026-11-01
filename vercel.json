@@ -1,5 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/projetos/jornal-anamnese", "destination": "/publicacoes/anamnese/", "permanent": true },
+    { "source": "/projetos/jornal-anamnese/", "destination": "/publicacoes/anamnese/", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/agenda/pet.ics", "destination": "https://eupkdyhngmrsbvmaondp.supabase.co/functions/v1/agenda-ics" }
   ],
