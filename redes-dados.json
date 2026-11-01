@@ -91,7 +91,16 @@
     "youtube": []
   },
   "12-e-30": {
-    "instagram": [],
+    "instagram": [
+      {
+        "titulo": "Boas-vindas à Turma 79",
+        "url": "https://www.instagram.com/petmedicina.ufmt/p/DcNF9fpu5wQ/"
+      },
+      {
+        "titulo": "Boas-vindas à Turma 78",
+        "url": "https://www.instagram.com/petmedicina.ufmt/p/DWRyL7gjlvc/"
+      }
+    ],
     "youtube": []
   },
   "cartas-coracao": {
