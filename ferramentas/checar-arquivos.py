@@ -12,9 +12,10 @@ CITACAO = re.compile(r"""["'(`]((?:https://pet-conecta\.vercel\.app)?/[A-Za-z0-9
 # Montagem de caminho em tempo de execucao: nao pode ser conferida, entao tambem e erro.
 MONTADO = re.compile(r"""["'`]/?(?:assets|materiais)/[A-Za-z0-9_/-]*/?["'`]\s*\+""")
 
-# Enderecos servidos por rewrite do vercel.json (ex.: /agenda/pet.ics) nao sao arquivos do repositorio.
+# Enderecos servidos por rewrite ou redirecionados no vercel.json nao sao arquivos do repositorio.
 with open(os.path.join(RAIZ, 'vercel.json'), encoding='utf-8') as f:
-    REESCRITOS = {r['source'].lstrip('/') for r in json.load(f).get('rewrites', [])}
+    _vercel = json.load(f)
+REESCRITOS = {r['source'].lstrip('/') for r in _vercel.get('rewrites', []) + _vercel.get('redirects', [])}
 
 faltando, montados = {}, []
 for pasta, subpastas, arquivos in os.walk(RAIZ):

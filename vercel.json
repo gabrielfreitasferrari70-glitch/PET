@@ -2,7 +2,21 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     { "source": "/projetos/jornal-anamnese", "destination": "/publicacoes/anamnese/", "permanent": true },
-    { "source": "/projetos/jornal-anamnese/", "destination": "/publicacoes/anamnese/", "permanent": true }
+    { "source": "/projetos/jornal-anamnese/", "destination": "/publicacoes/anamnese/", "permanent": true },
+    { "source": "/materiais/ar-e-saude.pdf", "destination": "/aprender/ar-e-saude/", "permanent": true },
+    { "source": "/materiais/comunicacao-acessivel.pdf", "destination": "/aprender/comunicacao-acessivel/", "permanent": true },
+    { "source": "/materiais/formacao-medica.pdf", "destination": "/aprender/formacao-medica/", "permanent": true },
+    { "source": "/materiais/manual-pet.pdf", "destination": "/aprender/manual-pet/", "permanent": true },
+    { "source": "/materiais/saude-auditiva.pdf", "destination": "/aprender/saude-auditiva/", "permanent": true },
+    { "source": "/materiais/setembro-azul.pdf", "destination": "/aprender/setembro-azul/", "permanent": true },
+    { "source": "/materiais/visao-nas-escolas.pdf", "destination": "/aprender/visao-nas-escolas/", "permanent": true },
+    { "source": "/materiais/formacao.pdf", "destination": "/colecoes/formacao/", "permanent": true },
+    { "source": "/materiais/inclusao.pdf", "destination": "/colecoes/inclusao/", "permanent": true },
+    { "source": "/materiais/infancia.pdf", "destination": "/colecoes/infancia/", "permanent": true },
+    { "source": "/materiais/acuidade-visual.pdf", "destination": "/projetos/acuidade-visual/", "permanent": true },
+    { "source": "/materiais/petnews.pdf", "destination": "/projetos/petnews/", "permanent": true },
+    { "source": "/balancos/pet-em-dois-meses-2026-05.pdf", "destination": "/publicacoes/balanco-2026-05/", "permanent": true },
+    { "source": "/balancos/pet-em-dois-meses-2026-09.pdf", "destination": "/publicacoes/balanco-2026-09/", "permanent": true }
   ],
   "rewrites": [
     { "source": "/agenda/pet.ics", "destination": "https://eupkdyhngmrsbvmaondp.supabase.co/functions/v1/agenda-ics" }
