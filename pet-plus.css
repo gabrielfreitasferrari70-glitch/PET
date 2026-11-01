@@ -14,7 +14,7 @@
 .reading-plus .rp-options{display:flex;gap:6px;flex-wrap:wrap}
 .reading-plus button{font:600 13px/1 var(--sans);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:var(--raio-pill);padding:9px 13px;min-height:38px;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
 .reading-plus button:hover{border-color:var(--forest);color:var(--forest)}
-.reading-plus button[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:var(--claro)}
+.reading-plus button[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:var(--paper)}
 
 /* Tamanho do texto (complementa o "Aumentar textos" existente) */
 html[data-reading-size="sm"]{font-size:93.75%}
@@ -55,9 +55,9 @@ html[data-reading-theme="dark"] .button{color:var(--fundo)}
 .theme-dock::-webkit-scrollbar{display:none}
 .theme-dock button{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;font:600 13px/1 var(--sans);color:var(--muted);background:transparent;border:0;border-radius:var(--raio-pill);padding:10px 15px;min-height:40px;cursor:pointer;transition:background .15s,color .15s}
 .theme-dock button:hover{background:var(--mint);color:var(--forest)}
-.theme-dock button[aria-pressed="true"]{background:var(--forest);color:var(--claro)}
+.theme-dock button[aria-pressed="true"]{background:var(--forest);color:var(--paper)}
 .theme-dock .count{font-size:11px;padding:2px 7px;border-radius:var(--raio-pill);background:var(--mint);color:var(--muted)}
-.theme-dock button[aria-pressed="true"] .count{background:color-mix(in srgb,var(--claro) 20%,transparent);color:var(--claro)}
+.theme-dock button[aria-pressed="true"] .count{background:color-mix(in srgb,var(--paper) 20%,transparent);color:var(--paper)}
 .theme-dock .sep{flex:0 0 1px;background:var(--line);margin:8px 4px}
 
 /* ---------- 4. Selos de status e profundidade nos cards ---------- */
