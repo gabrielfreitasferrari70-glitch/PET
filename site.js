@@ -10,16 +10,15 @@ function legacy(){if(location.pathname!=='/')return;let h;try{h=decodeURICompone
 const menu=$('#menu-open');menu?.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));$('#mobile-menu').hidden=!open});document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(menu){menu.setAttribute('aria-expanded','false');$('#mobile-menu').hidden=true}$('#reading-panel').hidden=true;$('#reading-open').setAttribute('aria-expanded','false')}});
 const toast=t=>{const n=$('#toast');n.textContent=t;n.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>n.hidden=true,4000)};
 // Painel de leitura: tamanho e tema, guardados neste navegador.
-const painel=$('#reading-panel'),abrir=$('#reading-open'),corMeta=$('meta[name="theme-color"]'),corBase=corMeta?.content,COR_TEMA={dark:'#0d1715',sepia:'#f4ecdb'},PADRAO={theme:'auto',size:'md'},sistemaEscuro=matchMedia('(prefers-color-scheme: dark)');let leitura={},medidos=[];
+const painel=$('#reading-panel'),abrir=$('#reading-open'),corMeta=$('meta[name="theme-color"]'),corBase=corMeta?.content,COR_TEMA={dark:'#0d1715',sepia:'#f4ecdb'},PADRAO={theme:'paper',size:'md'};let leitura={},medidos=[];
 function salvaLeitura(){try{localStorage.setItem('pet-reading-plus',JSON.stringify(leitura))}catch{}}
-try{const g=JSON.parse(localStorage.getItem('pet-reading-plus')||'{}');if(['auto','paper','sepia','dark'].includes(g?.theme))leitura.theme=g.theme;if(['sm','md','lg'].includes(g?.size))leitura.size=g.size;const velho=JSON.parse(localStorage.getItem('pet-conecta-leitura')||localStorage.getItem('pet-reading')||'{}');if(velho?.large&&!leitura.size){leitura.size='lg';salvaLeitura()}localStorage.removeItem('pet-conecta-leitura');localStorage.removeItem('pet-reading')}catch{}
+try{const g=JSON.parse(localStorage.getItem('pet-reading-plus')||'{}');if(['paper','sepia','dark'].includes(g?.theme))leitura.theme=g.theme;if(['sm','md','lg'].includes(g?.size))leitura.size=g.size;const velho=JSON.parse(localStorage.getItem('pet-conecta-leitura')||localStorage.getItem('pet-reading')||'{}');if(velho?.large&&!leitura.size){leitura.size='lg';salvaLeitura()}localStorage.removeItem('pet-conecta-leitura');localStorage.removeItem('pet-reading')}catch{}
 // O CSS usa medidas em px, entao o tamanho e aplicado sobre o valor calculado de cada texto.
 function escala(){medidos.forEach(m=>m.node.style.fontSize=m.original);medidos=[];const r=leitura.size==='sm'?.9375:leitura.size==='lg'?1.125:1;if(r===1)return;const lista=[...document.querySelectorAll('main :is(h1,h2,h3,h4,p,li,dt,dd,figcaption,label),main .pet-number :is(strong,span,small,em)')].map(node=>({node,original:node.style.fontSize,size:parseFloat(getComputedStyle(node).fontSize)}));lista.forEach(m=>m.node.style.fontSize=m.size*r+'px');medidos=lista}
-// Sem escolha guardada, o tema acompanha o sistema; "paper" e o claro escolhido a mao.
-function temaAtual(){const t=leitura.theme||PADRAO.theme;return t==='auto'?(sistemaEscuro.matches?'dark':'paper'):t}
+// Sem escolha guardada, o tema e o claro.
+function temaAtual(){return leitura.theme||PADRAO.theme}
 function aplicaLeitura(){for(const k of Object.keys(PADRAO)){const v=leitura[k]||PADRAO[k],atual=k==='theme'?temaAtual():v;if(atual==='paper'||atual===PADRAO[k])document.documentElement.removeAttribute('data-reading-'+k);else document.documentElement.setAttribute('data-reading-'+k,atual);painel.querySelectorAll(`[data-rp="${k}"]`).forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.value===v)))}if(corMeta)corMeta.content=COR_TEMA[temaAtual()]||corBase;escala()}
 aplicaLeitura();
-sistemaEscuro.addEventListener('change',aplicaLeitura);
 // Impressao sempre em fundo claro, qualquer que seja o tema da tela.
 window.addEventListener('beforeprint',()=>document.documentElement.removeAttribute('data-reading-theme'));
 window.addEventListener('afterprint',aplicaLeitura);
