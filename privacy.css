@@ -1,3 +1,5 @@
+/* Regras comuns ficam na camada base. As que estao fora dela, no fim do arquivo, vencem qualquer regra da base. */
+@layer base{
 /* Adições de privacidade: preservam os estilos e o layout do portal publicado. */
 .privacy-links{display:flex;flex-wrap:wrap;gap:8px 28px;padding-block:18px;border-top:1px solid var(--line)}
 .privacy-links a{display:inline-flex;align-items:center;min-height:44px;font:600 13px/1.5 var(--sans);text-underline-offset:4px}
@@ -12,5 +14,5 @@
 .privacy-embed p{font:400 15px/1.8 var(--sans);margin:0}
 .privacy-embed .button{max-width:100%;white-space:normal;text-align:left;line-height:1.6}
 .privacy-hide-embed{margin-block:8px}
-#contact-privacy{margin-bottom:24px}
-@media(max-width:600px){.privacy-links{gap:6px 20px}.privacy-embed{min-height:360px;padding:22px}.privacy-prose{padding-bottom:52px}}
+@media(max-width:760px){.privacy-links{gap:6px 20px}.privacy-embed{min-height:360px;padding:22px}.privacy-prose{padding-bottom:52px}}
+}

@@ -1,60 +1,38 @@
-/* PET Conecta: padronização visual (Rodadas A, B e C do mapeamento estético).
-   Última folha do <head> de cada página. Regras: raio de botão 8px, raio de card 12px,
-   superfícies brancas com borda fina, menta só em detalhes pequenos, verde-escuro só na ação principal,
-   escala de espaços 16/24/40/64. */
-
-/* ===== A1. Título principal: sempre preto; o verde fica no rótulo acima ===== */
-.page-intro h1, .pj-cab h1, .djf-page h1 { color: var(--ink) !important; }
-
-/* ===== A2. Botões: um raio, uma altura ===== */
-.button, .djf-button, .header-tools .join, .fale-flutuante, .part-acoes .button, .assinar-acoes .button,
-.event-actions .button, .com-form .button, .hm-acoes .button, .hm-fale .hm-fale-btn { border-radius: 8px !important; }
+/* Regras comuns ficam na camada base. As que estao fora dela, no fim do arquivo, vencem qualquer regra da base. */
+@layer base{
 .button, .djf-button { min-height: 46px; }
-.djf-button { background: var(--forest) !important; color: #fff !important; font-family: var(--sans); }
-.djf-button:hover { background: var(--deep) !important; }
+.djf-button { font-family: var(--sans)}
 .assinar-acoes, .part-acoes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: stretch; max-width: 560px; }
 .assinar-acoes > :not(.button), .part-acoes > :not(.button) { grid-column: 1 / -1; }
 .assinar-acoes .button, .part-acoes .button { justify-content: center; text-align: center; width: 100%; box-sizing: border-box; }
 .event-actions { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center; }
-.cal-nav button, .carousel-buttons button, .hm-car-seta { border-radius: 8px; }
+.cal-nav button,.hm-car-seta{ border-radius: var(--raio-peq); }
 .hm-car-seta { width: 40px; height: 40px; }
 
 /* ===== A3. Cards: 12px; caixas internas 8px ===== */
-.acervo-card, .com-form, .part-links a, .ap-guia a, .pj-mats a, .fale-tipo, .tl-rolagem { border-radius: 12px; }
-.part-etapas li, .tema-item, .com-aviso-faixa { border-radius: 8px; }
+.acervo-card, .com-form, .part-links a, .ap-guia a, .pj-mats a, .fale-tipo, .tl-rolagem { border-radius: var(--raio-card); }
+.part-etapas li,.tema-item{ border-radius: var(--raio-peq); }
 .tl-rolagem { overflow: hidden; }
 
 /* ===== A4. Fundos menta grandes viram branco com borda ===== */
-.fale-votos, .part-parceria, .op-cx, .pj-nums li, .com-aviso-faixa, .hm-car-palco, .agenda-assinar {
-  background: #fff !important; border: 1px solid var(--line);
-}
-.fale-votos, .part-parceria, .agenda-assinar { border-top: 3px solid var(--forest); border-radius: 0 0 12px 12px; }
-.pj-nums li { border-radius: 12px; }
+.fale-votos,.part-parceria,.op-cx,.pj-nums li,.hm-car-palco,.agenda-assinar{ border: 1px solid var(--line)}
+.fale-votos, .part-parceria, .agenda-assinar { border-top: 3px solid var(--forest); border-radius: 0 0 var(--raio-card) var(--raio-card); }
+.pj-nums li { border-radius: var(--raio-card); }
 .pj-nums strong { color: var(--forest); }
-.hm-s-cartaz { background: #fff; }
-.hm-car-palco { border-radius: 12px; }
-.fale-votos .tema-item { background: #fff; }
+.hm-s-cartaz { background: var(--paper); }
+.hm-car-palco { border-radius: var(--raio-card); }
+.fale-votos .tema-item { background: var(--paper); }
 
 /* Faixa "Tem uma dúvida de saúde?": deixa de ser bloco verde-escuro */
-.hm-fale { background: #fff !important; color: var(--ink) !important; border: 1px solid var(--line); border-top: 3px solid var(--forest); border-radius: 0 0 12px 12px; }
-.hm-fale h2 { color: var(--ink) !important; }
-.hm-fale p { color: var(--muted) !important; }
-.hm-fale .hm-fale-btn { background: var(--forest) !important; color: #fff !important; border-color: var(--forest) !important; }
+.hm-fale { border: 1px solid var(--line); border-top: 3px solid var(--forest); border-radius: 0 0 var(--raio-card) var(--raio-card)}
 
 /* Círculos numerados e qualquer ícone redondo verde-escuro continuam: são ação/ordem, não fundo decorativo */
 
 /* ===== A5. Etiquetas: três tipos (status em pílula menta, agora em pílula escura, tema em texto) ===== */
-.project-card .meta, .status, .news-tag, .chip, .pj-status, .news-event-top .news-tag {
-  display: inline-flex !important; align-items: center; width: fit-content;
-  border-radius: 999px !important; background: var(--mint) !important; color: var(--forest) !important;
-  border: 0 !important; padding: 4px 10px !important; font: 600 12px/1.4 var(--sans) !important;
-  letter-spacing: .02em !important; text-transform: none !important;
-}
+.project-card .meta,.status,.chip,.pj-status{ align-items: center; width: fit-content}
 .project-card[data-period="2026"] .meta::before { content: "●"; font-size: .7em; margin-right: 6px; }
 .project-card .meta { margin-bottom: 10px; }
-.chip::first-letter, .news-tag::first-letter { text-transform: uppercase; }
-.news-tag { margin-bottom: 14px; }
-.selo-agora { background: var(--forest) !important; }
+.chip::first-letter{ text-transform: uppercase; }
 
 /* ===== A6. Setas: → em links internos (as desenhadas pelo CSS) ===== */
 .pet-refined .seta-int:not(#_) > span[aria-hidden="true"]::before { top: 2px; right: 1px; transform: rotate(45deg); }
@@ -66,116 +44,85 @@
 }
 .breadcrumb-line a:hover, .pj .breadcrumb:hover, .djf-breadcrumb a:hover, .caminho-volta:hover { text-decoration: underline; text-underline-offset: 4px; }
 .djf-breadcrumb { font-size: 14px; }
-
-/* ===== A8. Textos pequenos demais ===== */
-.hm-foto figcaption, .hm-nota, .fale-nota, .part-obs, .cal-legenda, .com-total, .contagem, .com-aviso, .fale-agenda, .tl-gap { font-size: 13px !important; }
-.footer-bottom, .footer-bottom > span { font-size: 12px !important; }
-.footer-main p, .footer-main a { font-size: 14px !important; }
 .pet-number small, .tl-sd, .acervo-resumo { font-size: 13px; }
 .hd-data small { font-size: 12px; }
-:is(.eyebrow, .meta, .project-topic, .pathway-kicker, .pathway-next-label, .field-project-facts dt, .project-section-nav > span) { font-size: 12px !important; }
-
-/* ===== B. Início ===== */
-.hm-slide.is-on { animation: none !important; }
 .hm-s-cartaz img { padding: 12px 12px 0; }
-.hm-slide figcaption a { background: #fff; }
-.hm-tema-topo { display: none !important; }
-.hp-corpo .capa-titulo, .hp-corpo > strong.capa-titulo { font: 400 clamp(24px, 2.2vw, 28px)/1.15 var(--serif) !important; letter-spacing: -.01em; color: var(--ink) !important; }
-.project-copy h3, .project-card h3 { font-size: clamp(24px, 2.3vw, 30px) !important; line-height: 1.15; }
-.hm-memoria { border-radius: 12px; }
+.hm-slide figcaption a { background: var(--paper); }
+.hp-corpo .capa-titulo, .hp-corpo > strong.capa-titulo { letter-spacing: -.01em}
+.project-copy h3, .project-card h3 { line-height: 1.15}
+.hm-memoria { border-radius: var(--raio-card); }
 
 /* ===== B. Agenda: a mesma divisão em todos os eventos ===== */
-@media (min-width: 761px) {
-  .event-row { display: grid !important; grid-template-columns: 240px minmax(0, 1fr) !important; }
+@media (min-width:761px) {
   .event-date { align-items: flex-start; }
-  .event-date strong { font-size: 44px !important; line-height: 1.05; white-space: normal !important; overflow-wrap: anywhere; }
-  .event-body h2 { font-size: clamp(30px, 3vw, 38px) !important; text-wrap: balance; }
+  .event-date strong { line-height: 1.05; overflow-wrap: anywhere}
+  .event-body h2 { text-wrap: balance}
 }
-@media (max-width: 760px) {
-  .event-body h2 { font-size: 30px !important; }
+@media (max-width:760px) {
   .event-actions .button { width: 100%; justify-content: center; box-sizing: border-box; }
   .assinar-acoes, .part-acoes { grid-template-columns: 1fr; max-width: none; }
 }
 
 /* ===== B. Aprender: trilhas com respiro e linha reta ===== */
-.pet-refined .pathway-card, .pet-refined .collection {
-  padding: 24px; border: 1px solid var(--line); border-top: 3px solid var(--forest); border-radius: 0 0 12px 12px; background: #fff;
+.pet-refined .pathway-card{
+  padding: 24px; border: 1px solid var(--line); border-top: 3px solid var(--forest); border-radius: 0 0 var(--raio-card) var(--raio-card); background: var(--paper);
 }
 .pet-refined .pathway-card { overflow: visible; }
 .pet-refined .pathway-grid { gap: 24px; }
-.collection-grid { gap: 24px; }
 .collection-sequence .learning-copy { padding-block: 20px; }
-.learning-card, .learning-cover { border-radius: 12px; }
+.learning-card, .learning-cover { border-radius: var(--raio-card); }
 .learning-cover { border: 0; }
 .learning-card > div { padding: 20px 24px; }
-
-/* ===== B. De Jaleco e Fone: mesmas fontes e botões do site; a cor do podcast fica na arte ===== */
-.djf-page h1 { font: 400 clamp(54px, 7vw, 96px)/.98 var(--serif) !important; letter-spacing: -.03em !important; }
-.djf-page h1 span { color: var(--forest) !important; }
 .djf-dot { background: var(--forest); }
 .djf-signature svg { stroke: var(--forest); }
-.djf-studio-label > span:first-child, .djf-episode-art > span:last-child, .djf-catalog-art strong { font-family: var(--serif) !important; font-weight: 400 !important; letter-spacing: -.02em; }
-.djf-hero-media, .djf-photo { border-radius: 12px; overflow: hidden; }
+.djf-studio-label > span:first-child,.djf-episode-art > span:last-child{ letter-spacing: -.02em}
+.djf-hero-media, .djf-photo { border-radius: var(--raio-card); overflow: hidden; }
 .djf-hosts { border-top-color: var(--forest); }
-.djf-listen { background: #fff; color: var(--ink); border-block: 1px solid var(--line); }
+.djf-listen { background: var(--paper); color: var(--ink); border-block: 1px solid var(--line); }
 .djf-listen h2 { color: var(--ink); }
 .djf-listen .djf-kicker { color: var(--forest); }
 .djf-listen-grid > div > p, .djf-channel p { color: var(--muted); }
-.djf-channel { border-color: var(--line); border-radius: 12px; color: var(--ink); background: #fff; }
+.djf-channel { border-color: var(--line); border-radius: var(--raio-card); color: var(--ink); background: var(--paper); }
 .djf-channel:hover { background: var(--mint); border-color: var(--forest); }
 .djf-spotify > svg, .djf-instagram > svg, .djf-spotify .djf-channel-cta, .djf-instagram .djf-channel-cta { color: var(--forest); }
-.djf-episode-art { border-radius: 12px; }
-
-/* ===== C. Anamnese ===== */
-.issue-cover b { font-size: 96px !important; line-height: 1.1 !important; }
-.issue-original { display: block; margin-inline: auto; max-width: min(100%, 460px); border-radius: 8px; }
-.issue-card, .issue-cover { border-radius: 0 0 12px 12px; }
+.djf-episode-art { border-radius: var(--raio-card); }
+.issue-card, .issue-cover { border-radius: 0 0 var(--raio-card) var(--raio-card); }
 
 /* ===== C. Capa da página de projeto na largura da coluna ===== */
-.pj-capa { max-height: none !important; width: 100%; box-sizing: border-box; }
+.pj-capa { width: 100%; box-sizing: border-box}
 
 /* ===== C. O PET: caixas de "não aparece" viram linha discreta ===== */
-.op-cx { background: transparent !important; border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 14px 0; }
+.op-cx { border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 14px 0}
 .op-cx h3 { font-size: 18px; }
 .op-pessoas { margin-bottom: 16px; }
 .op-pessoas + p, .op-pessoas + .pj-fontes { margin-top: 16px; }
-
-/* ===== C. Campos de escolha com o mesmo estilo dos campos de texto ===== */
-.xf input[type=search], .xf select, .com-busca, .com-form textarea, .com-form select, .adm input, .adm select, .adm textarea { border-radius: 8px !important; }
-.xf select, .com-form select, .adm select {
-  -webkit-appearance: none; appearance: none; padding-right: 38px !important; cursor: pointer;
-  background-image: linear-gradient(45deg, transparent 50%, #0e614f 50%), linear-gradient(135deg, #0e614f 50%, transparent 50%);
-  background-position: calc(100% - 20px) 50%, calc(100% - 14px) 50%; background-size: 6px 6px; background-repeat: no-repeat;
-}
+.xf select,.com-form select{
+  -webkit-appearance: none; appearance: none; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--forest) 50%), linear-gradient(135deg, var(--forest) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 50%, calc(100% - 14px) 50%; background-size: 6px 6px; background-repeat: no-repeat}
 .xf { min-height: 76px; }
 
 /* ===== C. Rodapé: colunas equilibradas ===== */
-@media (min-width: 761px) {
+@media (min-width:761px) {
   .footer-main > :nth-child(2) { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; align-content: start; }
   .footer-main > :nth-child(2) > h2 { grid-column: 1 / -1; }
 }
 .footer-main a { text-decoration: none; }
 .footer-main a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.footer-bottom a { text-decoration: none; }
-.footer-bottom a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .footer-ingresso { font-size: 14px; color: var(--muted); margin: 0; padding: 18px 0; border-top: 1px solid var(--line); }
 .footer-ingresso a { color: var(--forest); font-weight: 600; }
 
 /* ===== C. Celular ===== */
-@media (max-width: 640px) {
-  .pg-home .fale-flutuante { display: none !important; }
+@media (max-width:760px) {
   .hm-acoes .button { width: 100%; justify-content: space-between; box-sizing: border-box; }
 }
 
 /* De Jaleco e Fone: a foto com rostos da abertura vira a ilustração do projeto */
-.djf-photo { background: #f35b27 url(/assets/capas/de-jaleco-e-fone.svg) center / cover no-repeat; }
+.djf-photo { background: var(--djf-orange) url(/assets/capas/de-jaleco-e-fone.svg) center / cover no-repeat; }
 .djf-photo img { opacity: 0; }
-
-/* ===== O PET e páginas de projeto: mesma largura do cabeçalho (.wrap), abertura igual às demais ===== */
-.wrap.pj:not(#_) { max-width: none !important; }
 .op .pj-cab, .yt-intro { padding: 27px 0 41px; border: 0; }
 .op .pj-cab .eyebrow, .yt-intro .eyebrow { display: block; margin: 26px 0 20px; }
-.op .pj-cab h1, .yt-intro h1 { font: 400 clamp(45px, 5vw, 70px)/1.08 var(--serif) !important; letter-spacing: -.04em !important; max-width: 980px !important; margin: 0 !important; text-wrap: wrap; }
+.op .pj-cab h1, .yt-intro h1 { text-wrap: wrap}
 .op .pj-lead, .yt-lead { font-size: 18px; line-height: 1.8; max-width: 790px; margin: 22px 0 0; color: var(--muted); }
 .op .pj-nav { margin-bottom: 8px; }
 .op .pj-sec { padding-block: 40px; }
@@ -191,7 +138,7 @@
 .op .pj-hist + p { margin-top: 24px; }
 
 /* ===== YouTube: abertura no mesmo padrão e seções separadas ===== */
-.yt-intro .text-link { display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 18px; border: 1px solid var(--forest); border-radius: 8px; color: var(--forest); font-weight: 600; text-decoration: none; background: #fff; }
+.yt-intro .text-link { display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 18px; border: 1px solid var(--forest); border-radius: var(--raio-peq); color: var(--forest); font-weight: 600; text-decoration: none; background: var(--paper); }
 .yt-intro .text-link:hover { background: var(--mint); }
 .yt-intro > p:last-child { margin: 24px 0 0; }
 .yt-sec:first-of-type { border-top: 1px solid var(--line); }
@@ -200,24 +147,67 @@
 .yt-sec-cab h2 { font-size: clamp(28px, 3vw, 34px); margin: 0 0 8px; }
 .yt-sec-cab p { max-width: 62ch; margin: 0 0 12px; line-height: 1.55; }
 .yt-sec-cab p:last-child { margin-bottom: 24px; }
-@media (max-width: 760px) { .yt-grid { grid-template-columns: 1fr; } .yt-intro { padding-top: 24px; } }
+@media (max-width:760px) { .yt-grid { grid-template-columns: 1fr; } .yt-intro { padding-top: 24px; } }
 
 /* Linha do tempo no celular: sem largura mínima quando não está numa área rolável */
-@media (max-width: 760px) { .wrap > .tl { min-width: 0; } }
+@media (max-width:760px) { .wrap > .tl { min-width: 0; } }
 
 /* ===== O PET: uma só escala de texto e uma só largura de leitura (a mesma da abertura, 790px) ===== */
 .op .pj-sec > p, .op .pj-hist p, .op .op-cx p, .op .pj-passos span, .op-tres span { font-size: 17px; line-height: 1.7; text-wrap: pretty; }
 .op-tres span { font-size: 16px; line-height: 1.6; }
-.op .pj-sec > p, .op .pj-hist p, .op .op-cx p, .op .hm-nota:not(#_) { max-width: 790px !important; }
-.op .hm-nota:not(#_) { font-size: 15px !important; line-height: 1.6; }
+.op .hm-nota:not(#_) { line-height: 1.6}
 .op .pj-hist h3 { font-size: 20px; line-height: 1.3; }
 .op .op-cx h3 { font-size: 20px; }
 .op .pj-passos + p .text-link { display: inline; min-height: 0; padding: 0; font-size: inherit; line-height: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 
 /* Capas ilustradas dos projetos. */
-.capa-midia { display: block !important; position: relative; aspect-ratio: 16 / 9; height: auto !important; min-height: 0 !important; max-height: none !important; padding: 0 !important; overflow: hidden; background: var(--mint, #edf7f4); }
-.capa-midia img { display: block; width: 100% !important; height: 100% !important; max-width: none !important; max-height: none !important; margin: 0 !important; object-fit: cover !important; object-position: center; }
-.capa-midia::before, .capa-midia::after, article.tem-capa::before { content: none !important; display: none !important; }
-.pj-capa { margin: 28px 0 8px; aspect-ratio: 16 / 9; max-height: 420px; overflow: hidden; border: 1px solid var(--line, #d1dfda); border-radius: 12px; background: var(--mint, #edf7f4); }
+.capa-midia { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--mint)}
+.capa-midia img { display: block; object-position: center}
+.pj-capa { margin: 28px 0 8px; aspect-ratio: 16 / 9; max-height: 420px; overflow: hidden; border: 1px solid var(--line, var(--line)); border-radius: var(--raio-card); background: var(--mint); }
 .pj-capa img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.hp-corpo .capa-titulo { position: static !important; display: block !important; width: auto !important; height: auto !important; overflow: visible !important; clip: auto !important; clip-path: none !important; white-space: normal !important; margin: 0 0 6px !important; padding: 0 !important; border: 0 !important; font-family: var(--serif, Georgia, serif); font-size: 1.3rem; font-weight: 600; line-height: 1.2; color: var(--ink, #171a18); }
+.hp-corpo .capa-titulo { font-family: var(--serif, Georgia, serif); font-size: 1.3rem; font-weight: 600; line-height: 1.2; color: var(--ink, var(--ink))}
+}
+/* PET Conecta: padronização visual (Rodadas A, B e C do mapeamento estético).
+   Última folha do <head> de cada página. Regras: raio de botão 8px, raio de card 12px,
+   superfícies brancas com borda fina, menta só em detalhes pequenos, verde-escuro só na ação principal,
+   escala de espaços 16/24/40/64. */
+
+/* ===== A1. Título principal: sempre preto; o verde fica no rótulo acima ===== */
+.page-intro h1, .pj-cab h1, .djf-page h1 {color: var(--ink)}
+
+/* ===== A2. Botões: um raio, uma altura ===== */
+.button, .djf-button, .header-tools .join, .fale-flutuante, .part-acoes .button, .assinar-acoes .button,
+.event-actions .button, .com-form .button, .hm-acoes .button, .hm-fale .hm-fale-btn {border-radius: var(--raio-peq)}.djf-button {background: var(--forest);color: var(--claro)}
+.djf-button:hover {background: var(--deep)}.fale-votos,.part-parceria,.op-cx,.pj-nums li,.hm-car-palco,.agenda-assinar{background: var(--paper)}.hm-fale {background: var(--paper);color: var(--ink)}
+.hm-fale h2 {color: var(--ink)}
+.hm-fale p {color: var(--muted)}
+.hm-fale .hm-fale-btn {background: var(--forest);color: var(--claro);border-color: var(--forest)}.project-card .meta,.status,.chip,.pj-status{display: inline-flex;border-radius: var(--raio-pill);background: var(--mint);color: var(--forest);border: 0;padding: 4px 10px;font: 600 12px/1.4 var(--sans);letter-spacing: .02em;text-transform: none}
+.selo-agora {background: var(--forest)}
+
+/* ===== A8. Textos pequenos demais ===== */
+.hm-nota,.fale-nota,.part-obs,.cal-legenda,.com-total,.contagem,.com-aviso,.fale-agenda,.tl-gap{font-size: 13px}
+.footer-bottom, .footer-bottom > span {font-size: 12px}
+.footer-main p, .footer-main a {font-size: 14px}
+:is(.eyebrow, .meta, .project-topic, .pathway-kicker, .pathway-next-label, .field-project-facts dt, .project-section-nav > span) {font-size: 12px}
+
+/* ===== B. Início ===== */
+.hm-slide.is-on {animation: none}
+.hm-tema-topo {display: none}.hp-corpo .capa-titulo, .hp-corpo > strong.capa-titulo {font: 400 clamp(24px, 2.2vw, 28px)/1.15 var(--serif);color: var(--ink)}.project-copy h3, .project-card h3 {font-size: clamp(24px, 2.3vw, 30px)}@media (min-width:761px) {
+  .event-row {display: grid;grid-template-columns: 240px minmax(0, 1fr)}.event-date strong {font-size: 44px;white-space: normal}.event-body h2 {font-size: clamp(30px, 3vw, 38px)}}@media (max-width:760px) {
+  .event-body h2 {font-size: 30px}}
+
+/* ===== B. De Jaleco e Fone: mesmas fontes e botões do site; a cor do podcast fica na arte ===== */
+.djf-page h1 {font: 400 clamp(54px, 7vw, 96px)/.98 var(--serif);letter-spacing: -.03em}
+.djf-page h1 span {color: var(--forest)}.djf-studio-label > span:first-child,.djf-episode-art > span:last-child{font-family: var(--serif);font-weight: 400}
+
+/* ===== C. Anamnese ===== */
+.issue-cover b {font-size: 96px;line-height: 1.1}.pj-capa {max-height: none}.op-cx {background: transparent}
+
+/* ===== C. Campos de escolha com o mesmo estilo dos campos de texto ===== */
+.xf input[type=search],.xf select,.com-busca,.com-form textarea,.com-form select{border-radius: var(--raio-peq)}.xf select,.com-form select{padding-right: 38px}@media (max-width:760px) {
+  .pg-home .fale-flutuante {display: none}}
+
+/* ===== O PET e páginas de projeto: mesma largura do cabeçalho (.wrap), abertura igual às demais ===== */
+.wrap.pj:not(#_) {max-width: none}.op .pj-cab h1, .yt-intro h1 {font: 400 clamp(45px, 5vw, 70px)/1.08 var(--serif);letter-spacing: -.04em;max-width: 980px;margin: 0}
+.op .pj-sec > p, .op .pj-hist p, .op .op-cx p, .op .hm-nota:not(#_) {max-width: 790px}.op .hm-nota:not(#_) {font-size: 15px}.capa-midia {display: block;height: auto;min-height: 0;max-height: none;padding: 0}.capa-midia img {width: 100%;height: 100%;max-width: none;max-height: none;margin: 0;object-fit: cover}
+.capa-midia::before, .capa-midia::after, article.tem-capa::before {content: none;display: none}.hp-corpo .capa-titulo {position: static;display: block;width: auto;height: auto;overflow: visible;clip: auto;clip-path: none;white-space: normal;margin: 0 0 6px;padding: 0;border: 0}
