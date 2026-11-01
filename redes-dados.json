@@ -122,8 +122,22 @@
     ]
   },
   "menstruacao": {
-    "instagram": [],
-    "youtube": []
+    "instagram": [
+      {
+        "titulo": "Ação na EMEB Dejani Ribeiro, ao lado do Papo Cabeça",
+        "url": "https://www.instagram.com/petmedicina.ufmt/p/Cs-APTFsNe0/"
+      },
+      {
+        "titulo": "Anamnese 29: o que é pobreza menstrual",
+        "url": "https://www.instagram.com/petmedicina.ufmt/p/CWjo8o9lPKt/"
+      }
+    ],
+    "youtube": [
+      {
+        "titulo": "Projeto MenstruAção 2023 - PET Medicina UFMT",
+        "id": "VECwdA50z2o"
+      }
+    ]
   },
   "papo-cabeca": {
     "instagram": [],
