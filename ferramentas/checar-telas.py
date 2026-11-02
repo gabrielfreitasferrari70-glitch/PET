@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Abre o site num navegador sem janela, em celular (390px) e computador (1280px), tema claro e escuro.
+"""Abre o site num navegador sem janela, em celular (360px) e computador (1280px), tema claro e escuro.
 Tira capturas e confere o que so aparece na tela renderizada.
    pip install playwright && python3 -m playwright install chromium   (uma vez)
    python3 ferramentas/checar-telas.py                 # paginas principais
@@ -65,7 +65,7 @@ async def main():
             nav = await p.chromium.launch()
         except Exception:
             nav = await p.chromium.launch(executable_path='/usr/bin/google-chrome', args=['--no-sandbox'])
-        for largura, altura in ((390, 844), (1280, 900)):
+        for largura, altura in ((360, 780), (1280, 900)):
             for tema in ('claro', 'escuro'):
                 ctx = await nav.new_context(viewport={'width': largura, 'height': altura})
                 if tema == 'escuro':
@@ -91,7 +91,7 @@ async def main():
                         res['T02'].append(rotulo + ': ' + c)
                     for e in erros:
                         (res['rede'].add if re.search(r'Failed to load resource|ERR_|net::|CORS|supabase|formsubmit|ytimg', e) else res['T03'].append)(rotulo + ': ' + e[:120])
-                    if largura == 390 and tema == 'claro':
+                    if largura == 360 and tema == 'claro':
                         res['T04'][caminho] = m['pequenos']
                 await ctx.close()
         await nav.close()

@@ -911,3 +911,10 @@ html[data-reading-theme="dark"] .djf-page h1 span{color:var(--djf-soft)}html[dat
 
 
 .wrap.footer-ingresso { margin-inline: auto; }
+
+
+.sec-titulo { flex-wrap: wrap; row-gap: var(--esp-3); }
+@media (max-width: 480px) {
+  .hm-car-pontos { gap: 0; }
+  .hm-car-pontos button { width: var(--esp-6); }
+}

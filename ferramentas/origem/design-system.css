@@ -40,3 +40,10 @@
 
 /* Rodape: a faixa do processo seletivo alinhada ao conteudo */
 .wrap.footer-ingresso { margin-inline: auto; }
+
+/* Celulares estreitos (360px): cabecalhos de secao quebram linha e os pontos do carrossel encolhem na largura */
+.sec-titulo { flex-wrap: wrap; row-gap: var(--esp-3); }
+@media (max-width: 480px) {
+  .hm-car-pontos { gap: 0; }
+  .hm-car-pontos button { width: var(--esp-6); }
+}
