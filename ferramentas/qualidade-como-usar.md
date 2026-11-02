@@ -11,7 +11,7 @@ Três verificadores acusam os problemas do mapeamento de 02/11/2026. Cada códig
 ## Ciclo de cada correção
 
 1. Escolher as linhas da fase atual no plano.
-2. Corrigir. CSS e `site.js` são editados em `ferramentas/origem/` e depois gerados com `python3 ferramentas/unir-arquivos.py`.
+2. Corrigir. CSS e `site.js` são editados em `ferramentas/origem/` e depois gerados com `python3 ferramentas/unir-arquivos.py`. Páginas de projeto saem de `projetos-dados.json` e `redes-dados.json` com `python3 ferramentas/gerar-projetos.py`.
 3. Rodar `checar-arquivos.py`, `checar-qualidade.py` e `checar-telas.py`. Nenhuma FALHA pode sobrar; os números META não podem subir.
 4. Olhar as capturas de 390 px em `ferramentas/telas/`.
 5. Publicar só com autorização. Mudanças no banco (migrações, RLS) pedem confirmação separada.

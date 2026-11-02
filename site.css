@@ -918,3 +918,6 @@ html[data-reading-theme="dark"] .djf-page h1 span{color:var(--djf-soft)}html[dat
   .hm-car-pontos { gap: 0; }
   .hm-car-pontos button { width: var(--esp-6); }
 }
+
+
+.voto[aria-pressed="true"]:disabled { opacity: 1; cursor: default; }

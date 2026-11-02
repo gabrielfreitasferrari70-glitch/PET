@@ -1,5 +1,7 @@
 (function(){'use strict';
 var raiz=document.getElementById('pj-raiz'),P=window.PET;if(!raiz||!P){return;}
+// Paginas geradas por ferramentas/gerar-projetos.py ja vem completas no HTML.
+if(raiz.hasAttribute('data-gerado')){return;}
 var esc=P.esc,ext=P.la,seta=P.seta;
 function url(u){return P.safeUrl(u)||'#';}
 var slug=location.pathname.split('/').filter(Boolean).pop();

@@ -33,13 +33,13 @@ if(t){t.addEventListener('input',function(){cnt.textContent=t.value.length+'/'+T
  var q=new URLSearchParams(location.search).get('tipo')||location.hash.replace('#','');tipo(TIPOS[q]?q:'duvida');}
 var lista=$('temas-lista'),total=$('temas-total'),tmsg=$('temas-msg');
 function mostraTotal(){total.textContent=plural(soma)+' em '+ntemas+' temas';}
-function botao(r,ja){return `<div class='voto-col'><button type='button' class='voto' data-voto='${P.esc(r.id)}' data-tema='${P.esc(r.tema)}' aria-pressed='${ja?'true':'false'}'${ja?' disabled':''} aria-label='${ja?'Você votou em':'Eu também quero saber sobre'}: ${P.esc(r.tema)}. ${plural(r.votos)}'>${ja?'Votado':'Eu também'}</button><span class='voto-n' data-n='${r.votos}'>${plural(r.votos)}</span></div>`;}
+function botao(r,ja){return P.botaoVoto(r,ja);}
 function temas(){if(!lista){return;}P.get('pet_sugestoes','select=id,tema,categoria,votos,origem&status=eq.aprovada&order=votos.desc,criado_em.asc').then(function(rows){var v=votados();
  if(!rows.length){lista.innerHTML=`<li class='empty-state'>Nenhum tema na votação ainda. Sugira o primeiro.</li>`;total.textContent='';return;}
  soma=rows.reduce(function(a,r){return a+r.votos;},0);lista.innerHTML=rows.map(function(r,i){return `<li class='tema-item'><div><p>${soma>=20?`<span class='pos'>${i+1}</span>`:''}${P.esc(r.tema)}</p><span class='chip'>${P.esc(CAT[r.categoria]||'Outro tema')}</span></div>${botao(r,v.indexOf(r.id)>=0)}</li>`;}).join('');
  ntemas=rows.length;mostraTotal();})
  .catch(function(){lista.innerHTML=`<li class='empty-state'>Não foi possível carregar os temas agora. Tente novamente em instantes.</li>`;});}
 if(lista){lista.addEventListener('click',function(e){var b=e.target.closest('[data-voto]');if(!b||b.disabled){return;}var id=b.getAttribute('data-voto');b.disabled=true;tmsg.className='com-msg';tmsg.textContent='';
- P.votar(id).then(function(n){marca(id);soma++;mostraTotal();b.setAttribute('aria-pressed','true');b.setAttribute('aria-label','Você votou em: '+b.getAttribute('data-tema')+'. '+plural(n));b.textContent='Votado';var c=b.parentNode.querySelector('.voto-n');c.setAttribute('data-n',n);c.textContent=plural(n);tmsg.className='com-msg ok';tmsg.textContent='Voto registrado. Obrigado!';})
- .catch(function(err){if(err.message.indexOf('Voce ja')===0){marca(id);b.setAttribute('aria-pressed','true');tmsg.className='com-msg ok';tmsg.textContent='Você já votou neste tema. Obrigado!';return;}b.disabled=false;tmsg.className='com-msg erro';tmsg.textContent=err.message.indexOf('Muitos')===0?err.message:'Não foi possível registrar o voto agora.';});});}
+ P.votar(id).then(function(n){marca(id);soma++;mostraTotal();P.marcaBotao(b,n);tmsg.className='com-msg ok';tmsg.textContent='Voto registrado. Obrigado!';})
+ .catch(function(err){if(err.message.indexOf('Voce ja')===0){marca(id);P.marcaBotao(b,null);tmsg.className='com-msg ok';tmsg.textContent='Você já votou neste tema. Obrigado!';return;}b.disabled=false;tmsg.className='com-msg erro';tmsg.textContent=err.message.indexOf('Muitos')===0?err.message:'Não foi possível registrar o voto agora.';});});}
 temas();})();

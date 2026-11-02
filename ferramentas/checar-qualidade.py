@@ -326,6 +326,12 @@ sm = set(re.findall(r'<loc>https://pet-conecta\.vercel\.app([^<]*)</loc>', ler('
 faltam = sorted(r for r in rotas if r not in sm and r != '/404.html')
 registra('Q18', 'Sitemap cobre todas as páginas', 'FALHA', not faltam, len(faltam), faltam)
 
+# Q20 Paginas de projeto geradas e em dia com projetos-dados.json
+import subprocess
+r20 = subprocess.run([sys.executable, os.path.join(RAIZ, 'ferramentas', 'gerar-projetos.py'), '--checar'], capture_output=True, text=True)
+registra('Q20', 'Páginas de projeto completas no HTML e em dia com os dados', 'FALHA', r20.returncode == 0, 0 if r20.returncode == 0 else 1,
+         [] if r20.returncode == 0 else [r20.stdout.strip() + ' — rode ferramentas/gerar-projetos.py'])
+
 # Q19 Tokens de cor sem versao escura (texto e fundo)
 cores_root = [k for k, v in TEMAS['claro'].items() if not v.strip().startswith('var(') and resolve(v, 'claro')]
 escuro = tokens_de('[data-reading-theme="dark"]')

@@ -47,3 +47,6 @@
   .hm-car-pontos { gap: 0; }
   .hm-car-pontos button { width: var(--esp-6); }
 }
+
+/* Voto registrado e um estado, nao um botao apagado */
+.voto[aria-pressed="true"]:disabled { opacity: 1; cursor: default; }
