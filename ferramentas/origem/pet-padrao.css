@@ -186,7 +186,7 @@
 .hm-nota,.fale-nota,.part-obs,.cal-legenda,.com-total,.contagem,.com-aviso,.fale-agenda,.tl-gap{font-size: 13px}
 .footer-bottom, .footer-bottom > span {font-size: 12px}
 .footer-main p, .footer-main a {font-size: 14px}
-:is(.eyebrow, .meta, .project-topic, .pathway-kicker, .pathway-next-label, .field-project-facts dt, .project-section-nav > span) {font-size: 12px}
+:is(.eyebrow,.meta,.project-topic,.pathway-kicker,.pathway-next-label){font-size: 12px}
 
 /* ===== B. Início ===== */
 .hm-slide.is-on {animation: none}

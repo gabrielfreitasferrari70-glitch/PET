@@ -67,8 +67,7 @@
 .pergunta .resposta p{margin:0 0 10px}
 .com-busca{margin-bottom:14px}
 @media(max-width:480px){.tema-item{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:12px 0}.tema-item>div:first-child{display:contents}.tema-item p{flex:0 0 100%;margin:0}.tema-item .chip{margin:0}.voto-col{flex-direction:row;gap:8px;margin-left:auto}}
-/* Projetos: capa do podcast cabe na proporcao comum dos cartoes */
-.project-card .djf-catalog-art{box-sizing:border-box}
+
 }
-@media print{.editorial-header,.editorial-nav,footer,#search-dialog,#toast,.skip,.privacy-links{display:none}}.project-card .djf-catalog-art{padding:22px}
-.project-card .djf-catalog-art strong{font-size:clamp(30px,3.2vw,44px);line-height:.95}
+@media print{.editorial-header,.editorial-nav,footer,#search-dialog,#toast,.skip,.privacy-links{display:none}}
+

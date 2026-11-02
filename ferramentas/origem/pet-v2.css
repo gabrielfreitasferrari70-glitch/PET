@@ -165,9 +165,9 @@ body.cab-v2 .editorial-header{display:none}
 .header-tools .join:not([data-v2]){font-size:0}
 #mobile-menu .menu-sec{font-size:15px;font-weight:400;color:var(--muted)}@media(max-width:760px){.header-inner>.editorial-brand span{font-size:13px}.header-tools .join,#reading-open{display:none}}
 .pet-numbers-head h2{font:400 clamp(32px,3.6vw,46px)/1.1 var(--serif);text-transform:none;letter-spacing:-.02em;color:var(--ink)}.footer-wordmark{font-weight:400}
-:is(.eyebrow,.meta,.project-topic,.pathway-kicker,.pathway-next-label,.field-project-facts dt,.project-section-nav>span){font-size:11px}
-.field-grid .meta{display:none}
-.project-card .djf-catalog-art{background:var(--paper);color:var(--forest)}
-.project-card .djf-catalog-art *{color:var(--forest)}@media print{.fale-flutuante{display:none}}
+:is(.eyebrow,.meta,.project-topic,.pathway-kicker,.pathway-next-label){font-size:11px}
+
+
+@media print{.fale-flutuante{display:none}}
 .part-obs{font-size:13px}
 .hm-fale .hm-fale-btn{background:var(--paper);color:var(--forest);border-color:var(--paper)}

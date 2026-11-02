@@ -1,7 +1,7 @@
 /* Regras comuns ficam na camada base. As que estao fora dela, no fim do arquivo, vencem qualquer regra da base. */
 @layer base{
-.pet-refined .hero-actions .button{gap:28px;min-height:49px}
-.pet-refined .editorial-lead>.text-link{font-size:13px}
+
+
 .pet-refined .pathway-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
 .pet-refined .pathway-card{min-width:0;border-top:3px solid var(--forest);border-bottom:1px solid var(--line);padding:20px 0;display:flex;flex-direction:column}
 .pet-refined .pathway-kicker{display:flex;justify-content:space-between;gap:16px;align-items:start;color:var(--forest);font:600 10px/1.6 var(--sans);letter-spacing:.06em;text-transform:uppercase}
@@ -30,21 +30,20 @@
 .pet-refined .pathway-summary p{color:var(--muted);font-size:15px;line-height:1.8}
 .pet-refined .pathway-summary .pathway-next{padding-top:0;border-top:0}
 .pet-refined .pathway-summary .pathway-progress{font-size:11px;margin:0}
-.pet-refined .collection-sequence .learning-card.is-completed{border-left:3px solid var(--forest);padding-left:16px}
+
 .pet-refined .prose h2[id]{scroll-margin-top:105px}
-.pet-refined .pet-entry-grid .eyebrow{font-size:9px;line-height:1.6;margin-bottom:13px;letter-spacing:.07em}
+
 /* Draw decorative arrows so they remain consistent across system font fallbacks. */
-.pet-refined :is(.hero-actions .button,.pathway-kicker,.pathway-continue,.participation-shortcuts a,.material-entry,.pet-entry-action)>span[aria-hidden="true"]{display:inline-block;position:relative;width:12px;height:12px;flex:0 0 12px;font-size:0;line-height:0}
-.pet-refined :is(.hero-actions .button,.pathway-kicker,.pathway-continue,.participation-shortcuts a,.material-entry,.pet-entry-action)>span[aria-hidden="true"]::before{content:'';position:absolute;top:0;right:0;width:8px;height:8px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor}
-.pet-refined :is(.hero-actions .button,.pathway-kicker,.pathway-continue,.participation-shortcuts a,.material-entry,.pet-entry-action)>span[aria-hidden="true"]::after{content:'';position:absolute;left:-1px;top:5px;width:15px;height:1.5px;background:currentColor;transform:rotate(-45deg)}
+.pet-refined :is(.pathway-kicker,.pathway-continue,.material-entry)>span[aria-hidden="true"]{display:inline-block;position:relative;width:12px;height:12px;flex:0 0 12px;font-size:0;line-height:0}
+.pet-refined :is(.pathway-kicker,.pathway-continue,.material-entry)>span[aria-hidden="true"]::before{content:'';position:absolute;top:0;right:0;width:8px;height:8px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor}
+.pet-refined :is(.pathway-kicker,.pathway-continue,.material-entry)>span[aria-hidden="true"]::after{content:'';position:absolute;left:-1px;top:5px;width:15px;height:1.5px;background:currentColor;transform:rotate(-45deg)}
 @media(max-width:1000px) and (min-width:761px){.pet-refined .pathway-grid{gap:20px}.pet-refined .pathway-card h3{font-size:30px}.pet-refined .pathway-footer{display:block}}
-@media(max-width:760px){.pet-refined .hero-actions .button{font-size:13px;padding:13px 17px}.pet-refined .pathway-grid{grid-template-columns:1fr;gap:22px}.pet-refined .pathway-card{padding-top:18px}.pet-refined .pathway-card h3{font-size:33px;margin-top:18px}.pet-refined .pathway-description{margin-bottom:18px}.pet-refined .pathway-summary{grid-template-columns:1fr;gap:18px;margin-bottom:28px}}
-@media(max-width:480px){.pet-refined .hero-actions .button{width:100%}.pet-refined .pathway-footer{align-items:start;flex-direction:column;gap:0}}
+@media(max-width:760px){.pet-refined .pathway-grid{grid-template-columns:1fr;gap:22px}.pet-refined .pathway-card{padding-top:18px}.pet-refined .pathway-card h3{font-size:33px;margin-top:18px}.pet-refined .pathway-description{margin-bottom:18px}.pet-refined .pathway-summary{grid-template-columns:1fr;gap:18px;margin-bottom:28px}}
+@media(max-width:480px){.pet-refined .pathway-footer{align-items:start;flex-direction:column;gap:0}}
 .editorial-brand span{text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-/* Projetos: todas as capas com a mesma proporcao; projetos sem imagem ganham capa tipografica. */
-.project-card .catalog-photo,.project-card .djf-catalog-art{overflow:hidden}
-.project-card .catalog-photo img{object-fit:contain}
-.project-card:not(:has(.catalog-photo,.djf-catalog-art))::before{content:attr(data-theme);display:flex;align-items:flex-end;aspect-ratio:4/3;padding:20px;box-sizing:border-box;background:var(--paper);border-bottom:3px solid var(--forest);font:400 clamp(24px,2.4vw,32px)/1 var(--serif);text-transform:uppercase;color:var(--forest)}
+
+
+.project-card::before{content:attr(data-theme);display:flex;align-items:flex-end;aspect-ratio:4/3;padding:20px;box-sizing:border-box;background:var(--paper);border-bottom:3px solid var(--forest);font:400 clamp(24px,2.4vw,32px)/1 var(--serif);text-transform:uppercase;color:var(--forest)}
 .project-card .meta{white-space:nowrap}
 }
 /* Menu enxuto: o podcast fica em Projetos e em destaque no inicio. */
@@ -58,4 +57,4 @@
 .page-intro+.section,.page-intro+section{padding-top:0}
 /* Projetos: um so conjunto de filtros (os atalhos por tema) e sem filtros de periodo redundantes. */
 [data-catalog="projects"] #filter-toggle{display:none}
-.theme-dock button[data-kind="period"]{display:none}.project-card .catalog-photo,.project-card .djf-catalog-art{display:block;aspect-ratio:4/3;height:auto}.project-card .catalog-photo img{width:100%;height:100%}
+.theme-dock button[data-kind="period"]{display:none}
