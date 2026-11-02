@@ -9,7 +9,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ORIGEM = os.path.join(RAIZ, 'ferramentas', 'origem')
 # A ordem e a da cascata: fontes, base, ajustes e por fim o pet-padrao.
 CSS = ('fonts.css', 'styles.css', 'pet-plus.css', 'pet-editorial-base.css', 'pet-v2.css', 'pet-v3.css', 'pet-editorial.css',
-       'privacy.css', 'podcast.css', 'pet-extra.css', 'youtube.css', 'pet-padrao.css')
+       'privacy.css', 'podcast.css', 'pet-extra.css', 'youtube.css', 'pet-padrao.css', 'design-system.css')
 JS = ('portal.js', 'privacy.js')
 AVISO = '/* Gerado por ferramentas/unir-arquivos.py. Nao edite aqui. */\n'
 

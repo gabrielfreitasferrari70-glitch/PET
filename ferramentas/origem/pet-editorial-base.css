@@ -2,34 +2,34 @@
 @layer base{
 
 
-.pet-refined .pathway-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
-.pet-refined .pathway-card{min-width:0;border-top:3px solid var(--forest);border-bottom:1px solid var(--line);padding:20px 0;display:flex;flex-direction:column}
-.pet-refined .pathway-kicker{display:flex;justify-content:space-between;gap:16px;align-items:start;color:var(--forest);font:600 10px/1.6 var(--sans);letter-spacing:.06em;text-transform:uppercase}
-.pet-refined .pathway-kicker>span:last-child{font-size:21px;line-height:1}
-.pet-refined .pathway-card h3{font:400 clamp(28px,2.7vw,36px)/1.12 var(--serif);letter-spacing:-.025em;color:var(--ink);margin:23px 0 14px}
+.pet-refined .pathway-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--esp-6)}
+.pet-refined .pathway-card{min-width:0;border-top:3px solid var(--forest);border-bottom:1px solid var(--line);padding:var(--esp-5) 0;display:flex;flex-direction:column}
+.pet-refined .pathway-kicker{display:flex;justify-content:space-between;gap:var(--esp-4);align-items:start;color:var(--forest);font:600 12px/1.6 var(--sans);letter-spacing:.06em;text-transform:uppercase}
+.pet-refined .pathway-kicker>span:last-child{font-size:20px;line-height:1}
+.pet-refined .pathway-card h3{font:400 clamp(28px,2.7vw,40px)/1.12 var(--serif);letter-spacing:-.025em;color:var(--ink);margin:var(--esp-5) 0 var(--esp-4)}
 .pet-refined .pathway-card h3 a{text-decoration:none;text-underline-offset:5px;text-decoration-thickness:1px}
 .pet-refined .pathway-card h3 a:hover{text-decoration:underline}
-.pet-refined .pathway-description{font-size:14px;line-height:1.85;color:var(--muted);margin:0 0 24px}
-.pet-refined .pathway-next{margin-top:auto;padding:18px 0;border-top:1px solid var(--line);display:grid;gap:8px}
-.pet-refined .pathway-next-label{font:600 9px/1.5 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pet-refined .pathway-description{font-size:14px;line-height:1.85;color:var(--muted);margin:0 0 var(--esp-5)}
+.pet-refined .pathway-next{margin-top:auto;padding:var(--esp-4) 0;border-top:1px solid var(--line);display:grid;gap:var(--esp-2)}
+.pet-refined .pathway-next-label{font:600 12px/1.5 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .pet-refined .pathway-next-title{font:400 14px/1.6 var(--sans);color:var(--ink)}
-.pet-refined .pathway-footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;align-items:center;padding-top:8px}
-.pet-refined .pathway-progress{font:400 11px/1.6 var(--sans);color:var(--muted);margin:0}
-.pet-refined .pathway-continue{font-size:12px;min-height:44px;gap:12px}
+.pet-refined .pathway-footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--esp-2) var(--esp-4);align-items:center;padding-top:var(--esp-2)}
+.pet-refined .pathway-progress{font:400 12px/1.6 var(--sans);color:var(--muted);margin:0}
+.pet-refined .pathway-continue{font-size:12px;min-height:44px;gap:var(--esp-3)}
 .pet-refined .project-card{display:flex;flex-direction:column;min-width:0}
 .pet-refined .project-copy{display:flex;flex-direction:column;flex:1}
 .pet-refined .project-copy .meta{max-width:100%;line-height:1.6;letter-spacing:.03em}
-.pet-refined .project-topic{display:block;margin-top:16px;font:600 10px/1.6 var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-.pet-refined .project-copy h3{margin-top:9px}
-.pet-refined .project-copy>p{margin-bottom:24px}
-.pet-refined .card-bottom{margin-top:auto;padding-top:12px}
+.pet-refined .project-topic{display:block;margin-top:var(--esp-4);font:600 12px/1.6 var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.pet-refined .project-copy h3{margin-top:var(--esp-2)}
+.pet-refined .project-copy>p{margin-bottom:var(--esp-5)}
+.pet-refined .card-bottom{margin-top:auto;padding-top:var(--esp-3)}
 .pet-refined .learning-copy{display:flex;flex-direction:column;align-items:start;min-width:0}
-.pet-refined .learning-copy .material-entry{font-size:13px;min-height:44px;gap:16px;margin-top:12px}
-.pet-refined .pathway-summary{display:grid;grid-template-columns:1fr 1.2fr;gap:45px;padding:25px 0;margin-bottom:40px;border-block:1px solid var(--line)}
+.pet-refined .learning-copy .material-entry{font-size:13px;min-height:44px;gap:var(--esp-4);margin-top:var(--esp-3)}
+.pet-refined .pathway-summary{display:grid;grid-template-columns:1fr 1.2fr;gap:var(--esp-7);padding:var(--esp-5) 0;margin-bottom:var(--esp-7);border-block:1px solid var(--line)}
 .pet-refined .pathway-summary>div{min-width:0}
 .pet-refined .pathway-summary p{color:var(--muted);font-size:15px;line-height:1.8}
 .pet-refined .pathway-summary .pathway-next{padding-top:0;border-top:0}
-.pet-refined .pathway-summary .pathway-progress{font-size:11px;margin:0}
+.pet-refined .pathway-summary .pathway-progress{font-size:12px;margin:0}
 
 .pet-refined .prose h2[id]{scroll-margin-top:105px}
 
@@ -37,13 +37,13 @@
 .pet-refined :is(.pathway-kicker,.pathway-continue,.material-entry)>span[aria-hidden="true"]{display:inline-block;position:relative;width:12px;height:12px;flex:0 0 12px;font-size:0;line-height:0}
 .pet-refined :is(.pathway-kicker,.pathway-continue,.material-entry)>span[aria-hidden="true"]::before{content:'';position:absolute;top:0;right:0;width:8px;height:8px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor}
 .pet-refined :is(.pathway-kicker,.pathway-continue,.material-entry)>span[aria-hidden="true"]::after{content:'';position:absolute;left:-1px;top:5px;width:15px;height:1.5px;background:currentColor;transform:rotate(-45deg)}
-@media(max-width:1000px) and (min-width:761px){.pet-refined .pathway-grid{gap:20px}.pet-refined .pathway-card h3{font-size:30px}.pet-refined .pathway-footer{display:block}}
-@media(max-width:760px){.pet-refined .pathway-grid{grid-template-columns:1fr;gap:22px}.pet-refined .pathway-card{padding-top:18px}.pet-refined .pathway-card h3{font-size:33px;margin-top:18px}.pet-refined .pathway-description{margin-bottom:18px}.pet-refined .pathway-summary{grid-template-columns:1fr;gap:18px;margin-bottom:28px}}
+@media(max-width:1000px) and (min-width:761px){.pet-refined .pathway-grid{gap:var(--esp-5)}.pet-refined .pathway-card h3{font-size:32px}.pet-refined .pathway-footer{display:block}}
+@media(max-width:760px){.pet-refined .pathway-grid{grid-template-columns:1fr;gap:var(--esp-5)}.pet-refined .pathway-card{padding-top:var(--esp-4)}.pet-refined .pathway-card h3{font-size:32px;margin-top:var(--esp-4)}.pet-refined .pathway-description{margin-bottom:var(--esp-4)}.pet-refined .pathway-summary{grid-template-columns:1fr;gap:var(--esp-4);margin-bottom:var(--esp-6)}}
 @media(max-width:480px){.pet-refined .pathway-footer{align-items:start;flex-direction:column;gap:0}}
 .editorial-brand span{text-transform:uppercase;letter-spacing:.06em;font-weight:600}
 
 
-.project-card::before{content:attr(data-theme);display:flex;align-items:flex-end;aspect-ratio:4/3;padding:20px;box-sizing:border-box;background:var(--paper);border-bottom:3px solid var(--forest);font:400 clamp(24px,2.4vw,32px)/1 var(--serif);text-transform:uppercase;color:var(--forest)}
+.project-card::before{content:attr(data-theme);display:flex;align-items:flex-end;aspect-ratio:4/3;padding:var(--esp-5);box-sizing:border-box;background:var(--paper);border-bottom:3px solid var(--forest);font:400 clamp(24px,2.4vw,32px)/1 var(--serif);text-transform:uppercase;color:var(--forest)}
 .project-card .meta{white-space:nowrap}
 }
 /* Menu enxuto: o podcast fica em Projetos e em destaque no inicio. */
@@ -53,7 +53,7 @@
 /* Recursos pessoais retirados: salvar, marcar como concluido, quiz e contador de progresso. */
 #saved-only,.quiz,[data-complete],.learning-completion+.note,#progress-count,.completion-mark{display:none}
 /* Simetria: intervalo unico entre a abertura da pagina e o conteudo. */
-.page-intro{padding-bottom:clamp(28px,4vw,44px)}
+.page-intro{padding-bottom:clamp(var(--esp-6),4vw,var(--esp-7))}
 .page-intro+.section,.page-intro+section{padding-top:0}
 /* Projetos: um so conjunto de filtros (os atalhos por tema) e sem filtros de periodo redundantes. */
 [data-catalog="projects"] #filter-toggle{display:none}

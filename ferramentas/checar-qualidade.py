@@ -163,9 +163,9 @@ for sel, bloco, _ in REGRAS:
             literais.append('%s { %s: %s }' % (sel[:50], k, v[:40]))
 registra('Q04', 'Nenhuma cor solta fora dos tokens', 'FALHA', not literais, len(literais), literais)
 
-# Q05 Espacamento fora da escala 4/8/12/16/24/32/48 (meta)
-ESCALA = {0, 4, 8, 12, 16, 24, 32, 48}
-fora = 0
+# Q05 Espacamento solto: padding/margin/gap devem usar os tokens --esp-* (0 e o 1px do .sr-only ficam de fora)
+ESCALA = {0, 4, 8, 12, 16, 24, 32, 48, 64, 80}
+soltos_esp, fora = 0, 0
 exemplos = {}
 for sel, bloco, _ in REGRAS:
     if sel == ':root' or not usado(sel):
@@ -173,23 +173,28 @@ for sel, bloco, _ in REGRAS:
     for k, v in decls(bloco):
         if re.fullmatch(r'(padding|margin|gap|row-gap|column-gap)(-(top|right|bottom|left|inline|block)(-start|-end)?)?', k):
             for n in re.findall(r'(?<![\w.-])(-?\d+(?:\.\d+)?)px', v):
+                if abs(float(n)) in (0, 1):
+                    continue
+                soltos_esp += 1
                 if abs(float(n)) not in ESCALA:
                     fora += 1
-                    exemplos.setdefault(n + 'px', sel[:40])
-registra('Q05', 'Espaçamentos fora da escala 4/8/12/16/24/32/48', 'META', fora == 0, fora,
+                exemplos.setdefault(n + 'px', sel[:40])
+registra('Q05', 'Espaçamentos sem token --esp-* (fora da escala: %d)' % fora, 'META', soltos_esp == 0, soltos_esp,
          ['%s (ex.: %s)' % kv for kv in sorted(exemplos.items(), key=lambda x: -abs(float(x[0][:-2])))], alvo=0)
 
-# Q06 Padding interno de cards: um so valor (meta)
-CARD = re.compile(r'(card|painel|-corpo|acervo|com-form|fale-form|agenda-assinar|project-copy|pathway)')
-pads = {}
+# Q06 Cards: todos usam o mesmo padding (token --card-pad) na regra que vale por ultimo
+CARDS = ['.project-card .project-copy', '.learning-card > div', '.pathway-card', '.acervo-card', '.agenda-assinar',
+         '.com-form', '.fale-form', '.hm-painel', '.hp-corpo', '.yt-corpo', '.yt-d-corpo', '.aside-card']
+ultimo = {}
 for sel, bloco, _ in REGRAS:
-    for s in sel.split(','):
-        if CARD.search(s) and usado(s) and not re.search(r'::?(before|after|hover|focus)', s):
+    for s_ in [x.strip() for x in sel.split(',')]:
+        s_n = re.sub(r'\s*>\s*', ' > ', s_)
+        if s_n in CARDS:
             for k, v in decls(bloco):
                 if k == 'padding':
-                    pads.setdefault(v, s.strip()[:40])
-registra('Q06', 'Cards com um único padding interno (token)', 'META', len(pads) <= 1, len(pads),
-         ['%s (ex.: %s)' % kv for kv in pads.items()], alvo=1)
+                    ultimo[s_n] = v
+sem_token = ['%s: %s' % (c, ultimo.get(c, '(sem padding)')) for c in CARDS if ultimo.get(c) != 'var(--card-pad)']
+registra('Q06', 'Cards com o padding único --card-pad', 'META', not sem_token, len(sem_token), sem_token, alvo=0)
 
 # Q07 Barra de acento com topo reto
 retos = ['%s { %s }' % (sel[:50], v) for sel, bloco, _ in REGRAS for k, v in decls(bloco)
@@ -282,17 +287,19 @@ for p, txt in HTML.items():
         inline.append(p + ': on…=')
 registra('Q14', 'Sem estilo, script ou evento inline (CSP)', 'FALHA', not inline, len(inline), inline)
 
-# Q15 Tamanhos de fonte distintos (meta)
-tams = set()
+# Q15 Tamanhos de fonte fora da escala (12 13 14 15 16 18 20 24 28 32 40 48 64 80 96 128 160)
+FS = {12, 13, 14, 15, 16, 18, 20, 24, 28, 32, 40, 48, 64, 80, 96, 128, 160}
+tams, fora_fs = set(), []
 for sel, bloco, _ in REGRAS:
     if not usado(sel):
         continue
     for k, v in decls(bloco):
-        if k == 'font-size' or k == 'font':
+        if k in ('font-size', 'font'):
             for n in re.findall(r'(\d+(?:\.\d+)?)px', v.split('/')[0] if k == 'font' else v):
                 tams.add(float(n))
-registra('Q15', 'Tamanhos de fonte em px distintos', 'META', len(tams) <= 12, len(tams),
-         [', '.join('%g' % t for t in sorted(tams))], alvo=12)
+                if float(n) not in FS:
+                    fora_fs.append('%s: %spx' % (sel[:40], n))
+registra('Q15', 'Tamanhos de fonte fora da escala (%d tamanhos em uso)' % len(tams), 'META', not fora_fs, len(fora_fs), fora_fs, alvo=0)
 
 # Q16 Classes do CSS sem uso (meta)
 classes_css = set(re.findall(r'\.([a-zA-Z][\w-]*)', ' '.join(s for s, _, _ in REGRAS)))

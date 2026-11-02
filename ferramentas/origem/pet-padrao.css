@@ -2,10 +2,10 @@
 @layer base{
 .button, .djf-button { min-height: 46px; }
 .djf-button { font-family: var(--sans)}
-.assinar-acoes, .part-acoes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: stretch; max-width: 560px; }
+.assinar-acoes, .part-acoes { display: grid; grid-template-columns: 1fr 1fr; gap: var(--esp-3); align-items: stretch; max-width: 560px; }
 .assinar-acoes > :not(.button), .part-acoes > :not(.button) { grid-column: 1 / -1; }
 .assinar-acoes .button, .part-acoes .button { justify-content: center; text-align: center; width: 100%; box-sizing: border-box; }
-.event-actions { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center; }
+.event-actions { display: flex; flex-wrap: wrap; gap: var(--esp-3) var(--esp-3); align-items: center; }
 .cal-nav button,.hm-car-seta{ border-radius: var(--raio-peq); }
 .hm-car-seta { width: 40px; height: 40px; }
 
@@ -29,8 +29,8 @@
 
 /* ===== A5. Etiquetas: três tipos (status em pílula menta, agora em pílula escura, tema em texto) ===== */
 .project-card .meta,.status,.chip{ align-items: center; width: fit-content}
-.project-card[data-period="2026"] .meta::before { content: "●"; font-size: .7em; margin-right: 6px; }
-.project-card .meta { margin-bottom: 10px; }
+.project-card[data-period="2026"] .meta::before { content: "●"; font-size: .7em; margin-right: var(--esp-2); }
+.project-card .meta { margin-bottom: var(--esp-3); }
 .chip::first-letter{ text-transform: uppercase; }
 
 /* ===== A6. Setas: → em links internos (as desenhadas pelo CSS) ===== */
@@ -45,7 +45,7 @@
 .djf-breadcrumb { font-size: 14px; }
 .pet-number small, .tl-sd, .acervo-resumo { font-size: 13px; }
 .hd-data small { font-size: 12px; }
-.hm-s-cartaz img { padding: 12px 12px 0; }
+.hm-s-cartaz img { padding: var(--esp-3) var(--esp-3) 0; }
 .hm-slide figcaption a { background: var(--paper); }
 .hp-corpo .capa-titulo, .hp-corpo > strong.capa-titulo { letter-spacing: -.01em}
 .project-copy h3, .project-card h3 { line-height: 1.15}
@@ -64,14 +64,14 @@
 
 /* ===== B. Aprender: trilhas com respiro e linha reta ===== */
 .pet-refined .pathway-card{
-  padding: 24px; border: 1px solid var(--line); border-top: 3px solid var(--forest); border-radius:var(--raio-card); background: var(--paper);
+  padding: var(--esp-5); border: 1px solid var(--line); border-top: 3px solid var(--forest); border-radius:var(--raio-card); background: var(--paper);
 }
 .pet-refined .pathway-card { overflow: visible; }
-.pet-refined .pathway-grid { gap: 24px; }
-.collection-sequence .learning-copy { padding-block: 20px; }
+.pet-refined .pathway-grid { gap: var(--esp-5); }
+.collection-sequence .learning-copy { padding-block: var(--esp-5); }
 .learning-card, .learning-cover { border-radius: var(--raio-card); }
 .learning-cover { border: 0; }
-.learning-card > div { padding: 20px 24px; }
+.learning-card > div { padding: var(--esp-5) var(--esp-5); }
 .djf-dot { background: var(--forest); }
 .djf-signature svg { stroke: var(--forest); }
 .djf-studio-label > span:first-child,.djf-episode-art > span:last-child{ letter-spacing: -.02em}
@@ -91,10 +91,10 @@
 .pj-capa { width: 100%; box-sizing: border-box}
 
 /* ===== C. O PET: caixas de "não aparece" viram linha discreta ===== */
-.op-cx { border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 14px 0}
+.op-cx { border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: var(--esp-4) 0}
 .op-cx h3 { font-size: 18px; }
-.op-pessoas { margin-bottom: 16px; }
-.op-pessoas + p, .op-pessoas + .pj-fontes { margin-top: 16px; }
+.op-pessoas { margin-bottom: var(--esp-4); }
+.op-pessoas + p, .op-pessoas + .pj-fontes { margin-top: var(--esp-4); }
 .xf select,.com-form select{
   -webkit-appearance: none; appearance: none; cursor: pointer;
   background-image: linear-gradient(45deg, transparent 50%, var(--forest) 50%), linear-gradient(135deg, var(--forest) 50%, transparent 50%);
@@ -103,12 +103,12 @@
 
 /* ===== C. Rodapé: colunas equilibradas ===== */
 @media (min-width:761px) {
-  .footer-main > :nth-child(2) { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; align-content: start; }
+  .footer-main > :nth-child(2) { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--esp-6); align-content: start; }
   .footer-main > :nth-child(2) > h2 { grid-column: 1 / -1; }
 }
 .footer-main a { text-decoration: none; }
 .footer-main a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.footer-ingresso { font-size: 14px; color: var(--muted); margin: 0; padding: 18px 0; border-top: 1px solid var(--line); }
+.footer-ingresso { font-size: 14px; color: var(--muted); margin: 0; padding: var(--esp-4) 0; border-top: 1px solid var(--line); }
 .footer-ingresso a { color: var(--forest); font-weight: 600; }
 
 /* ===== C. Celular ===== */
@@ -118,40 +118,40 @@
 
 /* De Jaleco e Fone: fundo laranja enquanto a foto da equipe carrega */
 .djf-photo { background: var(--djf-orange); }
-.op .pj-cab, .yt-intro { padding: 27px 0 41px; border: 0; }
-.op .pj-cab .eyebrow, .yt-intro .eyebrow { display: block; margin: 26px 0 20px; }
+.op .pj-cab, .yt-intro { padding: var(--esp-5) 0 var(--esp-7); border: 0; }
+.op .pj-cab .eyebrow, .yt-intro .eyebrow { display: block; margin: var(--esp-5) 0 var(--esp-5); }
 .op .pj-cab h1, .yt-intro h1 { text-wrap: wrap}
-.op .pj-lead, .yt-lead { font-size: 18px; line-height: 1.8; max-width: 790px; margin: 22px 0 0; color: var(--muted); }
-.op .pj-nav { margin-bottom: 8px; }
-.op .pj-sec { padding-block: 40px; }
-.op .pj-sec h2 { font-size: clamp(28px, 3vw, 36px); line-height: 1.15; margin: 0 0 20px; }
-.op .pj-sec > p { max-width: 66ch; line-height: 1.6; margin: 0 0 16px; }
-.op .pj-passos { margin: 0 0 24px; }
-.op .pj-passos + p { margin-top: 24px; }
-.op-tres { margin: 24px 0; }
-.op .part-acoes { display: flex; flex-wrap: wrap; gap: 12px; max-width: none; margin-top: 8px; }
+.op .pj-lead, .yt-lead { font-size: 18px; line-height: 1.8; max-width: 790px; margin: var(--esp-5) 0 0; color: var(--muted); }
+.op .pj-nav { margin-bottom: var(--esp-2); }
+.op .pj-sec { padding-block: var(--esp-7); }
+.op .pj-sec h2 { font-size: clamp(28px, 3vw, 40px); line-height: 1.15; margin: 0 0 var(--esp-5); }
+.op .pj-sec > p { max-width: 66ch; line-height: 1.6; margin: 0 0 var(--esp-4); }
+.op .pj-passos { margin: 0 0 var(--esp-5); }
+.op .pj-passos + p { margin-top: var(--esp-5); }
+.op-tres { margin: var(--esp-5) 0; }
+.op .part-acoes { display: flex; flex-wrap: wrap; gap: var(--esp-3); max-width: none; margin-top: var(--esp-2); }
 .op .part-acoes .button { width: auto; white-space: nowrap; }
-.op .part-acoes .button.secondary { gap: 8px; }
-.op .hm-nota { max-width: 66ch; margin: 16px 0 20px; }
-.op .pj-hist + p { margin-top: 24px; }
+.op .part-acoes .button.secondary { gap: var(--esp-2); }
+.op .hm-nota { max-width: 66ch; margin: var(--esp-4) 0 var(--esp-5); }
+.op .pj-hist + p { margin-top: var(--esp-5); }
 
 /* ===== YouTube: abertura no mesmo padrão e seções separadas ===== */
-.yt-intro .text-link { display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 18px; border: 1px solid var(--forest); border-radius: var(--raio-peq); color: var(--forest); font-weight: 600; text-decoration: none; background: var(--paper); }
+.yt-intro .text-link { display: inline-flex; align-items: center; gap: var(--esp-2); min-height: 46px; padding: 0 var(--esp-4); border: 1px solid var(--forest); border-radius: var(--raio-peq); color: var(--forest); font-weight: 600; text-decoration: none; background: var(--paper); }
 .yt-intro .text-link:hover { background: var(--mint); }
-.yt-intro > p:last-child { margin: 24px 0 0; }
+.yt-intro > p:last-child { margin: var(--esp-5) 0 0; }
 .yt-sec:first-of-type { border-top: 1px solid var(--line); }
-.yt-sec { margin-top: 0; padding-top: 40px; }
-.yt-sec + .yt-sec { border-top: 1px solid var(--line); margin-top: 40px; }
-.yt-sec-cab h2 { font-size: clamp(28px, 3vw, 34px); margin: 0 0 8px; }
-.yt-sec-cab p { max-width: 62ch; margin: 0 0 12px; line-height: 1.55; }
-.yt-sec-cab p:last-child { margin-bottom: 24px; }
-@media (max-width:760px) { .yt-grid { grid-template-columns: 1fr; } .yt-intro { padding-top: 24px; } }
+.yt-sec { margin-top: 0; padding-top: var(--esp-7); }
+.yt-sec + .yt-sec { border-top: 1px solid var(--line); margin-top: var(--esp-7); }
+.yt-sec-cab h2 { font-size: clamp(28px, 3vw, 32px); margin: 0 0 var(--esp-2); }
+.yt-sec-cab p { max-width: 62ch; margin: 0 0 var(--esp-3); line-height: 1.55; }
+.yt-sec-cab p:last-child { margin-bottom: var(--esp-5); }
+@media (max-width:760px) { .yt-grid { grid-template-columns: 1fr; } .yt-intro { padding-top: var(--esp-5); } }
 
 /* Linha do tempo no celular: sem largura mínima quando não está numa área rolável */
 @media (max-width:760px) { .wrap > .tl { min-width: 0; } }
 
 /* ===== O PET: uma só escala de texto e uma só largura de leitura (a mesma da abertura, 790px) ===== */
-.op .pj-sec > p, .op .pj-hist p, .op .op-cx p, .op .pj-passos span, .op-tres span { font-size: 17px; line-height: 1.7; text-wrap: pretty; }
+.op .pj-sec > p, .op .pj-hist p, .op .op-cx p, .op .pj-passos span, .op-tres span { font-size: 18px; line-height: 1.7; text-wrap: pretty; }
 .op-tres span { font-size: 16px; line-height: 1.6; }
 .op .hm-nota:not(#_) { line-height: 1.6}
 .op .pj-hist h3 { font-size: 20px; line-height: 1.3; }
@@ -161,7 +161,7 @@
 /* Capas ilustradas dos projetos. */
 .capa-midia { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--paper)}
 .capa-midia img { display: block; object-position: center}
-.pj-capa { margin: 28px 0 8px; aspect-ratio: 16 / 9; max-height: 420px; overflow: hidden; border: 1px solid var(--line, var(--line)); border-radius: var(--raio-card); background: var(--paper); }
+.pj-capa { margin: var(--esp-6) 0 var(--esp-2); aspect-ratio: 16 / 9; max-height: 420px; overflow: hidden; border: 1px solid var(--line, var(--line)); border-radius: var(--raio-card); background: var(--paper); }
 .pj-capa img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .hp-corpo .capa-titulo { font-family: var(--serif, Georgia, serif); font-size: 1.3rem; font-weight: 400; line-height: 1.2; color: var(--ink, var(--ink))}
 }
@@ -179,7 +179,7 @@
 .djf-button:hover {background: var(--forest);color: var(--paper)}.fale-votos,.part-parceria,.op-cx,.pj-nums li,.hm-car-palco,.agenda-assinar{background: var(--paper)}.hm-fale {background: var(--paper);color: var(--ink)}
 .hm-fale h2 {color: var(--ink)}
 .hm-fale p {color: var(--muted)}
-.hm-fale .hm-fale-btn {background: var(--forest);color: var(--paper);border-color: var(--forest)}.project-card .meta,.status,.chip{display: inline-flex;border-radius: var(--raio-pill);background: var(--mint);color: var(--forest);border: 0;padding: 4px 10px;font: 600 12px/1.4 var(--sans);letter-spacing: .02em;text-transform: none}
+.hm-fale .hm-fale-btn {background: var(--forest);color: var(--paper);border-color: var(--forest)}.project-card .meta,.status,.chip{display: inline-flex;border-radius: var(--raio-pill);background: var(--mint);color: var(--forest);border: 0;padding: var(--esp-1) var(--esp-3);font: 600 12px/1.4 var(--sans);letter-spacing: .02em;text-transform: none}
 .selo-agora {background: var(--forest)}
 
 /* ===== A8. Textos pequenos demais ===== */
@@ -190,22 +190,22 @@
 
 /* ===== B. Início ===== */
 .hm-slide.is-on {animation: none}
-.hm-tema-topo {display: none}.hp-corpo .capa-titulo, .hp-corpo > strong.capa-titulo {font: 400 clamp(24px, 2.2vw, 28px)/1.15 var(--serif);color: var(--ink)}.project-copy h3, .project-card h3 {font-size: clamp(24px, 2.3vw, 30px)}@media (min-width:761px) {
-  .event-row {display: grid;grid-template-columns: 240px minmax(0, 1fr)}.event-date strong {font-size: 44px;white-space: normal}.event-body h2 {font-size: clamp(30px, 3vw, 38px)}}@media (max-width:760px) {
-  .event-body h2 {font-size: 30px}}
+.hm-tema-topo {display: none}.hp-corpo .capa-titulo, .hp-corpo > strong.capa-titulo {font: 400 clamp(24px, 2.2vw, 28px)/1.15 var(--serif);color: var(--ink)}.project-copy h3, .project-card h3 {font-size: clamp(24px, 2.3vw, 32px)}@media (min-width:761px) {
+  .event-row {display: grid;grid-template-columns: 240px minmax(0, 1fr)}.event-date strong {font-size: 48px;white-space: normal}.event-body h2 {font-size: clamp(32px, 3vw, 40px)}}@media (max-width:760px) {
+  .event-body h2 {font-size: 32px}}
 
 /* ===== B. De Jaleco e Fone: mesmas fontes e botões do site; a cor do podcast fica na arte ===== */
-.djf-page h1 {font: 400 clamp(54px, 7vw, 96px)/.98 var(--serif);letter-spacing: -.03em}
+.djf-page h1 {font: 400 clamp(48px, 7vw, 96px)/.98 var(--serif);letter-spacing: -.03em}
 .djf-page h1 span {color: var(--forest)}.djf-studio-label > span:first-child,.djf-episode-art > span:last-child{font-family: var(--serif);font-weight: 400}
 
 /* ===== C. Anamnese ===== */
 .issue-cover b {font-size: 96px;line-height: 1.1}.pj-capa {max-height: none}.op-cx {background: transparent}
 
 /* ===== C. Campos de escolha com o mesmo estilo dos campos de texto ===== */
-.xf input[type=search],.xf select,.com-busca,.com-form textarea,.com-form select{border-radius: var(--raio-peq)}.xf select,.com-form select{padding-right: 38px}@media (max-width:760px) {
+.xf input[type=search],.xf select,.com-busca,.com-form textarea,.com-form select{border-radius: var(--raio-peq)}.xf select,.com-form select{padding-right: var(--esp-6)}@media (max-width:760px) {
   .pg-home .fale-flutuante {display: none}}
 
 /* ===== O PET e páginas de projeto: mesma largura do cabeçalho (.wrap), abertura igual às demais ===== */
-.wrap.pj:not(#_) {max-width: none}.op .pj-cab h1, .yt-intro h1 {font: 400 clamp(45px, 5vw, 70px)/1.08 var(--serif);letter-spacing: -.04em;max-width: 980px;margin: 0}
+.wrap.pj:not(#_) {max-width: none}.op .pj-cab h1, .yt-intro h1 {font: 400 clamp(48px, 5vw, 64px)/1.08 var(--serif);letter-spacing: -.04em;max-width: 980px;margin: 0}
 .op .pj-sec > p, .op .pj-hist p, .op .op-cx p, .op .hm-nota:not(#_) {max-width: 790px}.op .hm-nota:not(#_) {font-size: 15px}.capa-midia {display: block;height: auto;min-height: 0;max-height: none;padding: 0}.capa-midia img {width: 100%;height: 100%;max-width: none;max-height: none;margin: 0;object-fit: cover}
-.capa-midia::before, .capa-midia::after, article.tem-capa::before {content: none;display: none}.hp-corpo .capa-titulo {position: static;display: block;width: auto;height: auto;overflow: visible;clip: auto;clip-path: none;white-space: normal;margin: 0 0 6px;padding: 0;border: 0}
+.capa-midia::before, .capa-midia::after, article.tem-capa::before {content: none;display: none}.hp-corpo .capa-titulo {position: static;display: block;width: auto;height: auto;overflow: visible;clip: auto;clip-path: none;white-space: normal;margin: 0 0 var(--esp-2);padding: 0;border: 0}

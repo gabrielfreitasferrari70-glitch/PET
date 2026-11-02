@@ -1,0 +1,42 @@
+/* Design System do PET Conecta: tokens e regras que valem para o site inteiro.
+   Fica fora de @layer e por ultimo na uniao, entao vence as regras antigas.
+   Escala de espacamento: 4, 8, 12, 16, 24, 32, 48; 64 e 80 so entre secoes.
+   Escala de fonte (px): 12 13 14 15 16 18 20 24 28 32 40 48 64 80 96 128 160. */
+:root {
+  --esp-1: 4px; --esp-2: 8px; --esp-3: 12px; --esp-4: 16px; --esp-5: 24px;
+  --esp-6: 32px; --esp-7: 48px; --esp-8: 64px; --esp-9: 80px;
+  --card-pad: clamp(var(--esp-4), 2.4vw, var(--esp-5));
+  --toque: 44px;
+}
+
+/* Um so padding interno para todos os cards */
+.project-card .project-copy, .learning-card > div, .pathway-card, .pet-refined .pathway-card,
+.acervo-card, .agenda-assinar, .com-form, .fale-form, .hm-painel, .hp-corpo, .yt-corpo, .yt-d-corpo,
+.aside-card { padding: var(--card-pad); }
+
+/* Alvos de toque de pelo menos 44px */
+.pj-nav a, .pj .breadcrumb, .breadcrumb, .breadcrumb-line a, .fale-link, .caminho-volta, .djf-breadcrumb a,
+.footer-main a, .footer-bottom a {
+  display: inline-flex; align-items: center; min-height: var(--toque);
+}
+.footer-main a { display: flex; }
+.icon-button, .hm-car-seta { min-width: var(--toque); min-height: var(--toque); }
+.join-votar { min-height: var(--toque); }
+.header-inner > .editorial-brand { min-height: var(--toque); }
+.hm-car-pontos button { width: var(--toque); height: var(--toque); }
+.hm-car-pontos button[aria-current="true"]::after { width: var(--esp-5); }
+
+/* Simetria: os dois paineis da home com a mesma borda */
+.hm-painel-voto { border-color: var(--line); border-top-color: var(--forest); }
+.hm-proj + .hm-aprender { margin-top: var(--esp-7); }
+
+/* Estados */
+:is(button, .button):active:not(:disabled) { transform: translateY(1px); }
+:is(button, .button, input, select, textarea):disabled,
+.button[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+[aria-busy="true"] { cursor: progress; }
+:is(input, textarea, select):user-invalid { border-color: var(--perigo); }
+:is(input, textarea, select):user-invalid:focus-visible { outline-color: var(--perigo); }
+
+/* Rodape: a faixa do processo seletivo alinhada ao conteudo */
+.wrap.footer-ingresso { margin-inline: auto; }

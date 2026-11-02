@@ -1,26 +1,26 @@
 /* Regras comuns ficam na camada base. As que estao fora dela, no fim do arquivo, vencem qualquer regra da base. */
 @layer base{
-.yt-intro { padding-top: 40px; padding-bottom: 8px; }
-.yt-intro h1 { margin: 8px 0 12px; max-width: 18ch; }
-.yt-lead { max-width: 60ch; color: var(--muted); margin: 0 0 12px; }
-.yt-conteudo { padding-bottom: 56px; }
-.yt-sec { margin-top: 40px; }
-.yt-sec-cab h2 { margin: 0 0 4px; }
-.yt-sec-cab p { margin: 0 0 20px; color: var(--muted); max-width: 62ch; }
-.yt-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.yt-intro { padding-top: var(--esp-7); padding-bottom: var(--esp-2); }
+.yt-intro h1 { margin: var(--esp-2) 0 var(--esp-3); max-width: 18ch; }
+.yt-lead { max-width: 60ch; color: var(--muted); margin: 0 0 var(--esp-3); }
+.yt-conteudo { padding-bottom: var(--esp-8); }
+.yt-sec { margin-top: var(--esp-7); }
+.yt-sec-cab h2 { margin: 0 0 var(--esp-1); }
+.yt-sec-cab p { margin: 0 0 var(--esp-5); color: var(--muted); max-width: 62ch; }
+.yt-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--esp-5); grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .yt-item { display: flex; }
 .yt-card { display: flex; flex-direction: column; width: 100%; background: var(--paper); border: 1px solid var(--line); border-radius: var(--raio-card); overflow: hidden; color: var(--ink); text-decoration: none; transition: border-color .15s ease; }
 .yt-card:hover, .yt-card:focus-visible { border-color: var(--forest); }
 .yt-thumb { position: relative; display: block; aspect-ratio: 16 / 9; background: var(--paper); overflow: hidden; }
 .yt-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.yt-thumb::after { content: ""; position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: var(--veu); }
-.yt-thumb::before { content: ""; position: absolute; z-index: 1; left: 50%; top: 50%; margin: -9px 0 0 -6px; border-style: solid; border-width: 9px 0 9px 15px; border-color: transparent transparent transparent var(--paper); }
-.yt-dur { position: absolute; z-index: 1; right: 8px; bottom: 8px; padding: 2px 7px; border-radius: var(--raio-peq); background: var(--veu); color: var(--claro); font: 600 .78rem/1.4 var(--sans); }
-.yt-corpo { display: flex; flex-direction: column; gap: 6px; flex: 1; padding: 16px; }
+.yt-thumb::after { content: ""; position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: calc(-1 * var(--esp-5)) 0 0 calc(-1 * var(--esp-5)); border-radius: 50%; background: var(--veu); }
+.yt-thumb::before { content: ""; position: absolute; z-index: 1; left: 50%; top: 50%; margin: calc(-1 * var(--esp-2)) 0 0 calc(-1 * var(--esp-2)); border-style: solid; border-width: 9px 0 9px 15px; border-color: transparent transparent transparent var(--paper); }
+.yt-dur { position: absolute; z-index: 1; right: 8px; bottom: 8px; padding: var(--esp-1) var(--esp-2); border-radius: var(--raio-peq); background: var(--veu); color: var(--claro); font: 600 .78rem/1.4 var(--sans); }
+.yt-corpo { display: flex; flex-direction: column; gap: var(--esp-2); flex: 1; padding: var(--esp-4); }
 .yt-tipo { font: 600 .72rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--forest); }
 .yt-titulo { font: 400 1.05rem/1.35 var(--serif); }
-.yt-ver { margin-top: auto; padding-top: 6px; font: 600 .9rem/1.3 var(--sans); color: var(--forest); }
-.yt-nota { margin: 40px 0 0; color: var(--muted); font-size: .9rem; max-width: 70ch; }
+.yt-ver { margin-top: auto; padding-top: var(--esp-2); font: 600 .9rem/1.3 var(--sans); color: var(--forest); }
+.yt-nota { margin: var(--esp-7) 0 0; color: var(--muted); font-size: .9rem; max-width: 70ch; }
 
 .yt-dialog { width: min(640px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 0; border: 1px solid var(--line); border-radius: var(--raio-card); background: var(--paper); color: var(--ink); overflow: auto; }
 .yt-dialog::backdrop { background: var(--veu); }
@@ -29,20 +29,20 @@
 .yt-d-fechar:hover { background: var(--mint); }
 .yt-d-thumb { display: block; aspect-ratio: 16 / 9; background: var(--paper); }
 .yt-d-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.yt-d-corpo { padding: 20px 22px 24px; }
-.yt-d-meta { margin: 0 0 6px; font: 600 .75rem/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--forest); }
-.yt-d-corpo h2 { margin: 0 0 10px; font-size: 1.35rem; line-height: 1.25; }
-.yt-d-resumo { margin: 0 0 18px; color: var(--muted); }
-.yt-d-ir { display: inline-block; padding: 12px 20px; border-radius: var(--raio-pill); background: var(--forest); color: var(--paper); font: 600 .95rem/1 var(--sans); text-decoration: none; }
+.yt-d-corpo { padding: var(--esp-5) var(--esp-5) var(--esp-5); }
+.yt-d-meta { margin: 0 0 var(--esp-2); font: 600 .75rem/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--forest); }
+.yt-d-corpo h2 { margin: 0 0 var(--esp-3); font-size: 1.35rem; line-height: 1.25; }
+.yt-d-resumo { margin: 0 0 var(--esp-4); color: var(--muted); }
+.yt-d-ir { display: inline-block; padding: var(--esp-3) var(--esp-5); border-radius: var(--raio-pill); background: var(--forest); color: var(--paper); font: 600 .95rem/1 var(--sans); text-decoration: none; }
 .yt-d-ir:hover, .yt-d-ir:focus-visible { background: var(--deep); }
-.yt-d-proj { display: inline-block; margin: 12px 0 0 16px; }
+.yt-d-proj { display: inline-block; margin: var(--esp-3) 0 0 var(--esp-4); }
 .yt-d-proj[hidden] { display: none; }
-.yt-sec-cab .text-link { display: inline-block; margin: -8px 0 20px; }
+.yt-sec-cab .text-link { display: inline-block; margin: calc(-1 * var(--esp-2)) 0 var(--esp-5); }
 
 @media (max-width:1000px) { .yt-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width:760px) {
-  .yt-grid { grid-template-columns: 1fr; gap: 16px; }
-  .yt-intro { padding-top: 28px; }
-  .yt-sec { margin-top: 32px; }
+  .yt-grid { grid-template-columns: 1fr; gap: var(--esp-4); }
+  .yt-intro { padding-top: var(--esp-6); }
+  .yt-sec { margin-top: var(--esp-6); }
 }
 }

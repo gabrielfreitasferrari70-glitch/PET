@@ -26,10 +26,10 @@ if(t){t.addEventListener('input',function(){cnt.textContent=t.value.length+'/'+T
   if(o.assunto){d.Assunto=CAT[cat]||'Outro tema';}
   d.Mensagem=v;d.Nome=nome||'(não informado)';d.Contato=cont||'(não informado)';d.Enviado_em=new Date().toLocaleString('pt-BR',{timeZone:'America/Cuiaba'});
   if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cont)){d._replyto=cont;}
-  btn.disabled=true;msgEstado('','Enviando…');
+  btn.disabled=true;btn.setAttribute('aria-busy','true');msgEstado('','Enviando…');
   enviar(d).then(function(){t.value='';$('fale-nome').value='';$('fale-contato').value='';cnt.textContent='0/'+o.max;msgEstado('ok',o.ok);})
   .catch(function(){msgEstado('erro','Não foi possível enviar agora. Tente novamente em instantes.');})
-  .then(function(){btn.disabled=false;});});
+  .then(function(){btn.disabled=false;btn.removeAttribute('aria-busy');});});
  var q=new URLSearchParams(location.search).get('tipo')||location.hash.replace('#','');tipo(TIPOS[q]?q:'duvida');}
 var lista=$('temas-lista'),total=$('temas-total'),tmsg=$('temas-msg');
 function mostraTotal(){total.textContent=plural(soma)+' em '+ntemas+' temas';}
