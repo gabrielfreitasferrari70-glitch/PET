@@ -12,11 +12,10 @@
 /* ===== A3. Cards: 12px; caixas internas 8px ===== */
 .acervo-card, .com-form, .part-links a, .ap-guia a, .pj-mats a, .fale-tipo, .tl-rolagem { border-radius: var(--raio-card); }
 .part-etapas li{ border-radius: var(--raio-peq); }
-.tl-rolagem { overflow: hidden; }
 
 /* ===== A4. Fundos menta grandes viram branco com borda ===== */
 .fale-votos,.part-parceria,.op-cx,.pj-nums li,.hm-car-palco,.agenda-assinar{ border: 1px solid var(--line)}
-.fale-votos, .part-parceria, .agenda-assinar { border-top: 3px solid var(--forest); border-radius: 0 0 var(--raio-card) var(--raio-card); }
+.fale-votos, .part-parceria, .agenda-assinar { border-top: 3px solid var(--forest); border-radius:var(--raio-card); }
 .pj-nums li { border-radius: var(--raio-card); }
 .pj-nums strong { color: var(--forest); }
 .hm-s-cartaz { background: var(--paper); }
@@ -24,12 +23,12 @@
 .fale-votos .tema-item { background: var(--paper); }
 
 /* Faixa "Tem uma dúvida de saúde?": deixa de ser bloco verde-escuro */
-.hm-fale { border: 1px solid var(--line); border-top: 3px solid var(--forest); border-radius: 0 0 var(--raio-card) var(--raio-card)}
+.hm-fale { border: 1px solid var(--line); border-top: 3px solid var(--forest); border-radius:var(--raio-card)}
 
 /* Círculos numerados e qualquer ícone redondo verde-escuro continuam: são ação/ordem, não fundo decorativo */
 
 /* ===== A5. Etiquetas: três tipos (status em pílula menta, agora em pílula escura, tema em texto) ===== */
-.project-card .meta,.status,.chip,.pj-status{ align-items: center; width: fit-content}
+.project-card .meta,.status,.chip{ align-items: center; width: fit-content}
 .project-card[data-period="2026"] .meta::before { content: "●"; font-size: .7em; margin-right: 6px; }
 .project-card .meta { margin-bottom: 10px; }
 .chip::first-letter{ text-transform: uppercase; }
@@ -65,7 +64,7 @@
 
 /* ===== B. Aprender: trilhas com respiro e linha reta ===== */
 .pet-refined .pathway-card{
-  padding: 24px; border: 1px solid var(--line); border-top: 3px solid var(--forest); border-radius: 0 0 var(--raio-card) var(--raio-card); background: var(--paper);
+  padding: 24px; border: 1px solid var(--line); border-top: 3px solid var(--forest); border-radius:var(--raio-card); background: var(--paper);
 }
 .pet-refined .pathway-card { overflow: visible; }
 .pet-refined .pathway-grid { gap: 24px; }
@@ -86,7 +85,7 @@
 .djf-channel:hover { background: var(--mint); border-color: var(--forest); }
 .djf-spotify > svg, .djf-instagram > svg, .djf-spotify .djf-channel-cta, .djf-instagram .djf-channel-cta { color: var(--forest); }
 .djf-episode-art { border-radius: var(--raio-card); }
-.issue-card, .issue-cover { border-radius: 0 0 var(--raio-card) var(--raio-card); }
+.issue-card, .issue-cover { border-radius:var(--raio-card); }
 
 /* ===== C. Capa da página de projeto na largura da coluna ===== */
 .pj-capa { width: 100%; box-sizing: border-box}
@@ -177,10 +176,10 @@
 /* ===== A2. Botões: um raio, uma altura ===== */
 .button, .djf-button, .header-tools .join, .part-acoes .button, .assinar-acoes .button,
 .event-actions .button, .com-form .button, .hm-acoes .button, .hm-fale .hm-fale-btn {border-radius: var(--raio-peq)}.djf-button {background: var(--forest);color: var(--paper)}
-.djf-button:hover {background: var(--deep)}.fale-votos,.part-parceria,.op-cx,.pj-nums li,.hm-car-palco,.agenda-assinar{background: var(--paper)}.hm-fale {background: var(--paper);color: var(--ink)}
+.djf-button:hover {background: var(--forest);color: var(--paper)}.fale-votos,.part-parceria,.op-cx,.pj-nums li,.hm-car-palco,.agenda-assinar{background: var(--paper)}.hm-fale {background: var(--paper);color: var(--ink)}
 .hm-fale h2 {color: var(--ink)}
 .hm-fale p {color: var(--muted)}
-.hm-fale .hm-fale-btn {background: var(--forest);color: var(--paper);border-color: var(--forest)}.project-card .meta,.status,.chip,.pj-status{display: inline-flex;border-radius: var(--raio-pill);background: var(--mint);color: var(--forest);border: 0;padding: 4px 10px;font: 600 12px/1.4 var(--sans);letter-spacing: .02em;text-transform: none}
+.hm-fale .hm-fale-btn {background: var(--forest);color: var(--paper);border-color: var(--forest)}.project-card .meta,.status,.chip{display: inline-flex;border-radius: var(--raio-pill);background: var(--mint);color: var(--forest);border: 0;padding: 4px 10px;font: 600 12px/1.4 var(--sans);letter-spacing: .02em;text-transform: none}
 .selo-agora {background: var(--forest)}
 
 /* ===== A8. Textos pequenos demais ===== */

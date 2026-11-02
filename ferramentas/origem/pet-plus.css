@@ -27,7 +27,7 @@ html[data-reading-theme="sepia"]{--paper:#fbf6ea;--mint:#efe6d2;--line:#ddd0b6;-
 html[data-reading-theme="sepia"] body{background:var(--fundo);color:var(--ink)}
 
 /* Tema escuro */
-html[data-reading-theme="dark"]{--paper:#13211e;--mint:#182b27;--line:#28443d;--ink:#e9f3f0;--muted:#a3bab3;--forest:#3cc5a6;--deep:#2aa88c;color-scheme:dark;--fundo:#0d1715;--destaque:#45dccb;--veu:rgba(0,0,0,.8);--sombra:rgba(0,0,0,.4)}
+html[data-reading-theme="dark"]{--perigo:#ff9a8f;--paper:#13211e;--mint:#182b27;--line:#28443d;--ink:#e9f3f0;--muted:#a3bab3;--forest:#3cc5a6;--deep:#2aa88c;color-scheme:dark;--fundo:#0d1715;--destaque:#45dccb;--veu:rgba(0,0,0,.8);--sombra:rgba(0,0,0,.4)}
 html[data-reading-theme="dark"] .skip{color:var(--fundo)}
 html[data-reading-theme="dark"] body{background:var(--fundo);color:var(--ink)}
 html[data-reading-theme="dark"] :is(header,.editorial-nav,.header,footer,dialog,.reading-panel,.project-card,article,section){background-color:transparent;color:inherit}

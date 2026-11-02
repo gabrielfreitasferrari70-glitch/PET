@@ -223,7 +223,8 @@ for p, txt in HTML.items():
         h = href.group(1)
         texto = re.sub(r'<[^>]+>', '', corpo).strip()
         if h.startswith('http') and 'pet-conecta.vercel.app' not in h:
-            if 'yt-card' in attrs or not texto or '<img' in corpo:
+            # marcas da tabela de anos sao simbolos com aria-label; o nome da linha leva a seta
+            if 'yt-card' in attrs or 'tl-mark' in attrs or not texto or '<img' in corpo:
                 continue
             if '↗' not in corpo:
                 sem_seta.append('%s: %s' % (p, texto[:40]))
@@ -321,7 +322,8 @@ registra('Q18', 'Sitemap cobre todas as páginas', 'FALHA', not faltam, len(falt
 # Q19 Tokens de cor sem versao escura (texto e fundo)
 cores_root = [k for k, v in TEMAS['claro'].items() if not v.strip().startswith('var(') and resolve(v, 'claro')]
 escuro = tokens_de('[data-reading-theme="dark"]')
-IGNORAR = {'--spotify', '--djf-orange', '--djf-deep', '--djf-soft', '--djf-dark', '--djf-cream'}
+IGNORAR = {'--claro',  # branco fixo sobre fundos que continuam escuros no tema escuro (De Jaleco e Fone)
+           '--spotify', '--djf-orange', '--djf-deep', '--djf-soft', '--djf-dark', '--djf-cream'}
 sem_escuro = sorted(k for k in cores_root if k not in escuro and k not in IGNORAR)
 registra('Q19', 'Tokens de cor com versão para o tema escuro', 'FALHA', not sem_escuro, len(sem_escuro), sem_escuro)
 

@@ -41,14 +41,6 @@
     });
   });
 
-  const form = document.getElementById('contact-form');
-  form?.addEventListener('reset', () => {
-    setTimeout(() => {
-      form.dispatchEvent(new Event('input', {bubbles:true}));
-      document.getElementById('contact-feedback').textContent = 'Campos limpos nesta página. A área de transferência não foi alterada.';
-    }, 0);
-  });
-
   const clear = document.querySelector('[data-clear-local]');
   const feedback = document.getElementById('privacy-storage-status');
   if (feedback && location.hash === '#preferencias-redefinidas') feedback.textContent = 'Favoritos, progresso e preferências foram redefinidos neste navegador. As preferências padrão podem ser gravadas novamente.';
