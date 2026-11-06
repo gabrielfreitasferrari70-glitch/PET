@@ -921,3 +921,25 @@ html[data-reading-theme="dark"] .djf-page h1 span{color:var(--djf-soft)}html[dat
 
 
 .voto[aria-pressed="true"]:disabled { opacity: 1; cursor: default; }
+
+
+:root { --cab-h: 74px; --pjnav-h: 0px; }
+@media (max-width: 1000px) { :root { --cab-h: 59px; } }
+@media (max-width: 760px) { :root { --cab-h: 62px; } }
+html { scroll-padding-top: calc(var(--cab-h) + var(--pjnav-h) + var(--esp-4)); }
+.pet-refined .prose h2[id], .pj-sec, .privacy-prose h2 { scroll-margin-top: calc(var(--cab-h) + var(--pjnav-h) + var(--esp-4)); }
+.pj-nav { top: var(--cab-h); }
+.fale-votos { top: calc(var(--cab-h) + var(--esp-4)); }
+.aside-card { top: calc(var(--cab-h) + var(--esp-5)); }
+.theme-dock { top: calc(var(--cab-h) + var(--esp-3)); }
+
+
+@media (max-width: 1000px) {
+  #mobile-menu {
+    max-height: calc(100dvh - var(--cab-h));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 12px 24px var(--sombra);
+  }
+}

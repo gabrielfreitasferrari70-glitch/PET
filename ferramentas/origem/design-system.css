@@ -50,3 +50,26 @@
 
 /* Voto registrado e um estado, nao um botao apagado */
 .voto[aria-pressed="true"]:disabled { opacity: 1; cursor: default; }
+
+/* Cabecalho fixo: a altura real chega do site.js em --cab-h; os valores abaixo sao reserva.
+   Tudo que fica preso ao rolar para abaixo do cabecalho, e as ancoras param abaixo dele. */
+:root { --cab-h: 74px; --pjnav-h: 0px; }
+@media (max-width: 1000px) { :root { --cab-h: 59px; } }
+@media (max-width: 760px) { :root { --cab-h: 62px; } }
+html { scroll-padding-top: calc(var(--cab-h) + var(--pjnav-h) + var(--esp-4)); }
+.pet-refined .prose h2[id], .pj-sec, .privacy-prose h2 { scroll-margin-top: calc(var(--cab-h) + var(--pjnav-h) + var(--esp-4)); }
+.pj-nav { top: var(--cab-h); }
+.fale-votos { top: calc(var(--cab-h) + var(--esp-4)); }
+.aside-card { top: calc(var(--cab-h) + var(--esp-5)); }
+.theme-dock { top: calc(var(--cab-h) + var(--esp-3)); }
+
+/* Menu movel: separado da pagina, nunca maior que a tela (rola por dentro) */
+@media (max-width: 1000px) {
+  #mobile-menu {
+    max-height: calc(100dvh - var(--cab-h));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 12px 24px var(--sombra);
+  }
+}
