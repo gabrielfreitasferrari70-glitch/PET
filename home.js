@@ -16,7 +16,7 @@ if(tl){P.get('pet_sugestoes','select=id,tema,categoria,votos&status=eq.aprovada&
  var hmsg=document.getElementById('home-temas-msg');function aviso(c,t){if(hmsg){hmsg.className='com-msg'+(c?' '+c:'');hmsg.textContent=t;}}
  tl.addEventListener('click',function(e){var b=e.target.closest('[data-voto]');if(!b||b.disabled){return;}var id=b.getAttribute('data-voto');b.disabled=true;b.setAttribute('aria-busy','true');aviso('','');
   P.votar(id).then(function(n){P.marcaVoto(id);P.marcaBotao(b,n);temaTopo();aviso('ok','Voto registrado. Obrigado!');})
-  .catch(function(err){var m=err&&err.message||'';if(m.indexOf('Voce ja')===0){P.marcaVoto(id);P.marcaBotao(b,null);aviso('ok','Você já votou neste tema. Obrigado!');return;}b.disabled=false;aviso('erro',m.indexOf('Muitos')===0?m:'Não foi possível registrar o voto agora. Tente de novo em instantes.');})
+  .catch(function(err){var m=err&&err.message||'';if(m.indexOf('Voce ja')===0){P.marcaVoto(id);P.marcaBotao(b,null);aviso('ok','Você já votou neste tema. Obrigado!');return;}b.disabled=false;aviso('erro',m.indexOf('Muitos')===0?m:m.indexOf('Nao foi possivel conferir')===0?'Não foi possível conferir seu voto nesta conexão. Tente de novo por outra rede (Wi‑Fi ou dados móveis).':'Não foi possível registrar o voto agora. Tente de novo em instantes.');})
   .then(function(){b.removeAttribute('aria-busy');});});}
 })();
 /* Carrossel da abertura */
