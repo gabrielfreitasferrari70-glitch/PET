@@ -73,3 +73,13 @@ html { scroll-padding-top: calc(var(--cab-h) + var(--pjnav-h) + var(--esp-4)); }
     box-shadow: 0 12px 24px var(--sombra);
   }
 }
+
+/* Revisao de 16/11/2026 */
+/* Alvos de toque: titulos que sao link ganham 44px de area sem mudar o desenho */
+main :is(h2, h3, th) > a { display: inline-block; padding-block: var(--esp-3); margin-block: calc(var(--esp-3) * -1); }
+.tl-mark { width: 44px; height: 44px; }
+.xf .check input { width: 24px; height: 24px; }
+/* Bloco de votacao: o card ja tem a barra de acento, o titulo de dentro nao repete */
+.fale-votos .sec-titulo { border-top: 0; padding-top: 0; }
+/* Capa do projeto no computador: nao ocupa a tela inteira antes do conteudo */
+@media (min-width: 1001px) { .pj-capa { max-width: 760px; } }

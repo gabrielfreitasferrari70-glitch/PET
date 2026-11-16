@@ -123,6 +123,7 @@ def main():
         novo = html[:m.start()] + "<div class='wrap pj' id='pj-raiz' data-gerado>" + pagina(p, redes.get(slug, {})) + m.group(3) + html[m.end():]
         # o titulo e a descricao acompanham os dados
         novo = re.sub(r"<meta name='description' content='[^']*'>", "<meta name='description' content='%s'>" % esc_base(p['resumo']), novo, count=1)
+        novo = re.sub(r"<meta (property='og:description'|name='twitter:description') content='[^']*'>", lambda g: "<meta %s content='%s'>" % (g.group(1), esc_base(p['resumo'])), novo)
         if novo != html:
             fora.append(slug)
             if not checar:

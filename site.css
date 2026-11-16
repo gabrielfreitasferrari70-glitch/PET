@@ -943,3 +943,13 @@ html { scroll-padding-top: calc(var(--cab-h) + var(--pjnav-h) + var(--esp-4)); }
     box-shadow: 0 12px 24px var(--sombra);
   }
 }
+
+
+
+main :is(h2, h3, th) > a { display: inline-block; padding-block: var(--esp-3); margin-block: calc(var(--esp-3) * -1); }
+.tl-mark { width: 44px; height: 44px; }
+.xf .check input { width: 24px; height: 24px; }
+
+.fale-votos .sec-titulo { border-top: 0; padding-top: 0; }
+
+@media (min-width: 1001px) { .pj-capa { max-width: 760px; } }
