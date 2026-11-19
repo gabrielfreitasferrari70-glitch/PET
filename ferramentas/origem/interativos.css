@@ -64,3 +64,8 @@
 @media(max-width:760px){.int-form h2,.int-result h2,.ff-card h2{font-size:28px}.int-item{grid-template-columns:1fr}.int-tag{grid-row:auto;justify-self:start}.int-acoes .button{flex:1;min-width:0}.ff-botoes button{min-height:56px;font-size:16px}.ff-final .ff-placar{font-size:64px}.int-destaque-home .int-acoes{flex-direction:column;align-items:stretch}.int-destaque-home .int-acoes .button{width:100%;justify-content:space-between}.int-vazio{padding:var(--esp-6) var(--esp-5)}}
 @media print{.int-grupo>h3,.int-perguntas>h3{break-after:avoid}.int-result:before{content:'PET Conecta · Minha Saúde em Dia · pet-conecta.vercel.app/saude-em-dia';display:block;font-size:10pt;color:var(--muted);margin-bottom:var(--esp-4)}.editorial-header,.header,footer,.fale-flutuante,.int-form,.int-acoes,.skip,.page-intro .breadcrumb,#toast,dialog{display:none!important}.int-layout{display:block;padding:0}.int-item{break-inside:avoid}body{font-size:12pt}a{text-decoration:none}}
 .ap-guia-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+/* Barra de cima com Saúde em Dia e Fato ou Fake: tudo numa linha a partir de 1001px */
+@media(min-width:1001px){.desktop-nav{gap:var(--esp-4)}.desktop-nav a{font-size:14px}}
+@media(min-width:1001px) and (max-width:1439px){.header-tools .join-votar{display:none}}
+@media(min-width:1001px) and (max-width:1279px){.editorial-brand span{display:none}.desktop-nav{gap:var(--esp-3)}}
+@media(min-width:1001px) and (max-width:1099px){.header-tools .join{font-size:0;gap:0;padding-inline:var(--esp-3)}.header-tools .join .fala-ic{margin:0}}
