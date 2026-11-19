@@ -37,7 +37,12 @@
       f: 'Calendário Nacional de Vacinação 2026; Kampmann et al., New England Journal of Medicine, 2023' }
   ];
 
-  var i = 0, acertos = 0;
+  var i = 0, acertos = 0, ordem = [];
+  // A cada partida as frases vêm em ordem sorteada; o número registrado continua sendo o da frase, não o da posição.
+  function sortear() {
+    ordem = Q.map(function (_, k) { return k; });
+    for (var a = ordem.length - 1; a > 0; a--) { var b = Math.floor(Math.random() * (a + 1)); var t = ordem[a]; ordem[a] = ordem[b]; ordem[b] = t; }
+  }
   var prog = document.getElementById('ff-progresso-txt');
   var barra = document.getElementById('ff-barra');
   var palco = document.getElementById('ff-palco');
@@ -83,7 +88,7 @@
   }
 
   function pergunta() {
-    var q = Q[i];
+    var q = Q[ordem[i]];
     var inicio = Date.now();
     atualizarProgresso(false);
     marcar(i, 'atual');
@@ -110,7 +115,7 @@
       var certo = escolhaFato === q.fato;
       if (certo) acertos++;
       marcar(i, certo ? 'certa' : 'errada');
-      if (window.petMedir) { if (i === 0) window.petMedir('quiz_inicio'); window.petMedir('quiz_resposta', { n: i + 1, ok: certo, valor: Math.min(600000, Date.now() - inicio) }); }
+      if (window.petMedir) { if (i === 0) window.petMedir('quiz_inicio'); window.petMedir('quiz_resposta', { n: ordem[i] + 1, ok: certo, valor: Math.min(600000, Date.now() - inicio) }); }
       placar();
       bF.disabled = bK.disabled = true;
       (q.fato ? bF : bK).classList.add('ff-certa');
@@ -162,7 +167,7 @@
     });
     var de = el('button', 'button secondary', 'Jogar de novo');
     de.type = 'button';
-    de.addEventListener('click', function () { if (window.petMedir) window.petMedir('quiz_acao', { alvo: 'jogar_de_novo' }); i = 0; acertos = 0; montarPontos(); pergunta(); focar(palco.querySelector('.ff-afirmacao')); mostrar(palco.querySelector('.ff-card')); });
+    de.addEventListener('click', function () { if (window.petMedir) window.petMedir('quiz_acao', { alvo: 'jogar_de_novo' }); i = 0; acertos = 0; sortear(); montarPontos(); pergunta(); focar(palco.querySelector('.ff-afirmacao')); mostrar(palco.querySelector('.ff-card')); });
     acoes.appendChild(comp);
     acoes.appendChild(de);
     box.appendChild(acoes);
@@ -185,6 +190,7 @@
     setTimeout(function () { toast.hidden = true; }, 3000);
   }
 
+  sortear();
   montarPontos();
   pergunta();
 })();

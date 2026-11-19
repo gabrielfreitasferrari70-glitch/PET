@@ -52,3 +52,14 @@
 @media(max-width:760px){html{scroll-padding-bottom:var(--esp-8)}}
 .int-result,.int-form,.ff-card,.ff-resposta{scroll-margin-top:var(--esp-4)}
 @media(max-width:760px){.ff-proxima{position:sticky;bottom:var(--esp-8);padding-block:var(--esp-3);background:var(--paper)}.ff-proxima .button{width:100%;justify-content:center}}
+/* Página de projeto: título e resumo à esquerda, capa à direita, em vez de capa sozinha com metade da largura vazia */
+.wrap.pj:not(.op) .pj-cab h1{font-size:clamp(32px,4.4vw,48px);line-height:1.08}
+@media(min-width:1001px){
+.wrap.pj:not(.op):has(>.pj-capa){display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:var(--esp-8)}
+.wrap.pj:not(.op):has(>.pj-capa)>*{grid-column:1/-1;min-width:0}
+.wrap.pj:not(.op):has(>.pj-capa)>.breadcrumb{grid-column:1;grid-row:1;justify-self:start}
+.wrap.pj:not(.op):has(>.pj-capa)>.pj-cab{grid-column:1;grid-row:2}
+.wrap.pj:not(.op):has(>.pj-capa)>.pj-capa{grid-column:2;grid-row:1/span 2;align-self:center;margin:0;max-width:none}
+.wrap.pj:not(.op):has(>.pj-capa)>.pj-nav{margin-top:var(--esp-6)}
+}
+.wrap.pj:not(.op):not(#_){padding-top:var(--esp-6)}
