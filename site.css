@@ -1062,3 +1062,11 @@ main :is(h2, h3, th) > a { display: inline-block; padding-block: var(--esp-3); m
 @media print{.ff-lado{display:none}}
 :is(.op .pj-cab,.yt-intro):not(#_){border-bottom:0;margin-bottom:0}
 .int-previa:not(#_){grid-template-columns:repeat(2,minmax(0,1fr))}
+
+.page-intro:not(#_):has(+*>:is(.sec-titulo,.pathway-summary):first-child),.page-intro:not(#_):has(+.part){border-bottom:0;margin-bottom:0}
+@media(max-width:1000px){.page-intro:not(#_):has(+.int-layout){border-bottom:0;margin-bottom:0}}
+
+.wrap.pj.op:not(#_){padding-top:0}
+.op .pj-cab:not(#_){padding-bottom:0}
+
+@media(min-width:1001px){.part>.part-parceria{align-self:start}}
