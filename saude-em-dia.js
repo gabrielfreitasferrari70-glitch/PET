@@ -109,7 +109,7 @@
     var acoes = el('div', 'int-acoes');
     var imp = el('button', 'button', 'Imprimir / PDF');
     imp.type = 'button';
-    imp.addEventListener('click', function () { window.print(); });
+    imp.addEventListener('click', function () { if (window.petMedir) window.petMedir('lista_impressa'); window.print(); });
     var novo = el('button', 'button secondary', 'Refazer');
     novo.type = 'button';
     novo.addEventListener('click', function () { form.reset(); atualizarGestante(); document.getElementById('sd-idade').focus(); });
@@ -170,5 +170,6 @@
     if (isNaN(idade) || idade < 0 || idade > 120) { erro.textContent = 'Digite uma idade entre 0 e 120 anos.'; erro.hidden = false; return; }
     if (!sexo) { erro.textContent = 'Escolha uma das opções de sexo.'; erro.hidden = false; return; }
     desenhar(idade, sexo.value, gestInput.checked);
+    if (window.petMedir) window.petMedir('lista_gerada');
   });
 })();

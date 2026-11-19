@@ -1024,7 +1024,7 @@ main :is(h2, h3, th) > a { display: inline-block; padding-block: var(--esp-3); m
 @media(min-width:1001px) and (max-width:1279px){.editorial-brand span{display:none}.desktop-nav{gap:var(--esp-3)}}
 @media(min-width:1001px) and (max-width:1099px){.header-tools .join{font-size:0;gap:0;padding-inline:var(--esp-3)}.header-tools .join .fala-ic{margin:0}}
 :is(.page-intro,.op .pj-cab,.yt-intro):not(#_){padding-top:var(--esp-6);padding-bottom:var(--esp-6);border-bottom:1px solid var(--line);margin-bottom:var(--esp-6)}
-:is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>h1{font-size:clamp(36px,4.4vw,48px);line-height:1.08;margin:var(--esp-3) 0 0;max-width:none}
+:is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>h1{font-size:clamp(32px,4.4vw,48px);line-height:1.08;margin:var(--esp-3) 0 0;max-width:none}
 :is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>.eyebrow{display:block;margin:0}
 :is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>.breadcrumb{display:inline-block;justify-self:start;margin:0 0 var(--esp-3)}
 :is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>:is(.intro-description,.pj-lead,.yt-lead){font-size:16px;line-height:1.6;margin:var(--esp-4) 0 0;max-width:68ch}
@@ -1070,3 +1070,4 @@ main :is(h2, h3, th) > a { display: inline-block; padding-block: var(--esp-3); m
 .op .pj-cab:not(#_){padding-bottom:0}
 
 @media(min-width:1001px){.part>.part-parceria{align-self:start}}
+.medir-aviso{position:fixed;left:50%;bottom:var(--esp-8);transform:translateX(-50%);z-index:60;max-width:calc(100% - var(--esp-6));padding:var(--esp-3) var(--esp-5);background:var(--ink);color:var(--paper);font-size:14px;line-height:1.4;border-radius:var(--raio-peq);text-align:center}

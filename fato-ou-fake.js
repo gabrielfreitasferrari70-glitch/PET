@@ -1,5 +1,5 @@
 /* Fato ou Fake da Saúde: quiz de mitos e verdades, com fonte oficial em cada resposta.
-   Roda só neste navegador; nenhuma resposta é enviada. Conteúdo conferido em 19/11/2026. */
+   Roda neste navegador. O site só conta acertos e erros por pergunta, sem identificar quem respondeu. Conteúdo conferido em 19/11/2026. */
 (function () {
   var raiz = document.getElementById('ff-app');
   if (!raiz) return;
@@ -98,6 +98,7 @@
       var certo = escolhaFato === q.fato;
       if (certo) acertos++;
       marcar(i, certo ? 'certa' : 'errada');
+      if (window.petMedir) { if (i === 0) window.petMedir('quiz_inicio'); window.petMedir('quiz_resposta', { n: i + 1, ok: certo }); }
       placar();
       bF.disabled = bK.disabled = true;
       (q.fato ? bF : bK).classList.add('ff-certa');
@@ -123,6 +124,7 @@
 
   function final() {
     atualizarProgresso(true);
+    if (window.petMedir) window.petMedir('quiz_fim', { n: acertos });
     palco.textContent = '';
     var box = el('div', 'ff-card ff-final');
     box.appendChild(el('span', 'eyebrow', 'Seu resultado'));
