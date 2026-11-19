@@ -41,6 +41,23 @@
   var prog = document.getElementById('ff-progresso-txt');
   var barra = document.getElementById('ff-barra');
   var palco = document.getElementById('ff-palco');
+  var pontos = document.getElementById('ff-pontos');
+  var nAcertos = document.getElementById('ff-acertos');
+  var tAcertos = document.getElementById('ff-acertos-txt');
+
+  function montarPontos() {
+    if (!pontos) return;
+    pontos.textContent = '';
+    for (var k = 0; k < Q.length; k++) pontos.appendChild(document.createElement('li'));
+    placar();
+  }
+  function marcar(k, estado) {
+    if (pontos && pontos.children[k]) pontos.children[k].className = estado;
+  }
+  function placar() {
+    if (nAcertos) nAcertos.textContent = acertos;
+    if (tAcertos) tAcertos.textContent = acertos === 1 ? 'acerto até aqui' : 'acertos até aqui';
+  }
 
   function el(tag, cls, texto) {
     var n = document.createElement(tag);
@@ -57,6 +74,7 @@
   function pergunta() {
     var q = Q[i];
     atualizarProgresso(false);
+    marcar(i, 'atual');
     palco.textContent = '';
     var card = el('div', 'ff-card');
     card.appendChild(el('span', 'eyebrow', 'Fato ou fake?'));
@@ -79,6 +97,8 @@
     function responder(escolhaFato) {
       var certo = escolhaFato === q.fato;
       if (certo) acertos++;
+      marcar(i, certo ? 'certa' : 'errada');
+      placar();
       bF.disabled = bK.disabled = true;
       (q.fato ? bF : bK).classList.add('ff-certa');
       if (!certo) (escolhaFato ? bF : bK).classList.add('ff-errada');
@@ -124,7 +144,7 @@
     });
     var de = el('button', 'button secondary', 'Jogar de novo');
     de.type = 'button';
-    de.addEventListener('click', function () { i = 0; acertos = 0; pergunta(); palco.querySelector('.ff-afirmacao').focus(); });
+    de.addEventListener('click', function () { i = 0; acertos = 0; montarPontos(); pergunta(); palco.querySelector('.ff-afirmacao').focus(); });
     acoes.appendChild(comp);
     acoes.appendChild(de);
     box.appendChild(acoes);
@@ -146,5 +166,6 @@
     setTimeout(function () { toast.hidden = true; }, 3000);
   }
 
+  montarPontos();
   pergunta();
 })();

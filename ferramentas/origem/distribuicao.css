@@ -1,0 +1,41 @@
+/* Distribuição: cabeçalho de página compacto em duas colunas, mesma margem esquerda em tudo,
+   largura de leitura e ritmo vertical. Só tokens. Entra por último no site.css. */
+:is(.page-intro,.op .pj-cab,.yt-intro):not(#_){padding-top:var(--esp-6);padding-bottom:var(--esp-6);border-bottom:1px solid var(--line);margin-bottom:var(--esp-6)}
+:is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>h1{font-size:clamp(36px,4.4vw,48px);line-height:1.08;margin:var(--esp-3) 0 0;max-width:none}
+:is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>.eyebrow{display:block;margin:0}
+:is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>.breadcrumb{display:inline-block;justify-self:start;margin:0 0 var(--esp-3)}
+:is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>:is(.intro-description,.pj-lead,.yt-lead){font-size:16px;line-height:1.6;margin:var(--esp-4) 0 0;max-width:68ch}
+:is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>p:not(.intro-description,.pj-lead,.yt-lead){margin:var(--esp-4) 0 0;max-width:68ch}
+@media(min-width:1001px){
+:is(.page-intro,.op .pj-cab,.yt-intro):not(#_){display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:var(--esp-8);align-items:end}
+:is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>*{grid-column:1}
+:is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>:is(.intro-description,.pj-lead,.yt-lead){grid-column:2;grid-row:1/span 3;align-self:end;margin:0}
+:is(.page-intro,.op .pj-cab,.yt-intro):not(#_)>p:not(.intro-description,.pj-lead,.yt-lead){grid-column:2;margin-top:var(--esp-3)}
+}
+/* Fato ou Fake: jogo em dois terços, painel em um terço, alinhados à margem do título */
+.ff-wrap:not(#_){max-width:none}
+.ff-lado{margin-top:var(--esp-7);display:grid;gap:var(--esp-5)}
+.ff-lado section{border-top:1px solid var(--line);padding-top:var(--esp-4)}
+.ff-lado h2{font:600 12px/1.4 var(--sans);letter-spacing:.11em;text-transform:uppercase;color:var(--forest);margin-bottom:var(--esp-3)}
+.ff-lado p,.ff-passos li{font-size:14px;line-height:1.6;color:var(--muted)}
+.ff-lado-num b{font:400 40px/1 var(--serif);color:var(--ink);letter-spacing:-.03em;margin-right:var(--esp-2)}
+.ff-pontos{list-style:none;display:grid;grid-template-columns:repeat(10,1fr);gap:var(--esp-1);margin:var(--esp-3) 0 0;padding:0}
+.ff-pontos li{height:var(--esp-2);background:var(--line)}
+.ff-pontos li.atual{background:var(--muted)}
+.ff-pontos li.certa{background:var(--forest)}
+.ff-pontos li.errada{background:var(--perigo)}
+.ff-passos{margin:0;padding:0;list-style:none;counter-reset:p;display:grid;gap:var(--esp-2)}
+.ff-passos li{counter-increment:p;display:grid;grid-template-columns:var(--esp-5) 1fr}
+.ff-passos li:before{content:counter(p);font-weight:600;color:var(--forest)}
+@media(min-width:1001px){
+.ff-wrap:not(#_){display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);column-gap:var(--esp-8);align-items:start}
+.ff-lado{margin-top:0;position:sticky;top:122px}
+.ff-lado section:first-child{border-top:3px solid var(--forest)}
+}
+/* Saúde em Dia: o espaço vazio da lista antecipa o que ela traz */
+.int-previa{list-style:none;margin:var(--esp-5) 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--esp-4)}
+.int-previa li{border-top:1px solid var(--line);padding-top:var(--esp-3);font-size:14px;line-height:1.6}
+.int-previa b{display:block;font-weight:600;color:var(--forest)}
+@media print{.ff-lado{display:none}}
+:is(.op .pj-cab,.yt-intro):not(#_){border-bottom:0;margin-bottom:0}
+.int-previa:not(#_){grid-template-columns:repeat(2,minmax(0,1fr))}
