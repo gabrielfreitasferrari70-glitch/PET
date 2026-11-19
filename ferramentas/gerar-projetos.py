@@ -57,10 +57,33 @@ def listas_redes(r, tag):
     return h
 
 
+def bloco_saiba(s):
+    if not s:
+        return ''
+    h = '<section id="saiba" class="pj-sec pj-saiba"><h2>Saiba mais</h2>'
+    if s.get('porque'):
+        h += '<h3>Por que este projeto existe</h3>' + ''.join('<p>%s</p>' % esc(t) for t in s['porque'])
+    if s.get('objetivos'):
+        h += '<h3>Objetivos</h3><ul class="pj-obj">' + ''.join('<li>%s</li>' % esc(t) for t in s['objetivos']) + '</ul>'
+    if s.get('etapas'):
+        h += '<h3>Passo a passo, em detalhe</h3><ol class="pj-etapas">' + ''.join('<li><strong>%s</strong><span>%s</span></li>' % (esc(e[0]), esc(e[1])) for e in s['etapas']) + '</ol>'
+    if s.get('termos'):
+        h += '<h3>Palavras que ajudam a entender</h3><dl class="pj-termos">' + ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % (esc(t[0]), esc(t[1])) for t in s['termos']) + '</dl>'
+    if s.get('edicoes'):
+        h += '<h3>Edição por edição</h3><div class="pj-eds">' + ''.join(
+            '<details class="pj-det"><summary><span class="pj-det-ano">%s</span><span class="pj-det-tit">%s</span></summary><p>%s</p><a class="text-link" href="%s"%s>Ver proposta no SIEx %s</a></details>'
+            % (esc(e[0]), esc(e[1]), esc(e[2]), esc(url(e[3])), la(e[3]), seta(e[3])) for e in s['edicoes']) + '</div>'
+    return h + ('<p class="hm-nota">Texto escrito a partir das propostas e dos relatórios que o próprio PET registrou no SIEx, o sistema de extensão da UFMT. '
+                'Os números são os que o grupo relatou.</p></section>')
+
+
 def pagina(p, r):
     l = listas_redes(r, 'h3')
     redes = '<section id="redes" class="pj-sec"><h2>Nas redes</h2>' + l + '</section>' if l else ''
-    nav = [('oque', 'O que é'), ('quem', 'Para quem'), ('como', 'Como funciona'), ('anos', 'Ano a ano')]
+    nav = [('oque', 'O que é'), ('quem', 'Para quem'), ('como', 'Como funciona')]
+    if p.get('saiba'):
+        nav.append(('saiba', 'Saiba mais'))
+    nav.append(('anos', 'Ano a ano'))
     if p.get('mats'):
         nav.append(('mat', 'Materiais'))
     if redes:
@@ -80,6 +103,7 @@ def pagina(p, r):
         h += '<ul class="pj-nums" aria-label="Resultados documentados">' + ''.join(
             '<li><strong>%s</strong><span>%s</span><small>%s</small></li>' % (esc(n[0]), esc(n[1]), esc(n[2])) for n in p['nums']) + '</ul>'
     h += '</section>'
+    h += bloco_saiba(p.get('saiba'))
     h += '<section id="anos" class="pj-sec"><h2>Ano a ano</h2><ol class="pj-hist">' + ''.join(
         '<li><span class="pj-ano">%s</span><div><h3>%s</h3><p>%s</p><a class="text-link" href="%s"%s>Ver registro %s</a></div></li>'
         % (esc(x[0]), esc(x[1]), esc(x[2]), esc(url(x[3])), la(x[3]), seta(x[3])) for x in p['hist']) + '</ol>' + (
