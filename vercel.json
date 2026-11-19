@@ -19,6 +19,7 @@
     { "source": "/balancos/pet-em-dois-meses-2026-09.pdf", "destination": "/publicacoes/balanco-2026-09/", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/m", "destination": "https://eupkdyhngmrsbvmaondp.supabase.co/rest/v1/rpc/pet_registrar?apikey=sb_publishable_XogjNPP1iiEFFF9SlCHdOQ_2taX94S9" },
     { "source": "/agenda/pet.ics", "destination": "https://eupkdyhngmrsbvmaondp.supabase.co/functions/v1/agenda-ics" }
   ],
   "headers": [

@@ -84,6 +84,7 @@
 
   function pergunta() {
     var q = Q[i];
+    var inicio = Date.now();
     atualizarProgresso(false);
     marcar(i, 'atual');
     palco.textContent = '';
@@ -109,7 +110,7 @@
       var certo = escolhaFato === q.fato;
       if (certo) acertos++;
       marcar(i, certo ? 'certa' : 'errada');
-      if (window.petMedir) { if (i === 0) window.petMedir('quiz_inicio'); window.petMedir('quiz_resposta', { n: i + 1, ok: certo }); }
+      if (window.petMedir) { if (i === 0) window.petMedir('quiz_inicio'); window.petMedir('quiz_resposta', { n: i + 1, ok: certo, valor: Math.min(600000, Date.now() - inicio) }); }
       placar();
       bF.disabled = bK.disabled = true;
       (q.fato ? bF : bK).classList.add('ff-certa');
@@ -153,6 +154,7 @@
     var comp = el('button', 'button', 'Desafiar alguém');
     comp.type = 'button';
     comp.addEventListener('click', function () {
+      if (window.petMedir) window.petMedir('quiz_acao', { alvo: 'desafiar' });
       var texto = 'Acertei ' + acertos + ' de ' + Q.length + ' no Fato ou Fake da Saúde do PET Medicina UFMT. Consegue fazer melhor?';
       var url = location.origin + '/fato-ou-fake/';
       if (navigator.share) { navigator.share({ title: 'Fato ou Fake da Saúde', text: texto, url: url }).catch(function () {}); return; }
@@ -160,7 +162,7 @@
     });
     var de = el('button', 'button secondary', 'Jogar de novo');
     de.type = 'button';
-    de.addEventListener('click', function () { i = 0; acertos = 0; montarPontos(); pergunta(); focar(palco.querySelector('.ff-afirmacao')); mostrar(palco.querySelector('.ff-card')); });
+    de.addEventListener('click', function () { if (window.petMedir) window.petMedir('quiz_acao', { alvo: 'jogar_de_novo' }); i = 0; acertos = 0; montarPontos(); pergunta(); focar(palco.querySelector('.ff-afirmacao')); mostrar(palco.querySelector('.ff-card')); });
     acoes.appendChild(comp);
     acoes.appendChild(de);
     box.appendChild(acoes);

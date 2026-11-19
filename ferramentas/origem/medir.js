@@ -1,6 +1,7 @@
-/* Contagem anônima de uso. Não guarda IP, nome nem identificador de visitante:
-   envia só o tipo do evento, a página, a origem em categoria e o tipo de aparelho.
-   Abrir qualquer página com ?nao-contar=1 tira este aparelho da contagem (?nao-contar=0 devolve). */
+/* Registro anônimo de uso, para gestão e pesquisa (coleta v2).
+   Não guarda IP, nome nem identificador que acompanhe a pessoa entre visitas. Cada registro leva o tipo do evento,
+   a página e dados gerais do aparelho. A "sessao" é um código aleatório que vale só para a aba aberta.
+   Abrir qualquer página com ?nao-contar=1 tira este aparelho do registro (?nao-contar=0 devolve). */
 (() => {
   'use strict';
   const BASE = 'https://eupkdyhngmrsbvmaondp.supabase.co';
@@ -10,6 +11,8 @@
   const JA = 'pet-visita-primeira';
   const ler = k => { try { return localStorage.getItem(k); } catch { return null; } };
   const gravar = (k, v) => { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch { /* sem armazenamento */ } };
+  const lerS = k => { try { return sessionStorage.getItem(k); } catch { return null; } };
+  const gravarS = (k, v) => { try { sessionStorage.setItem(k, v); } catch { /* sem armazenamento */ } };
   let params = null;
   try { params = new URLSearchParams(location.search); } catch { /* endereço sem parâmetros */ }
 
@@ -29,6 +32,8 @@
   }
 
   const ativo = () => location.hostname === 'pet-conecta.vercel.app' && !navigator.webdriver && ler(FORA) !== '1';
+  const pagina = location.pathname.toLowerCase();
+  if (!/^\/[a-z0-9/_-]*$/.test(pagina)) return;
 
   const origem = () => {
     const de = (params?.get('de') || params?.get('utm_source') || '').toLowerCase();
@@ -43,28 +48,80 @@
     if (/(^|\.)(google\.[a-z.]+|bing\.com|duckduckgo\.com|yahoo\.com)$/.test(h)) return 'busca';
     return 'outro';
   };
+  const ua = navigator.userAgent || '';
+  const so = /android/i.test(ua) ? 'android' : /iphone|ipad|ipod/i.test(ua) ? 'ios' : /windows/i.test(ua) ? 'windows' : /mac os x/i.test(ua) ? 'mac' : /linux/i.test(ua) ? 'linux' : 'outro';
+  const nav = /instagram/i.test(ua) ? 'instagram' : /samsungbrowser/i.test(ua) ? 'samsung' : /edg\//i.test(ua) ? 'edge' : /opr\//i.test(ua) ? 'opera' : /firefox|fxios/i.test(ua) ? 'firefox' : /chrome|crios/i.test(ua) ? 'chrome' : /safari/i.test(ua) ? 'safari' : 'outro';
+  const largura = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+  const idioma = (navigator.language || '').toLowerCase().match(/^[a-z]{2}(-[a-z]{2})?/)?.[0] || null;
+  let tema = 'paper';
+  try { const g = JSON.parse(ler('pet-reading-plus') || '{}'); if (['paper', 'sepia', 'dark'].includes(g?.theme)) tema = g.theme; } catch { /* preferência ilegível */ }
+  let sessao = lerS('pet-sessao');
+  if (!/^[a-z0-9]{6,16}$/.test(sessao || '')) { sessao = Math.random().toString(36).slice(2, 12).padEnd(8, '0'); gravarS('pet-sessao', sessao); }
+  let ref = null;
+  try { const r = new URL(document.referrer); if (r.hostname === location.hostname && /^\/[a-z0-9/_-]{0,79}$/.test(r.pathname.toLowerCase())) ref = r.pathname.toLowerCase(); } catch { /* sem referência */ }
+  const comum = { pagina, origem: origem(), aparelho: largura <= 760 ? 'celular' : 'computador', sessao, so, nav, tela: largura <= 760 ? 'p' : largura <= 1200 ? 'm' : 'g', idioma, tema };
 
+  // Envia pelo próprio endereço do site (/m), que bloqueadores não barram; se não funcionar, vai direto ao banco.
+  let via = lerS('pet-via') === 'd' ? 'd' : 'p';
+  const direto = corpo => fetch(BASE + '/rest/v1/rpc/pet_registrar', { method: 'POST', keepalive: true, headers: { apikey: KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ e: { ...corpo, via: 'd' } }) }).catch(() => {});
+  const enviar = corpo => {
+    try {
+      if (via === 'd') { direto(corpo); return; }
+      fetch('/m', { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ e: { ...corpo, via: 'p' } }) })
+        .then(r => { if (!r.ok) throw new Error('proxy'); })
+        .catch(() => { via = 'd'; gravarS('pet-via', 'd'); direto(corpo); });
+    } catch { /* o registro nunca atrapalha a página */ }
+  };
+  const inteiro = v => Number.isInteger(v) && v >= 0 ? v : undefined;
   const medir = (tipo, extra) => {
     if (!ativo()) return;
-    const pagina = location.pathname.toLowerCase();
-    if (!/^\/[a-z0-9/_-]*$/.test(pagina)) return;
-    const corpo = {
-      p_tipo: tipo, p_pagina: pagina, p_origem: origem(),
-      p_aparelho: matchMedia('(max-width:760px)').matches ? 'celular' : 'computador',
-      p_novo: Boolean(extra?.novo), p_primeiro: Boolean(extra?.primeiro), p_n: Number.isInteger(extra?.n) ? extra.n : null,
-      p_ok: typeof extra?.ok === 'boolean' ? extra.ok : null
-    };
-    try {
-      fetch(BASE + '/rest/v1/rpc/pet_medir', { method: 'POST', keepalive: true, headers: { apikey: KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) }).catch(() => {});
-    } catch { /* a contagem nunca atrapalha a página */ }
+    const x = extra || {};
+    enviar({ ...comum, tipo, ref,
+      novo: x.novo === true || undefined, primeiro: x.primeiro === true || undefined, retorno: inteiro(x.retorno),
+      n: inteiro(x.n), ok: typeof x.ok === 'boolean' ? x.ok : undefined, valor: inteiro(x.valor),
+      dur: inteiro(x.dur), rolagem: inteiro(x.rolagem),
+      alvo: typeof x.alvo === 'string' ? x.alvo.toLowerCase().replace(/[^a-z0-9:/._-]/g, '').slice(0, 60) || undefined : undefined,
+      faixa: x.faixa, sexo: x.sexo, gestante: typeof x.gestante === 'boolean' ? x.gestante : undefined });
   };
   window.petMedir = medir;
+  if (!ativo()) return;
 
-  // Uma visita por página aberta. "novo" marca a primeira do dia neste aparelho e "primeiro" a primeira de todas,
-  // para contar aparelhos diferentes sem guardar nenhum identificador.
+  // Visita: "novo" é a primeira do dia neste aparelho, "primeiro" a primeira de todas, "retorno" os dias desde a última.
   const d = new Date();
   const hoje = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
-  const novo = ler(DIA) !== hoje;
+  const ultima = ler(DIA);
+  const novo = ultima !== hoje;
   const primeiro = ler(JA) === null;
-  if (ativo()) { if (novo) gravar(DIA, hoje); if (primeiro) gravar(JA, hoje); medir('visita', { novo, primeiro }); }
+  let retorno;
+  if (novo && ultima) { const p = ultima.split('-').map(Number); const dias = Math.round((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - new Date(p[0], p[1] - 1, p[2])) / 864e5); if (dias > 0) retorno = Math.min(dias, 999); }
+  if (novo) gravar(DIA, hoje);
+  if (primeiro) gravar(JA, hoje);
+  medir('visita', { novo, primeiro, retorno });
+
+  // Saída: tempo com a aba visível e até onde a página foi rolada. Enviada uma vez, quando a aba é escondida ou fechada.
+  let visivelDesde = document.visibilityState === 'visible' ? Date.now() : 0;
+  let tempo = 0, rolou = 0, saiu = false;
+  const medirRolagem = () => { const alt = document.documentElement.scrollHeight - window.innerHeight; const pct = alt <= 0 ? 100 : Math.round((window.scrollY || 0) / alt * 100); if (pct > rolou) rolou = Math.min(100, pct); };
+  window.addEventListener('scroll', medirRolagem, { passive: true });
+  const sair = () => {
+    if (visivelDesde) { tempo += Date.now() - visivelDesde; visivelDesde = 0; }
+    if (saiu) return;
+    saiu = true; medirRolagem();
+    medir('saida', { dur: Math.min(86400, Math.round(tempo / 1000)), rolagem: rolou });
+  };
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') sair(); else if (!visivelDesde) visivelDesde = Date.now(); });
+  window.addEventListener('pagehide', sair);
+
+  // Cliques em links que saem do site e uso da busca (sem guardar o que foi digitado).
+  document.addEventListener('click', ev => {
+    const a = ev.target.closest?.('a[href]');
+    if (!a) return;
+    let u; try { u = new URL(a.href, location.href); } catch { return; }
+    if (u.hostname === location.hostname || !/^https?:$/.test(u.protocol)) return;
+    const h = u.hostname.toLowerCase();
+    const grupo = /instagram\.com$/.test(h) ? 'instagram' : /(youtube\.com|youtu\.be)$/.test(h) ? 'youtube' : /(wa\.me|whatsapp\.com)$/.test(h) ? 'whatsapp' : /google\.com$/.test(h) ? 'google' : /gov\.br$/.test(h) ? 'governo' : 'outro';
+    medir('clique', { alvo: grupo + ':' + h });
+  }, true);
+  let buscou = false;
+  document.getElementById('search-dialog')?.addEventListener('input', () => { if (!buscou) { buscou = true; medir('busca'); } });
 })();

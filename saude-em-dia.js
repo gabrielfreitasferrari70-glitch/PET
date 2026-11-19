@@ -173,6 +173,10 @@
   }
 
   form.addEventListener('change', atualizarGestante);
+  saida.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if (a && window.petMedir) window.petMedir('lista_clique', { alvo: a.getAttribute('href') });
+  });
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     erro.hidden = true;
@@ -181,6 +185,10 @@
     if (isNaN(idade) || idade < 0 || idade > 120) { erro.textContent = 'Digite uma idade entre 0 e 120 anos.'; erro.hidden = false; return; }
     if (!sexo) { erro.textContent = 'Escolha uma das opções de sexo.'; erro.hidden = false; return; }
     desenhar(idade, sexo.value, gestInput.checked && idade >= 10 && idade <= 55);
-    if (window.petMedir) window.petMedir('lista_gerada');
+    if (window.petMedir) {
+      var gest = gestInput.checked && idade >= 10 && idade <= 55;
+      var base = Math.min(85, Math.floor(idade / 5) * 5);
+      window.petMedir('lista_gerada', { faixa: base >= 85 ? '85+' : base + '-' + (base + 4), sexo: sexo.value, gestante: sexo.value === 'f' ? gest : undefined, valor: saida.querySelectorAll('.int-item').length });
+    }
   });
 })();
