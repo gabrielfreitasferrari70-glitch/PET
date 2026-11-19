@@ -1071,3 +1071,7 @@ main :is(h2, h3, th) > a { display: inline-block; padding-block: var(--esp-3); m
 
 @media(min-width:1001px){.part>.part-parceria{align-self:start}}
 .medir-aviso{position:fixed;left:50%;bottom:var(--esp-8);transform:translateX(-50%);z-index:60;max-width:calc(100% - var(--esp-6));padding:var(--esp-3) var(--esp-5);background:var(--ink);color:var(--paper);font-size:14px;line-height:1.4;border-radius:var(--raio-peq);text-align:center}
+
+@media(max-width:760px){html{scroll-padding-bottom:var(--esp-8)}}
+.int-result,.int-form,.ff-card,.ff-resposta{scroll-margin-top:var(--esp-4)}
+@media(max-width:760px){.ff-proxima{position:sticky;bottom:var(--esp-8);padding-block:var(--esp-3);background:var(--paper)}.ff-proxima .button{width:100%;justify-content:center}}

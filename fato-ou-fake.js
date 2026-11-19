@@ -59,6 +59,17 @@
     if (tAcertos) tAcertos.textContent = acertos === 1 ? 'acerto até aqui' : 'acertos até aqui';
   }
 
+  // Foco sem pulo: a página só rola quando o que importa ficou fora da tela, e o mínimo necessário.
+  var suave = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  function focar(alvo) { if (!alvo) return; try { alvo.focus({ preventScroll: true }); } catch (e) { alvo.focus(); } }
+  function mostrar(alvo, bloco) {
+    if (!alvo || !alvo.getBoundingClientRect) return;
+    var r = alvo.getBoundingClientRect(), topo = 90, base = window.innerHeight - 70;
+    if (r.top >= topo && r.bottom <= base) return;
+    if (bloco === 'start' && r.top >= topo && r.top <= window.innerHeight * 0.5) return;
+    alvo.scrollIntoView({ block: bloco || 'nearest', behavior: suave });
+  }
+
   function el(tag, cls, texto) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -112,11 +123,14 @@
       var nav = el('div', 'ff-proxima');
       var prox = el('button', 'button', i + 1 < Q.length ? 'Próxima pergunta →' : 'Ver meu resultado →');
       prox.type = 'button';
-      prox.addEventListener('click', function () { i++; if (i < Q.length) { pergunta(); palco.querySelector('.ff-afirmacao').focus(); } else final(); });
+      prox.addEventListener('click', function () { i++; if (i < Q.length) { pergunta(); focar(palco.querySelector('.ff-afirmacao')); mostrar(palco.querySelector('.ff-card'), 'start'); } else final(); });
       nav.appendChild(prox);
       resp.appendChild(nav);
       resp.hidden = false;
-      prox.focus();
+      focar(prox);
+      // Âncora única: o topo do cartão. A resposta abre abaixo da frase e a página não fica subindo e descendo.
+      var rc = card.getBoundingClientRect();
+      if (rc.top < 90 || rc.bottom > window.innerHeight - 70) card.scrollIntoView({ block: 'start', behavior: suave });
     }
     bF.addEventListener('click', function () { responder(true); });
     bK.addEventListener('click', function () { responder(false); });
@@ -146,7 +160,7 @@
     });
     var de = el('button', 'button secondary', 'Jogar de novo');
     de.type = 'button';
-    de.addEventListener('click', function () { i = 0; acertos = 0; montarPontos(); pergunta(); palco.querySelector('.ff-afirmacao').focus(); });
+    de.addEventListener('click', function () { i = 0; acertos = 0; montarPontos(); pergunta(); focar(palco.querySelector('.ff-afirmacao')); mostrar(palco.querySelector('.ff-card')); });
     acoes.appendChild(comp);
     acoes.appendChild(de);
     box.appendChild(acoes);
@@ -157,7 +171,8 @@
     mais.appendChild(a);
     box.appendChild(mais);
     palco.appendChild(box);
-    pl.focus();
+    focar(pl);
+    mostrar(box);
   }
 
   function avisar(t) {

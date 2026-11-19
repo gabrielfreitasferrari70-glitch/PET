@@ -112,7 +112,7 @@
     imp.addEventListener('click', function () { if (window.petMedir) window.petMedir('lista_impressa'); window.print(); });
     var novo = el('button', 'button secondary', 'Refazer');
     novo.type = 'button';
-    novo.addEventListener('click', function () { form.reset(); atualizarGestante(); document.getElementById('sd-idade').focus(); });
+    novo.addEventListener('click', function () { form.reset(); atualizarGestante(); var campo = document.getElementById('sd-idade'); focar(campo); mostrar(form, 'start'); });
     acoes.appendChild(imp);
     acoes.appendChild(novo);
     head.appendChild(acoes);
@@ -149,19 +149,30 @@
     saida.appendChild(perg);
 
     saida.appendChild(el('p', 'int-aviso', 'Esta lista é educativa e segue as recomendações gerais do SUS para a idade e o sexo informados. Ela não substitui a consulta: doenças crônicas, gravidez, histórico familiar e outras condições podem mudar o que é indicado para você. Conteúdo conferido em novembro de 2026.'));
-    h2.focus();
+    focar(h2);
+    mostrar(saida, 'start');
+  }
+
+  // Foco sem pulo: a página só rola quando o que importa ficou fora da tela, e o mínimo necessário.
+  var suave = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  function focar(alvo) { if (!alvo) return; try { alvo.focus({ preventScroll: true }); } catch (e) { alvo.focus(); } }
+  function mostrar(alvo, bloco) {
+    if (!alvo || !alvo.getBoundingClientRect) return;
+    var r = alvo.getBoundingClientRect(), topo = 90, base = window.innerHeight - 70;
+    if (r.top >= topo && r.bottom <= base) return;
+    if (bloco === 'start' && r.top >= topo && r.top <= window.innerHeight * 0.5) return;
+    alvo.scrollIntoView({ block: bloco || 'nearest', behavior: suave });
   }
 
   function atualizarGestante() {
     var sexo = form.querySelector('input[name=sexo]:checked');
-    var idade = parseInt(document.getElementById('sd-idade').value, 10);
-    var mostra = sexo && sexo.value === 'f' && !(idade < 10) && !(idade > 55);
+    // Depende só do sexo: assim nada se move enquanto a pessoa digita a idade.
+    var mostra = sexo && sexo.value === 'f';
     gestBox.hidden = !mostra;
     if (!mostra) gestInput.checked = false;
   }
 
   form.addEventListener('change', atualizarGestante);
-  form.addEventListener('input', atualizarGestante);
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     erro.hidden = true;
@@ -169,7 +180,7 @@
     var sexo = form.querySelector('input[name=sexo]:checked');
     if (isNaN(idade) || idade < 0 || idade > 120) { erro.textContent = 'Digite uma idade entre 0 e 120 anos.'; erro.hidden = false; return; }
     if (!sexo) { erro.textContent = 'Escolha uma das opções de sexo.'; erro.hidden = false; return; }
-    desenhar(idade, sexo.value, gestInput.checked);
+    desenhar(idade, sexo.value, gestInput.checked && idade >= 10 && idade <= 55);
     if (window.petMedir) window.petMedir('lista_gerada');
   });
 })();

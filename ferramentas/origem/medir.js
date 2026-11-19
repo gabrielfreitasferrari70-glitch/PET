@@ -7,6 +7,7 @@
   const KEY = 'sb_publishable_XogjNPP1iiEFFF9SlCHdOQ_2taX94S9';
   const FORA = 'pet-nao-contar';
   const DIA = 'pet-visita-dia';
+  const JA = 'pet-visita-primeira';
   const ler = k => { try { return localStorage.getItem(k); } catch { return null; } };
   const gravar = (k, v) => { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch { /* sem armazenamento */ } };
   let params = null;
@@ -50,7 +51,7 @@
     const corpo = {
       p_tipo: tipo, p_pagina: pagina, p_origem: origem(),
       p_aparelho: matchMedia('(max-width:760px)').matches ? 'celular' : 'computador',
-      p_novo: Boolean(extra?.novo), p_n: Number.isInteger(extra?.n) ? extra.n : null,
+      p_novo: Boolean(extra?.novo), p_primeiro: Boolean(extra?.primeiro), p_n: Number.isInteger(extra?.n) ? extra.n : null,
       p_ok: typeof extra?.ok === 'boolean' ? extra.ok : null
     };
     try {
@@ -59,9 +60,11 @@
   };
   window.petMedir = medir;
 
-  // Uma visita por página aberta. "novo" marca a primeira do dia neste aparelho, sem identificar ninguém.
+  // Uma visita por página aberta. "novo" marca a primeira do dia neste aparelho e "primeiro" a primeira de todas,
+  // para contar aparelhos diferentes sem guardar nenhum identificador.
   const d = new Date();
   const hoje = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
   const novo = ler(DIA) !== hoje;
-  if (ativo()) { if (novo) gravar(DIA, hoje); medir('visita', { novo }); }
+  const primeiro = ler(JA) === null;
+  if (ativo()) { if (novo) gravar(DIA, hoje); if (primeiro) gravar(JA, hoje); medir('visita', { novo, primeiro }); }
 })();
