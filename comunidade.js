@@ -7,6 +7,10 @@ var TIPOS={
  parceria:{nome:'Proposta de parceria',titulo:'Sua proposta',rotulo:'Conte a demanda ou a ideia',ph:'Ex.: somos uma escola do bairro e gostaríamos de uma ação sobre saúde visual com os alunos…',assunto:false,min:20,max:1500,subj:'nova proposta de parceria',nomeRot:'Seu nome e instituição',contRot:'Telefone ou e-mail para retorno (obrigatório)',contObr:true,ok:'Proposta enviada! A resposta chega pelo contato que você informou.'}
 };
 function $(id){return document.getElementById(id);}
+// Cada envio vai para dois lugares: a caixa privada do responsável (banco, sem leitura pública) e uma cópia por e-mail.
+// Basta um dos dois funcionar para a mensagem não se perder.
+function guardar(m){return fetch('https://eupkdyhngmrsbvmaondp.supabase.co/rest/v1/rpc/pet_enviar_mensagem',{method:'POST',headers:{apikey:'sb_publishable_XogjNPP1iiEFFF9SlCHdOQ_2taX94S9','Content-Type':'application/json'},body:JSON.stringify({p:m})}).then(function(r){if(!r.ok){throw new Error('Erro '+r.status);}return true;});}
+function enviarTudo(d,m){var ok=0,falhas=0;return new Promise(function(res,rej){function fim(sucesso){if(sucesso){ok++;}else{falhas++;}if(ok===1&&sucesso){res();}else if(falhas===2){rej(new Error('falhou'));}}guardar(m).then(function(){fim(true);},function(){fim(false);});enviar(d).then(function(){fim(true);},function(){fim(false);});});}
 function enviar(d){return fetch('https://formsubmit.co/ajax/'+ALIAS,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},referrerPolicy:'strict-origin-when-cross-origin',body:JSON.stringify(d)}).then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok||String(j.success)!=='true'){throw new Error(j.message||('Erro '+r.status));}return j;});});}
 var atual='duvida',t=$('fale-texto'),cnt=$('fale-cnt'),msg=$('fale-msg'),btn=$('fale-enviar');
 function msgEstado(c,txt){msg.className='com-msg'+(c?' '+c:'');msg.textContent=txt;}
@@ -27,7 +31,8 @@ if(t){t.addEventListener('input',function(){cnt.textContent=t.value.length+'/'+T
   d.Mensagem=v;d.Nome=nome||'(não informado)';d.Contato=cont||'(não informado)';d.Enviado_em=new Date().toLocaleString('pt-BR',{timeZone:'America/Cuiaba'});
   if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cont)){d._replyto=cont;}
   btn.disabled=true;btn.setAttribute('aria-busy','true');msgEstado('','Enviando…');
-  enviar(d).then(function(){t.value='';$('fale-nome').value='';$('fale-contato').value='';cnt.textContent='0/'+o.max;msgEstado('ok',o.ok);if(window.petMedir){window.petMedir('mensagem',{alvo:atual});}})
+  var m={tipo:atual,categoria:o.assunto?(CAT[cat]?cat:'outro'):'',texto:v,nome:nome,contato:cont};
+  enviarTudo(d,m).then(function(){t.value='';$('fale-nome').value='';$('fale-contato').value='';cnt.textContent='0/'+o.max;msgEstado('ok',o.ok);if(window.petMedir){window.petMedir('mensagem',{alvo:atual});}})
   .catch(function(){msgEstado('erro','Não foi possível enviar agora. Tente novamente em instantes.');})
   .then(function(){btn.disabled=false;btn.removeAttribute('aria-busy');});});
  var q=new URLSearchParams(location.search).get('tipo')||location.hash.replace('#','');tipo(TIPOS[q]?q:'duvida');}
