@@ -323,7 +323,7 @@ registra('Q17', 'site.css e site.js gerados a partir de ferramentas/origem', 'FA
 
 # Q18 Sitemap cobre todas as paginas
 sm = set(re.findall(r'<loc>https://pet-conecta\.vercel\.app([^<]*)</loc>', ler('sitemap.xml')))
-faltam = sorted(r for r in rotas if r not in sm and r != '/404.html')
+faltam = sorted(r for r in rotas if r not in sm and r not in ('/404.html', '/painel/'))  # /painel/ é privado (noindex), fica fora do sitemap de propósito
 registra('Q18', 'Sitemap cobre todas as páginas', 'FALHA', not faltam, len(faltam), faltam)
 
 # Q20 Paginas de projeto geradas e em dia com projetos-dados.json
