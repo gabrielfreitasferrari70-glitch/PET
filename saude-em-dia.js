@@ -188,7 +188,8 @@
     if (window.petMedir) {
       var gest = gestInput.checked && idade >= 10 && idade <= 55;
       var base = Math.min(85, Math.floor(idade / 5) * 5);
-      window.petMedir('lista_gerada', { faixa: base >= 85 ? '85+' : base + '-' + (base + 4), sexo: sexo.value, gestante: sexo.value === 'f' ? gest : undefined, valor: saida.querySelectorAll('.int-item').length });
+      window.petMedir('lista_gerada', { faixa: base >= 85 ? '85+' : base + '-' + (base + 4), sexo: sexo.value, gestante: sexo.value === 'f' ? gest : undefined, valor: saida.querySelectorAll('.int-item').length, tentativa: window.petVez ? window.petVez('lista') : 1 });
+      if (window.petAvaliar) window.petAvaliar(saida, 'lista');
     }
   });
 })();

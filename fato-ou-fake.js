@@ -37,7 +37,7 @@
       f: 'Calendário Nacional de Vacinação 2026; Kampmann et al., New England Journal of Medicine, 2023' }
   ];
 
-  var i = 0, acertos = 0, ordem = [];
+  var i = 0, acertos = 0, ordem = [], partida = 0;
   // A cada partida as frases vêm em ordem sorteada; o número registrado continua sendo o da frase, não o da posição.
   function sortear() {
     ordem = Q.map(function (_, k) { return k; });
@@ -115,7 +115,7 @@
       var certo = escolhaFato === q.fato;
       if (certo) acertos++;
       marcar(i, certo ? 'certa' : 'errada');
-      if (window.petMedir) { if (i === 0) window.petMedir('quiz_inicio'); window.petMedir('quiz_resposta', { n: ordem[i] + 1, ok: certo, valor: Math.min(600000, Date.now() - inicio) }); }
+      if (window.petMedir) { if (i === 0) { partida = window.petVez ? window.petVez('quiz') : 1; window.petMedir('quiz_inicio', { tentativa: partida }); } window.petMedir('quiz_resposta', { n: ordem[i] + 1, ok: certo, posicao: i + 1, tentativa: partida, valor: Math.min(600000, Date.now() - inicio) }); }
       placar();
       bF.disabled = bK.disabled = true;
       (q.fato ? bF : bK).classList.add('ff-certa');
@@ -144,7 +144,7 @@
 
   function final() {
     atualizarProgresso(true);
-    if (window.petMedir) window.petMedir('quiz_fim', { n: acertos });
+    if (window.petMedir) window.petMedir('quiz_fim', { n: acertos, tentativa: partida });
     palco.textContent = '';
     var box = el('div', 'ff-card ff-final');
     box.appendChild(el('span', 'eyebrow', 'Seu resultado'));
@@ -177,6 +177,7 @@
     a.href = '/comunidade/?tipo=tema';
     mais.appendChild(a);
     box.appendChild(mais);
+    if (window.petAvaliar) window.petAvaliar(box, 'quiz');
     palco.appendChild(box);
     focar(pl);
     mostrar(box);

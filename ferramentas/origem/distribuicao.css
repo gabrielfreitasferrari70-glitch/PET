@@ -63,3 +63,8 @@
 .wrap.pj:not(.op):has(>.pj-capa)>.pj-nav{margin-top:var(--esp-6)}
 }
 .wrap.pj:not(.op):not(#_){padding-top:var(--esp-6)}
+.medir-util{display:flex;flex-wrap:wrap;align-items:center;gap:var(--esp-3);margin-top:var(--esp-6);padding-top:var(--esp-4);border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.medir-util p{margin:0 var(--esp-2) 0 0}
+.medir-util button{min-height:var(--toque,44px);min-width:var(--esp-8);padding:0 var(--esp-4);border:1px solid var(--line);border-radius:var(--raio-peq);background:var(--paper);color:var(--ink);font:inherit;font-weight:600;cursor:pointer}
+.medir-util button:hover{border-color:var(--forest);color:var(--forest)}
+@media print{.medir-util{display:none}}

@@ -154,7 +154,9 @@ if(catalog){const key='pet-scroll:'+location.pathname;try{if(performance.getEntr
     if (document.body) dizer(); else document.addEventListener('DOMContentLoaded', dizer);
   }
 
-  const ativo = () => location.hostname === 'pet-conecta.vercel.app' && !navigator.webdriver && ler(FORA) !== '1';
+  // Robôs, buscadores e pré-visualizadores de link não entram no registro.
+  const robo = /bot|crawl|spider|slurp|preview|facebookexternalhit|headless|lighthouse|pagespeed/i.test(navigator.userAgent || '');
+  const ativo = () => location.hostname === 'pet-conecta.vercel.app' && !navigator.webdriver && !robo && ler(FORA) !== '1';
   const pagina = location.pathname.toLowerCase();
   if (!/^\/[a-z0-9/_-]*$/.test(pagina)) return;
 
@@ -182,7 +184,10 @@ if(catalog){const key='pet-scroll:'+location.pathname;try{if(performance.getEntr
   if (!/^[a-z0-9]{6,16}$/.test(sessao || '')) { sessao = Math.random().toString(36).slice(2, 12).padEnd(8, '0'); gravarS('pet-sessao', sessao); }
   let ref = null;
   try { const r = new URL(document.referrer); if (r.hostname === location.hostname && /^\/[a-z0-9/_-]{0,79}$/.test(r.pathname.toLowerCase())) ref = r.pathname.toLowerCase(); } catch { /* sem referência */ }
-  const comum = { pagina, origem: origem(), aparelho: largura <= 760 ? 'celular' : 'computador', sessao, so, nav, tela: largura <= 760 ? 'p' : largura <= 1200 ? 'm' : 'g', idioma, tema };
+  // Campanha: código opcional no link (?c=stories-vacina), lembrado enquanto a aba estiver aberta.
+  let campanha = (params?.get('c') || '').toLowerCase();
+  if (/^[a-z0-9-]{1,30}$/.test(campanha)) gravarS('pet-campanha', campanha); else campanha = lerS('pet-campanha') || undefined;
+  const comum = { campanha, pagina, origem: origem(), aparelho: largura <= 760 ? 'celular' : 'computador', sessao, so, nav, tela: largura <= 760 ? 'p' : largura <= 1200 ? 'm' : 'g', idioma, tema };
 
   // Envia pelo próprio endereço do site (/m), que bloqueadores não barram; se não funcionar, vai direto ao banco.
   let via = lerS('pet-via') === 'd' ? 'd' : 'p';
@@ -202,11 +207,24 @@ if(catalog){const key='pet-scroll:'+location.pathname;try{if(performance.getEntr
     enviar({ ...comum, tipo, ref,
       novo: x.novo === true || undefined, primeiro: x.primeiro === true || undefined, retorno: inteiro(x.retorno),
       n: inteiro(x.n), ok: typeof x.ok === 'boolean' ? x.ok : undefined, valor: inteiro(x.valor),
-      dur: inteiro(x.dur), rolagem: inteiro(x.rolagem),
+      dur: inteiro(x.dur), rolagem: inteiro(x.rolagem), tentativa: inteiro(x.tentativa), posicao: inteiro(x.posicao),
       alvo: typeof x.alvo === 'string' ? x.alvo.toLowerCase().replace(/[^a-z0-9:/._-]/g, '').slice(0, 60) || undefined : undefined,
       faixa: x.faixa, sexo: x.sexo, gestante: typeof x.gestante === 'boolean' ? x.gestante : undefined });
   };
   window.petMedir = medir;
+  // Conta quantas vezes algo aconteceu nesta aba (1ª partida, 2ª lista…), para separar a primeira tentativa das repetições.
+  window.petVez = chave => { const k = 'pet-vez-' + chave; const v = (Number(lerS(k)) || 0) + 1; gravarS(k, String(v)); return v; };
+  // Pergunta de um toque no fim das ferramentas: "Isso foi útil?"
+  window.petAvaliar = (onde, alvo) => {
+    if (!onde) return;
+    const caixa = document.createElement('div'); caixa.className = 'medir-util';
+    const p = document.createElement('p'); p.textContent = 'Isso foi útil para você?';
+    const sim = document.createElement('button'); sim.type = 'button'; sim.textContent = 'Sim';
+    const nao = document.createElement('button'); nao.type = 'button'; nao.textContent = 'Não';
+    const responder = ok => () => { medir('avaliacao', { alvo, ok }); p.textContent = 'Obrigado pela resposta.'; sim.remove(); nao.remove(); };
+    sim.addEventListener('click', responder(true)); nao.addEventListener('click', responder(false));
+    caixa.append(p, sim, nao); onde.appendChild(caixa);
+  };
   if (!ativo()) return;
 
   // Visita: "novo" é a primeira do dia neste aparelho, "primeiro" a primeira de todas, "retorno" os dias desde a última.
