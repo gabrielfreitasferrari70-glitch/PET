@@ -190,14 +190,15 @@ if(catalog){const key='pet-scroll:'+location.pathname;try{if(performance.getEntr
   const comum = { campanha, pagina, origem: origem(), aparelho: largura <= 760 ? 'celular' : 'computador', sessao, so, nav, tela: largura <= 760 ? 'p' : largura <= 1200 ? 'm' : 'g', idioma, tema };
 
   // Envia pelo próprio endereço do site (/m), que bloqueadores não barram; se não funcionar, vai direto ao banco.
-  let via = lerS('pet-via') === 'd' ? 'd' : 'p';
+  // Só troca para o envio direto se o endereço /m responder com erro; a escolha vale para a página, não para a visita inteira.
+  let via = 'p';
   const direto = corpo => fetch(BASE + '/rest/v1/rpc/pet_registrar', { method: 'POST', keepalive: true, headers: { apikey: KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ e: { ...corpo, via: 'd' } }) }).catch(() => {});
   const enviar = corpo => {
     try {
       if (via === 'd') { direto(corpo); return; }
       fetch('/m', { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ e: { ...corpo, via: 'p' } }) })
-        .then(r => { if (!r.ok) throw new Error('proxy'); })
-        .catch(() => { via = 'd'; gravarS('pet-via', 'd'); direto(corpo); });
+        .then(r => { if (!r.ok) { via = 'd'; direto(corpo); } })
+        .catch(() => { direto(corpo); }); // falha passageira (aba fechando, rede): tenta direto só desta vez
     } catch { /* o registro nunca atrapalha a página */ }
   };
   const inteiro = v => Number.isInteger(v) && v >= 0 ? v : undefined;
