@@ -1,6 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
+    { "source": "/voce", "destination": "/para-voce/?c=endereco-voce", "permanent": false },
+    { "source": "/visao", "destination": "/acao/acuidade-visual/?c=endereco-visao", "permanent": false },
     { "source": "/projetos/jornal-anamnese", "destination": "/publicacoes/anamnese/", "permanent": true },
     { "source": "/projetos/jornal-anamnese/", "destination": "/publicacoes/anamnese/", "permanent": true },
     { "source": "/materiais/ar-e-saude.pdf", "destination": "/aprender/ar-e-saude/", "permanent": true },

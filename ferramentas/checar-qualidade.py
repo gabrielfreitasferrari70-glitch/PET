@@ -253,7 +253,8 @@ registra('Q11', 'Links internos sem destino quebrado', 'FALHA', not quebrados, l
 
 # Q12 Arquivos soltos na raiz e midia sem uso
 PERMITIDOS = {'.vercelignore', '.gitignore', '404.html', 'favicon.png', 'index.html', 'logo.png', 'robots.txt',
-              'sitemap.xml', 'vercel.json', 'search-index.json', 'projetos-dados.json', 'redes-dados.json', 'site.css',
+              'sitemap.xml', 'vercel.json', 'search-index.json', 'projetos-dados.json', 'redes-dados.json', 'alcance-dados.json',
+              'devolutiva-dados.json', 'site.css',
               'README.md'}
 soltos = [f for f in os.listdir('.') if os.path.isfile(f) and f not in PERMITIDOS and not f.endswith('.js')]
 citado = TODO_HTML + TODO_JS + CSS + ler('projetos-dados.json') + ler('redes-dados.json')

@@ -1,0 +1,27 @@
+{
+  "_como_editar": "Só entram números e locais que o PET já publicou, com a página que traz a fonte. \"retorno\" recebe os totais do retorno anônimo quando houver pelo menos 20 respostas. \"retorno_exemplo\" só aparece na prévia, nunca no site publicado.",
+  "numeros": [
+    { "valor": "87", "rotulo": "bolsas de sangue", "detalhe": "Trote Solidário 2026.1, com o MT Hemocentro", "url": "/projetos/trote-solidario/" },
+    { "valor": "20", "rotulo": "novos cadastros de medula", "detalhe": "Trote Solidário 2026.1", "url": "/projetos/trote-solidario/" },
+    { "valor": "1.880", "rotulo": "pessoas alcançadas", "detalhe": "Cadastro do Bem · 41 ações em 2024", "url": "/projetos/cadastro-do-bem/" },
+    { "valor": "249 kg", "rotulo": "de alimentos arrecadados", "detalhe": "Arte na Veia 2023", "url": "/o-pet/linha-do-tempo/" }
+  ],
+  "locais": [
+    { "local": "Escolas municipais de Cuiabá", "tipo": "Escolas · os nomes não constam nos registros públicos", "acao": "Acuidade Visual", "quando": "2026", "url": "/projetos/acuidade-visual/" },
+    { "local": "UFMT, com o MT Hemocentro", "tipo": "Coleta de sangue e cadastro de medula", "acao": "Trote Solidário", "quando": "2026", "url": "/projetos/trote-solidario/" },
+    { "local": "Centros de convivência e espaços da UFMT", "tipo": "Pessoas idosas, em Cuiabá", "acao": "Saúde Sexual", "quando": "2026", "url": "/projetos/saude-sexual/" },
+    { "local": "HUJM", "tipo": "Hospital · pacientes internados", "acao": "Cartas CorAção", "quando": "2025", "url": "/projetos/cartas-coracao/" },
+    { "local": "Campus da UFMT, escolas e cursinhos", "tipo": "Jovens de 18 a 35 anos, em Cuiabá", "acao": "Cadastro do Bem", "quando": "2024", "url": "/projetos/cadastro-do-bem/" },
+    { "local": "EMEB Dejani Ribeiro", "tipo": "Escola", "acao": "MenstruAção e Papo Cabeça", "quando": "2023", "url": "/projetos/menstruacao/" }
+  ],
+  "retorno": null,
+  "retorno_exemplo": {
+    "respostas": 64,
+    "itens": [
+      { "valor": "64", "rotulo": "famílias responderam", "detalhe": "Retorno anônimo depois do teste de visão" },
+      { "valor": "41", "rotulo": "já foram à consulta", "detalhe": "64% de quem respondeu" },
+      { "valor": "9", "rotulo": "estão com consulta marcada", "detalhe": "14% de quem respondeu" },
+      { "valor": "14", "rotulo": "ainda não conseguiram", "detalhe": "Motivo mais citado: não saber onde marcar" }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "_como_editar": "Cada item é uma resposta que serve para mais gente. Nunca coloque nome, contato nem detalhe que identifique quem perguntou. Itens com \"exemplo\": true só aparecem na prévia, nunca no site publicado.",
+  "itens": [
+    {
+      "exemplo": true,
+      "tipo": "duvida",
+      "quando": "novembro de 2026",
+      "pergunta": "Quem pode doar sangue?",
+      "resposta": "Pode doar quem está bem de saúde, tem entre 16 e 69 anos e pesa pelo menos 50 kg. Quem tem 16 ou 17 anos precisa da autorização dos responsáveis, e a primeira doação deve acontecer antes dos 60 anos. No dia, leve um documento oficial com foto. O hemocentro faz uma triagem antes de cada doação.",
+      "fonte": "Ministério da Saúde",
+      "fonte_url": "https://www.gov.br/saude/pt-br/composicao/saes/doacao-de-sangue",
+      "url": "/projetos/trote-solidario/",
+      "url_texto": "Conhecer o Trote Solidário"
+    },
+    {
+      "exemplo": true,
+      "tipo": "tema",
+      "quando": "novembro de 2026",
+      "pergunta": "Como saber se meu filho precisa de óculos?",
+      "resposta": "O tema virou uma página: ela explica o teste de visão feito na escola, os sinais para observar em casa e o que fazer quando o papel pede consulta com o oftalmologista.",
+      "url": "/acao/acuidade-visual/",
+      "url_texto": "Abrir a página do teste de visão"
+    }
+  ]
+}
