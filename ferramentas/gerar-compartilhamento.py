@@ -56,6 +56,7 @@ def arte(titulo, secao, destino):
 
 
 os.makedirs(os.path.join(RAIZ, 'assets', 'compartilhar'), exist_ok=True)
+CHAMADA_INICIO = 'A comunidade em contato com todos os projetos do PET.'
 for pagina in glob.glob(os.path.join(RAIZ, '**/index.html'), recursive=True):
     rel = os.path.relpath(os.path.dirname(pagina), RAIZ)
     rel = '' if rel == '.' else rel
@@ -63,7 +64,7 @@ for pagina in glob.glob(os.path.join(RAIZ, '**/index.html'), recursive=True):
     q = re.search(r"<meta charset=(['\"])", s).group(1)
     titulo = html.unescape(re.search(r'<title>(.*?)</title>', s).group(1)).replace(' · PET Conecta', '')
     if not rel:
-        titulo = re.sub(r'<[^>]+>', '', re.search(r'<h1[^>]*>(.*?)</h1>', s, re.S).group(1))
+        titulo = CHAMADA_INICIO  # cartao de quem compartilha o link principal
     nome = (rel.replace(os.sep, '-') or 'inicio') + '.jpg'
     arte(titulo, SECOES.get(rel.split(os.sep)[0], ''), os.path.join(RAIZ, 'assets', 'compartilhar', nome))
     s = re.sub(r"<meta (?:property|name)=['\"](?:og:image[^'\"]*|og:type|og:url|og:site_name|og:locale|twitter:card)['\"] content=(?:'[^']*'|\"[^\"]*\")>", '', s)
