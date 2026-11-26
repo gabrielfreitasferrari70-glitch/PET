@@ -218,6 +218,7 @@
 :root .hm-hero h1:not(#_) { margin: var(--esp-3) 0 var(--esp-5); }
 .hm-hero .cx-portas-grid { gap: var(--esp-3); }
 .hm-hero .cx-porta { min-height: 104px; }
-.hm-hero .cx-porta strong { font-size: 24px; }
+.hm-hero .cx-porta strong { font-size: 20px; }
+.hm-hero .cx-porta strong::after { font-size: 16px; }
 .hm-hero .cx-portas-rodape { margin-top: var(--esp-4); }
 .hm-hero .cx-portas-rodape p { font-size: 14px; color: var(--muted); }

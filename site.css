@@ -1332,6 +1332,58 @@ main :is(h2, h3, th) > a { display: inline-block; padding-block: var(--esp-3); m
 :root .hm-hero h1:not(#_) { margin: var(--esp-3) 0 var(--esp-5); }
 .hm-hero .cx-portas-grid { gap: var(--esp-3); }
 .hm-hero .cx-porta { min-height: 104px; }
-.hm-hero .cx-porta strong { font-size: 24px; }
+.hm-hero .cx-porta strong { font-size: 20px; }
+.hm-hero .cx-porta strong::after { font-size: 16px; }
 .hm-hero .cx-portas-rodape { margin-top: var(--esp-4); }
 .hm-hero .cx-portas-rodape p { font-size: 14px; color: var(--muted); }
+:root { --ritmo-secao: var(--esp-8); --ritmo-titulo: var(--esp-5); --grade: var(--esp-5); }
+@media (max-width: 760px) { :root { --ritmo-secao: var(--esp-7); --ritmo-titulo: var(--esp-4); --grade: var(--esp-4); } }
+
+
+:root main .section:not(#_) { padding-block: calc(var(--ritmo-secao) / 2); }
+:root main .page-intro:not(#_) + :is(.section, section):not(#_) { padding-top: 0; }
+:root main > :last-child:not(#_), :root main > .wrap:last-child > :last-child:not(#_) { margin-bottom: 0; }
+:root main:not(#_) { padding-bottom: var(--ritmo-secao); }
+:root .pj-sec:not(#_), :root .op .pj-sec:not(#_) { padding-block: var(--esp-7); margin: 0; }
+:root .cx-sec:not(#_) { margin-top: var(--ritmo-secao); }
+:root .hm:not(#_) { padding-bottom: 0; }
+
+
+:root main :is(.section-head, .sec-titulo, .hm-cab, .yt-sec-cab, .pet-numbers-head):not(#_) { margin: 0 0 var(--ritmo-titulo); padding-top: 0; border-top: 0; align-items: flex-end; }
+:root main :is(.section-head, .sec-titulo, .hm-cab, .yt-sec-cab, .pet-numbers-head) h2:not(#_) { margin: 0; }
+:root main :is(.section-head, .sec-titulo, .hm-cab, .yt-sec-cab, .pet-numbers-head) .eyebrow:not(#_) { display: block; margin: 0 0 var(--esp-2); }
+:root main :is(.section-head, .sec-titulo, .hm-cab, .yt-sec-cab, .pet-numbers-head) p:not(#_) { margin: var(--esp-2) 0 0; }
+:root main :is(.pj-sec, .cx-sec, .ap-guia, .part-mais, .fale-col) > h2:not(#_) { margin: 0 0 var(--ritmo-titulo); }
+:root main :is(.pj-sec, .cx-sec, .part-mais) > h2:not(#_) + p { margin-top: calc(var(--esp-2) - var(--ritmo-titulo)); margin-bottom: var(--ritmo-titulo); }
+:root main .cx-sec.cx-dica > div > h2:not(#_) { margin: var(--esp-2) 0 var(--esp-3); }
+:root main .prose h2:not(#_) { margin: var(--esp-7) 0 var(--ritmo-titulo); }
+:root main .prose > h2:first-child:not(#_), :root main .prose > :first-child > h2:first-child:not(#_) { margin-top: 0; }
+
+
+:root main :is(.hm-grid, .hm-duo, .ap-guia-grid, .cx-portas-grid, .cx-ferramentas, .cx-ciclo, .cx-nums, .cx-duas, .learning-grid, .project-grid, .pathway-grid, .issues-grid, .part-links, .yt-grid, .acervo-grid, .djf-channel-grid, .fale-tipos):not(#_) { gap: var(--grade); }
+:root main .cx-ferramentas:not(#_) { margin-bottom: var(--grade); }
+:root main .hm-duo:not(#_) { margin-bottom: 0; }
+
+
+:root main :is(.hm-painel, .agenda-assinar, .com-bloco, .pathway-card, .part-bloco, .aside-card, .fale-form, .com-form, .int-form, .ff-card, .fale-votos, .part-parceria, .djf-hosts, .int-perguntas, #contact-form):not(#_) { border: 1px solid var(--line); border-radius: var(--raio-card); }
+:root main :is(.hm-painel, .agenda-assinar, .com-bloco, .part-bloco, .aside-card, .fale-form, .com-form, .int-form, .ff-card, .cx-painel, .cx-porta, .cx-ferramenta, .ap-guia a, .part-links a, .cx-ciclo li, .cx-nums li, .cx-pr li):not(#_) { padding: var(--card-pad); }
+:root main :is(.hm-memoria, .cx-dica, .cx-folha):not(#_) { padding: var(--esp-6); }
+:root main :is(.empty-state, .int-vazio):not(#_) { border-radius: var(--raio-card); padding: var(--card-pad); }
+:root main :is(.op-tres li, .event-row, .ff-lado section:first-child):not(#_) { border-top-width: 1px; border-top-color: var(--line); }
+:root main .pet-numbers:not(#_) { border-top: 0; padding-top: 0; }
+:root main .hp-corpo:not(#_) { padding: var(--card-pad); gap: var(--esp-2); }
+:root main .hp-corpo .eyebrow:not(#_) { margin: 0; }
+:root main .hp-corpo .capa-titulo:not(#_) { margin: 0 0 var(--esp-1); }
+@media (max-width: 760px) {
+  :root main :is(.hm-memoria, .cx-dica, .cx-folha):not(#_) { padding: var(--esp-5); }
+}
+
+
+:root main :is(.privacy-embed, .direct-publication, .empty-state, .cx-painel, .hm-painel, .com-bloco, .agenda-assinar, .part-bloco) > :is(h2, h3):first-child:not(#_) { margin-top: 0; }
+
+
+:root main .page-intro:not(#_):not(#__), :root main .op .pj-cab:not(#_):not(#__) { border-bottom: 1px solid var(--line); margin-bottom: var(--esp-6); padding-bottom: var(--esp-6); }
+:root main .op .ap-guia:not(#_) { margin: 0 0 var(--esp-6); }
+
+:root main .pj-sec:last-child:not(#_) { border-bottom: 0; padding-bottom: 0; }
+:root main .cx-ferramenta .eyebrow:not(#_) { margin: 0; }
