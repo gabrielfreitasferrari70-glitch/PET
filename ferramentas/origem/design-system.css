@@ -15,13 +15,12 @@
 .aside-card { padding: var(--card-pad); }
 
 /* Alvos de toque de pelo menos 44px */
-.pj-nav a, .pj .breadcrumb, .breadcrumb, .breadcrumb-line a, .fale-link, .caminho-volta, .djf-breadcrumb a,
+.pj-nav a, .breadcrumb-line a, .fale-link, .djf-breadcrumb a,
 .footer-main a, .footer-bottom a {
   display: inline-flex; align-items: center; min-height: var(--toque);
 }
 .footer-main a { display: flex; }
 .icon-button, .hm-car-seta { min-width: var(--toque); min-height: var(--toque); }
-.join-votar { min-height: var(--toque); }
 .header-inner > .editorial-brand { min-height: var(--toque); }
 .hm-car-pontos button { width: var(--toque); height: var(--toque); }
 .hm-car-pontos button[aria-current="true"]::after { width: var(--esp-5); }

@@ -2,7 +2,7 @@
 @layer base{
 /* ===== Etapas 4 e 5: projetos, O PET, Aprender ===== */
 .pj{max-width:860px;padding-block:clamp(var(--esp-5),3vw,var(--esp-7)) clamp(var(--esp-7),6vw,var(--esp-9))}
-.pj .breadcrumb{display:inline-block;margin-bottom:var(--esp-4)}
+
 .pj-cab h1{font:400 clamp(40px,5vw,64px)/1.04 var(--serif);letter-spacing:-.025em;color:var(--ink);margin:var(--esp-3) 0 var(--esp-4)}
 .pj-lead{font-size:clamp(18px,1.5vw,20px);line-height:1.65;color:var(--muted);margin:0 0 var(--esp-4);max-width:640px}
 .pj-status{margin:0 0 var(--esp-2)}

@@ -89,7 +89,7 @@ def pagina(p, r):
     if redes:
         nav.append(('redes', 'Nas redes'))
     nav.append(('part', 'Como participar'))
-    h = '<a href="/projetos/" class="breadcrumb">← Todos os projetos</a>'
+    h = ''
     h += '<header class="pj-cab"><span class="eyebrow">%s</span><h1>%s</h1><p class="pj-lead">%s</p><p class="pj-status"><span class="chip">%s</span></p></header>' % (
         esc(p['tema'].upper()), esc(p['nome']), esc(p['resumo']), esc(p['status']))
     if p.get('capa'):

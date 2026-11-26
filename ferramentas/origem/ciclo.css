@@ -5,13 +5,7 @@
 .cx-sec > p strong { color: var(--ink); }
 
 /* Quatro portas da pagina Para voce */
-.cx-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--esp-4); list-style: none; padding: 0; margin: 0; }
-.cx-card { display: flex; flex-direction: column; gap: var(--esp-3); padding: var(--card-pad); border: 1px solid var(--line); border-radius: var(--raio-card); background: var(--paper); }
-.cx-card h2 { font: 400 24px/1.2 var(--serif); color: var(--ink); margin: 0; }
-.cx-card p { font-size: 15px; line-height: 1.6; color: var(--muted); margin: 0; }
-.cx-card .button { align-self: flex-start; margin-top: auto; border-radius: var(--raio-peq); }
-.cx-card .text-link { align-self: flex-start; min-height: var(--toque); display: inline-flex; align-items: center; }
-.cx-n { font: 600 12px/1 var(--sans); letter-spacing: .08em; color: var(--forest); }
+
 
 /* O ciclo em tres tempos */
 .cx-ciclo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--esp-4); list-style: none; padding: 0; margin: 0; }
@@ -23,7 +17,6 @@
 
 /* Avisos: previa, exemplo e privacidade */
 .cx-aviso { font-size: 14px; line-height: 1.6; color: var(--ink); padding: var(--esp-3) var(--esp-4); border: 1px solid var(--line); border-left: 3px solid var(--forest); border-radius: var(--raio-peq); background: var(--paper); margin: 0 0 var(--esp-5); max-width: 68ch; }
-.cx-larga { grid-column: 1 / -1; }
 .cx-nota .text-link, .cx-painel p .text-link { display: inline; min-height: 0; }
 .cx-nota { font-size: 13px; line-height: 1.6; color: var(--muted); max-width: 68ch; margin: var(--esp-4) 0 0; }
 
@@ -75,16 +68,13 @@
 
 @media (max-width: 1000px) { .cx-nums { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 760px) {
-  .cx-grid, .cx-ciclo, .cx-duas { grid-template-columns: 1fr; }
+   .cx-ciclo, .cx-duas { grid-template-columns: 1fr; }
   .cx-duas { gap: var(--esp-2); }
   .cx-locais li { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) { .cx-nums { grid-template-columns: 1fr; } }
 @media print { .cx-ops, .cx-form { display: none; } }
 
-/* Menu: Para voce como primeiro item */
-.desktop-nav a.nav-voce { color: var(--forest); font-weight: 600; }
-:root #mobile-menu a.menu-voce { order: -3; justify-content: center; text-align: center; border-radius: var(--raio-peq); font: 600 15px/1.2 var(--sans); padding: 0 var(--esp-2); background: var(--forest); color: var(--paper); }
 
 /* Home: as quatro portas antes de tudo */
 .cx-portas { padding: var(--esp-6) 0 var(--esp-7); border-bottom: 1px solid var(--line); margin-bottom: var(--esp-6); }
@@ -155,6 +145,29 @@
   body[data-imprimir] .cx-folha-cartaz.cx-alvo .cx-folha-qr strong { font-size: 24px; }
   body[data-imprimir] .cx-folha-cartaz.cx-alvo .cx-folha-qr p { font-size: 20px; }
 }
-/* Cabecalho: com o Para voce, o YouTube (que tambem esta em Aprender e no rodape) sai da barra do computador, para nada quebrar linha */
-@media (min-width: 1001px) { .desktop-nav a[href="/youtube/"] { display: none; } }
-@media (max-width: 1000px) { :root #mobile-menu a.menu-voce { grid-column: 1 / -1; } }
+
+/* Navegacao por secoes: a ordem do menu e a do HTML (Atendimento, Aprender, Conhecer o PET, Estudantes) */
+:root .desktop-nav a[href] { order: 0; }
+.desktop-nav a[aria-current="page"] { color: var(--forest); font-weight: 600; }
+
+/* Trilha: Inicio > Secao > Pagina, igual em todas as paginas */
+.trilha { padding-top: var(--esp-4); }
+.trilha ol { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--esp-2); padding: 0; margin: 0; font-size: 13px; color: var(--muted); }
+.trilha li { display: inline-flex; align-items: center; gap: var(--esp-2); }
+.trilha li + li::before { content: '›'; color: var(--muted); }
+.trilha a { display: inline-flex; align-items: center; min-height: var(--toque); color: var(--muted); text-decoration: none; }
+.trilha a:hover { color: var(--forest); text-decoration: underline; text-underline-offset: 4px; }
+.trilha [aria-current="page"] { color: var(--ink); }
+.trilha + .page-intro:not(#_), .trilha + .wrap .pj-cab { padding-top: var(--esp-3); }
+
+/* Home: bloco final para estudantes */
+.cx-estudantes { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--esp-4) var(--esp-6); padding: var(--card-pad); border: 1px solid var(--line); border-radius: var(--raio-card); background: var(--paper); margin: var(--esp-7) 0; }
+.cx-estudantes > div { flex: 1 1 320px; }
+.cx-estudantes h2 { font: 400 28px/1.15 var(--serif); color: var(--ink); margin: var(--esp-2) 0; }
+.cx-estudantes p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
+.cx-estudantes .button { border-radius: var(--raio-peq); }
+
+/* Indice da secao dentro de O PET */
+.op .ap-guia { margin: 0 0 var(--esp-6); }
+/* Home: respiro entre as secoes (Aprender termina, Conhecer o PET comeca) */
+.hm-aprender + .hm-hero { margin-top: var(--esp-8); padding-top: var(--esp-6); border-top: 1px solid var(--line); }

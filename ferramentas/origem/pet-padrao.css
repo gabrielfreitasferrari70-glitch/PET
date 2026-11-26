@@ -38,10 +38,10 @@
 .pet-refined .seta-int:not(#_) > span[aria-hidden="true"]::after { left: -1px; top: 5px; transform: none; width: 14px; }
 
 /* ===== A7. Caminho de volta único ===== */
-.breadcrumb-line a, .pj .breadcrumb, .djf-breadcrumb a, .caminho-volta {
+.breadcrumb-line a, .djf-breadcrumb a {
   font: 600 14px/1.4 var(--sans); color: var(--forest); text-decoration: none;
 }
-.breadcrumb-line a:hover, .pj .breadcrumb:hover, .djf-breadcrumb a:hover, .caminho-volta:hover { text-decoration: underline; text-underline-offset: 4px; }
+.breadcrumb-line a:hover, .djf-breadcrumb a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .djf-breadcrumb { font-size: 14px; }
 .pet-number small, .tl-sd, .acervo-resumo { font-size: 13px; }
 .hd-data small { font-size: 12px; }
@@ -175,11 +175,11 @@
 
 /* ===== A2. Botões: um raio, uma altura ===== */
 .button, .djf-button, .header-tools .join, .part-acoes .button, .assinar-acoes .button,
-.event-actions .button, .com-form .button, .hm-acoes .button, .hm-fale .hm-fale-btn {border-radius: var(--raio-peq)}.djf-button {background: var(--forest);color: var(--paper)}
+.event-actions .button, .com-form .button, .hm-acoes .button {border-radius: var(--raio-peq)}.djf-button {background: var(--forest);color: var(--paper)}
 .djf-button:hover {background: var(--forest);color: var(--paper)}.fale-votos,.part-parceria,.op-cx,.pj-nums li,.hm-car-palco,.agenda-assinar{background: var(--paper)}.hm-fale {background: var(--paper);color: var(--ink)}
 .hm-fale h2 {color: var(--ink)}
 .hm-fale p {color: var(--muted)}
-.hm-fale .hm-fale-btn {background: var(--forest);color: var(--paper);border-color: var(--forest)}.project-card .meta,.status,.chip{display: inline-flex;border-radius: var(--raio-pill);background: var(--mint);color: var(--forest);border: 0;padding: var(--esp-1) var(--esp-3);font: 600 12px/1.4 var(--sans);letter-spacing: .02em;text-transform: none}
+.project-card .meta,.status,.chip{display: inline-flex;border-radius: var(--raio-pill);background: var(--mint);color: var(--forest);border: 0;padding: var(--esp-1) var(--esp-3);font: 600 12px/1.4 var(--sans);letter-spacing: .02em;text-transform: none}
 .selo-agora {background: var(--forest)}
 
 /* ===== A8. Textos pequenos demais ===== */

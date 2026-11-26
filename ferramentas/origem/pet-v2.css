@@ -12,9 +12,9 @@
 .desktop-nav a{font-size:15px}
 .header-tools .join{align-items:center;gap:var(--esp-2);background:var(--forest);border:0;border-radius:var(--raio-pill);padding:var(--esp-3) var(--esp-4);min-height:42px;margin-right:var(--esp-2);transition:background .15s}
 .header-tools .join:hover{background:var(--deep)}
-.join-votar{display:inline-flex;align-items:center;min-height:42px;padding:var(--esp-3) var(--esp-4);border:1px solid var(--forest);border-radius:var(--raio-peq);color:var(--forest);font:600 14px/1 var(--sans);text-decoration:none;white-space:nowrap;margin-right:var(--esp-1)}
-.join-votar:hover{background:var(--mint)}
-@media(max-width:760px){.join-votar{display:none}}
+
+
+
 .header-tools .join>span[aria-hidden]:not(.fala-ic){display:none}
 .header-tools .join:not([data-v2])::before{content:"Fale com o PET";font-size:14px}
 .header-tools .join[aria-current="page"]{background:var(--deep);box-shadow:inset 0 0 0 2px var(--mint)}
@@ -22,9 +22,9 @@
 .fala-ic::after{content:'';position:absolute;left:2px;bottom:-5px;width:5px;height:5px;border-left:1.6px solid currentColor;border-bottom:1.6px solid currentColor;background:var(--forest);transform:skewX(-20deg)}
 .header-tools .join:hover .fala-ic::after,.header-tools .join[aria-current="page"] .fala-ic::after{background:var(--deep)}
 .fale-flutuante{display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;border-radius:0;align-items:center;justify-content:center;gap:var(--esp-2);background:var(--paper);color:var(--forest);border-top:1px solid var(--line);padding:var(--esp-4) var(--esp-4) calc(var(--esp-4) + env(safe-area-inset-bottom));font:600 15px/1 var(--sans);text-decoration:none}
-:root #mobile-menu a:is(.menu-destaque,.menu-votar){justify-content:center;text-align:center;border-radius:var(--raio-peq);font:600 15px/1.2 var(--sans);padding:0 var(--esp-2)}
+:root #mobile-menu a.menu-destaque{justify-content:center;text-align:center;border-radius:var(--raio-peq);font:600 15px/1.2 var(--sans);padding:0 var(--esp-2)}
 :root #mobile-menu a.menu-destaque{order:-1;background:var(--forest);color:var(--paper)}
-:root #mobile-menu a.menu-votar{order:-2;border:1px solid var(--forest);color:var(--forest)}
+
 #mobile-menu .menu-sep{display:block;grid-column:1/-1;height:1px;background:var(--line);margin:var(--esp-2) 0}
 #mobile-menu button.menu-sec{background:none;border:0;padding:var(--esp-3) 0;text-align:left;font-family:var(--sans);cursor:pointer;min-height:44px}
 @media(max-width:1000px){.header-tools .join{padding:var(--esp-3) var(--esp-4)}}
@@ -170,4 +170,4 @@ body.cab-v2 .editorial-header{display:none}
 
 @media print{.fale-flutuante{display:none}}
 .part-obs{font-size:13px}
-.hm-fale .hm-fale-btn{background:var(--paper);color:var(--forest);border-color:var(--paper)}
+

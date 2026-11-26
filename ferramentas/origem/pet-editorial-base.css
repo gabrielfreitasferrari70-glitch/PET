@@ -47,7 +47,7 @@
 .project-card .meta{white-space:nowrap}
 }
 /* Menu enxuto: o podcast fica em Projetos e em destaque no inicio. */
-.desktop-nav .djf-nav,#mobile-menu .djf-nav{display:none}
+
 /* Cabecalho enxuto: PET Conecta e o nome principal; sem o titulo PET/MEDICINA em destaque. */
 .editorial-masthead{display:none}
 /* Recursos pessoais retirados: salvar, marcar como concluido, quiz e contador de progresso. */

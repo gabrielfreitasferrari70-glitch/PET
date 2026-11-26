@@ -16,7 +16,7 @@ function blocoSaiba(s){
  if(s.edicoes&&s.edicoes.length){h+='<h3>Edição por edição</h3><div class="pj-eds">'+s.edicoes.map(function(e){return '<details class="pj-det"><summary><span class="pj-det-ano">'+esc(e[0])+'</span><span class="pj-det-tit">'+esc(e[1])+'</span></summary><p>'+esc(e[2])+'</p><a class="text-link" href="'+esc(url(e[3]))+'"'+ext(e[3])+'>Ver proposta no SIEx '+seta(e[3])+'</a></details>';}).join('')+'</div>';}
  return h+'<p class="hm-nota">Texto escrito a partir das propostas e dos relatórios que o próprio PET registrou no SIEx, o sistema de extensão da UFMT. Os números são os que o grupo relatou.</p></section>';
 }
-function falhou(){raiz.innerHTML='<a href="/projetos/" class="breadcrumb">← Todos os projetos</a><header class="pj-cab"><h1>Projeto não encontrado</h1><p class="pj-lead">Veja a lista completa de projetos.</p></header><p><a class="button" href="/projetos/">Ver os projetos</a></p>';}
+function falhou(){raiz.innerHTML='<header class="pj-cab"><h1>Projeto não encontrado</h1><p class="pj-lead">Veja a lista completa de projetos.</p></header><p><a class="button" href="/projetos/">Ver os projetos</a></p>';}
 var redesPedido=fetch('/redes-dados.json').then(function(r){return r.ok?r.json():{};}).catch(function(){return {};});
 fetch('/projetos-dados.json').then(function(r){if(!r.ok){throw new Error();}return r.json();}).then(function(D){return redesPedido.then(function(R){
  var p=D[slug];if(!p){falhou();return;}
@@ -24,7 +24,7 @@ fetch('/projetos-dados.json').then(function(r){if(!r.ok){throw new Error();}retu
  var nav=[['oque','O que é'],['quem','Para quem'],['como','Como funciona']];
  if(p.saiba){nav.push(['saiba','Saiba mais']);}nav.push(['anos','Ano a ano']);
  if(p.mats){nav.push(['mat','Materiais']);}if(redes){nav.push(['redes','Nas redes']);}nav.push(['part','Como participar']);
- var h='<a href="/projetos/" class="breadcrumb">← Todos os projetos</a>';
+ var h='';
  h+='<header class="pj-cab"><span class="eyebrow">'+esc(p.tema.toUpperCase())+'</span><h1>'+esc(p.nome)+'</h1><p class="pj-lead">'+esc(p.resumo)+'</p><p class="pj-status"><span class="chip">'+esc(p.status)+'</span></p></header>';
  if(p.capa){h+='<figure class="pj-capa"><img src="'+esc(url(p.capa.src))+'" alt="'+esc(p.capa.alt)+'" width="1600" height="900" loading="eager" decoding="async"></figure>';}
  h+='<nav class="pj-nav" aria-label="Nesta página">'+nav.map(function(n){return '<a href="#'+n[0]+'">'+n[1]+'</a>';}).join('')+'</nav>';

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Gera as paginas do ciclo de alcance a partir do cabecalho e do rodape de comunidade/index.html:
-   /para-voce/  /leve-o-pet/  /acao/acuidade-visual/  /voce-perguntou/  /alcance/
+"""Gera as paginas do ciclo de alcance e as paginas das secoes a partir de comunidade/index.html:
+   /atendimento/  /estudantes/  /leve-o-pet/  /acao/acuidade-visual/  /voce-perguntou/  /alcance/
    /imprimir/ (papel e cartaz com QR code)
 Edite os textos aqui e rode:  python3 ferramentas/gerar-ciclo.py
 Precisa do pacote qrcode:  pip install qrcode
@@ -25,17 +25,18 @@ def qr(url, rotulo):
 
 
 URL_PAPEL = SITE + '/acao/acuidade-visual/?c=papel-visao'
-URL_CARTAZ = SITE + '/para-voce/?c=cartaz'
+URL_CARTAZ = SITE + '/?c=cartaz'
 
-PARA_VOCE = f"""<div class='wrap page-intro'><span class='eyebrow'>PARA VOCÊ</span><h1>Não é da área da saúde? Comece por aqui.</h1><p class='intro-description'>Esta página é para quem foi atendido numa ação do PET, para famílias, escolas e para qualquer pessoa que queira cuidar da saúde. Escolha o que você precisa.</p></div>
+ATENDIMENTO = f"""<div class='wrap page-intro'><span class='eyebrow'>ATENDIMENTO</span><h1>Participe de uma ação, tire uma dúvida ou chame o PET.</h1><p class='intro-description'>Tudo o que a comunidade pode buscar junto aos estudantes de Medicina da UFMT. É gratuito.</p></div>
 <div class='wrap cx'>
-<ul class='cx-grid'>
-<li class='cx-card'><span class='cx-n'>CUIDAR</span><h2>Quero cuidar da minha saúde</h2><p>Diga sua idade e veja as vacinas e os exames que o SUS indica para você. Leva menos de um minuto.</p><a class='button' href='/saude-em-dia/'>Ver minha lista {SETA}</a><a class='text-link' href='/aprender/'>Vídeos e textos simples →</a></li>
-<li class='cx-card'><span class='cx-n'>PERGUNTAR</span><h2>Quero tirar uma dúvida</h2><p>Escreva sua pergunta de saúde. Ela não é publicada, e a resposta chega pelo contato que você deixar.</p><a class='button' href='/comunidade/?tipo=duvida'>Mandar minha dúvida {SETA}</a><a class='text-link' href='/fato-ou-fake/'>Checar um boato de saúde →</a></li>
-<li class='cx-card'><span class='cx-n'>PARTICIPAR</span><h2>Quero ser atendido ou ajudar</h2><p>Veja as próximas ações do PET, com data e local, e como doar sangue ou se cadastrar como doador de medula.</p><a class='button' href='/agenda/'>Ver as próximas ações {SETA}</a><a class='text-link' href='/leve-o-pet/'>Levar o PET até minha escola ou unidade →</a></li>
-<li class='cx-card'><span class='cx-n'>DECIDIR</span><h2>Quero escolher o próximo tema</h2><p>Vote no assunto de saúde que você quer ver explicado. O voto é anônimo e o mais votado entra na fila.</p><a class='button' href='/comunidade/#temas'>Votar em um tema {SETA}</a><a class='text-link' href='/voce-perguntou/'>Ver o que o PET já respondeu →</a></li>
-</ul>
-<section class='cx-sec' aria-labelledby='pv-papel'><h2 id='pv-papel'>Recebeu um papel do PET com QR code?</h2><p>Depois de uma ação, o papel entregue leva a uma página com a explicação do resultado e os próximos passos, em linguagem simples.</p><ul class='cx-grid'><li class='cx-card cx-larga'><span class='cx-n'>ACUIDADE VISUAL</span><h2>Meu filho fez o teste de visão na escola</h2><p>Entenda o que o papel diz, o que fazer se ele pede consulta e conte ao PET como foi.</p><a class='button' href='/acao/acuidade-visual/'>Abrir a página do teste {SETA}</a></li></ul></section>
+<section class='ap-guia' aria-labelledby='at-t'><h2 id='at-t'>O que você precisa?</h2><div class='ap-guia-grid'>
+<a href='/agenda/'><strong>Ver as próximas ações</strong><span>Datas e locais das ações abertas à comunidade.</span></a>
+<a href='/projetos/trote-solidario/'><strong>Doar sangue ou medula</strong><span>Campanha com o MT Hemocentro: quem pode doar e quando.</span></a>
+<a href='/acao/acuidade-visual/'><strong>Meu filho fez o teste de visão</strong><span>O que o papel quer dizer e o que fazer agora.</span></a>
+<a href='/comunidade/?tipo=duvida'><strong>Tirar uma dúvida de saúde</strong><span>A pergunta não é publicada e a resposta chega pelo seu contato.</span></a>
+<a href='/leve-o-pet/'><strong>Levar o PET até você</strong><span>Escolas, unidades de saúde e grupos de bairro pedem uma ação.</span></a>
+</div></section>
+<section class='cx-sec' aria-labelledby='pv-papel'><h2 id='pv-papel'>Recebeu um papel do PET com QR code?</h2><p>Aponte a câmera do celular para o quadrado. Ele abre a página daquela ação, com a explicação do resultado e os próximos passos.</p></section>
 <section class='cx-sec' aria-labelledby='pv-ciclo'><h2 id='pv-ciclo'>Como o PET chega até você</h2><p>Cada ação tem um antes, um durante e um depois. O site liga os três.</p><ol class='cx-ciclo'>
 <li><b>Antes</b><strong>A comunidade chama</strong><span>Escolas, unidades de saúde e grupos de bairro pedem uma ação. Qualquer pessoa vota nos temas.</span><a class='text-link' href='/leve-o-pet/'>Pedir uma ação →</a></li>
 <li><b>Durante</b><strong>A ação tem a sua página</strong><span>O papel entregue no dia traz um QR code. A orientação continua disponível em casa.</span><a class='text-link' href='/acao/acuidade-visual/'>Ver um exemplo →</a></li>
@@ -44,7 +45,20 @@ PARA_VOCE = f"""<div class='wrap page-intro'><span class='eyebrow'>PARA VOCÊ</s
 <p class='cx-nota'>Quem somos: estudantes de Medicina da UFMT, em Cuiabá. <a class='text-link' href='/o-pet/'>Conhecer o PET →</a> O PET Conecta é uma proposta independente, sem vínculo oficial com o PET Medicina UFMT.</p>
 </div>"""
 
-LEVE = f"""<div class='wrap page-intro'><a href='/para-voce/' class='breadcrumb'>← Para você</a><span class='eyebrow'>LEVE O PET ATÉ VOCÊ</span><h1>Peça uma ação de saúde para a sua escola, unidade ou bairro.</h1><p class='intro-description'>Este pedido é para quem responde por um grupo de pessoas: direção de escola, equipe de unidade de saúde, associação ou liderança de bairro. Leva cerca de três minutos.</p></div>
+ESTUDANTES = f"""<div class='wrap page-intro'><span class='eyebrow'>ESTUDANTES</span><h1>Para quem estuda Medicina ou faz parte do PET.</h1><p class='intro-description'>Processo seletivo, cursos e aulas, e o que o grupo pode usar no dia a dia das ações.</p></div>
+<div class='wrap cx'>
+<section class='ap-guia' aria-labelledby='es-t'><h2 id='es-t'>Nesta seção</h2><div class='ap-guia-grid'>
+<a href='/participar/#ingresso'><strong>Processo seletivo</strong><span>Como entrar no PET Medicina UFMT.</span></a>
+<a href='/participar/#parcerias'><strong>Parcerias</strong><span>Instituições que querem propor um trabalho com o grupo.</span></a>
+<a href='/projetos/curso-aph/'><strong>Curso de APH</strong><span>Formação em urgência e emergência.</span></a>
+<a href='/projetos/tarjapet/'><strong>Aulas TarjaPet</strong><span>Farmacologia: como os medicamentos funcionam.</span></a>
+<a href='/para-o-pet/'><strong>Para o PET</strong><span>O que o site oferece ao grupo e como ele chega à população.</span></a>
+<a href='/imprimir/'><strong>Material para imprimir</strong><span>Papel da ação e cartaz com QR code.</span></a>
+</div></section>
+<p class='cx-nota'>O PET Conecta é uma proposta independente, sem vínculo oficial com o PET Medicina UFMT. Confirme inscrições nos canais oficiais do grupo.</p>
+</div>"""
+
+LEVE = f"""<div class='wrap page-intro'><span class='eyebrow'>LEVE O PET ATÉ VOCÊ</span><h1>Peça uma ação de saúde para a sua escola, unidade ou bairro.</h1><p class='intro-description'>Este pedido é para quem responde por um grupo de pessoas: direção de escola, equipe de unidade de saúde, associação ou liderança de bairro. Leva cerca de três minutos.</p></div>
 <div class='wrap cx'>
 <ol class='fale-passos' aria-label='Como funciona'><li><b>1</b>Você descreve o local, o público e a ação desejada.</li><li><b>2</b>O pedido chega ao responsável pelo PET Conecta e não é publicado.</li><li><b>3</b>O retorno chega pelo contato que você informou.</li></ol>
 <section class='cx-sec' aria-labelledby='lp-t'><h2 id='lp-t'>Dados do pedido</h2><p class='cx-aviso'>O pedido não garante a ação: ela depende da agenda e da equipe do PET. Não escreva dados de saúde de pessoas identificáveis.</p>
@@ -63,7 +77,7 @@ LEVE = f"""<div class='wrap page-intro'><a href='/para-voce/' class='breadcrumb'
 <p class='cx-nota'>A lista reúne ações que o PET já realizou. O PET Conecta é uma proposta independente, sem vínculo oficial com o PET Medicina UFMT. <a class='text-link' href='/privacidade/#comunidade'>Como tratamos os envios →</a></p></section>
 </div>"""
 
-ACAO = f"""<div class='wrap page-intro'><a href='/para-voce/' class='breadcrumb'>← Para você</a><span class='eyebrow'>DEPOIS DA AÇÃO · ACUIDADE VISUAL</span><h1>Seu filho fez o teste de visão na escola. E agora?</h1><p class='intro-description'>O teste feito pelo PET é uma triagem: ele mostra quem precisa de uma consulta completa. Não é um diagnóstico. Escolha abaixo o que o papel que você recebeu diz.</p></div>
+ACAO = f"""<div class='wrap page-intro'><span class='eyebrow'>DEPOIS DA AÇÃO · ACUIDADE VISUAL</span><h1>Seu filho fez o teste de visão na escola. E agora?</h1><p class='intro-description'>O teste feito pelo PET é uma triagem: ele mostra quem precisa de uma consulta completa. Não é um diagnóstico. Escolha abaixo o que o papel que você recebeu diz.</p></div>
 <div class='wrap cx'>
 <div class='fale-tipos' role='group' aria-label='O que o papel diz'><button type='button' class='fale-tipo' data-papel='consulta' aria-pressed='true'><strong>O papel pede consulta</strong><span>A criança foi encaminhada ao oftalmologista.</span></button><button type='button' class='fale-tipo' data-papel='bem' aria-pressed='false'><strong>O papel diz que está tudo bem</strong><span>O teste não apontou alteração.</span></button></div>
 <div data-painel='consulta'>
@@ -80,13 +94,13 @@ ACAO = f"""<div class='wrap page-intro'><a href='/para-voce/' class='breadcrumb'
 <section class='cx-sec' aria-labelledby='duv-t'><h2 id='duv-t'>Ficou com dúvida?</h2><p>Pergunte ao PET. A mensagem não é publicada. Este conteúdo é educativo e não substitui a consulta. Dor forte, pancada no olho ou perda súbita da visão são urgências: procure atendimento na hora.</p><div class='part-acoes'><a class='button' href='/comunidade/?tipo=duvida'>Perguntar ao PET {SETA}</a><a class='button secondary' href='/projetos/acuidade-visual/'>Conhecer o projeto {SETA}</a></div><p class='cx-nota'>O funcionamento do projeto vem da proposta registrada pelo PET no <a class='text-link' href='https://siex.ufmt.br/Projeto/Detalhes?projetoUID=16626' target='_blank' rel='noopener noreferrer'>SIEx da UFMT ↗</a>. O PET Conecta é uma proposta independente, sem vínculo oficial com o PET Medicina UFMT. <a class='text-link' href='/privacidade/#contagem'>Como o retorno anônimo é guardado →</a></p></section>
 </div>"""
 
-PERGUNTOU = f"""<div class='wrap page-intro'><a href='/para-voce/' class='breadcrumb'>← Para você</a><span class='eyebrow'>VOCÊ PERGUNTOU, O PET RESPONDEU</span><h1>O que a comunidade pediu e o que voltou para ela.</h1><p class='intro-description'>Dúvidas que servem para mais gente e temas votados que viraram conteúdo. Nenhuma resposta traz o nome de quem perguntou.</p></div>
+PERGUNTOU = f"""<div class='wrap page-intro'><span class='eyebrow'>VOCÊ PERGUNTOU, O PET RESPONDEU</span><h1>O que a comunidade pediu e o que voltou para ela.</h1><p class='intro-description'>Dúvidas que servem para mais gente e temas votados que viraram conteúdo. Nenhuma resposta traz o nome de quem perguntou.</p></div>
 <div class='wrap cx'>
 <ul class='cx-pr' id='vp-lista' aria-live='polite'><li class='empty-state'>Carregando respostas…</li></ul>
 <section class='cx-sec' aria-labelledby='vp-mais'><h2 id='vp-mais'>Quer ver a sua pergunta aqui?</h2><p>Mande sua dúvida ou vote em um tema. As respostas são educativas e não substituem atendimento profissional.</p><div class='part-acoes'><a class='button' href='/comunidade/?tipo=duvida'>Mandar uma dúvida {SETA}</a><a class='button secondary' href='/comunidade/#temas'>Votar em um tema {SETA}</a></div></section>
 </div>"""
 
-ALCANCE = f"""<div class='wrap page-intro'><a href='/para-voce/' class='breadcrumb'>← Para você</a><span class='eyebrow'>ONDE O PET JÁ ESTEVE</span><h1>Os lugares, as pessoas e o que aconteceu depois.</h1><p class='intro-description'>Só entram aqui números e locais que o próprio PET publicou. Cada um leva à página que traz a fonte.</p></div>
+ALCANCE = f"""<div class='wrap page-intro'><span class='eyebrow'>ONDE O PET JÁ ESTEVE</span><h1>Os lugares, as pessoas e o que aconteceu depois.</h1><p class='intro-description'>Só entram aqui números e locais que o próprio PET publicou. Cada um leva à página que traz a fonte.</p></div>
 <div class='wrap cx'>
 <section aria-labelledby='al-n-t'><h2 class='sr-only' id='al-n-t'>Resultados publicados</h2><ul class='cx-nums' id='al-numeros' aria-live='polite'><li class='empty-state'>Carregando números…</li></ul></section>
 <section class='cx-sec' aria-labelledby='al-l-t'><h2 id='al-l-t'>Locais e públicos</h2><p>Onde as ações aconteceram, segundo os registros públicos do grupo.</p><ul class='cx-locais' id='al-locais'></ul></section>
@@ -95,7 +109,7 @@ ALCANCE = f"""<div class='wrap page-intro'><a href='/para-voce/' class='breadcru
 </div>"""
 
 
-IMPRIMIR = f"""<div class='wrap page-intro'><a href='/para-o-pet/' class='breadcrumb'>← Para o PET</a><span class='eyebrow'>MATERIAL PARA IMPRIMIR</span><h1>Papel e cartaz com QR code para as ações do PET.</h1><p class='intro-description'>Cada QR code leva direto à página certa e traz um código próprio. Assim o painel mostra quantas pessoas chegaram por cada papel e por cada cartaz, sem identificar ninguém.</p></div>
+IMPRIMIR = f"""<div class='wrap page-intro'><span class='eyebrow'>MATERIAL PARA IMPRIMIR</span><h1>Papel e cartaz com QR code para as ações do PET.</h1><p class='intro-description'>Cada QR code leva direto à página certa e traz um código próprio. Assim o painel mostra quantas pessoas chegaram por cada papel e por cada cartaz, sem identificar ninguém.</p></div>
 <div class='wrap cx'>
 <section class='cx-sec' aria-labelledby='im-papel-t'><h2 id='im-papel-t'>Papel da ação: teste de visão</h2><p>Meia folha A4, entregue à família depois da triagem. A equipe marca o resultado e escreve onde marcar a consulta.</p>
 <div class='cx-folha' id='folha-papel'>
@@ -107,22 +121,23 @@ IMPRIMIR = f"""<div class='wrap page-intro'><a href='/para-o-pet/' class='breadc
 <div class='cx-folha-qr'>{qr(URL_PAPEL, 'página do teste de visão')}<div><strong>Aponte a câmera do celular para o quadrado.</strong><p>Você vai ver o que o resultado quer dizer, o que fazer agora e como contar ao PET se conseguiu a consulta.</p><p>Ou digite: <b>pet-conecta.vercel.app/visao</b></p></div></div>
 </div>
 <div class='cx-imp-acoes'><button type='button' class='button' data-imprimir='folha-papel'>Imprimir o papel {SETA}</button></div></section>
-<section class='cx-sec' aria-labelledby='im-cartaz-t'><h2 id='im-cartaz-t'>Cartaz: escola, unidade de saúde ou hemocentro</h2><p>Folha A4 para deixar no mural. Leva à página Para você.</p>
+<section class='cx-sec' aria-labelledby='im-cartaz-t'><h2 id='im-cartaz-t'>Cartaz: escola, unidade de saúde ou hemocentro</h2><p>Folha A4 para deixar no mural. Leva à página inicial do site, que abre com o que a comunidade pode fazer.</p>
 <div class='cx-folha cx-folha-cartaz' id='folha-cartaz'>
 <div class='cx-folha-topo'><span>PET Medicina UFMT</span><span>Gratuito</span></div>
 <h3>Não é da área da saúde? Os estudantes de Medicina da UFMT têm uma página para você.</h3>
 <ul class='cx-lista'><li>Veja as vacinas e os exames para a sua idade.</li><li>Tire uma dúvida de saúde.</li><li>Saiba das próximas ações perto de você.</li><li>Escolha o próximo tema que vamos explicar.</li></ul>
-<div class='cx-folha-qr'>{qr(URL_CARTAZ, 'página Para você')}<div><strong>Aponte a câmera do celular para o quadrado.</strong><p>Ou digite: <b>pet-conecta.vercel.app/voce</b></p></div></div>
+<div class='cx-folha-qr'>{qr(URL_CARTAZ, 'página inicial do PET Conecta')}<div><strong>Aponte a câmera do celular para o quadrado.</strong><p>Ou digite: <b>pet-conecta.vercel.app/voce</b></p></div></div>
 <p class='cx-folha-pe'>Proposta independente feita por estudantes, sem vínculo oficial com o PET Medicina UFMT.</p>
 </div>
 <div class='cx-imp-acoes'><button type='button' class='button' data-imprimir='folha-cartaz'>Imprimir o cartaz {SETA}</button></div></section>
 <section class='cx-sec' aria-labelledby='im-links-t'><h2 id='im-links-t'>Links para o Instagram do PET</h2><p>Use estes endereços no lugar do link do site. Cada um mostra no painel de onde a pessoa veio.</p>
-<ul class='cx-links'><li><strong>Link da bio</strong><code>{SITE}/para-voce/?de=instagram&amp;c=bio</code></li><li><strong>Stories e posts</strong><code>{SITE}/para-voce/?de=instagram&amp;c=stories</code></li><li><strong>Post sobre o teste de visão</strong><code>{SITE}/acao/acuidade-visual/?de=instagram&amp;c=post-visao</code></li></ul>
+<ul class='cx-links'><li><strong>Link da bio</strong><code>{SITE}/?de=instagram&amp;c=bio</code></li><li><strong>Stories e posts</strong><code>{SITE}/?de=instagram&amp;c=stories</code></li><li><strong>Post sobre o teste de visão</strong><code>{SITE}/acao/acuidade-visual/?de=instagram&amp;c=post-visao</code></li></ul>
 <p class='cx-nota'>Para uma ação nova, troque a palavra depois de <code>c=</code> por um nome curto, só com letras minúsculas, números e hífen.</p></section>
 </div>"""
 
 PAGINAS = [
-    ('para-voce', 'Para você', 'Não é da área da saúde? Comece por aqui: cuide da sua saúde, tire uma dúvida, participe de uma ação ou escolha o próximo tema.', PARA_VOCE),
+    ('atendimento', 'Atendimento', 'Participe de uma ação de saúde, tire uma dúvida ou peça o PET na sua escola ou no seu bairro.', ATENDIMENTO),
+    ('estudantes', 'Estudantes', 'Processo seletivo, cursos e materiais para estudantes de Medicina e para o PET.', ESTUDANTES),
     ('leve-o-pet', 'Leve o PET até você', 'Escolas, unidades de saúde e grupos de bairro podem pedir uma ação de saúde do PET.', LEVE),
     ('acao/acuidade-visual', 'Depois do teste de visão na escola', 'Entenda o papel da triagem de visão, saiba o que fazer se ele pede consulta e conte ao PET como foi.', ACAO),
     ('voce-perguntou', 'Você perguntou, o PET respondeu', 'Dúvidas respondidas e temas votados pela comunidade que viraram conteúdo.', PERGUNTOU),
@@ -151,8 +166,6 @@ for caminho, titulo, desc, corpo in PAGINAS:
     h = troca(r"<meta property='og:url' content='[^']*'>", f"<meta property='og:url' content='{url}'>", h)
     h = troca(r"<script src='/pet-dados.js' defer></script><script src='/comunidade.js' defer></script>", "<script src='/ciclo.js' defer></script>", h)
     h = h.replace(" aria-current='page' data-v2=''", " data-v2=''").replace("class='menu-destaque active' aria-current='page'", "class='menu-destaque'")
-    if caminho == 'para-voce':
-        h = h.replace("class='nav-voce'>", "class='nav-voce' aria-current='page'>", 1).replace("class='menu-voce'>", "class='menu-voce active' aria-current='page'>", 1)
     h = troca(r"<main id='conteudo'>.*?</main>", "<main id='conteudo'>" + corpo.replace('\n', '') + "</main>", h)
     destino = os.path.join(RAIZ, caminho, 'index.html')
     os.makedirs(os.path.dirname(destino), exist_ok=True)
