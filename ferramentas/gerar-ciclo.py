@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Gera as paginas do ciclo de alcance e as paginas das secoes a partir de comunidade/index.html:
-   /atendimento/  /estudantes/  /leve-o-pet/  /acao/acuidade-visual/  /voce-perguntou/  /alcance/
+   /atendimento/  /leve-o-pet/  /acao/acuidade-visual/  /voce-perguntou/  /alcance/
    /imprimir/ (papel e cartaz com QR code)
 Edite os textos aqui e rode:  python3 ferramentas/gerar-ciclo.py
 Precisa do pacote qrcode:  pip install qrcode
@@ -36,26 +36,13 @@ ATENDIMENTO = f"""<div class='wrap page-intro'><span class='eyebrow'>ATENDIMENTO
 <a href='/comunidade/?tipo=duvida'><strong>Tirar uma dúvida de saúde</strong><span>A pergunta não é publicada e a resposta chega pelo seu contato.</span></a>
 <a href='/leve-o-pet/'><strong>Levar o PET até você</strong><span>Escolas, unidades de saúde e grupos de bairro pedem uma ação.</span></a>
 </div></section>
-<section class='cx-sec' aria-labelledby='pv-papel'><h2 id='pv-papel'>Recebeu um papel do PET com QR code?</h2><p>Aponte a câmera do celular para o quadrado. Ele abre a página daquela ação, com a explicação do resultado e os próximos passos.</p></section>
+<section class='cx-sec cx-dica' aria-labelledby='pv-papel'><div><span class='eyebrow'>DEPOIS DE UMA AÇÃO</span><h2 id='pv-papel'>Recebeu um papel do PET com QR code?</h2><p>Aponte a câmera do celular para o quadrado do papel. Abre a página daquela ação, com o que o resultado quer dizer e o que fazer agora.</p></div><a class='button secondary' href='/acao/acuidade-visual/'>Ver um exemplo <span aria-hidden='true'>→</span></a></section>
 <section class='cx-sec' aria-labelledby='pv-ciclo'><h2 id='pv-ciclo'>Como o PET chega até você</h2><p>Cada ação tem um antes, um durante e um depois. O site liga os três.</p><ol class='cx-ciclo'>
 <li><b>Antes</b><strong>A comunidade chama</strong><span>Escolas, unidades de saúde e grupos de bairro pedem uma ação. Qualquer pessoa vota nos temas.</span><a class='text-link' href='/leve-o-pet/'>Pedir uma ação →</a></li>
 <li><b>Durante</b><strong>A ação tem a sua página</strong><span>O papel entregue no dia traz um QR code. A orientação continua disponível em casa.</span><a class='text-link' href='/acao/acuidade-visual/'>Ver um exemplo →</a></li>
 <li><b>Depois</b><strong>O PET volta para contar</strong><span>As famílias dizem, sem se identificar, se conseguiram o atendimento. O PET publica o que respondeu e onde esteve.</span><a class='text-link' href='/alcance/'>Onde o PET já esteve →</a></li>
 </ol></section>
 <p class='cx-nota'>Quem somos: estudantes de Medicina da UFMT, em Cuiabá. <a class='text-link' href='/o-pet/'>Conhecer o PET →</a> O PET Conecta é uma proposta independente, sem vínculo oficial com o PET Medicina UFMT.</p>
-</div>"""
-
-ESTUDANTES = f"""<div class='wrap page-intro'><span class='eyebrow'>ESTUDANTES</span><h1>Para quem estuda Medicina ou faz parte do PET.</h1><p class='intro-description'>Processo seletivo, cursos e aulas, e o que o grupo pode usar no dia a dia das ações.</p></div>
-<div class='wrap cx'>
-<section class='ap-guia' aria-labelledby='es-t'><h2 id='es-t'>Nesta seção</h2><div class='ap-guia-grid'>
-<a href='/participar/#ingresso'><strong>Processo seletivo</strong><span>Como entrar no PET Medicina UFMT.</span></a>
-<a href='/participar/#parcerias'><strong>Parcerias</strong><span>Instituições que querem propor um trabalho com o grupo.</span></a>
-<a href='/projetos/curso-aph/'><strong>Curso de APH</strong><span>Formação em urgência e emergência.</span></a>
-<a href='/projetos/tarjapet/'><strong>Aulas TarjaPet</strong><span>Farmacologia: como os medicamentos funcionam.</span></a>
-<a href='/para-o-pet/'><strong>Para o PET</strong><span>O que o site oferece ao grupo e como ele chega à população.</span></a>
-<a href='/imprimir/'><strong>Material para imprimir</strong><span>Papel da ação e cartaz com QR code.</span></a>
-</div></section>
-<p class='cx-nota'>O PET Conecta é uma proposta independente, sem vínculo oficial com o PET Medicina UFMT. Confirme inscrições nos canais oficiais do grupo.</p>
 </div>"""
 
 LEVE = f"""<div class='wrap page-intro'><span class='eyebrow'>LEVE O PET ATÉ VOCÊ</span><h1>Peça uma ação de saúde para a sua escola, unidade ou bairro.</h1><p class='intro-description'>Este pedido é para quem responde por um grupo de pessoas: direção de escola, equipe de unidade de saúde, associação ou liderança de bairro. Leva cerca de três minutos.</p></div>
@@ -137,7 +124,6 @@ IMPRIMIR = f"""<div class='wrap page-intro'><span class='eyebrow'>MATERIAL PARA 
 
 PAGINAS = [
     ('atendimento', 'Atendimento', 'Participe de uma ação de saúde, tire uma dúvida ou peça o PET na sua escola ou no seu bairro.', ATENDIMENTO),
-    ('estudantes', 'Estudantes', 'Processo seletivo, cursos e materiais para estudantes de Medicina e para o PET.', ESTUDANTES),
     ('leve-o-pet', 'Leve o PET até você', 'Escolas, unidades de saúde e grupos de bairro podem pedir uma ação de saúde do PET.', LEVE),
     ('acao/acuidade-visual', 'Depois do teste de visão na escola', 'Entenda o papel da triagem de visão, saiba o que fazer se ele pede consulta e conte ao PET como foi.', ACAO),
     ('voce-perguntou', 'Você perguntou, o PET respondeu', 'Dúvidas respondidas e temas votados pela comunidade que viraram conteúdo.', PERGUNTOU),

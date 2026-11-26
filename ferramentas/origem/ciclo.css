@@ -77,9 +77,7 @@
 
 
 /* Home: as quatro portas antes de tudo */
-.cx-portas { padding: var(--esp-6) 0 var(--esp-7); border-bottom: 1px solid var(--line); margin-bottom: var(--esp-6); }
-.cx-portas-cab h1 { font: 400 clamp(32px, 4.4vw, 48px)/1.08 var(--serif); color: var(--ink); margin: var(--esp-3) 0 var(--esp-5); }
-.cx-portas-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--esp-4); list-style: none; padding: 0; margin: 0; }
+.cx-portas-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--esp-4); list-style: none; padding: 0; margin: 0; }
 .cx-portas-grid li { display: flex; }
 .cx-porta { flex: 1; display: flex; flex-direction: column; gap: var(--esp-2); min-height: 120px; padding: var(--card-pad); border: 1.5px solid var(--line); border-radius: var(--raio-card); background: var(--paper); text-decoration: none; }
 .cx-porta strong { font: 400 24px/1.15 var(--serif); color: var(--forest); }
@@ -90,10 +88,7 @@
 .cx-portas-rodape { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--esp-2) var(--esp-5); margin-top: var(--esp-5); }
 .cx-portas-rodape p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ink); }
 .cx-portas-rodape .text-link { min-height: var(--toque); display: inline-flex; align-items: center; }
-.hm-hero h2.hm-titulo { font: 400 clamp(32px, 4.4vw, 48px)/1.08 var(--serif); letter-spacing: -.02em; color: var(--ink); margin: var(--esp-4) 0 var(--esp-5); }
-@media (max-width: 1000px) { .cx-portas-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 760px) {
-  .cx-portas { padding: var(--esp-5) 0 var(--esp-6); }
   .cx-portas-grid { gap: var(--esp-3); }
   .cx-porta { min-height: 112px; padding: var(--esp-4); }
   .cx-porta strong { font-size: 20px; }
@@ -160,14 +155,69 @@
 .trilha [aria-current="page"] { color: var(--ink); }
 .trilha + .page-intro:not(#_), .trilha + .wrap .pj-cab { padding-top: var(--esp-3); }
 
-/* Home: bloco final para estudantes */
-.cx-estudantes { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--esp-4) var(--esp-6); padding: var(--card-pad); border: 1px solid var(--line); border-radius: var(--raio-card); background: var(--paper); margin: var(--esp-7) 0; }
-.cx-estudantes > div { flex: 1 1 320px; }
-.cx-estudantes h2 { font: 400 28px/1.15 var(--serif); color: var(--ink); margin: var(--esp-2) 0; }
-.cx-estudantes p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
-.cx-estudantes .button { border-radius: var(--raio-peq); }
 
 /* Indice da secao dentro de O PET */
 .op .ap-guia { margin: 0 0 var(--esp-6); }
-/* Home: respiro entre as secoes (Aprender termina, Conhecer o PET comeca) */
-.hm-aprender + .hm-hero { margin-top: var(--esp-8); padding-top: var(--esp-6); border-top: 1px solid var(--line); }
+
+/* Home em quatro partes, com o mesmo ritmo: 48px entre blocos de uma parte, 80px e uma linha entre as partes */
+:root .hm:not(#_) { padding-top: var(--esp-5); padding-bottom: var(--esp-9); }
+:root .hm:not(#_) > section { margin-top: var(--esp-7); margin-bottom: 0; }
+:root .hm:not(#_) > section:first-child { margin-top: 0; }
+:root .hm:not(#_) > :is(.hm-aprender, .hm-proj:not(.hm-aprender)) { margin-top: var(--esp-9); padding-top: var(--esp-7); border-top: 1px solid var(--line); }
+.hm-cab .eyebrow, .hm-hero .eyebrow { display: block; }
+
+/* Aprender na home: as duas ferramentas como cartoes, antes dos materiais */
+.cx-ferramentas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--esp-4); margin-bottom: var(--esp-4); }
+.cx-ferramenta { display: flex; flex-direction: column; gap: var(--esp-2); padding: var(--card-pad); border: 1.5px solid var(--line); border-radius: var(--raio-card); background: var(--paper); text-decoration: none; }
+.cx-ferramenta:hover { border-color: var(--forest); }
+.cx-ferramenta:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+.cx-ferramenta strong { font: 400 28px/1.15 var(--serif); color: var(--ink); }
+.cx-ferramenta > span:not(.eyebrow) { font-size: 15px; line-height: 1.6; color: var(--muted); }
+.cx-ferramenta em { margin-top: auto; padding-top: var(--esp-2); font: 600 14px/1.4 var(--sans); font-style: normal; color: var(--forest); }
+
+
+/* Cartoes da home com o mesmo respiro interno */
+.hm-memoria:not(#_) { padding: var(--esp-6); }
+.hm-painel:not(#_) { padding: var(--esp-5); }
+
+/* Atendimento: a dica do QR code como painel, com o botao ao lado */
+.cx-dica { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--esp-4) var(--esp-6); padding: var(--esp-6); border: 1px solid var(--line); border-radius: var(--raio-card); background: var(--paper); }
+.cx-dica > div { flex: 1 1 420px; }
+.cx-sec.cx-dica h2 { margin: var(--esp-2) 0 var(--esp-3); }
+.cx-dica p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--muted); max-width: 68ch; }
+.cx-dica .button { border-radius: var(--raio-peq); }
+
+/* Titulos de secao das paginas novas no mesmo tamanho do resto do site */
+.cx-sec > h2, .cx-dica h2 { font: 400 clamp(28px, 2.8vw, 32px)/1.15 var(--serif); }
+.cx-sec > h2 + p { margin-top: 0; }
+
+@media (max-width: 760px) {
+  .cx-ferramentas { grid-template-columns: 1fr; }
+  .cx-ferramenta strong { font-size: 24px; }
+  :root .hm:not(#_) > :is(.hm-aprender, .hm-proj:not(.hm-aprender)) { margin-top: var(--esp-8); padding-top: var(--esp-6); }
+  .cx-dica, .hm-memoria:not(#_) { padding: var(--esp-5); }
+  .cx-dica .button { width: 100%; justify-content: center; }
+}
+
+/* Escala unica de titulos (revisao de estetica de 26/11/2026)
+   Partes da home: 32-48px. Secoes das paginas: 28-32px. Titulos dentro de cartao ou paineis: 24-28px. Avisos vazios: 20px. */
+:root .hm :is(.hm-cab, .pet-numbers-head) h2:not(#_), :root .hm-hero h1:not(#_) { font: 400 clamp(32px, 3.6vw, 48px)/1.1 var(--serif); letter-spacing: -.02em; }
+:root main :is(.prose, .learning-prose, .bulletin-story, .document-block, .sec-titulo, .section-head, .pj-sec, .part-bloco) h2:not(#_) { font-size: clamp(28px, 2.8vw, 32px); line-height: 1.15; }
+:root .hm-memoria h2:not(#_) { font-size: clamp(24px, 2.4vw, 28px); }
+:root .empty-state h2:not(#_) { font: 400 20px/1.3 var(--serif); margin: 0 0 var(--esp-2); }
+
+/* Largura de leitura: textos corridos e notas com no maximo cerca de 70 caracteres por linha */
+:root .cx-sec > p:not(#_), :root .cx-painel p:not(#_) { max-width: 68ch; }
+:root main .hm-nota:not(#_), :root main .cx-nota:not(#_) { max-width: 72ch; }
+/* Secoes das paginas novas: titulo, texto de apoio e conteudo com o mesmo respiro */
+:root .cx-sec > h2:not(#_) { margin: 0 0 var(--esp-3); }
+:root .cx-sec > p:not(#_) { margin: 0 0 var(--esp-5); }
+
+/* Home: o topo junta "Precisa de algo?" e as quatro portas com o carrossel de fotos */
+:root .hm-hero:not(#_) { padding-bottom: 0; align-items: center; }
+:root .hm-hero h1:not(#_) { margin: var(--esp-3) 0 var(--esp-5); }
+.hm-hero .cx-portas-grid { gap: var(--esp-3); }
+.hm-hero .cx-porta { min-height: 104px; }
+.hm-hero .cx-porta strong { font-size: 24px; }
+.hm-hero .cx-portas-rodape { margin-top: var(--esp-4); }
+.hm-hero .cx-portas-rodape p { font-size: 14px; color: var(--muted); }

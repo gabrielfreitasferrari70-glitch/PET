@@ -32,9 +32,9 @@
 .int-perguntas ol{margin:var(--esp-3) 0 0;padding-left:var(--esp-5)}
 .int-perguntas li{font-size:16px;line-height:1.7;margin-block:var(--esp-2)}
 .int-aviso{font-size:13px;line-height:1.7;color:var(--muted);margin-top:var(--esp-6);border-left:3px solid var(--line);padding-left:var(--esp-4)}
-.int-destaque-home{display:grid;grid-template-columns:1.4fr 1fr;gap:var(--esp-6);align-items:center;border-top:3px solid var(--forest);border-bottom:1px solid var(--line);padding:var(--esp-6) 0}
-.int-destaque-home p{font-size:16px;color:var(--muted);line-height:1.7;margin-top:var(--esp-3)}
-.int-destaque-home .int-acoes{justify-content:flex-end}
+
+
+
 /* Fato ou Fake */
 .ff-wrap{max-width:820px;padding-bottom:var(--esp-8)}
 .ff-progresso{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);margin-bottom:var(--esp-3)}
@@ -60,8 +60,8 @@
 .ff-final .ff-placar{font:400 96px/1 var(--serif);color:var(--forest);letter-spacing:-.04em;margin:var(--esp-4) 0}
 .ff-final p{font-size:18px;color:var(--muted);line-height:1.7}
 .ff-final .int-acoes{margin-top:var(--esp-6)}
-@media(max-width:900px){.int-layout{grid-template-columns:1fr;gap:var(--esp-6)}.int-form{position:static}.int-destaque-home{grid-template-columns:1fr}.int-destaque-home .int-acoes{justify-content:flex-start}}
-@media(max-width:760px){.int-form h2,.int-result h2,.ff-card h2{font-size:28px}.int-item{grid-template-columns:1fr}.int-tag{grid-row:auto;justify-self:start}.int-acoes .button{flex:1;min-width:0}.ff-botoes button{min-height:56px;font-size:16px}.ff-final .ff-placar{font-size:64px}.int-destaque-home .int-acoes{flex-direction:column;align-items:stretch}.int-destaque-home .int-acoes .button{width:100%;justify-content:space-between}.int-vazio{padding:var(--esp-6) var(--esp-5)}}
+@media(max-width:900px){.int-layout{grid-template-columns:1fr;gap:var(--esp-6)}.int-form{position:static}}
+@media(max-width:760px){.int-form h2,.int-result h2,.ff-card h2{font-size:28px}.int-item{grid-template-columns:1fr}.int-tag{grid-row:auto;justify-self:start}.int-acoes .button{flex:1;min-width:0}.ff-botoes button{min-height:56px;font-size:16px}.ff-final .ff-placar{font-size:64px}.int-vazio{padding:var(--esp-6) var(--esp-5)}}
 @media print{.int-grupo>h3,.int-perguntas>h3{break-after:avoid}.int-result:before{content:'PET Conecta · Minha Saúde em Dia · pet-conecta.vercel.app/saude-em-dia';display:block;font-size:10pt;color:var(--muted);margin-bottom:var(--esp-4)}.editorial-header,.header,footer,.fale-flutuante,.int-form,.int-acoes,.skip,#toast,dialog{display:none!important}.int-layout{display:block;padding:0}.int-item{break-inside:avoid}body{font-size:12pt}a{text-decoration:none}}
 .ap-guia-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 /* Barra de cima com Saúde em Dia e Fato ou Fake: tudo numa linha a partir de 1001px */

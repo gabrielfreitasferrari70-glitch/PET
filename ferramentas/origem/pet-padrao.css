@@ -113,7 +113,6 @@
 
 /* ===== C. Celular ===== */
 @media (max-width:760px) {
-  .hm-acoes .button { width: 100%; justify-content: space-between; box-sizing: border-box; }
 }
 
 /* De Jaleco e Fone: fundo laranja enquanto a foto da equipe carrega */
@@ -175,7 +174,7 @@
 
 /* ===== A2. Botões: um raio, uma altura ===== */
 .button, .djf-button, .header-tools .join, .part-acoes .button, .assinar-acoes .button,
-.event-actions .button, .com-form .button, .hm-acoes .button {border-radius: var(--raio-peq)}.djf-button {background: var(--forest);color: var(--paper)}
+.event-actions .button, .com-form .button {border-radius: var(--raio-peq)}.djf-button {background: var(--forest);color: var(--paper)}
 .djf-button:hover {background: var(--forest);color: var(--paper)}.fale-votos,.part-parceria,.op-cx,.pj-nums li,.hm-car-palco,.agenda-assinar{background: var(--paper)}.hm-fale {background: var(--paper);color: var(--ink)}
 .hm-fale h2 {color: var(--ink)}
 .hm-fale p {color: var(--muted)}

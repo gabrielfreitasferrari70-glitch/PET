@@ -2,6 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     { "source": "/voce", "destination": "/?c=endereco-voce", "permanent": false },
+    { "source": "/estudantes", "destination": "/participar/", "permanent": false },
+    { "source": "/estudantes/", "destination": "/participar/", "permanent": false },
     { "source": "/para-voce", "destination": "/", "permanent": true },
     { "source": "/para-voce/", "destination": "/", "permanent": true },
     { "source": "/visao", "destination": "/acao/acuidade-visual/?c=endereco-visao", "permanent": false },

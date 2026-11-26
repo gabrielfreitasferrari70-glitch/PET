@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Aplica a mesma navegacao em todas as paginas: menu, menu do celular, rodape e trilha (Inicio > Secao > Pagina).
-A ordem das secoes segue o que a comunidade procura primeiro: Atendimento, Aprender, Conhecer o PET, Estudantes.
+A ordem segue o que a comunidade procura primeiro: Atendimento, Aprender, YouTube, Projetos e O PET.
 Rode por ultimo, depois de gerar-projetos.py e gerar-ciclo.py:  python3 ferramentas/aplicar-navegacao.py
 """
 import glob, html, os, re
@@ -8,11 +8,12 @@ import glob, html, os, re
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECOES = [  # (chave, nome no menu, endereco, prefixos das paginas que pertencem a ela)
     ('atendimento', 'Atendimento', '/atendimento/', ('atendimento/', 'agenda/', 'acao/', 'comunidade/', 'leve-o-pet/')),
-    ('aprender', 'Aprender', '/aprender/', ('aprender/', 'colecoes/', 'saude-em-dia/', 'fato-ou-fake/', 'youtube/', 'de-jaleco-e-fone/', 'voce-perguntou/')),
-    ('o-pet', 'Conhecer o PET', '/o-pet/', ('o-pet/', 'projetos/', 'alcance/', 'publicacoes/', 'redes/')),
-    ('estudantes', 'Estudantes', '/estudantes/', ('estudantes/', 'participar/', 'para-o-pet/', 'imprimir/')),
+    ('aprender', 'Aprender', '/aprender/', ('aprender/', 'colecoes/', 'saude-em-dia/', 'fato-ou-fake/', 'de-jaleco-e-fone/', 'voce-perguntou/')),
+    ('youtube', 'YouTube', '/youtube/', ('youtube/',)),
+    ('projetos', 'Projetos', '/projetos/', ('projetos/',)),
+    ('o-pet', 'O PET', '/o-pet/', ('o-pet/', 'alcance/', 'publicacoes/', 'redes/', 'participar/', 'para-o-pet/', 'imprimir/')),
 ]
-MEIO = {'projetos/': ('Projetos', '/projetos/'), 'publicacoes/': ('Publicações', '/publicacoes/')}
+MEIO = {'publicacoes/': ('Publicações', '/publicacoes/')}
 NOMES = {'404.html': 'Página não encontrada', 'comunidade/index.html': 'Tirar uma dúvida', 'agenda/index.html': 'Próximas ações',
          'projetos/curso-aph/index.html': 'Curso de APH', 'de-jaleco-e-fone/index.html': 'De Jaleco e Fone', 'fato-ou-fake/index.html': 'Fato ou Fake',
          'voce-perguntou/index.html': 'Você perguntou', 'acao/acuidade-visual/index.html': 'Teste de visão na escola', 'youtube/index.html': 'Vídeos'}
@@ -38,8 +39,8 @@ def celular(q, atual):
 
 RODAPE = ("<div><h2>Explore</h2><a href='/atendimento/'>Atendimento</a><a href='/agenda/'>Próximas ações</a><a href='/comunidade/?tipo=duvida'>Tirar uma dúvida</a>"
           "<a href='/aprender/'>Aprender</a><a href='/saude-em-dia/'>Saúde em Dia</a><a href='/fato-ou-fake/'>Fato ou Fake</a>"
-          "<a href='/o-pet/'>Conhecer o PET</a><a href='/projetos/'>Projetos</a><a href='/publicacoes/'>Jornal e publicações</a>"
-          "<a href='/estudantes/'>Estudantes</a><a href='/participar/'>Processo seletivo</a></div>")
+          "<a href='/youtube/'>YouTube</a><a href='/projetos/'>Projetos</a><a href='/o-pet/'>O PET</a><a href='/publicacoes/'>Jornal e publicações</a>"
+          "<a href='/participar/'>Processo seletivo</a></div>")
 
 paginas = sorted(p for p in glob.glob(os.path.join(RAIZ, '**', '*.html'), recursive=True) if os.sep + 'ferramentas' + os.sep not in p)
 for caminho in paginas:
