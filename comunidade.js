@@ -1,7 +1,7 @@
 (function(){'use strict';var P=window.PET;if(!P){return;}
 var ALIAS='0c6a077896ce402455ad91693ad6b897',soma=0,ntemas=0,CAT=P.CAT_TEMA,votados=P.votados,marca=P.marcaVoto,plural=P.plural;
 var TIPOS={
- duvida:{nome:'Dúvida de saúde',titulo:'Sua dúvida',rotulo:'Qual é a sua dúvida?',ph:'Ex.: quem pode doar sangue?',assunto:true,min:10,max:1000,subj:'nova dúvida de saúde',nomeRot:'Seu nome (opcional)',contRot:'Telefone ou e-mail para resposta (opcional)',contObr:false,ok:'Dúvida enviada! Se você deixou um contato, a resposta chega por lá.'},
+ duvida:{nome:'Dúvida de saúde',titulo:'Sua dúvida',rotulo:'Qual é a sua dúvida?',ph:'Ex.: quem pode doar sangue?',assunto:true,min:10,max:1000,subj:'nova dúvida de saúde',nomeRot:'Seu nome (opcional)',contRot:'E-mail para resposta (obrigatório)',contPh:'voce@exemplo.com',contObr:true,tel:true,ok:'Dúvida enviada! A resposta chega pelo contato que você informou.'},
  tema:{nome:'Sugestão de tema',titulo:'Sugerir um tema',rotulo:'Sobre o que você gostaria de entender melhor?',ph:'Ex.: como saber se meu filho precisa de óculos',assunto:true,min:5,max:280,subj:'novo tema sugerido',nomeRot:'Seu nome (opcional)',contRot:'Telefone ou e-mail (opcional)',contObr:false,ok:'Recebido! Se fizer sentido, o tema entra na votação ao lado.'},
  mensagem:{nome:'Mensagem',titulo:'Sua mensagem',rotulo:'O que você quer dizer ao PET?',ph:'Ex.: participei do Trote Solidário e queria agradecer…',assunto:false,min:5,max:1500,subj:'nova mensagem',nomeRot:'Seu nome (opcional)',contRot:'Telefone ou e-mail (opcional)',contObr:false,ok:'Mensagem enviada. Obrigado por escrever!'},
  parceria:{nome:'Proposta de parceria',titulo:'Sua proposta',rotulo:'Conte a demanda ou a ideia',ph:'Ex.: somos uma escola do bairro e gostaríamos de uma ação sobre saúde visual com os alunos…',assunto:false,min:20,max:1500,subj:'nova proposta de parceria',nomeRot:'Seu nome e instituição',contRot:'Telefone ou e-mail para retorno (obrigatório)',contObr:true,ok:'Proposta enviada! A resposta chega pelo contato que você informou.'}
@@ -19,20 +19,21 @@ function tipo(k){if(!TIPOS[k]){k='duvida';}atual=k;var o=TIPOS[k];
  $('fale-titulo').textContent=o.titulo;$('fale-rotulo').textContent=o.rotulo;t.placeholder=o.ph;t.maxLength=o.max;
  if(t.value.length>o.max){t.value=t.value.slice(0,o.max);}cnt.textContent=t.value.length+'/'+o.max;
  $('fale-assunto').hidden=!o.assunto;$('fale-nome-rot').textContent=o.nomeRot;$('fale-cont-rot').textContent=o.contRot;
- $('fale-contato').required=o.contObr;$('fale-aviso-saude').hidden=k!=='duvida';msgEstado('','');}
+ $('fale-contato').required=o.contObr;$('fale-contato').placeholder=o.contPh||'Telefone ou e-mail';$('fale-tel-campo').hidden=!o.tel;$('fale-tel').required=!!o.tel;$('fale-aviso-saude').hidden=k!=='duvida';msgEstado('','');}
 document.querySelectorAll('[data-tipo]').forEach(function(b){b.addEventListener('click',function(){tipo(b.getAttribute('data-tipo'));if(window.matchMedia('(max-width:760px)').matches||b.classList.contains('fale-link')){$('fale-form').scrollIntoView({behavior:'smooth',block:'start'});}t.focus({preventScroll:true});});});
 if(t){t.addEventListener('input',function(){cnt.textContent=t.value.length+'/'+TIPOS[atual].max;});
- btn.addEventListener('click',function(){var o=TIPOS[atual],v=t.value.trim(),nome=$('fale-nome').value.trim(),cont=$('fale-contato').value.trim();msgEstado('','');
+ btn.addEventListener('click',function(){var o=TIPOS[atual],v=t.value.trim(),nome=$('fale-nome').value.trim(),cont=$('fale-contato').value.trim(),tel=$('fale-tel').value.trim();msgEstado('','');
   if($('fale-hp').value){msgEstado('ok',o.ok);return;}
   if(v.length<o.min){msgEstado('erro','Escreva pelo menos '+o.min+' caracteres.');t.focus();return;}
-  if(o.contObr&&cont.length<6){msgEstado('erro','Informe um telefone ou e-mail para o PET responder.');$('fale-contato').focus();return;}
+  if(o.tel){if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cont)){msgEstado('erro','Informe um e-mail válido para o PET responder.');$('fale-contato').focus();return;}if(tel.replace(/\D/g,'').length<10){msgEstado('erro','Informe um telefone com DDD.');$('fale-tel').focus();return;}}
+  else if(o.contObr&&cont.length<6){msgEstado('erro','Informe um telefone ou e-mail para o PET responder.');$('fale-contato').focus();return;}
   var cat=$('fale-cat').value,d={_subject:'PET Conecta: '+o.subj+(o.assunto?' · '+(CAT[cat]||'Outro tema'):''),_template:'table',_captcha:'false',Tipo:o.nome};
   if(o.assunto){d.Assunto=CAT[cat]||'Outro tema';}
-  d.Mensagem=v;d.Nome=nome||'(não informado)';d.Contato=cont||'(não informado)';d.Enviado_em=new Date().toLocaleString('pt-BR',{timeZone:'America/Cuiaba'});
+  d.Mensagem=v;d.Nome=nome||'(não informado)';d.Contato=cont||'(não informado)';if(o.tel){d.Telefone=tel;}d.Enviado_em=new Date().toLocaleString('pt-BR',{timeZone:'America/Cuiaba'});
   if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cont)){d._replyto=cont;}
   btn.disabled=true;btn.setAttribute('aria-busy','true');msgEstado('','Enviando…');
-  var m={tipo:atual,categoria:o.assunto?(CAT[cat]?cat:'outro'):'',texto:v,nome:nome,contato:cont};
-  enviarTudo(d,m).then(function(){t.value='';$('fale-nome').value='';$('fale-contato').value='';cnt.textContent='0/'+o.max;msgEstado('ok',o.ok);if(window.petMedir){window.petMedir('mensagem',{alvo:atual});}})
+  var m={tipo:atual,categoria:o.assunto?(CAT[cat]?cat:'outro'):'',texto:v,nome:nome,contato:o.tel?cont+' · '+tel:cont};
+  enviarTudo(d,m).then(function(){t.value='';$('fale-nome').value='';$('fale-contato').value='';$('fale-tel').value='';cnt.textContent='0/'+o.max;msgEstado('ok',o.ok);if(window.petMedir){window.petMedir('mensagem',{alvo:atual});}})
   .catch(function(){msgEstado('erro','Não foi possível enviar agora. Tente novamente em instantes.');})
   .then(function(){btn.disabled=false;btn.removeAttribute('aria-busy');});});
  var q=new URLSearchParams(location.search).get('tipo')||location.hash.replace('#','');tipo(TIPOS[q]?q:'duvida');}
