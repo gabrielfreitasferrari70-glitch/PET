@@ -27,14 +27,30 @@ def secao(rel):
     return None
 
 
-def menu(q, atual):
-    return ''.join(f"<a href={q}{s[2]}{q}{f' aria-current={q}page{q}' if atual and atual[0] == s[0] else ''}>{s[1]}</a>" for s in SECOES)
+# Menu de cima: as secoes, com as duas ferramentas mais usadas logo depois de Aprender (acesso direto).
+# A trilha continua seguindo as secoes (Saude em Dia e Fato ou Fake ficam em Inicio > Aprender).
+MENU = [('Atendimento', '/atendimento/', SECOES[0][3]), ('Aprender', '/aprender/', ('aprender/', 'colecoes/', 'de-jaleco-e-fone/', 'voce-perguntou/')),
+        ('Saúde em Dia', '/saude-em-dia/', ('saude-em-dia/',)), ('Fato ou Fake', '/fato-ou-fake/', ('fato-ou-fake/',)),
+        ('YouTube', '/youtube/', ('youtube/',)), ('Projetos', '/projetos/', ('projetos/',)), ('O PET', '/o-pet/', SECOES[4][3])]
 
 
-def celular(q, atual):
-    a = f"<a href={q}{DUVIDA}{q} class={q}menu-destaque{q}>Tirar uma dúvida</a><a href={q}/{q}>Início</a>"
-    a += ''.join(f"<a href={q}{s[2]}{q}{f' class={q}active{q} aria-current={q}page{q}' if atual and atual[0] == s[0] else ''}>{s[1]}</a>" for s in SECOES)
-    return a + f"<span class={q}menu-sep{q} aria-hidden={q}true{q}></span><a href={q}/comunidade/#temas{q} class={q}menu-sec{q}>Votar em temas</a><button type={q}button{q} class={q}menu-sec{q} data-abrir-leitura>Preferências de leitura</button>"
+def item_atual(rel):
+    for nome, url, pre in MENU:
+        if rel.startswith(pre):
+            return url
+    return None
+
+
+def menu(q, rel):
+    a = item_atual(rel)
+    return ''.join(f"<a href={q}{u}{q}{f' aria-current={q}page{q}' if u == a else ''}>{n}</a>" for n, u, _ in MENU)
+
+
+def celular(q, rel):
+    a = item_atual(rel)
+    h = f"<a href={q}{DUVIDA}{q} class={q}menu-destaque{q}>Tirar uma dúvida</a><a href={q}/{q}>Início</a>"
+    h += ''.join(f"<a href={q}{u}{q}{f' class={q}active{q} aria-current={q}page{q}' if u == a else ''}>{n}</a>" for n, u, _ in MENU)
+    return h + f"<span class={q}menu-sep{q} aria-hidden={q}true{q}></span><a href={q}/comunidade/#temas{q} class={q}menu-sec{q}>Votar em temas</a><button type={q}button{q} class={q}menu-sec{q} data-abrir-leitura>Preferências de leitura</button>"
 
 
 RODAPE = ("<div><h2>Explore</h2><a href='/atendimento/'>Atendimento</a><a href='/agenda/'>Próximas ações</a><a href='/comunidade/?tipo=duvida'>Tirar uma dúvida</a>"
@@ -49,8 +65,8 @@ for caminho in paginas:
         h = f.read()
     original = h
     s = secao(rel)
-    h, n1 = re.subn(r"(<nav class=(['\"])desktop-nav\2 aria-label=\2Principal\2>).*?(</nav>)", lambda m: m.group(1) + menu(m.group(2), s) + m.group(3), h, count=1, flags=re.S)
-    h, n2 = re.subn(r"(<nav id=(['\"])mobile-menu\2 aria-label=\2Menu móvel\2 hidden>).*?(</nav>)", lambda m: m.group(1) + celular(m.group(2), s) + m.group(3), h, count=1, flags=re.S)
+    h, n1 = re.subn(r"(<nav class=(['\"])desktop-nav\2 aria-label=\2Principal\2>).*?(</nav>)", lambda m: m.group(1) + menu(m.group(2), rel) + m.group(3), h, count=1, flags=re.S)
+    h, n2 = re.subn(r"(<nav id=(['\"])mobile-menu\2 aria-label=\2Menu móvel\2 hidden>).*?(</nav>)", lambda m: m.group(1) + celular(m.group(2), rel) + m.group(3), h, count=1, flags=re.S)
     h = re.sub(r"<a href=(['\"])/comunidade/#temas\1 class=\1join-votar\1>Votar em temas</a>", '', h)
     h, n3 = re.subn(r"<a href=(['\"])/comunidade/[^'\"]*\1 class=\1join\1[^>]*>(<span class=\1fala-ic\1 aria-hidden=\1true\1></span>)[^<]*</a>",
                     lambda m: f"<a href={m.group(1)}{DUVIDA}{m.group(1)} class={m.group(1)}join{m.group(1)} data-v2=''>{m.group(2)}Tirar uma dúvida</a>", h, count=1)
