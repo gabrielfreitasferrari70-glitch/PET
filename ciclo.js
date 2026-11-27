@@ -17,6 +17,16 @@
   function link(u, txt) { var d = destino(u); if (!d) { return null; } var a = el('a', 'text-link'), fora = u.indexOf('https://') === 0; a.href = d; a.textContent = txt + (fora ? ' ↗' : ' →'); if (fora) { a.target = '_blank'; a.rel = 'noopener noreferrer'; } return a; }
   function medir(alvo) { if (window.petMedir) { window.petMedir('avaliacao', { alvo: alvo }); } }
 
+  /* ---------- Leve o PET até você: "Pedir esta ação" já escolhe a ação no pedido ---------- */
+  document.querySelectorAll('[data-pedir]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var sel = $('lp-acao'); if (!sel) { return; }
+      Array.prototype.forEach.call(sel.options, function (o, i) { if (o.text === b.getAttribute('data-pedir')) { sel.selectedIndex = i; } });
+      var alvo = $('pedido'); if (alvo) { alvo.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      setTimeout(function () { sel.focus({ preventScroll: true }); }, 400);
+    });
+  });
+
   /* ---------- Leve o PET até você: pedido formal de ação ---------- */
   var enviarBtn = $('lp-enviar');
   if (enviarBtn) {

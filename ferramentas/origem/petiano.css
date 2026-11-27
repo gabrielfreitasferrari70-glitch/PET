@@ -237,3 +237,17 @@
 .en-ret-fim { margin-top: var(--esp-2); font-weight: 600; color: var(--forest); }
 .en-lembrete-aviso:empty { display: none; }
 .en-lembrete-aviso { margin-top: var(--esp-3); }
+
+/* Leve o PET ate voce: catalogo de acoes com "Pedir esta acao" */
+.lv-cat { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--esp-4); }
+.lv-item { display: flex; flex-direction: column; gap: var(--esp-3); padding: var(--esp-5); border: 1px solid var(--line); border-radius: var(--raio-card); background: var(--paper); }
+.lv-topo { display: flex; flex-wrap: wrap; gap: var(--esp-2); }
+.lv-status, .lv-pub { padding: var(--esp-1) var(--esp-3); border-radius: var(--raio-pill); font-size: 12px; font-weight: 600; border: 1px solid var(--line); color: var(--muted); }
+.lv-status.lv-ativo { border-color: var(--mint); background: var(--mint); color: var(--forest); }
+.lv-item h3 { margin: 0; font: 400 24px/1.2 var(--serif); }
+.lv-item p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
+.lv-acoes { display: flex; flex-direction: column; align-items: flex-start; gap: var(--esp-2); margin-top: auto; padding-top: var(--esp-2); }
+.lv-acoes .button { border-radius: var(--raio-peq); }
+#pedido { scroll-margin-top: var(--esp-9); }
+@media (max-width: 900px) { .lv-cat { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .lv-cat { grid-template-columns: 1fr; } .lv-acoes .button { width: 100%; justify-content: center; } }
