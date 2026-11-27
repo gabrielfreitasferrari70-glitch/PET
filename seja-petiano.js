@@ -38,6 +38,30 @@
     }
   }
 
+  // Teste a sua: (E1 x 2 + E2 x 3 + E3 x 5) / 10, com os cortes do edital
+  var calc = document.querySelector('[data-calc]');
+  if (calc) {
+    var saida = calc.querySelector('[data-calc-nota]'), aviso = calc.querySelector('[data-calc-aviso]');
+    var ler = function (nome) {
+      var c = calc.elements[nome], v = c.value.trim().replace(',', '.');
+      if (v === '') { c.removeAttribute('aria-invalid'); return null; }
+      var n = Number(v), ok = isFinite(n) && n >= 0 && n <= 10;
+      c.setAttribute('aria-invalid', String(!ok));
+      return ok ? n : NaN;
+    };
+    var conta = function () {
+      var e1 = ler('e1'), e2 = ler('e2'), e3 = ler('e3'), notas = [e1, e2, e3];
+      if (notas.some(function (n) { return n !== null && isNaN(n); })) { saida.textContent = '–'; aviso.textContent = 'Use notas de 0 a 10.'; return; }
+      if (notas.some(function (n) { return n === null; })) { saida.textContent = '–'; aviso.textContent = 'Preencha as três notas.'; return; }
+      saida.textContent = ((e1 * 2 + e2 * 3 + e3 * 5) / 10).toFixed(2).replace('.', ',');
+      if (e1 < 7) aviso.textContent = 'Atenção: abaixo de 7 na prova objetiva elimina antes da etapa II.';
+      else if (e2 === 0 || e3 === 0) aviso.textContent = 'Atenção: nota zero no projeto ou na entrevista desclassifica.';
+      else aviso.textContent = 'A classificação depende das notas dos outros candidatos.';
+    };
+    calc.addEventListener('input', conta);
+    calc.addEventListener('submit', function (ev) { ev.preventDefault(); conta(); });
+  }
+
   var filtros = Array.prototype.slice.call(document.querySelectorAll('.sp-filtro'));
   var grupos = Array.prototype.slice.call(document.querySelectorAll('.sp-doc-grupo'));
   filtros.forEach(function (b) {

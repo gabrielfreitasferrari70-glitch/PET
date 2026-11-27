@@ -56,7 +56,7 @@ RESULTADOS = ('PASTA', 'Pasta com todos os resultados', PASTA.format('1NMPMFAiJA
 ETAPAS = [
     {'id': 'estudar', 'titulo': 'Conheça o PET e estude', 'quando': 'Antes da inscrição', 'inicio': '2026-09-24T00:00:00-04:00', 'fim': '2026-10-16T23:59:00-04:00',
      'texto': 'A prova objetiva cobra o Manual de Orientações Básicas e a legislação do programa. A entrevista pergunta o que o PET Medicina fez em 2026 e como você entraria nessas atividades.',
-     'itens': [], 'arquivos': [MOB, ESTUDO, CENAPET, MEC_MANUAL, MEC_LEIS], 'extra': ("Projetos do PET Medicina", '/projetos/')},
+     'itens': [], 'arquivos': [MOB, ESTUDO, CENAPET, MEC_MANUAL, MEC_LEIS], 'extra': ('Conheça os projetos do PET', '/projetos/', 'Os 12 projetos do PET Medicina, o que cada um faz e como você entraria neles')},
     {'id': 'inscricao', 'titulo': 'Faça a inscrição', 'quando': '12 a 16 de outubro', 'inicio': '2026-10-12T00:00:00-04:00', 'fim': '2026-10-19T23:59:00-04:00',
      'texto': 'Pelo formulário do edital, com estes documentos:',
      'itens': ['Documento de identidade e CPF', 'Histórico escolar atualizado (no 1º semestre, o comprovante de matrícula)', 'Currículo Lattes atualizado', 'Anexo I e Anexo II preenchidos'],
@@ -121,7 +121,8 @@ def etapa(n, e):
     datas = ''.join(f"<li><b>{E(d)}</b><span>{E(t)}</span></li>" for d, t in e.get('datas', []))
     datas = f"<details class='sp-datas'><summary>Todas as datas desta etapa</summary><ol>{datas}</ol></details>" if datas else ''
     arqs = ''.join(arquivo(a) for a in e['arquivos'])
-    extra = f"<a class='text-link' href='{e['extra'][1]}'>{E(e['extra'][0])} →</a>" if e.get('extra') else ''
+    extra = (f"<a class='sp-destaque' href='{e['extra'][1]}'><span class='sp-destaque-txt'><strong>{E(e['extra'][0])}</strong><small>{E(e['extra'][2])}</small></span>"
+             f"<span class='sp-destaque-seta' aria-hidden='true'>→</span></a>") if e.get('extra') else ''
     return (f"<li class='sp-passo' id='etapa-{e['id']}' data-inicio='{e['inicio']}' data-fim='{e['fim']}'>"
             f"<span class='sp-num' aria-hidden='true'>{n}</span><div class='sp-passo-corpo'>"
             f"<div class='sp-passo-topo'><h3>{E(e['titulo'])}</h3><span class='sp-estado' data-estado></span></div>"
@@ -157,7 +158,7 @@ CORPO = f"""<div class='wrap sp-hero'>
 <section class='sp-sec' aria-labelledby='sp-req'><h2 id='sp-req'>Quem pode se inscrever</h2><ul class='sp-req'>{req}</ul></section>
 <section class='sp-sec' aria-labelledby='sp-passos'><h2 id='sp-passos'>Passo a passo</h2><p class='sp-sub'>Da preparação ao resultado final, com os arquivos de cada etapa logo abaixo dela.</p><ol class='sp-passos'>{passos}</ol></section>
 <section class='sp-sec sp-nota' aria-labelledby='sp-nota-t'><div><h2 id='sp-nota-t'>Como a nota final é calculada</h2><p>Cada etapa vale de 0 a 10. A nota final é a média ponderada: a entrevista pesa metade.</p>
-<p class='sp-formula'>Nota final = (E1 × 2 + E2 × 3 + E3 × 5) ÷ 10</p><p class='sp-sub'>Empate: primeiro quem tem 60 anos ou mais, depois quem está no semestre mais avançado, depois quem é mais velho.</p></div><ul class='sp-pesos'>{nota}</ul></section>
+<p class='sp-formula'>Nota final = (E1 × 2 + E2 × 3 + E3 × 5) ÷ 10</p><p class='sp-sub'>Empate: primeiro quem tem 60 anos ou mais, depois quem está no semestre mais avançado, depois quem é mais velho.</p></div><ul class='sp-pesos'>{nota}</ul><form class='sp-calc' data-calc novalidate><div class='sp-calc-topo'><h3>Teste a sua</h3><p>Digite suas notas de 0 a 10 e veja a nota final. Nada é enviado ou guardado.</p></div><div class='sp-calc-campos'><label><span>Etapa I · prova <small>peso 2</small></span><input type='number' inputmode='decimal' min='0' max='10' step='0.1' name='e1' placeholder='0 a 10'></label><label><span>Etapa II · projeto <small>peso 3</small></span><input type='number' inputmode='decimal' min='0' max='10' step='0.1' name='e2' placeholder='0 a 10'></label><label><span>Etapa III · entrevista <small>peso 5</small></span><input type='number' inputmode='decimal' min='0' max='10' step='0.1' name='e3' placeholder='0 a 10'></label><div class='sp-calc-res' aria-live='polite'><span>Nota final</span><output name='nf' data-calc-nota>–</output><small data-calc-aviso>Preencha as três notas.</small></div></div></form></section>
 <section class='sp-sec' id='documentos' aria-labelledby='sp-docs'><h2 id='sp-docs'>Todos os arquivos</h2><p class='sp-sub'>Cada item abre direto o arquivo no Drive do PET.</p>
 <div class='sp-filtros' role='group' aria-label='Filtrar arquivos'>{filtros}</div><div class='sp-docs'>{docs}</div></section>
 <section class='sp-sec' aria-labelledby='sp-antes'><h2 id='sp-antes'>Edições anteriores</h2><p class='sp-sub'>Editais e resultados de outros anos, para entender como a seleção costuma ser.</p><div class='sp-anos'>{antes}</div></section>

@@ -57,3 +57,12 @@
 /* A ultima secao da pagina nao deixa linha nem vazio antes do rodape */
 :root main .pj-sec:last-child:not(#_) { border-bottom: 0; padding-bottom: 0; }
 :root main .cx-ferramenta .eyebrow:not(#_) { margin: 0; }
+
+/* Topo das paginas: a trilha (Inicio > ...) fica colada ao cabecalho e o conteudo comeca logo abaixo dela, em todas as paginas.
+   Os blocos de trilha antigos que ficaram vazios nao ocupam espaco. */
+.trilha:not(#_) { padding-top: var(--esp-2); }
+:is(.breadcrumb-line, .djf-breadcrumb):empty { display: none; }
+.trilha + :is(.page-intro, .yt-intro, .sp-hero):not(#_):not(#_),
+.trilha + :is(.breadcrumb-line, .djf-breadcrumb):empty + :is(.page-intro, .djf-hero):not(#_):not(#_) { padding-top: var(--esp-2); margin-top: 0; }
+.trilha + .wrap.pj:not(#_):not(#_) { padding-top: var(--esp-2); margin-top: 0; }
+.trilha + .pj > .pj-cab:not(#_):not(#_) { grid-row: 1; padding-top: 0; margin-top: 0; }
