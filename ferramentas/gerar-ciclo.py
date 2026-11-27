@@ -36,6 +36,7 @@ ATENDIMENTO = f"""<div class='wrap page-intro'><span class='eyebrow'>ATENDIMENTO
 <a href='/comunidade/?tipo=duvida'><strong>Tirar uma dúvida de saúde</strong><span>A pergunta não é publicada e a resposta chega pelo seu contato.</span></a>
 <a href='/leve-o-pet/'><strong>Levar o PET até você</strong><span>Escolas, unidades de saúde e grupos de bairro pedem uma ação.</span></a>
 <a href='/qr/'><strong>Veio por um QR code ou link?</strong><span>O que cada papel, cartaz ou link do PET traz.</span></a>
+<a href='/doar/'><strong>Doar sangue ou medula</strong><span>Veja se pode doar hoje e como agendar no MT Hemocentro.</span></a>
 </div></section>
 <section class='cx-sec cx-dica' aria-labelledby='pv-papel'><div><span class='eyebrow'>DEPOIS DE UMA AÇÃO</span><h2 id='pv-papel'>Veio por um QR code ou link?</h2><p>Veja o que cada papel, cartaz ou link do PET traz, como ler o QR code com o celular e o que fazer se ele não abrir.</p></div><a class='button secondary' href='/qr/'>Entender o QR code <span aria-hidden='true'>→</span></a></section>
 <section class='cx-sec' aria-labelledby='pv-ciclo'><h2 id='pv-ciclo'>Como o PET chega até você</h2><p>Cada ação tem um antes, um durante e um depois. O site liga os três.</p><ol class='cx-ciclo'>

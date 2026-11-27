@@ -7,7 +7,7 @@ import glob, html, os, re
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECOES = [  # (chave, nome no menu, endereco, prefixos das paginas que pertencem a ela)
-    ('atendimento', 'Atendimento', '/atendimento/', ('atendimento/', 'agenda/', 'acao/', 'comunidade/', 'leve-o-pet/', 'qr/')),
+    ('atendimento', 'Atendimento', '/atendimento/', ('atendimento/', 'agenda/', 'acao/', 'comunidade/', 'leve-o-pet/', 'qr/', 'doar/')),
     ('aprender', 'Aprender', '/aprender/', ('aprender/', 'colecoes/', 'saude-em-dia/', 'fato-ou-fake/', 'de-jaleco-e-fone/', 'voce-perguntou/')),
     ('youtube', 'YouTube', '/youtube/', ('youtube/',)),
     ('projetos', 'Projetos', '/projetos/', ('projetos/',)),
@@ -54,7 +54,7 @@ def celular(q, rel):
     return h + f"<span class={q}menu-sep{q} aria-hidden={q}true{q}></span><a href={q}/comunidade/#temas{q} class={q}menu-sec{q}>Votar em temas</a><button type={q}button{q} class={q}menu-sec{q} data-abrir-leitura>Preferências de leitura</button>"
 
 
-RODAPE = ("<div><h2>Explore</h2><a href='/atendimento/'>Atendimento</a><a href='/agenda/'>Próximas ações</a><a href='/comunidade/?tipo=duvida'>Tirar uma dúvida</a>"
+RODAPE = ("<div><h2>Explore</h2><a href='/atendimento/'>Atendimento</a><a href='/agenda/'>Próximas ações</a><a href='/comunidade/?tipo=duvida'>Tirar uma dúvida</a><a href='/doar/'>Doar sangue</a>"
           "<a href='/aprender/'>Aprender</a><a href='/saude-em-dia/'>Saúde em Dia</a><a href='/fato-ou-fake/'>Fato ou Fake</a>"
           "<a href='/youtube/'>YouTube</a><a href='/projetos/'>Projetos</a><a href='/o-pet/'>O PET</a><a href='/publicacoes/'>Jornal e publicações</a>"
           "<a href='/seja-petiano/'>Seja um Petiano</a></div>")
