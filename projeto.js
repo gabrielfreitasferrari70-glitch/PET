@@ -1,6 +1,8 @@
 (function(){'use strict';
 var raiz=document.getElementById('pj-raiz'),P=window.PET;if(!raiz||!P){return;}
 // Paginas geradas por ferramentas/gerar-projetos.py ja vem completas no HTML.
+// Itens com prazo (data-ate): somem depois da data, para a pagina nao anunciar algo encerrado
+document.querySelectorAll('[data-ate]').forEach(function(e){var t=Date.parse(e.getAttribute('data-ate'));if(t&&Date.now()>t){e.hidden=true;}});
 if(raiz.hasAttribute('data-gerado')){return;}
 var esc=P.esc,ext=P.la,seta=P.seta;
 function url(u){return P.safeUrl(u)||'#';}

@@ -40,7 +40,7 @@
       vac.push(item('Vacina', 'Hepatite B', 'Se o esquema de 3 doses não está completo, complete durante o pré-natal.', F.cnv));
       vac.push(item('Vacina', 'Vacinas que esperam o parto', 'Tríplice viral, varicela e dengue (feitas com vírus vivo atenuado) e a vacina de HPV não são aplicadas na gravidez. Se alguma estiver atrasada, a UBS orienta tomar depois do parto. A de febre amarela só é aplicada em situações excepcionais, com avaliação médica.', F.cnv));
       exa.push(item('Exame', 'Pré-natal em dia', 'Os exames da gestação, como o de glicemia para diabetes gestacional, são pedidos nas consultas do pré-natal. Leve sempre a Caderneta da Gestante.', 'Ministério da Saúde, Caderneta da Gestante'));
-      if (idade >= 16) doa.push(item('Doação', 'Doar sangue fica para depois', 'A gravidez é um impedimento temporário para doar sangue. Depois do parto e da amamentação, o hemocentro informa quando você pode voltar.', F.sangue));
+      if (idade >= 16) doa.push(item('Doação', 'Doar sangue fica para depois', 'A gravidez é um impedimento temporário para doar sangue. Depois do parto e da amamentação, o hemocentro informa quando você pode voltar.', F.sangue, { href: '/doar/', txt: 'Veja as regras de doação' }));
     }
     var g = gestante;
 
@@ -69,12 +69,12 @@
     if (!g && fem && ((idade >= 40 && idade <= 49) || idade > 74)) exa.push(item('Exame', 'Mamografia (se você quiser)', 'O SUS faz o exame mesmo sem sintomas. Converse com o profissional da UBS sobre riscos e benefícios no seu caso.', F.mama));
     if (!g && idade >= 35) exa.push(item('Exame', 'Glicemia de jejum (diabetes)', 'A partir dos 35 anos, todos devem fazer o exame de sangue para diabetes. Se der normal, repita a cada 3 anos.', F.dm));
     if (!g && idade >= 18 && idade < 35) exa.push(item('Exame', 'Glicemia de jejum (diabetes), se houver risco', 'Antes dos 35 anos, o exame é indicado para quem tem sobrepeso ou obesidade e mais algum fator de risco, como diabetes na família ou pressão alta. Pergunte na UBS.', F.dm));
-    if (idade >= 4 && idade <= 14) exa.push(item('Exame', 'Teste de visão', 'Criança muitas vezes não percebe que enxerga mal. Um teste simples na escola ou na UBS descobre cedo.', 'PET Medicina UFMT, projeto Acuidade Visual', { href: '/projetos/acuidade-visual/', txt: 'Conheça o Acuidade Visual' }));
+    if (idade >= 4 && idade <= 14) exa.push(item('Exame', 'Teste de visão', 'Criança muitas vezes não percebe que enxerga mal. Um teste simples na escola ou na UBS descobre cedo.', 'PET Medicina UFMT, projeto Acuidade Visual', [{ href: '/projetos/acuidade-visual/', txt: 'Conheça o Acuidade Visual' }, { href: '/encaminhado/', txt: 'Recebeu um papel de encaminhamento?' }, { href: '/leve-o-pet/#catalogo', txt: 'Pedir o teste para a escola' }]));
 
-    if (!g && idade >= 16 && idade <= 17) doa.push(item('Doação', 'Doar sangue', 'Com 16 ou 17 anos você já pode doar, com autorização dos responsáveis, se pesar 50 kg ou mais. Uma doação pode ajudar até quatro pessoas.', F.sangue, { href: '/projetos/trote-solidario/', txt: 'Veja o Trote Solidário' }));
-    if (!g && idade >= 18 && idade <= 60) doa.push(item('Doação', 'Doar sangue', 'Quem pesa 50 kg ou mais e está bem de saúde pode doar no hemocentro. A primeira doação precisa acontecer até os 60 anos. Uma doação pode ajudar até quatro pessoas.', F.sangue, { href: '/projetos/trote-solidario/', txt: 'Veja o Trote Solidário' }));
-    if (!g && idade >= 61) doa.push(item('Doação', 'Doar sangue (se você já é doador)', 'Quem já doava pode continuar, inclusive depois dos 70 anos, se for considerado apto na avaliação do hemocentro. A primeira doação, porém, precisa acontecer até os 60 anos.', F.sangue));
-    if (!g && idade >= 18 && idade <= 35) doa.push(item('Doação', 'Cadastro de doador de medula óssea', 'Entre 18 e 35 anos você pode se cadastrar. É só uma coleta pequena de sangue, e o cadastro vale até os 60 anos.', F.redome, { href: '/projetos/cadastro-do-bem/', txt: 'Veja o Cadastro do Bem' }));
+    if (!g && idade >= 16 && idade <= 17) doa.push(item('Doação', 'Doar sangue', 'Com 16 ou 17 anos você já pode doar, com autorização dos responsáveis, se pesar 50 kg ou mais. Uma doação pode ajudar até quatro pessoas.', F.sangue, [{ href: '/doar/#teste', txt: 'Posso doar hoje? Faça o teste' }, { href: '/projetos/trote-solidario/', txt: 'Trote Solidário' }]));
+    if (!g && idade >= 18 && idade <= 60) doa.push(item('Doação', 'Doar sangue', 'Quem pesa 50 kg ou mais e está bem de saúde pode doar no hemocentro. A primeira doação precisa acontecer até os 60 anos. Uma doação pode ajudar até quatro pessoas.', F.sangue, [{ href: '/doar/#teste', txt: 'Posso doar hoje? Faça o teste' }, { href: '/projetos/trote-solidario/', txt: 'Trote Solidário' }]));
+    if (!g && idade >= 61) doa.push(item('Doação', 'Doar sangue (se você já é doador)', 'Quem já doava pode continuar, inclusive depois dos 70 anos, se for considerado apto na avaliação do hemocentro. A primeira doação, porém, precisa acontecer até os 60 anos.', F.sangue, { href: '/doar/#teste', txt: 'Posso doar hoje? Faça o teste' }));
+    if (!g && idade >= 18 && idade <= 35) doa.push(item('Doação', 'Cadastro de doador de medula óssea', 'Entre 18 e 35 anos você pode se cadastrar. É só uma coleta pequena de sangue, e o cadastro vale até os 60 anos.', F.redome, [{ href: '/doar/#medula', txt: 'Como se cadastrar' }, { href: '/projetos/cadastro-do-bem/', txt: 'Cadastro do Bem' }]));
 
     if (idade >= 14) pet.push(item('PET', 'Saber agir numa emergência', 'Numa parada cardíaca, ligue 192 e comece logo as compressões no centro do peito: isso mais que dobra a chance de sobrevivência. O PET também oferece um curso de atendimento pré-hospitalar para estudantes e profissionais da saúde.', 'Hasselqvist-Ax et al., New England Journal of Medicine, 2015', { href: '/projetos/curso-aph/', txt: 'Conheça o Curso de APH' }));
 
@@ -93,6 +93,13 @@
     return n;
   }
 
+  // Cartão grande que leva à próxima ferramenta ou projeto do PET
+  function destaque(href, titulo, texto) {
+    var a = el('a', 'sp-destaque'); a.href = href;
+    var t = el('span', 'sp-destaque-txt'); t.appendChild(el('strong', null, titulo)); t.appendChild(el('small', null, texto));
+    a.appendChild(t); var s = el('span', 'sp-destaque-seta', '→'); s.setAttribute('aria-hidden', 'true'); a.appendChild(s);
+    return a;
+  }
   function desenhar(idade, sexo, gestante) {
     var grupos = montar(idade, sexo, gestante);
     var total = grupos.reduce(function (s, g) { return s + g.itens.length; }, 0);
@@ -127,11 +134,13 @@
         art.appendChild(el('span', 'int-tag', it.tipo));
         art.appendChild(el('h4', null, it.titulo));
         var p = el('p', null, it.texto + ' ');
-        if (it.link) {
-          var a = el('a', null, it.link.txt + ' →');
-          a.href = it.link.href;
+        // Um ou mais links para a ferramenta e o projeto do PET ligados ao item
+        (it.link ? [].concat(it.link) : []).forEach(function (l, i) {
+          if (i) p.appendChild(document.createTextNode(' · '));
+          var a = el('a', null, l.txt + ' →');
+          a.href = l.href;
           p.appendChild(a);
-        }
+        });
         art.appendChild(p);
         art.appendChild(el('p', 'meta int-fonte', 'Fonte: ' + it.fonte));
         sec.appendChild(art);
@@ -148,6 +157,14 @@
     perg.appendChild(ol);
     saida.appendChild(perg);
 
+    // Próximos passos no site, conforme a idade
+    var pr = el('section', 'int-pratica');
+    pr.appendChild(el('h3', 'eyebrow', 'Próximos passos com o PET'));
+    if (!gestante && idade >= 16 && idade <= 69) pr.appendChild(destaque('/doar/#teste', 'Posso doar sangue hoje?', 'Teste em um minuto e veja onde agendar no MT Hemocentro.'));
+    if (idade >= 4 && idade <= 14) pr.appendChild(destaque('/encaminhado/', 'Recebeu um papel de encaminhamento?', 'O caminho do teste de visão na escola até a consulta pelo SUS.'));
+    pr.appendChild(destaque('/fato-ou-fake/', 'Fato ou Fake', 'Teste o que você sabe sobre boatos de saúde.'));
+    pr.appendChild(destaque('/comunidade/?tipo=duvida', 'Ficou com dúvida sobre a lista?', 'Pergunte aos estudantes do PET. A pergunta não é publicada.'));
+    saida.appendChild(pr);
     saida.appendChild(el('p', 'int-aviso', 'Esta lista é educativa e segue as recomendações gerais do SUS para a idade e o sexo informados. Ela não substitui a consulta: doenças crônicas, gravidez, histórico familiar e outras condições podem mudar o que é indicado para você. Conteúdo conferido em novembro de 2026.'));
     focar(h2);
     mostrar(saida, 'start');

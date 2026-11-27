@@ -97,8 +97,9 @@ def pagina(p, r):
     h += '<nav class="pj-nav" aria-label="Nesta página">' + ''.join('<a href="#%s">%s</a>' % n for n in nav) + '</nav>'
     if p.get('pratica'):  # ferramentas do site ligadas a este projeto (doar, encaminhado, pedir a ação)
         h += '<section id="pratica" class="pj-sec pj-pratica"><h2>Na prática</h2><p>Use agora o que este projeto ensina:</p>' + ''.join(
-            '<a class="sp-destaque" href="%s"><span class="sp-destaque-txt"><strong>%s</strong><small>%s</small></span><span class="sp-destaque-seta" aria-hidden="true">→</span></a>'
-            % (esc(url(x[2])), esc(x[0]), esc(x[1])) for x in p['pratica']) + '</section>'
+            '<a class="sp-destaque" href="%s"%s%s><span class="sp-destaque-txt"><strong>%s</strong><small>%s</small></span><span class="sp-destaque-seta" aria-hidden="true">%s</span></a>'
+            % (esc(x[2] if x[2].startswith('tel:') else url(x[2])), '' if x[2].startswith('tel:') else la(x[2]), (' data-ate="%s"' % esc(x[3])) if len(x) > 3 else '', esc(x[0]), esc(x[1]),
+               '→' if x[2].startswith(('/', 'tel:')) else '↗') for x in p['pratica']) + '</section>'
     h += '<section id="oque" class="pj-sec"><h2>O que é</h2><p>%s</p></section>' % esc(p['oque'])
     h += '<section id="quem" class="pj-sec"><h2>Para quem</h2><p>%s</p></section>' % esc(p['quem'])
     h += '<section id="como" class="pj-sec"><h2>Como funciona</h2><ol class="pj-passos">' + ''.join(

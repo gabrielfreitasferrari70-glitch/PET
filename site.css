@@ -1609,6 +1609,14 @@ main :is(h2, h3, th) > a { display: inline-block; padding-block: var(--esp-3); m
 .pj-pratica > p { margin-bottom: var(--esp-2); }
 @media (max-width: 900px) { .lg-projs { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .lg-proj { grid-template-columns: 1fr; } .lg-proj img { aspect-ratio: 16 / 9; height: auto; } }
+.sp-destaque[hidden] { display: none; }
+
+.int-pratica { margin-top: var(--esp-6); }
+.int-pratica .eyebrow { margin-bottom: var(--esp-2); }
+.int-pratica .sp-destaque { margin-top: var(--esp-3); padding: var(--esp-4) var(--esp-5); }
+.int-pratica .sp-destaque strong { font-size: 20px; }
+.int-pratica .sp-destaque-seta { width: var(--esp-6); height: var(--esp-6); font-size: 16px; }
+.int-pratica .sp-destaque:not(#_) strong { color: var(--ink); font-weight: 400; } .int-pratica .sp-destaque:not(#_) small { font-weight: 400; color: var(--muted); }
 :root { --ritmo-secao: var(--esp-8); --ritmo-titulo: var(--esp-5); --grade: var(--esp-5); }
 @media (max-width: 760px) { :root { --ritmo-secao: var(--esp-7); --ritmo-titulo: var(--esp-4); --grade: var(--esp-4); } }
 

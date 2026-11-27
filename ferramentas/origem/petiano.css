@@ -268,3 +268,11 @@
 .pj-pratica > p { margin-bottom: var(--esp-2); }
 @media (max-width: 900px) { .lg-projs { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .lg-proj { grid-template-columns: 1fr; } .lg-proj img { aspect-ratio: 16 / 9; height: auto; } }
+.sp-destaque[hidden] { display: none; }
+/* Saude em Dia e Fato ou Fake: proximos passos no fim do resultado */
+.int-pratica { margin-top: var(--esp-6); }
+.int-pratica .eyebrow { margin-bottom: var(--esp-2); }
+.int-pratica .sp-destaque { margin-top: var(--esp-3); padding: var(--esp-4) var(--esp-5); }
+.int-pratica .sp-destaque strong { font-size: 20px; }
+.int-pratica .sp-destaque-seta { width: var(--esp-6); height: var(--esp-6); font-size: 16px; }
+.int-pratica .sp-destaque:not(#_) strong { color: var(--ink); font-weight: 400; } .int-pratica .sp-destaque:not(#_) small { font-weight: 400; color: var(--muted); }

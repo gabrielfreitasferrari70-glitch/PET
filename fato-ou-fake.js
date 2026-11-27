@@ -10,16 +10,16 @@
       f: 'Ministério da Saúde e Instituto Butantan' },
     { a: 'Uma criança pode enxergar mal sem perceber e sem reclamar.', fato: true,
       t: 'Para a criança, o jeito que ela enxerga é o "normal". Miopia, hipermetropia e astigmatismo estão entre as principais causas de baixa visão na infância, e o teste na escola descobre o problema antes que ele atrapalhe o aprendizado.',
-      f: 'PET Medicina UFMT, projeto Acuidade Visual', l: { href: '/projetos/acuidade-visual/', txt: 'Conheça o Acuidade Visual' } },
+      f: 'PET Medicina UFMT, projeto Acuidade Visual', l: [{ href: '/projetos/acuidade-visual/', txt: 'Conheça o Acuidade Visual' }, { href: '/encaminhado/', txt: 'Recebeu um papel de encaminhamento?' }] },
     { a: 'Quem tomou a vacina do HPV não precisa fazer o exame preventivo.', fato: false,
       t: 'Precisa. A vacina protege contra os tipos mais perigosos do HPV, mas não contra todos, e não substitui o exame. Mulheres e pessoas com útero de 25 a 64 anos devem fazer o teste DNA-HPV a cada 5 anos (ou o preventivo, onde o teste ainda não chegou).',
       f: 'INCA' },
     { a: 'Para se cadastrar como doador de medula óssea, basta uma pequena coleta de sangue.', fato: true,
       t: 'No cadastro, ninguém mexe no osso: é só uma amostra de sangue para o exame de compatibilidade. Pode se cadastrar quem tem de 18 a 35 anos e está bem de saúde.',
-      f: 'INCA/REDOME', l: { href: '/projetos/cadastro-do-bem/', txt: 'Veja o Cadastro do Bem' } },
+      f: 'INCA/REDOME', l: [{ href: '/doar/#medula', txt: 'Como se cadastrar' }, { href: '/projetos/cadastro-do-bem/', txt: 'Cadastro do Bem' }] },
     { a: 'Doar sangue vicia, engrossa ou afina o sangue.', fato: false,
       t: 'Nada disso acontece. O corpo repõe o volume doado, e a doação não muda a "espessura" do sangue. Também ninguém é obrigado a doar de novo.',
-      f: 'Ministério da Saúde', l: { href: '/projetos/trote-solidario/', txt: 'Veja o Trote Solidário' } },
+      f: 'Ministério da Saúde', l: [{ href: '/doar/#teste', txt: 'Posso doar hoje? Faça o teste' }, { href: '/projetos/trote-solidario/', txt: 'Trote Solidário' }] },
     { a: 'Mulheres de 40 a 49 anos podem fazer mamografia pelo SUS mesmo sem sintomas.', fato: true,
       t: 'Desde setembro de 2025, o SUS não restringe o exame nessa faixa. A decisão é tomada junto com o profissional de saúde. Dos 50 aos 74 anos, a mamografia é recomendada a cada 2 anos.',
       f: 'Ministério da Saúde, Nota Técnica nº 626/2025' },
@@ -123,7 +123,7 @@
       resp.appendChild(el('span', 'ff-veredito' + (q.fato ? '' : ' fake'), q.fato ? 'É fato' : 'É fake'));
       resp.appendChild(el('h3', null, certo ? 'Você acertou!' : 'Não foi dessa vez.'));
       var p = el('p', null, q.t + ' ');
-      if (q.l) { var a = el('a', null, q.l.txt + ' →'); a.href = q.l.href; p.appendChild(a); }
+      (q.l ? [].concat(q.l) : []).forEach(function (l, n) { if (n) p.appendChild(document.createTextNode(' · ')); var a = el('a', null, l.txt + ' →'); a.href = l.href; p.appendChild(a); });
       resp.appendChild(p);
       resp.appendChild(el('p', 'meta int-fonte', 'Fonte: ' + q.f));
       var nav = el('div', 'ff-proxima');
@@ -142,6 +142,13 @@
     bK.addEventListener('click', function () { responder(false); });
   }
 
+  // Cartão grande que leva à próxima ferramenta ou projeto do PET
+  function destaque(href, titulo, texto) {
+    var a = el('a', 'sp-destaque'); a.href = href;
+    var t = el('span', 'sp-destaque-txt'); t.appendChild(el('strong', null, titulo)); t.appendChild(el('small', null, texto));
+    a.appendChild(t); var s = el('span', 'sp-destaque-seta', '→'); s.setAttribute('aria-hidden', 'true'); a.appendChild(s);
+    return a;
+  }
   function final() {
     atualizarProgresso(true);
     if (window.petMedir) window.petMedir('quiz_fim', { n: acertos, tentativa: partida });
@@ -171,6 +178,12 @@
     acoes.appendChild(comp);
     acoes.appendChild(de);
     box.appendChild(acoes);
+    var pr = el('section', 'int-pratica');
+    pr.appendChild(el('h3', 'eyebrow', 'Coloque em prática'));
+    pr.appendChild(destaque('/doar/#teste', 'Posso doar sangue hoje?', 'Teste em um minuto, com as regras novas de 2026.'));
+    pr.appendChild(destaque('/saude-em-dia/', 'Minha Saúde em Dia', 'Vacinas e exames indicados para a sua idade.'));
+    pr.appendChild(destaque('/encaminhado/', 'Recebeu um papel do PET?', 'O caminho do encaminhamento até a consulta pelo SUS.'));
+    box.appendChild(pr);
     var mais = el('p', 'int-privacidade');
     mais.appendChild(document.createTextNode('Viu um boato que não está aqui? '));
     var a = el('a', null, 'Mande para o PET →');
