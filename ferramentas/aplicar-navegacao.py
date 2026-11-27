@@ -27,11 +27,11 @@ def secao(rel):
     return None
 
 
-# Menu de cima: as secoes, com as duas ferramentas mais usadas logo depois de Aprender (acesso direto).
+# Menu de cima: Atendimento, Aprender e Projetos, depois as duas ferramentas mais usadas (acesso direto), YouTube e O PET.
 # A trilha continua seguindo as secoes (Saude em Dia e Fato ou Fake ficam em Inicio > Aprender).
 MENU = [('Atendimento', '/atendimento/', SECOES[0][3]), ('Aprender', '/aprender/', ('aprender/', 'colecoes/', 'de-jaleco-e-fone/', 'voce-perguntou/')),
-        ('Saúde em Dia', '/saude-em-dia/', ('saude-em-dia/',)), ('Fato ou Fake', '/fato-ou-fake/', ('fato-ou-fake/',)),
-        ('YouTube', '/youtube/', ('youtube/',)), ('Projetos', '/projetos/', ('projetos/',)), ('O PET', '/o-pet/', SECOES[4][3])]
+        ('Projetos', '/projetos/', ('projetos/',)), ('Saúde em Dia', '/saude-em-dia/', ('saude-em-dia/',)), ('Fato ou Fake', '/fato-ou-fake/', ('fato-ou-fake/',)),
+        ('YouTube', '/youtube/', ('youtube/',)), ('O PET', '/o-pet/', SECOES[4][3])]
 
 
 def item_atual(rel):
