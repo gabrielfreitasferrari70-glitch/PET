@@ -78,6 +78,12 @@ FONTES = [
 ]
 
 
+def projeto(img, alt, rotulo, titulo, texto, url, botao):
+    """Cartao que liga esta pagina ao projeto do PET (ou a outra pagina) que explica o mesmo assunto."""
+    return (f"<li><a class='lg-proj' href='{url}'><img src='{img}' alt='{E(alt)}' width='1600' height='900' loading='lazy' decoding='async'>"
+            f"<span class='lg-proj-txt'><span class='lg-rotulo'>{E(rotulo)}</span><strong>{E(titulo)}</strong><span>{E(texto)}</span><span class='lg-ver'>{E(botao)} <span aria-hidden='true'>→</span></span></span></a></li>")
+
+
 def seta(url):
     return '→' if url.startswith('/') or url.startswith('#') else '↗'
 
@@ -149,16 +155,14 @@ CORPO = f"""<div class='wrap sp-hero'>
 </div>
 <div class='wrap sp'>
 <section class='sp-sec' aria-labelledby='dr-req'><h2 id='dr-req'>Quem pode doar sangue</h2><ul class='sp-req'>{req}</ul></section>
+<section class='sp-sec lg-sec' aria-labelledby='dr-pet'><h2 id='dr-pet'>Os projetos do PET sobre doação</h2><p class='sp-sub'>Esta página é a parte prática. Nos projetos você vê como o PET leva essa causa adiante, com os resultados de cada edição.</p><ul class='lg-projs'>{projeto('/assets/capas/trote-solidario.svg', 'Ilustração do Trote Solidário: gota de sangue com uma cruz, entre corações', 'Projeto do PET · ativo em 2026', 'Trote Solidário', 'Campanha de doação de sangue e cadastro de medula com o MT Hemocentro. A 6ª edição somou 87 bolsas de sangue e 20 novos cadastros de medula.', '/projetos/trote-solidario/', 'Ver o projeto')}{projeto('/assets/capas/cadastro-do-bem.svg', 'Ilustração do Cadastro do Bem: mão segurando uma gota com a fita do DNA', 'Projeto do PET · registro de 2024', 'Cadastro do Bem', 'Conversa sobre doação de medula em escolas e cursinhos, com mitos e dúvidas. Em 2024, foram 41 ações e 1.880 pessoas alcançadas.', '/projetos/cadastro-do-bem/', 'Ver o projeto')}</ul><p class='lg-mais'>Quando o PET anunciar uma nova coleta, ela aparece na <a class='text-link' href='/agenda/'>agenda →</a></p></section>
 <section class='sp-sec sp-nota dr-teste-sec' id='teste' aria-labelledby='dr-teste-t'><div><h2 id='dr-teste-t'>Teste antes de sair de casa</h2><p>Em um minuto você descobre se algo impede a doação hoje e, se impedir, a partir de que dia pode doar.</p></div>
 <ul class='dr-novas-mini'><li>Considera as regras novas de 2026</li><li>Calcula a data em que você pode voltar</li><li>Funciona sem internet depois de aberto</li></ul>{TESTE}</section>
 <section class='sp-sec' aria-labelledby='dr-passos'><h2 id='dr-passos'>Passo a passo da doação</h2><p class='sp-sub'>Do agendamento ao lanche, sem surpresa.</p><ol class='sp-passos'>{passos}</ol></section>
 <section class='sp-sec' aria-labelledby='dr-novas'><h2 id='dr-novas'>O que mudou em 2026</h2><p class='sp-sub'>A Portaria GM/MS 11.685/2026 entrou em vigor em 30 de setembro e encurtou várias esperas. Se você foi recusado antes, pode ser que já possa doar.</p><ul class='dr-novas'>{novas}</ul></section>
 <section class='sp-sec' id='medula' aria-labelledby='dr-medula'><h2 id='dr-medula'>Doador de medula óssea</h2><p class='sp-sub'>Para muitas pessoas com leucemia e outras doenças do sangue, o transplante de medula é o tratamento. A chance de achar alguém compatível fora da família é pequena, por isso cada cadastro conta.</p>
 <div class='dr-medula'><div><h3>Quem pode se cadastrar</h3><ul class='cx-lista'>{mreq}</ul><ul class='sp-arqs'>{arquivo(('SITE', 'Atualizar o cadastro no REDOME', REDOME, 'redome.inca.gov.br · INCA'))}</ul></div><ol class='sp-passos'>{mpassos}</ol></div></section>
-<section class='sp-sec ap-guia dr-pet' aria-labelledby='dr-pet'><h2 id='dr-pet'>O PET nessa causa</h2><div class='ap-guia-grid'>
-<a href='/projetos/trote-solidario/'><strong>Trote Solidário</strong><span>Campanha de doação de sangue e cadastro de medula com o MT Hemocentro. A 6ª edição, em 2026, somou 87 bolsas de sangue e 20 novos cadastros de medula.</span></a>
-<a href='/projetos/cadastro-do-bem/'><strong>Cadastro do Bem</strong><span>Conversa sobre doação de medula em escolas e cursinhos. Em 2024, foram 41 ações e 1.880 pessoas alcançadas.</span></a>
-<a href='/agenda/'><strong>Próximas campanhas</strong><span>Quando o PET anunciar uma nova coleta, ela aparece na agenda.</span></a></div></section>
+
 <section class='sp-sec' aria-labelledby='dr-faq'><h2 id='dr-faq'>Perguntas frequentes</h2><div class='sp-faqs'>{faq}</div></section>
 <section class='sp-sec' aria-labelledby='dr-fontes'><h2 id='dr-fontes'>Fontes</h2><p class='sp-sub'>Regras do Ministério da Saúde e do INCA; local e agendamento do Governo de Mato Grosso. Conferido em novembro de 2026.</p><ul class='sp-arqs'>{fontes}</ul></section>
 <section class='cx-sec cx-dica' aria-labelledby='dr-duvida'><div><span class='eyebrow'>FICOU COM DÚVIDA?</span><h2 id='dr-duvida'>Pergunte aos estudantes do PET</h2><p>Sua pergunta não é publicada e a resposta chega pelo contato que você deixar. Para casos de saúde específicos, a palavra final é da triagem do hemocentro.</p></div><a class='button' href='/comunidade/?tipo=duvida'>Tirar uma dúvida <span aria-hidden='true'>→</span></a></section>

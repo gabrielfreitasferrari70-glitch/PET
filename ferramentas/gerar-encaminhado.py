@@ -20,7 +20,7 @@ MEUSUS = 'https://meususdigital.saude.gov.br/'
 # (id, titulo, quando, texto, itens, arquivos)
 PASSOS = [
     ('papel', 'Leia e guarde o papel', 'No mesmo dia', 'O papel do PET mostra o resultado de uma triagem: um teste rápido que separa quem precisa de uma avaliação completa. Não é um diagnóstico. Guarde: ele explica à unidade de saúde por que você está pedindo a consulta.',
-     [], [('PÁGINA', 'O papel é do teste de visão na escola?', '/acao/acuidade-visual/', 'Veja o que o resultado quer dizer')]),
+     [], [('PÁGINA', 'O papel é do teste de visão na escola?', '/acao/acuidade-visual/', 'Veja o que o resultado quer dizer'), ('PÁGINA', 'Projeto Acuidade Visual', '/projetos/acuidade-visual/', 'Como o PET faz a triagem nas escolas')]),
     ('ubs', 'Vá à unidade de saúde do seu bairro', 'Nos próximos dias', 'A porta de entrada para o especialista pelo SUS é a Unidade Básica de Saúde (UBS) perto de casa. Leve o papel e os documentos da lista abaixo e peça uma consulta por causa do encaminhamento.',
      ['Não sabe qual é a sua UBS? O aplicativo Meu SUS Digital mostra a mais próxima', 'Se ainda não tem cartão do SUS, a própria UBS faz o cadastro'],
      [('APP', 'Meu SUS Digital', MEUSUS, 'Cartão do SUS, UBS mais próxima e consultas agendadas')]),
@@ -58,6 +58,12 @@ FONTES = [
     ('Ministério da Saúde · Meu SUS Digital', MEUSUS),
     ('Ministério da Saúde · Ouvidoria-Geral do SUS (136)', 'https://www.gov.br/saude/pt-br/canais-de-atendimento/ouvsus'),
 ]
+
+
+def projeto(img, alt, rotulo, titulo, texto, url, botao):
+    """Cartao que liga esta pagina ao projeto do PET (ou a outra pagina) que explica o mesmo assunto."""
+    return (f"<li><a class='lg-proj' href='{url}'><img src='{img}' alt='{E(alt)}' width='1600' height='900' loading='lazy' decoding='async'>"
+            f"<span class='lg-proj-txt'><span class='lg-rotulo'>{E(rotulo)}</span><strong>{E(titulo)}</strong><span>{E(texto)}</span><span class='lg-ver'>{E(botao)} <span aria-hidden='true'>→</span></span></span></a></li>")
 
 
 def seta(url):
@@ -103,6 +109,7 @@ CORPO = f"""<div class='wrap sp-hero'>
 <ol class='sp-linha' aria-label='Etapas'>{linha}</ol></aside>
 </div>
 <div class='wrap sp'>
+<section class='sp-sec lg-sec' aria-labelledby='en-origem'><h2 id='en-origem'>De onde veio o seu papel</h2><p class='sp-sub'>Hoje o encaminhamento do PET vem do teste de visão nas escolas. Veja o que o resultado quer dizer e conheça o projeto; depois siga o caminho abaixo.</p><ul class='lg-projs'>{projeto('/assets/capas/papel-triagem.svg', 'Ilustração de um papel de triagem com QR code e um sinal de confirmado', 'Depois da ação', 'O que o papel do teste de visão quer dizer', 'Consulta pedida ou tudo bem: o significado de cada resultado, os sinais para observar e o retorno anônimo ao PET.', '/acao/acuidade-visual/', 'Entender o resultado')}{projeto('/assets/capas/acuidade-visual.svg', 'Ilustração do Acuidade Visual: óculos sobre uma lousa, com letras de tabela de leitura nas lentes', 'Projeto do PET · ativo em 2026', 'Acuidade Visual', 'Triagem visual de crianças nas escolas, com encaminhamento ao oftalmologista e óculos quando indicados.', '/projetos/acuidade-visual/', 'Ver o projeto')}</ul></section>
 <section class='sp-sec sp-nota en-levar' id='levar' aria-labelledby='en-levar-t'><div><h2 id='en-levar-t'>O que levar</h2><p>Separe antes de sair. Vale para a UBS e para a consulta com o especialista.</p><p class='sp-sub' data-levar-conta>0 de {len(LEVAR)} separados</p></div>
 <ul class='en-check'>{levar}</ul></section>
 <section class='sp-sec' aria-labelledby='en-passos'><h2 id='en-passos'>Passo a passo</h2><p class='sp-sub'>Do papel do PET à consulta com o especialista. Marque o que já fez.</p><ol class='sp-passos'>{passos}</ol></section>

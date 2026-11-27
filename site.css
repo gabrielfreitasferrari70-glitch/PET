@@ -1592,6 +1592,23 @@ main :is(h2, h3, th) > a { display: inline-block; padding-block: var(--esp-3); m
 #pedido { scroll-margin-top: var(--esp-9); }
 @media (max-width: 900px) { .lv-cat { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .lv-cat { grid-template-columns: 1fr; } .lv-acoes .button { width: 100%; justify-content: center; } }
+
+
+.lg-projs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--esp-5); }
+.lg-proj { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); height: 100%; overflow: hidden; border: 1px solid var(--line); border-radius: var(--raio-card); background: var(--paper); color: var(--ink); text-decoration: none; transition: border-color .15s; }
+.lg-proj:hover { border-color: var(--forest); }
+.lg-proj:focus-visible { outline: var(--foco) solid 3px; outline-offset: 2px; }
+.lg-proj img { width: 100%; height: 100%; min-height: 100%; object-fit: cover; background: var(--mint); }
+.lg-proj-txt { display: flex; flex-direction: column; gap: var(--esp-2); padding: var(--esp-5); }
+.lg-rotulo { font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--forest); text-transform: uppercase; }
+.lg-proj strong { font: 400 24px/1.2 var(--serif); }
+.lg-proj-txt > span:not(.lg-rotulo):not(.lg-ver) { font-size: 15px; line-height: 1.55; color: var(--muted); }
+.lg-ver { margin-top: auto; padding-top: var(--esp-2); font-size: 15px; font-weight: 600; color: var(--forest); }
+.lg-mais { margin: var(--esp-4) 0 0; font-size: 15px; color: var(--muted); }
+.pj-pratica .sp-destaque { margin-top: var(--esp-3); }
+.pj-pratica > p { margin-bottom: var(--esp-2); }
+@media (max-width: 900px) { .lg-projs { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .lg-proj { grid-template-columns: 1fr; } .lg-proj img { aspect-ratio: 16 / 9; height: auto; } }
 :root { --ritmo-secao: var(--esp-8); --ritmo-titulo: var(--esp-5); --grade: var(--esp-5); }
 @media (max-width: 760px) { :root { --ritmo-secao: var(--esp-7); --ritmo-titulo: var(--esp-4); --grade: var(--esp-4); } }
 

@@ -80,7 +80,7 @@ def bloco_saiba(s):
 def pagina(p, r):
     l = listas_redes(r, 'h3')
     redes = '<section id="redes" class="pj-sec"><h2>Nas redes</h2>' + l + '</section>' if l else ''
-    nav = [('oque', 'O que é'), ('quem', 'Para quem'), ('como', 'Como funciona')]
+    nav = ([('pratica', 'Na prática')] if p.get('pratica') else []) + [('oque', 'O que é'), ('quem', 'Para quem'), ('como', 'Como funciona')]
     if p.get('saiba'):
         nav.append(('saiba', 'Saiba mais'))
     nav.append(('anos', 'Ano a ano'))
@@ -95,6 +95,10 @@ def pagina(p, r):
     if p.get('capa'):
         h += '<figure class="pj-capa"><img src="%s" alt="%s" width="1600" height="900" loading="eager" decoding="async"></figure>' % (esc(url(p['capa']['src'])), esc(p['capa']['alt']))
     h += '<nav class="pj-nav" aria-label="Nesta página">' + ''.join('<a href="#%s">%s</a>' % n for n in nav) + '</nav>'
+    if p.get('pratica'):  # ferramentas do site ligadas a este projeto (doar, encaminhado, pedir a ação)
+        h += '<section id="pratica" class="pj-sec pj-pratica"><h2>Na prática</h2><p>Use agora o que este projeto ensina:</p>' + ''.join(
+            '<a class="sp-destaque" href="%s"><span class="sp-destaque-txt"><strong>%s</strong><small>%s</small></span><span class="sp-destaque-seta" aria-hidden="true">→</span></a>'
+            % (esc(url(x[2])), esc(x[0]), esc(x[1])) for x in p['pratica']) + '</section>'
     h += '<section id="oque" class="pj-sec"><h2>O que é</h2><p>%s</p></section>' % esc(p['oque'])
     h += '<section id="quem" class="pj-sec"><h2>Para quem</h2><p>%s</p></section>' % esc(p['quem'])
     h += '<section id="como" class="pj-sec"><h2>Como funciona</h2><ol class="pj-passos">' + ''.join(
