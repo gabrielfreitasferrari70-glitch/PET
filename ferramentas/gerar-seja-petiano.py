@@ -67,8 +67,8 @@ ETAPAS = [
     {'id': 'projeto', 'titulo': 'Etapa II · Projeto de extensão', 'quando': 'Entrega até 5 de novembro, 23h59', 'inicio': '2026-11-05T00:00:00-04:00', 'fim': '2026-11-21T23:59:00-04:00',
      'texto': 'Um projeto de extensão escrito, enviado por e-mail para ' + EDICAO['email'] + ', nas normas do Anexo III. Passam para a etapa III os 15 melhores na soma das etapas I e II.',
      'itens': [], 'arquivos': [ANEXO3, ANEXO4, ETAPA3_PARCIAL, ETAPA3], 'datas': [('18 nov, 18h', 'Classificação preliminar'), ('19 nov', 'Recurso, por e-mail'), ('21 nov, 18h', 'Classificados para a entrevista')]},
-    {'id': 'entrevista', 'titulo': 'Etapa III · Entrevista', 'quando': '28 de novembro, a partir das 8h', 'inicio': '2026-11-26T18:00:00-04:00', 'fim': '2026-11-28T23:59:00-04:00',
-     'texto': 'Sala 54 do CCBSI, campus Cuiabá, no horário do cronograma. Tolerância de 3 minutos. São 15 minutos ao todo:',
+    {'id': 'entrevista', 'titulo': 'Etapa III · Entrevista', 'quando': '28 de novembro, a partir das 13h30', 'inicio': '2026-11-26T18:00:00-04:00', 'fim': '2026-11-28T23:59:00-04:00',
+     'texto': 'Sala 54 da Faculdade de Medicina (CCBSI), campus Cuiabá. O horário de cada candidato está na ata do cronograma, publicada em 26 de novembro. Tolerância de 3 minutos. São 15 minutos ao todo:',
      'itens': ['3 minutos para preparar a apresentação', '6 minutos para apresentar o projeto de extensão', '6 minutos de arguição',
                'Sem pendrive? Envie a apresentação para petmedicina.ufmt@gmail.com até 23h59 da véspera'],
      'arquivos': [CRONO]},
@@ -150,7 +150,7 @@ CORPO = f"""<div class='wrap sp-hero'>
 <ul class='sp-fatos'>{fatos}</ul>
 <div class='sp-acoes'><a class='button' href='{EDICAO['edital_url']}' target='_blank' rel='noopener noreferrer'>Ler o edital <span aria-hidden='true'>↗</span></a><a class='button secondary' href='#documentos'>Todos os arquivos <span aria-hidden='true'>↓</span></a></div></div>
 <aside class='sp-agora' aria-labelledby='sp-agora-t' data-agora><span class='eyebrow'>AGORA NO PROCESSO</span><h2 id='sp-agora-t' data-agora-titulo>Etapa III · Entrevista</h2>
-<p class='sp-agora-quando' data-agora-quando>28 de novembro, a partir das 8h</p><p data-agora-texto>Sala 54 do CCBSI, campus Cuiabá, no horário do cronograma.</p>
+<p class='sp-agora-quando' data-agora-quando>28 de novembro, a partir das 13h30</p><p data-agora-texto>Sala 54 da Faculdade de Medicina (CCBSI), no horário de cada candidato na ata.</p>
 <a class='button' href='#etapa-entrevista' data-agora-link>Ver esta etapa <span aria-hidden='true'>↓</span></a>
 <ol class='sp-linha' aria-label='Andamento das etapas'>{''.join(f"<li data-linha='{e['id']}'><span>{E(e['titulo'].split(' · ')[-1])}</span></li>" for e in ETAPAS)}</ol></aside>
 </div>
