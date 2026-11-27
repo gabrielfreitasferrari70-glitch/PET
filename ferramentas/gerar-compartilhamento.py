@@ -11,7 +11,7 @@ SITE = 'https://pet-conecta.vercel.app'
 FONTES = os.path.join(RAIZ, 'ferramentas', 'fontes')
 SECOES = {'projetos': 'Projeto', 'aprender': 'Aprender', 'colecoes': 'Coleção', 'publicacoes': 'Publicações', 'o-pet': 'O PET',
           'de-jaleco-e-fone': 'Podcast', 'youtube': 'YouTube', 'agenda': 'Agenda', 'redes': 'Nas redes', 'comunidade': 'Participação',
-          'participar': 'Participação', 'seja-petiano': 'Processo seletivo', 'doar': 'Atendimento', 'para-o-pet': 'O PET', 'privacidade': 'Transparência', 'termos': 'Transparência', 'saude-em-dia': 'Ferramenta', 'fato-ou-fake': 'Ferramenta'}
+          'participar': 'Participação', 'seja-petiano': 'Processo seletivo', 'doar': 'Atendimento', 'encaminhado': 'Atendimento', 'para-o-pet': 'O PET', 'privacidade': 'Transparência', 'termos': 'Transparência', 'saude-em-dia': 'Ferramenta', 'fato-ou-fake': 'Ferramenta'}
 VERDE, TINTA, CINZA, LINHA = '#0e614f', '#1c2522', '#5c6663', '#dfe5e2'
 L, A, M = 1200, 630, 72
 
