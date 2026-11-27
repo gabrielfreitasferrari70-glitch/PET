@@ -1336,6 +1336,12 @@ main :is(h2, h3, th) > a { display: inline-block; padding-block: var(--esp-3); m
 .hm-hero .cx-porta strong::after { font-size: 16px; }
 .hm-hero .cx-portas-rodape { margin-top: var(--esp-4); }
 .hm-hero .cx-portas-rodape p { font-size: 14px; color: var(--muted); }
+
+
+.cx-porta-qr strong::before { content: ''; display: inline-block; width: 18px; height: 18px; margin-right: var(--esp-2); vertical-align: -2px; border: 2px solid var(--forest); border-radius: var(--esp-1); background: linear-gradient(var(--forest), var(--forest)) 3px 3px / 5px 5px no-repeat, linear-gradient(var(--forest), var(--forest)) right 3px bottom 3px / 5px 5px no-repeat; }
+
+.cx-passos { margin: 0 0 var(--esp-5); }
+.cx-painel .cx-lista b { color: var(--forest); word-break: break-word; }
 :root { --ritmo-secao: var(--esp-8); --ritmo-titulo: var(--esp-5); --grade: var(--esp-5); }
 @media (max-width: 760px) { :root { --ritmo-secao: var(--esp-7); --ritmo-titulo: var(--esp-4); --grade: var(--esp-4); } }
 

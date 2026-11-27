@@ -35,8 +35,9 @@ ATENDIMENTO = f"""<div class='wrap page-intro'><span class='eyebrow'>ATENDIMENTO
 <a href='/acao/acuidade-visual/'><strong>Meu filho fez o teste de visão</strong><span>O que o papel quer dizer e o que fazer agora.</span></a>
 <a href='/comunidade/?tipo=duvida'><strong>Tirar uma dúvida de saúde</strong><span>A pergunta não é publicada e a resposta chega pelo seu contato.</span></a>
 <a href='/leve-o-pet/'><strong>Levar o PET até você</strong><span>Escolas, unidades de saúde e grupos de bairro pedem uma ação.</span></a>
+<a href='/qr/'><strong>Veio por um QR code ou link?</strong><span>O que cada papel, cartaz ou link do PET traz.</span></a>
 </div></section>
-<section class='cx-sec cx-dica' aria-labelledby='pv-papel'><div><span class='eyebrow'>DEPOIS DE UMA AÇÃO</span><h2 id='pv-papel'>Recebeu um papel do PET com QR code?</h2><p>Aponte a câmera do celular para o quadrado do papel. Abre a página daquela ação, com o que o resultado quer dizer e o que fazer agora.</p></div><a class='button secondary' href='/acao/acuidade-visual/'>Ver um exemplo <span aria-hidden='true'>→</span></a></section>
+<section class='cx-sec cx-dica' aria-labelledby='pv-papel'><div><span class='eyebrow'>DEPOIS DE UMA AÇÃO</span><h2 id='pv-papel'>Veio por um QR code ou link?</h2><p>Veja o que cada papel, cartaz ou link do PET traz, como ler o QR code com o celular e o que fazer se ele não abrir.</p></div><a class='button secondary' href='/qr/'>Entender o QR code <span aria-hidden='true'>→</span></a></section>
 <section class='cx-sec' aria-labelledby='pv-ciclo'><h2 id='pv-ciclo'>Como o PET chega até você</h2><p>Cada ação tem um antes, um durante e um depois. O site liga os três.</p><ol class='cx-ciclo'>
 <li><b>Antes</b><strong>A comunidade chama</strong><span>Escolas, unidades de saúde e grupos de bairro pedem uma ação. Qualquer pessoa vota nos temas.</span><a class='text-link' href='/leve-o-pet/'>Pedir uma ação →</a></li>
 <li><b>Durante</b><strong>A ação tem a sua página</strong><span>O papel entregue no dia traz um QR code. A orientação continua disponível em casa.</span><a class='text-link' href='/acao/acuidade-visual/'>Ver um exemplo →</a></li>
@@ -122,8 +123,26 @@ IMPRIMIR = f"""<div class='wrap page-intro'><span class='eyebrow'>MATERIAL PARA 
 <p class='cx-nota'>Para uma ação nova, troque a palavra depois de <code>c=</code> por um nome curto, só com letras minúsculas, números e hífen.</p></section>
 </div>"""
 
+
+QR = f"""<div class='wrap page-intro'><span class='eyebrow'>ATENDIMENTO · QR CODE E LINKS</span><h1>Veio por um QR code ou link do PET?</h1><p class='intro-description'>Os papéis, os cartazes e os links do PET levam direto à página certa. Veja de onde você veio, o que encontra lá e o que fazer se não abrir.</p></div>
+<div class='wrap cx'>
+<section class='ap-guia' aria-labelledby='qr-de'><h2 id='qr-de'>De onde você veio?</h2><div class='ap-guia-grid'>
+<a href='/acao/acuidade-visual/'><strong>Papel do teste de visão</strong><span>Entregue na escola depois da triagem. Abre a página que explica o resultado, o que fazer agora e como contar ao PET se a criança conseguiu a consulta.</span></a>
+<a href='/'><strong>Cartaz na escola, na unidade de saúde ou no hemocentro</strong><span>Abre a página inicial, com o que a comunidade pode fazer: cuidar da saúde, falar com o PET e participar das ações.</span></a>
+<a href='/'><strong>Link do Instagram do PET</strong><span>Na bio ou nos stories. Abre a página inicial ou a página da ação divulgada no post.</span></a>
+<a href='/comunidade/'><strong>Resposta do PET por e-mail</strong><span>Se você mandou uma dúvida, a resposta chega no contato que deixou. Pode mandar outra quando quiser.</span></a>
+</div></section>
+<section class='cx-sec' aria-labelledby='qr-como'><h2 id='qr-como'>Como ler um QR code</h2><p>O QR code é o quadrado de pontinhos impresso no papel ou no cartaz.</p>
+<ol class='pj-passos cx-passos'><li><b>1</b><span>Abra a câmera do celular, a mesma de tirar foto.</span></li><li><b>2</b><span>Aponte para o quadrado e espere um ou dois segundos, sem tirar foto.</span></li><li><b>3</b><span>Toque no aviso ou no link que aparecer na tela. A página do PET abre no navegador.</span></li></ol>
+<div class='cx-painel'><h3>Não abriu?</h3><ul class='cx-lista'><li>Chegue um pouco mais perto ou mais longe, com o quadrado inteiro na tela e boa luz.</li><li>Em alguns celulares Android, a leitura fica no Google Lens ou num botão da própria câmera.</li><li>Ou digite o endereço curto impresso embaixo do quadrado: <b>pet-conecta.vercel.app/visao</b> no papel do teste de visão e <b>pet-conecta.vercel.app/voce</b> no cartaz.</li></ul></div></section>
+<section class='cx-sec' aria-labelledby='qr-dados'><h2 id='qr-dados'>Seus dados</h2><p>Abrir uma página pelo QR code não identifica você. O site só conta quantas pessoas chegaram por cada papel, cartaz ou link, sem nome, telefone ou localização. Isso mostra ao PET quais ações estão chegando à comunidade.</p><p class='cx-nota'><a class='text-link' href='/privacidade/#contagem'>Como a contagem funciona →</a></p></section>
+<section class='cx-sec cx-dica' aria-labelledby='qr-ajuda'><div><span class='eyebrow'>AINDA COM DÚVIDA?</span><h2 id='qr-ajuda'>Não achou o que procurava?</h2><p>Mande sua pergunta para os estudantes do PET. Ela não é publicada e a resposta chega pelo contato que você deixar.</p></div><a class='button' href='/comunidade/?tipo=duvida'>Tirar uma dúvida <span aria-hidden='true'>→</span></a></section>
+<p class='cx-nota'>O PET Conecta é uma proposta independente, sem vínculo oficial com o PET Medicina UFMT.</p>
+</div>"""
+
 PAGINAS = [
     ('atendimento', 'Atendimento', 'Participe de uma ação de saúde, tire uma dúvida ou peça o PET na sua escola ou no seu bairro.', ATENDIMENTO),
+    ('qr', 'Veio por um QR code ou link?', 'O que cada papel, cartaz ou link do PET traz, como ler o QR code com o celular e o que fazer se ele não abrir.', QR),
     ('leve-o-pet', 'Leve o PET até você', 'Escolas, unidades de saúde e grupos de bairro podem pedir uma ação de saúde do PET.', LEVE),
     ('acao/acuidade-visual', 'Depois do teste de visão na escola', 'Entenda o papel da triagem de visão, saiba o que fazer se ele pede consulta e conte ao PET como foi.', ACAO),
     ('voce-perguntou', 'Você perguntou, o PET respondeu', 'Dúvidas respondidas e temas votados pela comunidade que viraram conteúdo.', PERGUNTOU),
@@ -133,6 +152,7 @@ PAGINAS = [
 
 with open(os.path.join(RAIZ, 'comunidade', 'index.html'), encoding='utf-8', newline='') as f:
     base = f.read()
+base = re.sub(r"\?v=[0-9a-f]{10}", '', base)  # versionar.py recoloca as versoes depois
 
 
 def troca(padrao, novo, texto):
@@ -152,7 +172,7 @@ for caminho, titulo, desc, corpo in PAGINAS:
     h = troca(r"<meta property='og:url' content='[^']*'>", f"<meta property='og:url' content='{url}'>", h)
     h = troca(r"<script src='/pet-dados.js' defer></script><script src='/comunidade.js' defer></script>", "<script src='/ciclo.js' defer></script>", h)
     h = h.replace(" aria-current='page' data-v2=''", " data-v2=''").replace("class='menu-destaque active' aria-current='page'", "class='menu-destaque'")
-    h = troca(r"<main id='conteudo'>.*?</main>", "<main id='conteudo'>" + corpo.replace('\n', '') + "</main>", h)
+    h = troca(r"<main id='conteudo'[^>]*>.*?</main>", "<main id='conteudo'>" + corpo.replace('\n', '') + "</main>", h)
     destino = os.path.join(RAIZ, caminho, 'index.html')
     os.makedirs(os.path.dirname(destino), exist_ok=True)
     with open(destino, 'w', encoding='utf-8', newline='') as f:

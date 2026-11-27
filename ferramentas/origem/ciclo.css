@@ -222,3 +222,9 @@
 .hm-hero .cx-porta strong::after { font-size: 16px; }
 .hm-hero .cx-portas-rodape { margin-top: var(--esp-4); }
 .hm-hero .cx-portas-rodape p { font-size: 14px; color: var(--muted); }
+
+/* Quadro "Veio por um QR code?" na home: selo pequeno de QR antes do titulo */
+.cx-porta-qr strong::before { content: ''; display: inline-block; width: 18px; height: 18px; margin-right: var(--esp-2); vertical-align: -2px; border: 2px solid var(--forest); border-radius: var(--esp-1); background: linear-gradient(var(--forest), var(--forest)) 3px 3px / 5px 5px no-repeat, linear-gradient(var(--forest), var(--forest)) right 3px bottom 3px / 5px 5px no-repeat; }
+/* Pagina /qr/: passos numerados no mesmo formato das paginas de projeto */
+.cx-passos { margin: 0 0 var(--esp-5); }
+.cx-painel .cx-lista b { color: var(--forest); word-break: break-word; }

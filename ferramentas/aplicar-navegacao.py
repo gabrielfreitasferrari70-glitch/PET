@@ -7,7 +7,7 @@ import glob, html, os, re
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECOES = [  # (chave, nome no menu, endereco, prefixos das paginas que pertencem a ela)
-    ('atendimento', 'Atendimento', '/atendimento/', ('atendimento/', 'agenda/', 'acao/', 'comunidade/', 'leve-o-pet/')),
+    ('atendimento', 'Atendimento', '/atendimento/', ('atendimento/', 'agenda/', 'acao/', 'comunidade/', 'leve-o-pet/', 'qr/')),
     ('aprender', 'Aprender', '/aprender/', ('aprender/', 'colecoes/', 'saude-em-dia/', 'fato-ou-fake/', 'de-jaleco-e-fone/', 'voce-perguntou/')),
     ('youtube', 'YouTube', '/youtube/', ('youtube/',)),
     ('projetos', 'Projetos', '/projetos/', ('projetos/',)),
