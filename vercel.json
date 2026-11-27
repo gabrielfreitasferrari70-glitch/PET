@@ -8,12 +8,12 @@
     },
     {
       "source": "/estudantes",
-      "destination": "/participar/",
+      "destination": "/seja-petiano/",
       "permanent": false
     },
     {
       "source": "/estudantes/",
-      "destination": "/participar/",
+      "destination": "/seja-petiano/",
       "permanent": false
     },
     {

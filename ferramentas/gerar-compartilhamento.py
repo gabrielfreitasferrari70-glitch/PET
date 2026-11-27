@@ -11,7 +11,7 @@ SITE = 'https://pet-conecta.vercel.app'
 FONTES = os.path.join(RAIZ, 'ferramentas', 'fontes')
 SECOES = {'projetos': 'Projeto', 'aprender': 'Aprender', 'colecoes': 'Coleção', 'publicacoes': 'Publicações', 'o-pet': 'O PET',
           'de-jaleco-e-fone': 'Podcast', 'youtube': 'YouTube', 'agenda': 'Agenda', 'redes': 'Nas redes', 'comunidade': 'Participação',
-          'participar': 'Participação', 'para-o-pet': 'O PET', 'privacidade': 'Transparência', 'termos': 'Transparência', 'saude-em-dia': 'Ferramenta', 'fato-ou-fake': 'Ferramenta'}
+          'participar': 'Participação', 'seja-petiano': 'Processo seletivo', 'para-o-pet': 'O PET', 'privacidade': 'Transparência', 'termos': 'Transparência', 'saude-em-dia': 'Ferramenta', 'fato-ou-fake': 'Ferramenta'}
 VERDE, TINTA, CINZA, LINHA = '#0e614f', '#1c2522', '#5c6663', '#dfe5e2'
 L, A, M = 1200, 630, 72
 
@@ -74,7 +74,7 @@ for pagina in glob.glob(os.path.join(RAIZ, '**/index.html'), recursive=True):
             ('property', 'og:image', f'{SITE}/assets/compartilhar/{nome}'), ('property', 'og:image:width', '1200'), ('property', 'og:image:height', '630'),
             ('property', 'og:image:alt', alt), ('name', 'twitter:card', 'summary_large_image')]
     bloco = ''.join(f'<meta {a}={q}{n}{q} content={q}{v}{q}>' for a, n, v in tags)
-    s, feitos = re.subn(r"(<script src=['\"]/tema\.js['\"]></script>)", lambda m: bloco + m.group(1), s, count=1)
+    s, feitos = re.subn(r"(<script src=['\"]/tema\.js(?:\?v=[0-9a-f]+)?['\"]></script>)", lambda m: bloco + m.group(1), s, count=1)
     assert feitos == 1, pagina
     open(pagina, 'w', encoding='utf-8', newline='').write(s)
 print('imagens:', len(glob.glob(os.path.join(RAIZ, 'assets/compartilhar/*.jpg'))))

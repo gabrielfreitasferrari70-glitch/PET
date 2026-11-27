@@ -11,6 +11,7 @@ SECOES = [  # (chave, nome no menu, endereco, prefixos das paginas que pertencem
     ('aprender', 'Aprender', '/aprender/', ('aprender/', 'colecoes/', 'saude-em-dia/', 'fato-ou-fake/', 'de-jaleco-e-fone/', 'voce-perguntou/')),
     ('youtube', 'YouTube', '/youtube/', ('youtube/',)),
     ('projetos', 'Projetos', '/projetos/', ('projetos/',)),
+    ('seja-petiano', 'Seja um Petiano', '/seja-petiano/', ('seja-petiano/',)),
     ('o-pet', 'O PET', '/o-pet/', ('o-pet/', 'alcance/', 'publicacoes/', 'redes/', 'participar/', 'para-o-pet/', 'imprimir/')),
 ]
 MEIO = {'publicacoes/': ('Publicações', '/publicacoes/')}
@@ -31,7 +32,7 @@ def secao(rel):
 # A trilha continua seguindo as secoes (Saude em Dia e Fato ou Fake ficam em Inicio > Aprender).
 MENU = [('Atendimento', '/atendimento/', SECOES[0][3]), ('Aprender', '/aprender/', ('aprender/', 'colecoes/', 'de-jaleco-e-fone/', 'voce-perguntou/')),
         ('Projetos', '/projetos/', ('projetos/',)), ('Saúde em Dia', '/saude-em-dia/', ('saude-em-dia/',)), ('Fato ou Fake', '/fato-ou-fake/', ('fato-ou-fake/',)),
-        ('YouTube', '/youtube/', ('youtube/',)), ('O PET', '/o-pet/', SECOES[4][3])]
+        ('YouTube', '/youtube/', ('youtube/',)), ('O PET', '/o-pet/', SECOES[5][3]), ('Seja um Petiano', '/seja-petiano/', ('seja-petiano/',))]
 
 
 def item_atual(rel):
@@ -56,7 +57,7 @@ def celular(q, rel):
 RODAPE = ("<div><h2>Explore</h2><a href='/atendimento/'>Atendimento</a><a href='/agenda/'>Próximas ações</a><a href='/comunidade/?tipo=duvida'>Tirar uma dúvida</a>"
           "<a href='/aprender/'>Aprender</a><a href='/saude-em-dia/'>Saúde em Dia</a><a href='/fato-ou-fake/'>Fato ou Fake</a>"
           "<a href='/youtube/'>YouTube</a><a href='/projetos/'>Projetos</a><a href='/o-pet/'>O PET</a><a href='/publicacoes/'>Jornal e publicações</a>"
-          "<a href='/participar/'>Processo seletivo</a></div>")
+          "<a href='/seja-petiano/'>Seja um Petiano</a></div>")
 
 paginas = sorted(p for p in glob.glob(os.path.join(RAIZ, '**', '*.html'), recursive=True) if os.sep + 'ferramentas' + os.sep not in p)
 for caminho in paginas:
